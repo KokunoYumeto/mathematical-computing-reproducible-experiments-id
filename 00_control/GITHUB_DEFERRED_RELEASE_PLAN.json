@@ -1,10 +1,10 @@
 {
   "schema": "o002.github-deferred-release.v1",
-  "status": "deferred_external_account_suspension",
+  "status": "executed_and_superseded_by_github_publication_receipt",
   "prepared_date": "2026-08-22",
   "attempt_policy": {
-    "attempt_now": false,
-    "resume_condition": "GitHub support restores the existing account and repository lineage",
+    "attempt_now": true,
+    "resume_condition": "satisfied on 2026-08-22",
     "no_competing_repository": true,
     "no_rebuild_required": true,
     "credential_file": "C:/Users/Floris/Downloads/Github Tokens.md",
@@ -45,7 +45,8 @@
     "file_count": 85,
     "content_bytes": 4046273,
     "tree_digest_algorithm": "SHA-256 over sorted UTF-8 rows path<TAB>bytes<TAB>sha256<LF>",
-    "tree_sha256": "52b7e40cbd7c4c107d7e41d5cc279ab1726f15435ef3fd9940b639096707a388",
+    "tree_sha256": "2afb80554d34d35ce889702109e7a2bd908f9c69bde3bc5e5a34fcb8a2c775b2",
+    "tree_digest_correction": "The prior value was stale/miscalculated; this value follows the stated relative-path row algorithm and matches all-file public Pages readback.",
     "output_docs_byte_match": true,
     "nojekyll": {
       "bytes": 1,

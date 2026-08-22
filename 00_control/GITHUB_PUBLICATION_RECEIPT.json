@@ -1,0 +1,85 @@
+{
+  "schema": "o002.github-publication.v1",
+  "successful": true,
+  "publication_date": "2026-08-22",
+  "repository": {
+    "name_with_owner": "KokunoYumeto/mathematical-computing-reproducible-experiments-id",
+    "public_url": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id",
+    "visibility": "public",
+    "default_branch": "main",
+    "branch": "codex/b80-final-architecture",
+    "commit": "73b809aabd99957453065b0c4884f33a4cf445cb",
+    "main_readback": "pass",
+    "branch_readback": "pass"
+  },
+  "tag": {
+    "name": "v2026.08.22.1",
+    "kind": "annotated",
+    "tag_object": "5334f6414ebd34d54bfaf93e507a2302508bbc79",
+    "target_commit": "73b809aabd99957453065b0c4884f33a4cf445cb",
+    "public_readback": "pass"
+  },
+  "release": {
+    "public_url": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22.1",
+    "asset_count": 5,
+    "asset_bytes": 3014210,
+    "inventory_exact": true,
+    "anonymous_readback": "pass",
+    "assets": [
+      {
+        "filename": "index.html",
+        "bytes": 37570,
+        "sha256": "5fb26b6316c5fd807760ca4f6c4e060f8d4ef95779eb04e3029c84c82e92c85a"
+      },
+      {
+        "filename": "Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+        "bytes": 754845,
+        "sha256": "f9d3df201c03107be3a3e6f61dd6798485cf20bc35ae14f2911ab212789b5038"
+      },
+      {
+        "filename": "Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+        "bytes": 291212,
+        "sha256": "8e9e35dd54be8524a8b7752df0a7285749db4c80fc5a10271eb841c01c0c748d"
+      },
+      {
+        "filename": "O002_B80_ID_EDITABLE_SOURCE_2026-08-22-1.zip",
+        "bytes": 316923,
+        "sha256": "a9dcdc18481b3dc88beee3006d46f1b8187815623534df523bbc70e3e011b9f9"
+      },
+      {
+        "filename": "O002_B80_ID_OFFLINE_READER_2026-08-22-1.zip",
+        "bytes": 1613660,
+        "sha256": "c3b97c057ed6751ddb2067d4be8ef96a7256e1c9bd25075601f46071eb2dfff9"
+      }
+    ]
+  },
+  "pages": {
+    "public_url": "https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/",
+    "source": "main:/docs",
+    "build_status": "built",
+    "build_commit": "73b809aabd99957453065b0c4884f33a4cf445cb",
+    "build_created_at": "2026-08-22T19:04:11Z",
+    "build_updated_at": "2026-08-22T19:04:34Z",
+    "file_count": 85,
+    "content_bytes": 4046273,
+    "tree_digest_algorithm": "SHA-256 over sorted UTF-8 rows relative-path<TAB>bytes<TAB>sha256<LF>",
+    "tree_sha256": "2afb80554d34d35ce889702109e7a2bd908f9c69bde3bc5e5a34fcb8a2c775b2",
+    "source_manifest": {
+      "path": "00_control/OUTPUT_FILE_MANIFEST_FINAL_B.csv",
+      "bytes": 9187,
+      "sha256": "bf6299dcc2e2fa3d10173cb54f43e075546a84e539a2c31d7b1c070bfeef8613",
+      "output_rows": 84,
+      "extra_file": "docs/.nojekyll"
+    },
+    "anonymous_readback": {
+      "method": "GET every one of the 85 source-tree paths with cache-busting commit query; independently recompute bytes and SHA-256",
+      "missing": 0,
+      "mismatched": 0,
+      "all_pass": true
+    }
+  },
+  "control_correction": {
+    "supersedes_tree_sha256": "52b7e40cbd7c4c107d7e41d5cc279ab1726f15435ef3fd9940b639096707a388",
+    "reason": "The deferred plan recorded a stale/miscalculated tree digest. Recalculation by its stated relative-path algorithm and anonymous readback both produce the receipt value."
+  }
+}

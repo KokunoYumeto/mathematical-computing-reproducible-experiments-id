@@ -1,14 +1,7 @@
 {
   "schema": "o002.cursor.v2",
-  "pursuit_status": "active_publication",
-  "blocked_audit": {
-    "condition": "GitHub account suspension prevents the required existing-lineage repository, release, tag, and Pages transaction",
-    "consecutive_goal_turns": 0,
-    "same_condition_confirmed": false,
-    "all_safe_local_work_exhausted": true,
-    "resume_condition": "satisfied on 2026-08-22 by Floris's direct restoration notice",
-    "no_retry_while_suspended": false
-  },
+  "pursuit_status": "complete",
+  "completion_date": "2026-08-22",
   "language": "id-ID",
   "course_id": "B80",
   "project_id": "O002",
@@ -23,60 +16,100 @@
   "current_release": {
     "version": "2026.08.22.1",
     "tag": "v2026.08.22.1",
-    "record_id": 22053905,
-    "doi": "10.5281/zenodo.22053905",
-    "concept_doi": "10.5281/zenodo.22052052",
-    "zenodo_status": "published_and_anonymously_verified",
-    "github_status": "restored_release_transaction_in_progress",
-    "figshare_item_id": 33314742,
-    "figshare_doi": "10.6084/m9.figshare.33314742.v1",
-    "figshare_collection_doi": "10.6084/m9.figshare.c.8668413.v6",
-    "figshare_v2_status": "in_place_reader_first_draft_upload_in_progress"
+    "selected_unit_count": 14,
+    "admitted_unit_count": 14,
+    "last_admitted_unit": "o002.u12",
+    "exercise_count": 75,
+    "test_count": 177,
+    "pdf_page_count": 159,
+    "b80_curriculum_complete": true
   },
-  "selected_unit_count": 14,
-  "admitted_unit_count": 14,
-  "last_admitted_unit": "o002.u12",
-  "exercise_count": 75,
-  "test_count": 177,
-  "pdf_page_count": 159,
-  "b80_curriculum_complete": true,
-  "active_block": [
-    "publish-v2026.08.22.1-to-existing-github-lineage",
-    "anonymous-github-release-and-pages-readback",
-    "finish-publish-and-read-back-existing-figshare-item-v2"
-  ],
-  "open_gates": [
-    "GitHub repository release and Pages anonymous readback",
-    "Figshare reader-first version 2 publication and anonymous byte readback"
-  ],
   "backend_truth": {
     "status": "pass",
     "schema": "o002.backend.v2",
     "catalog_bytes": 110511,
     "catalog_sha256": "447a7ae670a8232a08b24db4ab6288df6f0c3b4d46462206b173830fc55c085d"
   },
-  "zenodo_receipt": {
-    "path": "00_control/PUBLICATION_RECEIPT_FINAL.json",
-    "bytes": 2747,
-    "sha256": "9dadaec2091ef382b1d55dbd98a848ec06b641b347efc683fbad9724e4c793cf",
-    "anonymous_readback": "pass"
+  "zenodo": {
+    "record_id": 22053905,
+    "doi": "10.5281/zenodo.22053905",
+    "concept_doi": "10.5281/zenodo.22052052",
+    "status": "published_and_anonymously_verified",
+    "artifact_count": 5,
+    "receipt": {
+      "path": "00_control/PUBLICATION_RECEIPT_FINAL.json",
+      "bytes": 2747,
+      "sha256": "9dadaec2091ef382b1d55dbd98a848ec06b641b347efc683fbad9724e4c793cf"
+    }
   },
-  "figshare_receipt": {
-    "path": "00_control/FIGSHARE_PUBLICATION_RECEIPT.json",
-    "bytes": 2967,
-    "sha256": "e2938f9a83e50d7e647b870a9d106c7116f906040d4169e8684ee0cec856b5e7",
-    "anonymous_readback": "pass",
-    "file_policy": "CC0 metadata/link only; exact CC BY-SA 4.0 unavailable"
-  },
-  "github_deferred_plan": {
-    "path": "00_control/GITHUB_DEFERRED_RELEASE_PLAN.json",
-    "bytes": 5765,
-    "sha256": "8bb69f8d9ddd9e627d1c06c4bac390c363ac5d1ecfe09f5dc1e736f29f3f1506",
-    "tracked_pages_file_count": 85,
-    "tracked_pages_tree_sha256": "52b7e40cbd7c4c107d7e41d5cc279ab1726f15435ef3fd9940b639096707a388",
+  "github": {
+    "repository": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id",
+    "release": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22.1",
+    "pages": "https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/",
+    "release_commit": "73b809aabd99957453065b0c4884f33a4cf445cb",
+    "tag_object": "5334f6414ebd34d54bfaf93e507a2302508bbc79",
     "release_asset_count": 5,
     "release_asset_bytes": 3014210,
-    "local_staging": "complete_and_verified"
+    "pages_file_count": 85,
+    "pages_content_bytes": 4046273,
+    "pages_tree_sha256": "2afb80554d34d35ce889702109e7a2bd908f9c69bde3bc5e5a34fcb8a2c775b2",
+    "anonymous_readback": "pass",
+    "receipt": {
+      "path": "00_control/GITHUB_PUBLICATION_RECEIPT.json",
+      "bytes": 3420,
+      "sha256": "5afc69701c84914b0959d2d3bfcec9197ad67ae041187b0303bb2e56a9bd0fcb"
+    }
   },
-  "next_action": "Publish the exact v2026.08.22.1 bytes to the restored existing GitHub repository/release/Pages lineage and anonymously verify them; then resume and publish the sole existing Figshare item as reader-first v2, anonymously verify all files, update cross-lineage receipts, and complete the pursuit goal."
+  "figshare": {
+    "canonical_item_id": 33314796,
+    "version": 2,
+    "doi": "10.6084/m9.figshare.33314796.v2",
+    "concept_doi": "10.6084/m9.figshare.33314796",
+    "status": "published_and_anonymously_verified",
+    "file_count": 7,
+    "file_bytes": 2981079,
+    "license_boundary": "CC0 applies only to descriptive metadata; files retain exact component licenses",
+    "legacy_pointer_item_id": 33314742,
+    "legacy_pointer_doi": "10.6084/m9.figshare.33314742.v1",
+    "project_id": 280296,
+    "project_item_count": 25,
+    "project_current_version_file_count": 72,
+    "project_current_version_file_bytes": 212175199,
+    "collection_id": 8668413,
+    "collection_version": 36,
+    "collection_doi": "10.6084/m9.figshare.c.8668413.v36",
+    "collection_item_count": 20,
+    "receipt": {
+      "path": "00_control/FIGSHARE_PUBLICATION_RECEIPT.json",
+      "bytes": 3803,
+      "sha256": "0eaffa05546177cdebbd82e0bdcc1ebadf75e1702b1c11390b5049f3d1abfa92"
+    }
+  },
+  "terminology_qa": {
+    "status": "pass_no_reader_replacement",
+    "source": "arXiv:0807.4609v1",
+    "official_record": "https://arxiv.org/abs/0807.4609",
+    "source_archive_bytes": 155496,
+    "source_archive_sha256": "80c2f414b9269d15aaf92db71e7b355ff96301a18e7fc5dbe67d7dbbdc86241c",
+    "tex_member": "paper_abm_knsi_2008.tex",
+    "tex_bytes": 31672,
+    "tex_sha256": "79d96864286223614ec257e42b32811b3b53fcf7075626c726ed1d08495e5a15",
+    "qa_path": "00_control/TERMINOLOGY_QA_ID_ARXIV.md",
+    "qa_bytes": 3813,
+    "qa_sha256": "9e2988d50b6fb931c79a6e86ca61b8c2747003c58a2e3031ff8f3a519425fb32",
+    "glossary_path": "GLOSSARY_ID_ID.md",
+    "glossary_bytes": 2941,
+    "glossary_sha256": "28d9a533a34c89f3a6c2d91115308fb81837471c782758bf4df522fc04de17a2",
+    "model_disclosure": "OpenAI Codex gpt-5.6-sol, Ultra",
+    "model_disclosure_path": "README.md"
+  },
+  "blocked_audit": {
+    "condition": "closed; GitHub restoration confirmed and publication transaction passed",
+    "consecutive_goal_turns": 0,
+    "same_condition_confirmed": false,
+    "active": false
+  },
+  "active_block": [],
+  "open_gates": [],
+  "next_action": "none; pursuit terminal"
 }

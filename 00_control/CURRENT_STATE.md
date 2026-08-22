@@ -2,8 +2,8 @@
 
 Status date: 2026-08-22
 
-Status: complete 14-unit B80 edition; Zenodo public; GitHub restoration and
-Figshare reader-first correction publication transactions active
+Status: complete 14-unit B80 edition; GitHub, Zenodo, and Figshare public;
+Indonesian field-terminology QA complete
 
 Branch: `codex/b80-final-architecture`
 
@@ -41,7 +41,7 @@ manifests. The current backend is 110,511 bytes with SHA-256
 `447a7ae670a8232a08b24db4ab6288df6f0c3b4d46462206b173830fc55c085d`;
 it records `b80_curriculum_complete: true`.
 
-## Current public preservation
+## Complete public preservation
 
 Zenodo version `2026.08.22.1` is public in the existing concept lineage as
 record `22053905`, DOI `10.5281/zenodo.22053905`, under concept DOI
@@ -52,41 +52,41 @@ SHA-256 readback pass for every file. Durable receipt:
 `00_control/PUBLICATION_RECEIPT_FINAL.json` (2,747 bytes; SHA-256
 `9dadaec2091ef382b1d55dbd98a848ec06b641b347efc683fbad9724e4c793cf`).
 
-Figshare does not offer CC BY-SA 4.0. Therefore no release file was uploaded
-under a false substitute license. A zero-file CC0 metadata/link item points to
-the exact Zenodo release and records all five filenames, byte counts, and
-SHA-256 hashes. It is public as item `33314742`, DOI
-`10.6084/m9.figshare.33314742.v1`, in project `280296` and Indonesian
-collection `8668413` version 6, DOI `10.6084/m9.figshare.c.8668413.v6`.
-Anonymous item, license, zero-file, project-membership, collection-membership,
-and Zenodo-link readback pass. Durable receipt:
-`00_control/FIGSHARE_PUBLICATION_RECEIPT.json` (2,967 bytes; SHA-256
-`e2938f9a83e50d7e647b870a9d106c7116f906040d4169e8684ee0cec856b5e7`).
+The restored existing GitHub repository is public. Annotated tag
+`v2026.08.22.1` targets accepted release commit
+`73b809aabd99957453065b0c4884f33a4cf445cb`; its release exposes the exact
+five artifacts totaling 3,014,210 bytes. Pages serves 85 paths totaling
+4,046,273 bytes from `main:/docs`, with tree SHA-256
+`2afb80554d34d35ce889702109e7a2bd908f9c69bde3bc5e5a34fcb8a2c775b2`.
+Anonymous hash readback passes for every release asset and Pages path. Durable
+receipt: `00_control/GITHUB_PUBLICATION_RECEIPT.json` (3,420 bytes; SHA-256
+`5afc69701c84914b0959d2d3bfcec9197ad67ae041187b0303bb2e56a9bd0fcb`).
 
-## Active final publication boundary
+Figshare canonical item `33314796` is public as version 2, DOI
+`10.6084/m9.figshare.33314796.v2`. Its reader-first payload contains seven
+files totaling 2,981,079 bytes: the 159-page PDF first, EPUB, offline reader,
+editable source, license notice, manifest, and checksums. Anonymous SHA-256
+readback passes for all seven. Because Figshare cannot express the mixed
+license exactly, public metadata states that its CC0 label applies only to
+descriptive metadata; the files retain CC BY-SA 4.0 text, MIT code, and
+per-component runtime terms. The earlier zero-file item `33314742` is retained
+only as a supersession pointer and is absent from project `280296` and the
+Indonesian collection. The canonical item is present in both; the collection
+readback is version 36, DOI `10.6084/m9.figshare.c.8668413.v36`. Durable
+receipt: `00_control/FIGSHARE_PUBLICATION_RECEIPT.json` (3,803 bytes; SHA-256
+`0eaffa05546177cdebbd82e0bdcc1ebadf75e1702b1c11390b5049f3d1abfa92`).
 
-Floris directly reported on 2026-08-22 that GitHub is reinstated. The existing
-repository is again public, the authenticated `KokunoYumeto` account works,
-and Pages is configured from `main:/docs`. Do not create a competing
-repository. The tracked `docs` tree is already synchronized byte-for-byte to
-all 84 accepted output files plus `.nojekyll`: 85 files, 4,046,273 bytes, tree
-SHA-256 `52b7e40cbd7c4c107d7e41d5cc279ab1726f15435ef3fd9940b639096707a388`.
-The exact five-asset release transaction and full anonymous readback contract
-are frozen in `00_control/GITHUB_DEFERRED_RELEASE_PLAN.json` (5,765 bytes;
-SHA-256 `8bb69f8d9ddd9e627d1c06c4bac390c363ac5d1ecfe09f5dc1e736f29f3f1506`).
-Publish tag `v2026.08.22.1` and the exact frozen release bytes to the existing
-repository, release, and Pages lineage; anonymously verify them; and update
-the cross-lineage receipt. In parallel, retain the sole Figshare item
-`33314742`: its reader-first v2 draft is resumable in place after a transient
-rate-based Figshare API firewall response. The exact seven-file payload is
-2,981,079 bytes, puts the 159-page PDF first, and preserves CC BY-SA 4.0 text,
-MIT code, and per-component runtime terms in its item text and `LICENSE.md`.
-Publish that same v2 and anonymously hash-read every file before completing
-the pursuit goal. Current reader expression is original
-CC BY-SA 4.0; original code is MIT; runtime components retain their own terms.
-No upstream author has been contacted.
+## Final terminology and provenance boundary
 
-The earlier three-turn external-block audit is closed by Floris's restoration
-notice. This is a resumed active run, so no stale blocked claim is controlling.
-Completion now requires the GitHub repository/release/Pages readback and the
-Figshare v2 publication/readback described above.
+The official source archive for Indonesian arXiv:0807.4609v1 was downloaded,
+unpacked, and its actual TeX inspected as a bounded scientific-computing usage
+witness. It confirms the course's central `komputasi`, `pustaka`,
+`masukan/keluaran`, numerical, sequential/parallel, and scalability terms.
+Differences are deliberate formal/modern choices (`teknik`, `analisis`,
+`berkas`, `algoritme`), so no reader-wide replacement is justified. The exact
+source identity, hashes, TeX line evidence, and decision are in
+`00_control/TERMINOLOGY_QA_ID_ARXIV.md`; `GLOSSARY_ID_ID.md` fixes the chosen
+conventions. README carries the exact disclosure `OpenAI Codex gpt-5.6-sol,
+Ultra` and explicitly preserves author, source, rights-holder, and human-credit
+relationships. No upstream author has been contacted. No publication,
+curriculum, QA, terminology, or provenance gate remains open.

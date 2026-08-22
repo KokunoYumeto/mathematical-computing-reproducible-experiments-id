@@ -1,0 +1,108 @@
+{
+  "schema": "o002.figshare-publication.v2",
+  "successful": true,
+  "publication_date": "2026-08-22",
+  "verified_at": "2026-08-22T21:53:37+02:00",
+  "canonical_item": {
+    "id": 33314796,
+    "version": 2,
+    "doi": "10.6084/m9.figshare.33314796.v2",
+    "concept_doi": "10.6084/m9.figshare.33314796",
+    "public_url": "https://figshare.com/articles/book/Komputasi_Matematis_dan_Eksperimen_yang_Dapat_Direproduksi_Bahasa_Indonesia_Cermin_Preservasi_Figshare/33314796",
+    "title": "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi — Bahasa Indonesia",
+    "status_label": "complete",
+    "file_count": 7,
+    "file_bytes": 2981079,
+    "primary_visible_file": "00_Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+    "published": true,
+    "anonymous_metadata_readback": "pass",
+    "anonymous_file_sha256_readback": "pass"
+  },
+  "files": [
+    {
+      "id": 67761252,
+      "filename": "00_Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+      "bytes": 754845,
+      "sha256": "f9d3df201c03107be3a3e6f61dd6798485cf20bc35ae14f2911ab212789b5038"
+    },
+    {
+      "id": 67761255,
+      "filename": "01_Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+      "bytes": 291212,
+      "sha256": "8e9e35dd54be8524a8b7752df0a7285749db4c80fc5a10271eb841c01c0c748d"
+    },
+    {
+      "id": 67761261,
+      "filename": "02_O002_B80_ID_OFFLINE_READER_2026-08-22-1.zip",
+      "bytes": 1613660,
+      "sha256": "c3b97c057ed6751ddb2067d4be8ef96a7256e1c9bd25075601f46071eb2dfff9"
+    },
+    {
+      "id": 67761270,
+      "filename": "03_O002_B80_ID_EDITABLE_SOURCE_2026-08-22-1.zip",
+      "bytes": 316923,
+      "sha256": "a9dcdc18481b3dc88beee3006d46f1b8187815623534df523bbc70e3e011b9f9"
+    },
+    {
+      "id": 67761273,
+      "filename": "LICENSE.md",
+      "bytes": 1309,
+      "sha256": "8d9d91828c581ec95237ad964ea6d6c18a48b7f29f8a34d557f7a1d81a34c036"
+    },
+    {
+      "id": 67761276,
+      "filename": "RELEASE_MANIFEST.json",
+      "bytes": 2473,
+      "sha256": "ea875f882b71efb04c4b50b7b86c97b8d9276c79b25976ba63c39685c615f003"
+    },
+    {
+      "id": 67761279,
+      "filename": "SHA256SUMS.txt",
+      "bytes": 657,
+      "sha256": "7d339c398f9f6d8e293f9cf025916017916f9fc22335f751018b1b44d6913416"
+    }
+  ],
+  "license_boundary": {
+    "figshare_record_license": "CC0",
+    "figshare_cc0_scope": "descriptive metadata only",
+    "reader_text": "CC BY-SA 4.0",
+    "original_code": "MIT",
+    "runtime_components": "retain upstream component licenses",
+    "false_relicensing": false,
+    "scope_disclosed_in_public_description_and_LICENSE": true
+  },
+  "legacy_pointer": {
+    "id": 33314742,
+    "version": 1,
+    "doi": "10.6084/m9.figshare.33314742.v1",
+    "file_count": 0,
+    "public": true,
+    "description_begins": "Entri metadata lama: digantikan.",
+    "points_to_concept_doi": "10.6084/m9.figshare.33314796",
+    "in_project": false,
+    "in_indonesian_collection": false
+  },
+  "project": {
+    "id": 280296,
+    "public_url": "https://figshare.com/projects/Open_and_Share-Alike_Educational_Materials_Translations/280296",
+    "current_item_count": 25,
+    "current_version_file_count": 72,
+    "current_version_file_bytes": 212175199,
+    "below_20000000000_byte_cap": true,
+    "canonical_item_present": true,
+    "legacy_pointer_absent": true,
+    "anonymous_readback": "pass"
+  },
+  "collection": {
+    "id": 8668413,
+    "version": 36,
+    "doi": "10.6084/m9.figshare.c.8668413.v36",
+    "concept_doi": "10.6084/m9.figshare.c.8668413",
+    "public_url": "https://doi.org/10.6084/m9.figshare.c.8668413.v36",
+    "item_count": 20,
+    "canonical_version_doi_present": true,
+    "legacy_pointer_absent": true,
+    "anonymous_readback": "pass"
+  },
+  "zenodo_target": "https://doi.org/10.5281/zenodo.22053905"
+}

@@ -1,7 +1,7 @@
 # O002/B80 current goal and workflow
 
 Status date: 2026-08-22  
-Status: active publication transaction after GitHub account restoration  
+Status: complete
 Branch: `codex/b80-final-architecture`  
 Historical release preserved: `v2026.08.22`, DOI `10.5281/zenodo.22052053`
 
@@ -28,14 +28,17 @@ The selected B80 edition is complete at 14 units, 75 exercises, 177 passing
 tests, and 159 PDF pages. Two final builds have identical source/output
 manifests. Zenodo version `2026.08.22.1`, DOI
 `10.5281/zenodo.22053905`, is public with five exact artifacts and anonymous
-byte readback. On 2026-08-22 Floris reported that GitHub was reinstated; the
-existing repository, Pages configuration, authenticated account, public
-visibility, and historical lineage have been reverified. Execute the frozen
-`GITHUB_DEFERRED_RELEASE_PLAN.json` transaction without rebuilding: commit and
-push the current branch, fast-forward `main`, tag/release `v2026.08.22.1` with
-the exact five assets, then anonymously verify repository, tag, release bytes,
-and the 85-file Pages tree. Figshare item `33314742` remains the sole item; its
-reader-first v2 correction is an in-place draft with completed uploads reused
-by ID after a transient rate-based API firewall response. Finish and publish
-that same v2, anonymously hash-read all seven compact files, update durable
-receipts, and complete the pursuit only after both public routes pass.
+byte readback. GitHub tag/release `v2026.08.22.1` targets accepted commit
+`73b809aabd99957453065b0c4884f33a4cf445cb`; all five release assets and all
+85 Pages paths passed anonymous hash readback. Figshare canonical item
+`33314796` is public as version 2, DOI
+`10.6084/m9.figshare.33314796.v2`, with seven reader-first files totaling
+2,981,079 bytes and anonymous SHA-256 readback; zero-file item `33314742` is
+only a supersession pointer. The exact TeX of Indonesian arXiv:0807.4609v1 was
+inspected as a field-terminology witness. It confirms the edition's central
+vocabulary; modern/formal differences are documented and require no reader
+replacement. `GLOSSARY_ID_ID.md` fixes the convention and README records the
+exact provenance disclosure `OpenAI Codex gpt-5.6-sol, Ultra`. All selected
+content, build, accessibility, environment, backend, rights, terminology,
+publication, and anonymous-readback gates pass. There is no next production
+action for this pursuit.

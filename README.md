@@ -8,8 +8,13 @@ mandiri historis.
 Buku ini merupakan karya independen dan tidak menyiratkan dukungan dari penulis
 atau lembaga yang dibahas sebagai sumber perbandingan.
 
+Produksi, penerjemahan, dan QA berbantuan model menggunakan **OpenAI Codex gpt-5.6-sol, Ultra**,
+atas arahan Floris. Identifikasi ini tidak menggantikan atribusi penulis,
+sumber, pemegang hak, atau kontributor manusia yang tercatat.
+
 - Pembaca HTML: <https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/>
 - PDF dan paket preservasi versi 2026.08.22.1: <https://doi.org/10.5281/zenodo.22053905>
+- Cermin pembaca dan sumber ringkas di Figshare: <https://doi.org/10.6084/m9.figshare.33314796.v2>
 - Rilis historis 12-unit: <https://doi.org/10.5281/zenodo.22052053>
 - Repositori sumber: <https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id>
 
@@ -30,6 +35,8 @@ Sumber pembaca berada di `source/`, pengujian di `tests/`, catatan kendali di
 `00_control/`, rekaman backend stabil di `backend/`, dan pembaca terbangun di
 `output/`. Situs GitHub Pages diterbitkan dari pohon rilis yang telah
 diverifikasi, bukan dari salinan sumber yang dibaca sebagai sumber daya Quarto.
+Pilihan istilah utama dicatat dalam [glosarium id-ID](GLOSSARY_ID_ID.md),
+beserta [QA terminologi berbasis sumber TeX Indonesia](00_control/TERMINOLOGY_QA_ID_ARXIV.md).
 
 Teks asli proyek dilisensikan dengan CC BY-SA 4.0. Kode asli proyek
 dilisensikan dengan MIT. Sumber rujukan/donor mempertahankan lisensi masing-

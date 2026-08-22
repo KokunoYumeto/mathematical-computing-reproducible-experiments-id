@@ -165,3 +165,36 @@ existing Figshare item `33314742` is likewise corrected in place: a compact
 reader-first v2 draft uses the 159-page PDF first and retains exact CC BY-SA
 4.0 text, MIT code, and per-component runtime terms in the description and
 license notice. Neither route is complete until anonymous byte readback passes.
+
+## O002-D019 - Public preservation closes on three independent routes
+
+The restored existing GitHub lineage now carries commit
+`73b809aabd99957453065b0c4884f33a4cf445cb`, annotated tag
+`v2026.08.22.1`, a five-asset release totaling 3,014,210 bytes, and the
+85-file Pages tree. Anonymous SHA-256 readback passes for every release asset
+and Pages path. Zenodo DOI `10.5281/zenodo.22053905` remains the canonical
+five-artifact preservation record. Figshare item `33314796` was correctly
+updated in place to public version 2, DOI
+`10.6084/m9.figshare.33314796.v2`, with a reader-first seven-file payload of
+2,981,079 bytes; every file passed anonymous SHA-256 readback. The earlier
+zero-file item `33314742` remains only as a public supersession pointer and is
+absent from the project and Indonesian collection. Figshare's CC0 label is
+explicitly limited to descriptive metadata; text remains CC BY-SA 4.0, code
+MIT, and runtime components retain their own terms.
+
+## O002-D020 - Indonesian TeX terminology check changes no reader term
+
+The exact TeX source of Indonesian arXiv:0807.4609v1 was downloaded and
+inspected as a bounded field-usage witness for scientific/parallel computing
+and numerical simulation. Its source archive is 155,496 bytes with SHA-256
+`80c2f414b9269d15aaf92db71e7b355ff96301a18e7fc5dbe67d7dbbdc86241c`;
+the inspected `paper_abm_knsi_2008.tex` is 31,672 bytes with SHA-256
+`79d96864286223614ec257e42b32811b3b53fcf7075626c726ed1d08495e5a15`.
+It confirms the edition's core use of `komputasi`, `pustaka`,
+`masukan/keluaran`, numerical phrasing, `langkah waktu`, `rata-rata`,
+`sekuensial/paralel`, and `skalabilitas`. The edition retains modern/formal
+`teknik`, `analisis`, `berkas`, and `algoritme` rather than the source's dated
+or alternate forms. No reader, exercise, code, or backend replacement is
+justified. `GLOSSARY_ID_ID.md` and `TERMINOLOGY_QA_ID_ARXIV.md` make the
+evidence and choices durable; README records the exact model disclosure
+`OpenAI Codex gpt-5.6-sol, Ultra` without displacing any attribution.
