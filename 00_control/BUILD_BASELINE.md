@@ -2,8 +2,10 @@
 
 Status date: 2026-08-22
 
-Boundary: complete, locally verified, and published 12-unit Indonesian edition.
-Curriculum admission remains a separate evidence-based decision.
+Historical boundary: complete, locally verified, and published 12-unit
+Indonesian edition (`v2026.08.22`; DOI `10.5281/zenodo.22052053`). This file
+does not claim completion of the newly selected 14-unit B80 architecture; its
+live truth is in `CURRENT_STATE.md` and backend v2.
 
 ## Frozen toolchain
 
@@ -106,5 +108,6 @@ original code is MIT; bundled runtime components retain their upstream terms.
 The accepted bytes are published at GitHub release `v2026.08.22`, GitHub Pages,
 and DOI `10.5281/zenodo.22052053`; public-byte readback passed. The sanitized
 details are in `00_control/PUBLICATION_RECEIPT.json`. No upstream author was
-contacted. This baseline proves edition completion and publication only and does
-not admit the work to the 40-course curriculum.
+contacted. This baseline proves only the immutable 12-unit release. The
+coordinator later selected O002 under additional 14-unit B80 gates, which
+remain open until a new expanded baseline replaces this historical witness.

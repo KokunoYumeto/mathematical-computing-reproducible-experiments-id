@@ -1,44 +1,41 @@
 {
-  "schema": "o002.cursor.v1",
+  "schema": "o002.cursor.v2",
   "language": "id-ID",
   "course_id": "B80",
   "project_id": "O002",
-  "last_admitted_unit": "o002.u12",
-  "active_block": [],
-  "next_after_active_block": null,
-  "admission_gate": [
-    "reader source complete",
-    "stable IDs and backend references exact",
-    "all executable tests pass",
-    "HTML and PDF build pass",
-    "all PDF pages visually inspected",
-    "component rights explicit",
-    "canonical manifests and hashes recorded"
-  ],
-  "admission_gate_status": "pass",
-  "edition_complete": true,
-  "source_qa": "pass",
-  "tests": {
-    "status": "pass",
-    "run": 115,
-    "failures": 0,
-    "errors": 0
-  },
-  "reader_build": "pass",
-  "pdf_visual_qa": "pass",
-  "determinism": {
-    "status": "pass",
-    "output_rows": 60,
-    "manifest_sha256": "e2108333ac3121137b28646d19f087b07b96178eab34c24a504e1dcdeb7d78f5"
-  },
-  "curriculum_admission_decision": "separate and not implied by edition completion or publication",
-  "published": true,
-  "publication": {
+  "branch": "codex/b80-final-architecture",
+  "historical_release": {
     "version": "2026.08.22",
-    "repository": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id",
-    "reader": "https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/",
-    "github_release": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22",
+    "tag": "v2026.08.22",
     "doi": "10.5281/zenodo.22052053",
+    "standalone_edition_complete": true,
     "public_byte_readback": "pass"
-  }
+  },
+  "selected_unit_count": 14,
+  "admitted_unit_count": 12,
+  "last_admitted_unit": "o002.u12",
+  "active_block": ["o002.p01"],
+  "next_after_active_block": "o002.p02",
+  "b80_curriculum_complete": false,
+  "open_gates": [
+    "o002.p01",
+    "o002.p02",
+    "Unit 4 progressive plotting and mastery",
+    "Unit 5 local Sage execution and mastery",
+    "Unit 6 and Unit 11 SciPy execution and mastery",
+    "Unit 11 B30/B40/B70 prerequisite deferral",
+    "resolved Python environment lock",
+    "separate Sage environment lock and receipt",
+    "HTML PDF EPUB notebook and offline bundle",
+    "two clean identical final builds",
+    "full PDF and HTML accessibility review",
+    "expanded GitHub and Zenodo publication readback"
+  ],
+  "backend_truth": {
+    "status": "pass",
+    "schema": "o002.backend.v2",
+    "catalog_bytes": 22863,
+    "catalog_sha256": "92cdbd1864a79be524018eb6fcdbf2a46b76f0b3b32373fb7a855f5f5357fc17"
+  },
+  "next_action": "admit o002.p01 source, code, tests, five mastery sets, result artifact, and backend records"
 }

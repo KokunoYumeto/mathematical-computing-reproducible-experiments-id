@@ -1,4 +1,48 @@
 {
+  "architecture": {
+    "admitted_unit_ids": [
+      "o002.u01",
+      "o002.u02",
+      "o002.u03",
+      "o002.u04",
+      "o002.u05",
+      "o002.u06",
+      "o002.u07",
+      "o002.u08",
+      "o002.u09",
+      "o002.u10",
+      "o002.u11",
+      "o002.u12"
+    ],
+    "open_requirements": [
+      "compulsory primer o002.p01",
+      "compulsory primer o002.p02",
+      "progressive Unit 4 plotting lab and mastery",
+      "locally executed SageMath lab and exercises",
+      "tested SciPy additions in Units 6 and 11",
+      "Unit 11 prerequisite deferral",
+      "resolved Python and Sage environment locks",
+      "HTML PDF EPUB notebook and offline-bundle closure",
+      "two-clean-build determinism and final accessibility receipts"
+    ],
+    "required_unit_ids": [
+      "o002.p01",
+      "o002.p02",
+      "o002.u01",
+      "o002.u02",
+      "o002.u03",
+      "o002.u04",
+      "o002.u05",
+      "o002.u06",
+      "o002.u07",
+      "o002.u08",
+      "o002.u09",
+      "o002.u10",
+      "o002.u11",
+      "o002.u12"
+    ],
+    "status": "in_progress"
+  },
   "components": [
     {
       "id": "cmp-o002-u01-text",
@@ -173,40 +217,52 @@
     "id": "B80",
     "prerequisite": "A30",
     "project_id": "O002",
+    "selected_unit_count": 14,
     "title": "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi"
   },
   "cursor": {
-    "boundary": "complete 12-unit id-ID edition",
-    "edition_complete": true,
-    "last_complete_unit": "o002.u12",
-    "next_unit": null
+    "admitted_unit_count": 12,
+    "b80_curriculum_complete": false,
+    "boundary": "published standalone edition retained; selected 14-unit B80 architecture in progress",
+    "last_admitted_unit": "o002.u12",
+    "next_unit": "o002.p01",
+    "selected_unit_count": 14,
+    "standalone_edition_complete": true
+  },
+  "historical_release": {
+    "doi": "10.5281/zenodo.22052053",
+    "exercise_count": 60,
+    "tag": "v2026.08.22",
+    "unit_count": 12,
+    "verified": true,
+    "version": "2026.08.22"
   },
   "language": "id-ID",
   "qa": [
     {
-      "evidence": "12 units; stable IDs; five hint-and-solution exercises per unit",
-      "id": "qa-o002-source-structure",
+      "evidence": "immutable v2026.08.22 release: 12 units and 60 exercises",
+      "id": "qa-o002-standalone-release",
       "status": "pass"
     },
     {
-      "evidence": "complete standard-library/scientific-Python test suite at final boundary",
-      "id": "qa-o002-tests",
-      "status": "pass"
+      "evidence": "selected 14-unit architecture requires P01/P02 and four in-place repairs",
+      "id": "qa-o002-b80-source-structure",
+      "status": "pending"
     },
     {
-      "evidence": "Quarto HTML and LuaLaTeX PDF build at final boundary",
-      "id": "qa-o002-reader-build",
-      "status": "pass"
+      "evidence": "resolved transitive Python environment lock not yet admitted",
+      "id": "qa-o002-python-environment",
+      "status": "pending"
     },
     {
-      "evidence": "all final PDF pages rendered and inspected",
-      "id": "qa-o002-pdf-visual",
-      "status": "pass"
+      "evidence": "local frozen Sage execution and tests not yet admitted",
+      "id": "qa-o002-sage-runtime",
+      "status": "pending"
     },
     {
-      "evidence": "no audio or interactive widget surface in this edition",
-      "id": "qa-o002-audio",
-      "status": "not_applicable"
+      "evidence": "expanded HTML PDF EPUB notebook bundle and final receipts not yet built",
+      "id": "qa-o002-final-build-accessibility",
+      "status": "pending"
     }
   ],
   "relations": [
@@ -386,7 +442,7 @@
       "type": "uses_component"
     }
   ],
-  "schema_version": "o002.backend.v1",
+  "schema_version": "o002.backend.v2",
   "sources": [
     {
       "id": "src-o002-original",
@@ -427,6 +483,7 @@
         "cmp-o002-u01-text",
         "cmp-o002-u01-code"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u01-01",
         "ex-o002-u01-02",
@@ -447,7 +504,7 @@
         "sec-o002-u01-exercises",
         "sec-o002-u01-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Komputasi, Representasi, dan Bukti"
     },
     {
@@ -455,6 +512,7 @@
         "cmp-o002-u02-text",
         "cmp-o002-u02-code"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u02-01",
         "ex-o002-u02-02",
@@ -476,7 +534,7 @@
         "sec-o002-u02-exercises",
         "sec-o002-u02-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Objek, Nilai, dan Fungsi"
     },
     {
@@ -484,6 +542,7 @@
         "cmp-o002-u03-text",
         "cmp-o002-u03-code"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u03-01",
         "ex-o002-u03-02",
@@ -506,7 +565,7 @@
         "sec-o002-u03-exercises",
         "sec-o002-u03-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Array, Bentuk, dan Vektorisasi"
     },
     {
@@ -514,6 +573,7 @@
         "cmp-o002-u04-text",
         "cmp-o002-u04-code"
       ],
+      "curriculum_status": "repair_required",
       "exercises": [
         "ex-o002-u04-01",
         "ex-o002-u04-02",
@@ -537,7 +597,7 @@
         "sec-o002-u04-exercises",
         "sec-o002-u04-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Visualisasi dengan Integritas"
     },
     {
@@ -545,6 +605,7 @@
         "cmp-o002-u05-text",
         "cmp-o002-u05-code"
       ],
+      "curriculum_status": "repair_required",
       "exercises": [
         "ex-o002-u05-01",
         "ex-o002-u05-02",
@@ -567,7 +628,7 @@
         "sec-o002-u05-exercises",
         "sec-o002-u05-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Komputasi Eksak dan Simbolik"
     },
     {
@@ -575,6 +636,7 @@
         "cmp-o002-u06-text",
         "cmp-o002-u06-code"
       ],
+      "curriculum_status": "repair_required",
       "exercises": [
         "ex-o002-u06-01",
         "ex-o002-u06-02",
@@ -599,7 +661,7 @@
         "sec-o002-u06-exercises",
         "sec-o002-u06-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Titik-Mengambang, Galat, dan Stabilitas"
     },
     {
@@ -607,6 +669,7 @@
         "cmp-o002-u07-text",
         "cmp-o002-u07-code"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u07-01",
         "ex-o002-u07-02",
@@ -632,7 +695,7 @@
         "sec-o002-u07-exercises",
         "sec-o002-u07-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Rancangan Eksperimen yang Dapat Diperiksa"
     },
     {
@@ -640,6 +703,7 @@
         "cmp-o002-u08-text",
         "cmp-o002-u08-code"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u08-01",
         "ex-o002-u08-02",
@@ -665,7 +729,7 @@
         "sec-o002-u08-exercises",
         "sec-o002-u08-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Pengujian dan Validasi Komputasi"
     },
     {
@@ -673,6 +737,7 @@
         "cmp-o002-u09-text",
         "cmp-o002-u09-code"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u09-01",
         "ex-o002-u09-02",
@@ -698,7 +763,7 @@
         "sec-o002-u09-exercises",
         "sec-o002-u09-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Data, Konfigurasi, dan Provenans"
     },
     {
@@ -706,6 +771,7 @@
         "cmp-o002-u10-text",
         "cmp-o002-u10-code"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u10-01",
         "ex-o002-u10-02",
@@ -728,7 +794,7 @@
         "sec-o002-u10-exercises",
         "sec-o002-u10-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Otomasi dan Alur Kerja yang Dapat Direproduksi"
     },
     {
@@ -736,6 +802,7 @@
         "cmp-o002-u11-text",
         "cmp-o002-u11-code"
       ],
+      "curriculum_status": "repair_required",
       "exercises": [
         "ex-o002-u11-01",
         "ex-o002-u11-02",
@@ -758,7 +825,7 @@
         "sec-o002-u11-exercises",
         "sec-o002-u11-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Eksperimen Numerik Berprasyarat"
     },
     {
@@ -766,6 +833,7 @@
         "cmp-o002-u12-text",
         "cmp-o002-u12-code"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u12-01",
         "ex-o002-u12-02",
@@ -787,7 +855,7 @@
         "sec-o002-u12-exercises",
         "sec-o002-u12-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Proyek Akhir yang Dapat Diperiksa"
     }
   ]

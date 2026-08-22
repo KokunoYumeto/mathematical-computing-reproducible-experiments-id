@@ -1,8 +1,12 @@
 # Komputasi Matematis dan Eksperimen yang Dapat Direproduksi
 
-Edisi lengkap Bahasa Indonesia (`id-ID`) untuk peran kurikulum B80 / proyek
-O002. Buku ini merupakan karya independen dan tidak menyiratkan dukungan dari
-penulis atau lembaga yang dibahas sebagai sumber perbandingan.
+Edisi Bahasa Indonesia (`id-ID`) untuk peran kurikulum B80 / proyek O002. Rilis
+12-unit `v2026.08.22` tetap lengkap sebagai edisi mandiri. Cabang
+`codex/b80-final-architecture` sedang memperluasnya ke arsitektur kurikulum
+14-unit yang dipilih; backend v2 sengaja menandai B80 belum lengkap sampai
+primer, runtime Sage/SciPy, format, aksesibilitas, dan receipt final lulus.
+Buku ini merupakan karya independen dan tidak menyiratkan dukungan dari penulis
+atau lembaga yang dibahas sebagai sumber perbandingan.
 
 - Pembaca HTML: <https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/>
 - PDF dan paket preservasi: <https://doi.org/10.5281/zenodo.22052053>

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import argparse
 import json
 from pathlib import Path
 import re
@@ -51,10 +50,12 @@ def parse_unit(number: int, filename: str) -> tuple[dict[str, object], list[dict
 
     text_component = f"cmp-o002-u{number:02d}-text"
     code_component = f"cmp-o002-u{number:02d}-code"
+    curriculum_status = "repair_required" if number in {4, 5, 6, 11} else "complete"
     unit = {
         "id": expected_id,
         "title": title_match.group(1),
-        "status": "complete",
+        "standalone_status": "complete",
+        "curriculum_status": curriculum_status,
         "reader_path": path.relative_to(ROOT).as_posix(),
         "sections": sections,
         "exercises": exercises,
@@ -79,7 +80,7 @@ def parse_unit(number: int, filename: str) -> tuple[dict[str, object], list[dict
     return unit, components
 
 
-def build_catalog(qa_status: str, pdf_visual_status: str) -> dict[str, object]:
+def build_catalog() -> dict[str, object]:
     units: list[dict[str, object]] = []
     components: list[dict[str, str]] = []
     for number, filename in enumerate(UNIT_FILES, start=1):
@@ -97,13 +98,14 @@ def build_catalog(qa_status: str, pdf_visual_status: str) -> dict[str, object]:
             relations.append({"type": "uses_component", "from": unit["id"], "to": component})  # type: ignore[index]
 
     return {
-        "schema_version": "o002.backend.v1",
+        "schema_version": "o002.backend.v2",
         "language": "id-ID",
         "course": {
             "id": "B80",
             "project_id": "O002",
             "title": "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi",
             "prerequisite": "A30",
+            "selected_unit_count": 14,
         },
         "sources": [
             {
@@ -142,53 +144,78 @@ def build_catalog(qa_status: str, pdf_visual_status: str) -> dict[str, object]:
         "components": components,
         "units": units,
         "relations": relations,
+        "historical_release": {
+            "version": "2026.08.22",
+            "tag": "v2026.08.22",
+            "doi": "10.5281/zenodo.22052053",
+            "unit_count": 12,
+            "exercise_count": 60,
+            "verified": True,
+        },
+        "architecture": {
+            "status": "in_progress",
+            "required_unit_ids": [
+                "o002.p01",
+                "o002.p02",
+                *[f"o002.u{number:02d}" for number in range(1, 13)],
+            ],
+            "admitted_unit_ids": [f"o002.u{number:02d}" for number in range(1, 13)],
+            "open_requirements": [
+                "compulsory primer o002.p01",
+                "compulsory primer o002.p02",
+                "progressive Unit 4 plotting lab and mastery",
+                "locally executed SageMath lab and exercises",
+                "tested SciPy additions in Units 6 and 11",
+                "Unit 11 prerequisite deferral",
+                "resolved Python and Sage environment locks",
+                "HTML PDF EPUB notebook and offline-bundle closure",
+                "two-clean-build determinism and final accessibility receipts",
+            ],
+        },
         "qa": [
             {
-                "id": "qa-o002-source-structure",
-                "status": qa_status,
-                "evidence": "12 units; stable IDs; five hint-and-solution exercises per unit",
+                "id": "qa-o002-standalone-release",
+                "status": "pass",
+                "evidence": "immutable v2026.08.22 release: 12 units and 60 exercises",
             },
             {
-                "id": "qa-o002-tests",
-                "status": qa_status,
-                "evidence": "complete standard-library/scientific-Python test suite at final boundary",
+                "id": "qa-o002-b80-source-structure",
+                "status": "pending",
+                "evidence": "selected 14-unit architecture requires P01/P02 and four in-place repairs",
             },
             {
-                "id": "qa-o002-reader-build",
-                "status": qa_status,
-                "evidence": "Quarto HTML and LuaLaTeX PDF build at final boundary",
+                "id": "qa-o002-python-environment",
+                "status": "pending",
+                "evidence": "resolved transitive Python environment lock not yet admitted",
             },
             {
-                "id": "qa-o002-pdf-visual",
-                "status": pdf_visual_status,
-                "evidence": "all final PDF pages rendered and inspected",
+                "id": "qa-o002-sage-runtime",
+                "status": "pending",
+                "evidence": "local frozen Sage execution and tests not yet admitted",
             },
             {
-                "id": "qa-o002-audio",
-                "status": "not_applicable",
-                "evidence": "no audio or interactive widget surface in this edition",
+                "id": "qa-o002-final-build-accessibility",
+                "status": "pending",
+                "evidence": "expanded HTML PDF EPUB notebook bundle and final receipts not yet built",
             },
         ],
         "cursor": {
-            "last_complete_unit": "o002.u12",
-            "next_unit": None,
-            "boundary": "complete 12-unit id-ID edition",
-            "edition_complete": True,
+            "last_admitted_unit": "o002.u12",
+            "next_unit": "o002.p01",
+            "boundary": "published standalone edition retained; selected 14-unit B80 architecture in progress",
+            "standalone_edition_complete": True,
+            "b80_curriculum_complete": False,
+            "admitted_unit_count": 12,
+            "selected_unit_count": 14,
         },
     }
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--qa-status", choices=("pending", "pass"), default="pending")
-    parser.add_argument(
-        "--pdf-visual-status", choices=("pending", "pass"), default="pending"
-    )
-    args = parser.parse_args()
     output = ROOT / "backend" / "catalog.json"
     output.write_text(
         json.dumps(
-            build_catalog(args.qa_status, args.pdf_visual_status),
+            build_catalog(),
             ensure_ascii=False,
             indent=2,
             sort_keys=True,

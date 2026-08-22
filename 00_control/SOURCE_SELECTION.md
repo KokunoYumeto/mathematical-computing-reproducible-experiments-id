@@ -4,19 +4,17 @@ Status date: 2026-08-22
 
 ## Decision
 
-O002 remains an independently authored Indonesian coursebook. No examined work
-is an admissible wholesale spine for the B80 role. This decision was reached
-from prerequisite, coverage, rights, source-closure, exercise, and build
-evidence; completion of O002 is not evidence for its later admission into the
-40-course curriculum. Edition completion and curriculum admission are separate
-decisions.
+The curriculum coordinator independently selected this O002 coursebook as the
+sole B80 narrative spine under the exact 14-unit architecture recorded in
+`FINAL_ARCHITECTURE_HANDOFF.md`. No external work is selected wholesale and no
+second overlapping computing book is required. The selection rests on a
+separate source/coverage audit, not on sunk work or the prior release.
 
-The complete current reader, Units 1-12, is wholly original. It contains no
-adapted donor prose, exercises, figures, data, or code. Text is CC BY-SA 4.0
-and code is MIT. Completion of this edition does not convert any comparison
-source into a component. Future donor-derived components must be declared,
-licensed, attributed, and reviewed separately before admission to a later
-revision.
+The preserved 12-unit release and live reader are wholly original. They contain
+no adapted donor prose, exercises, figures, data, or code. Text is CC BY-SA 4.0
+and code is MIT. P01/P02 and the selected in-place repairs are also original.
+Completion does not convert a comparator into a component; future donor bytes
+must be declared, licensed, attributed, and reviewed before admission.
 
 ## Frozen primary authorities
 

@@ -72,3 +72,13 @@ GitHub release `v2026.08.22`, and Zenodo DOI `10.5281/zenodo.22052053`. GitHub
 and Zenodo each expose the same ten checksummed release artifacts; anonymous
 readback matches every local byte. Publication remains separate from curriculum
 admission and did not trigger any upstream contact.
+
+## O002-D011 - Selected 14-unit B80 architecture
+
+The coordinator independently selected O002 as B80's sole narrative spine, but
+not at the published 12-unit boundary. The immutable release remains valid.
+The live curriculum requires original compulsory P01/P02, in-place plotting,
+Sage, SciPy, mastery, prerequisite, lock, format, accessibility, determinism,
+and final-publication repairs. Backend v2 separates
+`standalone_edition_complete=true` from `b80_curriculum_complete=false`; only
+the latter may change after every selected gate passes.

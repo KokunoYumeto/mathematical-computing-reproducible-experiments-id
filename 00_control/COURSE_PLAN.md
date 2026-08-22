@@ -1,26 +1,26 @@
-# O002 bounded edition plan
+# O002 selected 14-unit course plan
 
-The edition is a complete B80 coursebook that can begin after A30. Later
-application units carry their own additional prerequisites rather than quietly
-raising the entry requirement.
+The immutable 12-unit standalone release is complete. The selected B80
+curriculum is a distinct live 14-unit architecture and remains incomplete.
 
-| Unit | Stable ID | Scope | Source role | State |
-|---|---|---|---|---|
-| Komputasi, Representasi, dan Bukti | `o002.u01` | exact/float distinction, reproducible record, evidence and proof | original | complete |
-| Objek, Nilai, dan Fungsi | `o002.u02` | types, aliasing, contracts, purity, invariants, canonical JSON | original | complete |
-| Array dan Vektorisasi | `o002.u03` | shapes, dtypes, broadcasting, views/copies, array invariants | original; donors comparison-only | complete |
-| Visualisasi dan Integritas | `o002.u04` | encodings, axes, units, uncertainty, accessibility, deterministic figures | original; donors comparison-only | complete |
-| Komputasi Eksak dan Simbolik | `o002.u05` | Fraction, SymPy, assumptions, equivalence, Sage-compatible bridge | original; donors comparison-only | complete |
-| Titik-Mengambang dan Stabilitas | `o002.u06` | representation model, propagation, conditioning, stable reformulation | original | complete |
-| Rancangan Eksperimen | `o002.u07` | hypotheses, parameters, controls, seeds, sweeps, stopping rules | original | complete |
-| Pengujian dan Validasi | `o002.u08` | assertions, unit/integration/regression tests, tolerances, coverage limits | original; RSE comparison-only | complete |
-| Data, Konfigurasi, dan Provenans | `o002.u09` | schemas, provenance, environments, run manifests, inspectability | original; RSE comparison-only | complete |
-| Otomasi dan Pipa Reproduksibel | `o002.u10` | dependency graphs, incremental rebuilds, task targets, archival artifacts | original; RSE comparison-only | complete |
-| Eksperimen Numerik Berprasyarat | `o002.u11` | root finding and later calculus/linear-algebra/ODE applications | original; local prerequisites declared | complete |
-| Proyek Akhir yang Dapat Diperiksa | `o002.u12` | question-to-artifact project, proof/evidence boundary, review and revision | original | complete |
+| Order | Stable ID | Scope | Standalone state | B80 curriculum state |
+|---:|---|---|---|---|
+| 1 | `o002.p01` | Python/Jupyter/Quarto, scalars, calls/imports, tracebacks, scripts, clean-kernel state | not applicable | in production |
+| 2 | `o002.p02` | collections, control flow, functions, modules, Path, text/CSV/JSON, unittest red-green | not applicable | planned next |
+| 3 | `o002.u01` | exact/float, reproducible record, evidence and proof | complete | retained complete |
+| 4 | `o002.u02` | objects, aliasing, contracts, purity, invariants | complete | retained complete |
+| 5 | `o002.u03` | arrays, dtype, vectorization, broadcasting, views/copies | complete | retained complete |
+| 6 | `o002.u04` | visualization integrity plus progressive construction and plot-manifest mastery | complete | repair required |
+| 7 | `o002.u05` | exact/symbolic work plus compulsory locally executed SageMath | complete | repair required |
+| 8 | `o002.u06` | floating point plus tested `scipy.special` stability comparison | complete | repair required |
+| 9 | `o002.u07` | experiment design, controls, seeds, stopping rules | complete | retained complete |
+| 10 | `o002.u08` | testing and validation | complete | retained complete after P02 bridge |
+| 11 | `o002.u09` | data, configuration, environments, provenance | complete | retained complete after P02 bridge |
+| 12 | `o002.u10` | automation and reproducible pipelines | complete | retained complete |
+| 13 | `o002.u11` | A30 bisection/SciPy core; B30/B40/B70 later routes gated | complete | repair required |
+| 14 | `o002.u12` | verifiable capstone and proof/evidence boundary | complete | retained complete |
 
-Every unit contains natural Indonesian reader prose, stable section and
-exercise IDs, runnable offline code, tests, exactly five exercises with hints
-and full solutions, a machine-readable component record, and explicit limits
-on what the computation establishes. The edition boundary is complete; later
-donor adaptation, if any, is a separate revision rather than unfinished work.
+P01/P02 each add five exercises with hints, checks, and full solutions. The
+existing 60 exercises remain. Final admission also requires resolved Python and
+Sage locks, executable receipts, HTML/PDF/EPUB/notebook/offline bundles, two
+identical clean builds, full visual/accessibility QA, and publication readback.

@@ -2,56 +2,49 @@
 
 Status date: 2026-08-22
 
-Role: B80 / O002, *Komputasi Matematis dan Eksperimen yang Dapat
-Direproduksi*, Bahasa Indonesia (`id-ID`).
+Status: selected B80 architecture in production
 
-## Edition boundary
+Branch: `codex/b80-final-architecture`
 
-The independent 12-unit edition is complete and locally verified. Units
-`o002.u01` through `o002.u12` form one admitted contiguous boundary. Every unit
-has one reader source, one executable code companion, one unit-test companion,
-five stable-ID exercises, five hints, and five full solutions. The complete
-assessment surface is therefore 60 exercises, 60 hints, and 60 full solutions.
-All current reader, exercise, figure, data, and code bytes are independently
-authored; no donor bytes are adapted.
+## Preserved historical boundary
 
-Source QA passes for all 12 triplets. The frozen Python 3.13.1 suite passes
-115/115 tests. The JSON Schema-backed backend records 12 complete units,
-60 exercises, exact component references, `edition_complete: true`, and passing
-source, test, reader-build, and PDF-visual gates. All twelve experiment paths,
-the Unit 4 artifact closure, the Unit 12 package verifier, and local-profile
-privacy checks pass.
+The independently authored 12-unit edition remains complete, verified, and
+published as GitHub tag `v2026.08.22` and Zenodo DOI
+`10.5281/zenodo.22052053`. Its 60 exercises, 115/115-test receipt, 98-page PDF,
+offline HTML, manifests, and public-byte receipt remain valid. That release is
+an immutable historical witness and is not being withdrawn or rewritten.
 
-The standalone reader contains 13 Indonesian HTML pages, native MathML, local
-runtime resources, packaged text/code/runtime licenses, and packaged source
-selection and backend provenance. The final PDF has 98 letter-size pages,
-502,373 bytes, and SHA-256
-`289e744aeef09eb6e546c002e0782a346519a39c5265ae4ef5c9d1e3ce095376`.
-All 98 pages were rendered at 120 dpi and inspected through seven contact sheets,
-with changed and dense pages inspected individually; the durable visual receipt
-passes against the current PDF.
+## Live selected curriculum truth
 
-Two clean final builds from empty `output/` produced byte-identical 60-row
-output manifests. Both manifest files have SHA-256
-`e2108333ac3121137b28646d19f087b07b96178eab34c24a504e1dcdeb7d78f5`.
-No build lock or in-progress marker remains.
+The curriculum coordinator independently selected this original narrative
+spine for B80, but only under the exact 14-unit completion architecture in
+`FINAL_ARCHITECTURE_HANDOFF.md`. The selected B80 curriculum is therefore
+**not complete** at the published 12-unit boundary.
 
-## Rights, release, and curriculum status
+The backend is now `o002.backend.v2` and explicitly records:
 
-Original text is CC BY-SA 4.0 and original code is MIT. Comparison works retain
-their own rights and remain outside the edition. The reader is verified but
-is now published through one non-duplicative lineage:
+- `standalone_edition_complete: true`;
+- `b80_curriculum_complete: false`;
+- 12 of 14 selected units currently admitted;
+- next unit `o002.p01`;
+- P01/P02, Unit 4 plotting, Unit 5 local Sage, Unit 6/11 SciPy, Unit 11
+  prerequisite deferral, resolved environment locks, expanded formats,
+  determinism, accessibility, and final receipts as open requirements; and
+- Units 4, 5, 6, and 11 as `repair_required` for the selected architecture.
 
-- repository: <https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id>
-- HTML reader: <https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/>
-- GitHub release: <https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22>
-- DOI record: <https://doi.org/10.5281/zenodo.22052053>
+The exact generated backend is 22,863 bytes with SHA-256
+`92cdbd1864a79be524018eb6fcdbf2a46b76f0b3b32373fb7a855f5f5357fc17`;
+Draft 2020-12 JSON Schema validation passes. This is a truth-correction
+checkpoint, not a final reader build.
 
-The ten GitHub release assets and the ten Zenodo files were anonymously read
-back and matched to local byte counts and SHA-256 values. Selected Pages files,
-including the PDF, HTML index, backend catalog, and Apache license, also match
-the accepted output exactly. `PUBLICATION_RECEIPT.json` records the sanitized
-transaction evidence. No upstream author was contacted. Edition completion or
-publication does not decide admission to the 40-course curriculum and must not
-be used as evidence of curricular superiority. There is no remaining production
-or publication action for this edition boundary.
+## Rights and next action
+
+Current and planned reader expression is original CC BY-SA 4.0; original code
+is MIT. External works remain comparison authorities only and no donor bytes
+are admitted. No upstream author has been contacted.
+
+Next executable action: admit P01 contiguously with its QMD, code, tests, five
+exercise/hint/check/solution sets, result artifact, backend records, source QA,
+and a pushed verified checkpoint. P02 follows immediately. Released Pages stay
+on the immutable historical reader until a later expanded boundary itself
+passes its release gates.

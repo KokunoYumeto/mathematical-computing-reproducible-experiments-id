@@ -12,19 +12,22 @@
     "units",
     "relations",
     "qa",
+    "historical_release",
+    "architecture",
     "cursor"
   ],
   "properties": {
-    "schema_version": {"const": "o002.backend.v1"},
+    "schema_version": {"const": "o002.backend.v2"},
     "language": {"const": "id-ID"},
     "course": {
       "type": "object",
-      "required": ["id", "project_id", "title", "prerequisite"],
+      "required": ["id", "project_id", "title", "prerequisite", "selected_unit_count"],
       "properties": {
         "id": {"const": "B80"},
         "project_id": {"const": "O002"},
         "title": {"type": "string", "minLength": 1},
-        "prerequisite": {"const": "A30"}
+        "prerequisite": {"const": "A30"},
+        "selected_unit_count": {"const": 14}
       },
       "additionalProperties": false
     },
@@ -66,19 +69,59 @@
         "additionalProperties": false
       }
     },
+    "historical_release": {
+      "type": "object",
+      "required": ["version", "tag", "doi", "unit_count", "exercise_count", "verified"],
+      "properties": {
+        "version": {"const": "2026.08.22"},
+        "tag": {"const": "v2026.08.22"},
+        "doi": {"const": "10.5281/zenodo.22052053"},
+        "unit_count": {"const": 12},
+        "exercise_count": {"const": 60},
+        "verified": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "architecture": {
+      "type": "object",
+      "required": ["status", "required_unit_ids", "admitted_unit_ids", "open_requirements"],
+      "properties": {
+        "status": {"enum": ["in_progress", "complete"]},
+        "required_unit_ids": {
+          "type": "array",
+          "minItems": 14,
+          "maxItems": 14,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^o002\\.(?:p|u)[0-9]{2}$"}
+        },
+        "admitted_unit_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^o002\\.(?:p|u)[0-9]{2}$"}
+        },
+        "open_requirements": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "additionalProperties": false
+    },
     "cursor": {
       "type": "object",
-      "required": ["last_complete_unit", "next_unit", "boundary"],
+      "required": ["last_admitted_unit", "next_unit", "boundary", "standalone_edition_complete", "b80_curriculum_complete", "admitted_unit_count", "selected_unit_count"],
       "properties": {
-        "last_complete_unit": {"type": "string", "pattern": "^o002\\.u[0-9]{2}$"},
+        "last_admitted_unit": {"type": "string", "pattern": "^o002\\.(?:p|u)[0-9]{2}$"},
         "next_unit": {
           "oneOf": [
-            {"type": "string", "pattern": "^o002\\.u[0-9]{2}$"},
+            {"type": "string", "pattern": "^o002\\.(?:p|u)[0-9]{2}$"},
             {"type": "null"}
           ]
         },
         "boundary": {"type": "string", "minLength": 1},
-        "edition_complete": {"type": "boolean"}
+        "standalone_edition_complete": {"type": "boolean"},
+        "b80_curriculum_complete": {"type": "boolean"},
+        "admitted_unit_count": {"type": "integer", "minimum": 0, "maximum": 14},
+        "selected_unit_count": {"const": 14}
       },
       "additionalProperties": false
     }
@@ -111,19 +154,20 @@
     },
     "unit": {
       "type": "object",
-      "required": ["id", "title", "status", "reader_path", "sections", "exercises", "components"],
+      "required": ["id", "title", "standalone_status", "curriculum_status", "reader_path", "sections", "exercises", "components"],
       "properties": {
-        "id": {"type": "string", "pattern": "^o002\\.u[0-9]{2}$"},
+        "id": {"type": "string", "pattern": "^o002\\.(?:p|u)[0-9]{2}$"},
         "title": {"type": "string", "minLength": 1},
-        "status": {"enum": ["complete", "in_progress", "planned"]},
+        "standalone_status": {"enum": ["complete", "not_applicable"]},
+        "curriculum_status": {"enum": ["complete", "repair_required", "in_progress", "planned"]},
         "reader_path": {"type": "string", "minLength": 1},
         "sections": {
           "type": "array",
-          "items": {"type": "string", "pattern": "^sec-o002-u[0-9]{2}"}
+          "items": {"type": "string", "pattern": "^sec-o002-(?:p|u)[0-9]{2}"}
         },
         "exercises": {
           "type": "array",
-          "items": {"type": "string", "pattern": "^ex-o002-u[0-9]{2}-[0-9]{2}$"}
+          "items": {"type": "string", "pattern": "^ex-o002-(?:p|u)[0-9]{2}-[0-9]{2}$"}
         },
         "components": {
           "type": "array",
