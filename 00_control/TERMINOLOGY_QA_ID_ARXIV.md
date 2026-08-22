@@ -58,6 +58,6 @@ the decision durable for later editions and locales.
 ## Provenance disclosure
 
 `README.md` contains the exact model disclosure **OpenAI Codex gpt-5.6-sol,
-Ultra**, states that the work was performed at Floris's direction, and
+Ultra**, states that the work was performed at the user's direction, and
 explicitly preserves author, source, rights-holder, and human-contributor
 attribution. This QA does not change any source or contributor credit.

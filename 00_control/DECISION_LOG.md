@@ -165,6 +165,8 @@ existing Figshare item `33314742` is likewise corrected in place: a compact
 reader-first v2 draft uses the 159-page PDF first and retains exact CC BY-SA
 4.0 text, MIT code, and per-component runtime terms in the description and
 license notice. Neither route is complete until anonymous byte readback passes.
+The Figshare clause in this historical resumption decision was later proven to
+identify the wrong item and is explicitly superseded by D019.
 
 ## O002-D019 - Public preservation closes on three independent routes
 

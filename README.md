@@ -9,7 +9,7 @@ Buku ini merupakan karya independen dan tidak menyiratkan dukungan dari penulis
 atau lembaga yang dibahas sebagai sumber perbandingan.
 
 Produksi, penerjemahan, dan QA berbantuan model menggunakan **OpenAI Codex gpt-5.6-sol, Ultra**,
-atas arahan Floris. Identifikasi ini tidak menggantikan atribusi penulis,
+atas arahan pengguna. Identifikasi ini tidak menggantikan atribusi penulis,
 sumber, pemegang hak, atau kontributor manusia yang tercatat.
 
 - Pembaca HTML: <https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/>

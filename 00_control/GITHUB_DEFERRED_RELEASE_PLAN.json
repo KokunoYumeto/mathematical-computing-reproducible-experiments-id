@@ -3,11 +3,12 @@
   "status": "executed_and_superseded_by_github_publication_receipt",
   "prepared_date": "2026-08-22",
   "attempt_policy": {
-    "attempt_now": true,
+    "attempt_now": false,
+    "attempt_state": "completed",
     "resume_condition": "satisfied on 2026-08-22",
     "no_competing_repository": true,
     "no_rebuild_required": true,
-    "credential_file": "C:/Users/Floris/Downloads/Github Tokens.md",
+    "credential_source": "local secret store; path and value intentionally not recorded",
     "credential_handling": "read only at runtime; never echo, log, commit, or place in a URL"
   },
   "existing_lineage": {
@@ -109,16 +110,16 @@
   ],
   "release_asset_count": 5,
   "release_asset_bytes": 3014210,
-  "resume_transaction": [
-    "Authenticate only after the account-restoration condition is true.",
-    "Use narrowly scoped Git inspection in this repository only; never scan the workspace root.",
-    "Commit the complete current source/control/backend plus the already-synchronized docs tree on the existing lineage.",
-    "Push the existing target branch, create immutable tag v2026.08.22.1, and create one release with exactly the five frozen assets above.",
-    "Allow the existing docs-based Pages publication to build from the accepted 85-file tracked tree.",
-    "Anonymously verify repository visibility, tag-to-commit identity, exact five-asset inventory, every release asset byte/hash, Pages build state, and all 85 Pages files against the tree digest.",
-    "Persist the GitHub/Pages result in the final cross-lineage receipt and mark the pursuit goal complete only after every check passes."
+  "executed_transaction": [
+    "Authenticated only after the account-restoration condition was satisfied.",
+    "Used narrowly scoped Git inspection in this repository only and did not scan the workspace root.",
+    "Committed the complete source/control/backend and synchronized docs tree on the existing lineage.",
+    "Pushed the target branch, created immutable tag v2026.08.22.1, and created one release with exactly the five frozen assets above.",
+    "Allowed the existing docs-based Pages publication to build from the accepted 85-file tracked tree.",
+    "Anonymously verified repository visibility, tag-to-commit identity, exact five-asset inventory, every release asset byte/hash, Pages build state, and all 85 Pages files against the tree digest.",
+    "Persisted the GitHub/Pages result in GITHUB_PUBLICATION_RECEIPT.json."
   ],
-  "required_anonymous_readback": {
+  "verified_anonymous_readback": {
     "repository_http": 200,
     "release_asset_count": 5,
     "release_asset_bytes": 3014210,
