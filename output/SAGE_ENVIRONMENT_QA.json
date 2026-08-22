@@ -1,0 +1,24 @@
+{
+  "lock": {
+    "bytes": 34181,
+    "installed_package_count": 1064,
+    "path": "environment/sage-ubuntu22.04-dpkg-lock.txt",
+    "sha256": "bbd7f235834660681327b975a816b71aabd6d31946e6c875bf55d06224a5d802"
+  },
+  "matches_runtime": true,
+  "operating_system": {
+    "architecture": "x86_64",
+    "id": "ubuntu",
+    "version_id": "22.04"
+  },
+  "sage": {
+    "apt_packages": {
+      "python3-sage": "9.5-4",
+      "sagemath": "9.5-4"
+    },
+    "python": "3.10.12",
+    "version": "9.5"
+  },
+  "schema": "o002.sage-environment.v1",
+  "wsl_distribution": "Ubuntu-22.04"
+}

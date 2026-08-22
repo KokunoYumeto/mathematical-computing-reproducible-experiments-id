@@ -30,6 +30,12 @@ def main() -> int:
     args = parser.parse_args()
 
     quarto_version = first_output_line(["quarto", "--version"])
+    quarto_pandoc_banner = first_output_line(["quarto", "pandoc", "--version"])
+    pandoc_match = re.search(r"pandoc\s+([0-9.]+)", quarto_pandoc_banner, re.IGNORECASE)
+    if pandoc_match is None:
+        raise RuntimeError(
+            f"banner Pandoc bawaan Quarto tidak dikenali: {quarto_pandoc_banner}"
+        )
     lualatex_banner = first_output_line(["lualatex", "--version"])
     match = re.search(r"LuaHBTeX, Version ([0-9.]+) \(MiKTeX ([0-9.]+)\)", lualatex_banner)
     if match is None:
@@ -38,12 +44,16 @@ def main() -> int:
     receipt = {
         "schema": "o002.toolchain-qa.v1",
         "python": platform.python_version(),
+        "python_implementation": platform.python_implementation(),
         "quarto": quarto_version,
+        "quarto_pandoc": pandoc_match.group(1),
         "luahbtex": match.group(1),
         "miktex": match.group(2),
         "expected": {
             "python": "3.13.1",
+            "python_implementation": "CPython",
             "quarto": "1.9.37",
+            "quarto_pandoc": "3.8.3",
             "luahbtex": "1.25.7",
             "miktex": "26.5",
         },

@@ -1,0 +1,45 @@
+{
+  "checks": {
+    "container_and_opf": true,
+    "css_runtime_resource_closure": true,
+    "image_alternatives": true,
+    "language_id": true,
+    "local_links_and_fragments": true,
+    "local_profile_paths_absent": true,
+    "local_runtime_resource_closure": true,
+    "manifest_and_spine_closure": true,
+    "mathml_present_and_declared": true,
+    "ocf_mimetype": true,
+    "publication_metadata": true,
+    "safe_unique_member_paths": true,
+    "unique_ids": true
+  },
+  "counts": {
+    "css_documents": 1,
+    "embedded_runtime_resources": 85,
+    "external_hyperlinks": 2,
+    "images": 1,
+    "local_links": 1077,
+    "local_runtime_references": 18,
+    "manifest_items": 20,
+    "mathml_elements": 272,
+    "members": 24,
+    "spine_documents": 17,
+    "xhtml_documents": 17
+  },
+  "epub": {
+    "bytes": 291212,
+    "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+    "sha256": "8e9e35dd54be8524a8b7752df0a7285749db4c80fc5a10271eb841c01c0c748d"
+  },
+  "metadata": {
+    "creator": "Floris",
+    "identifier": "o002.frontmatter.intro",
+    "language": "id",
+    "modified": "2026-08-21T00:00:00Z",
+    "opf_rootfile": "EPUB/content.opf",
+    "title": "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi"
+  },
+  "schema": "o002.epub-qa.v1",
+  "successful": true
+}

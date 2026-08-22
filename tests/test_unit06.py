@@ -37,6 +37,94 @@ class Unit06FloatingTests(unittest.TestCase):
         self.assertLess(stable_error, Decimal("1e-15"))
         self.assertTrue(report["rationalized_is_more_accurate"])
 
+    def test_scipy_special_exprel_is_stable_near_zero(self) -> None:
+        report = unit06.scipy_exprel_report(1e-8)
+        self.assertEqual(report["scipy"]["function"], "scipy.special.exprel")
+        self.assertEqual(report["mathematical_domain"], "semua x real")
+        self.assertEqual(
+            report["laboratory_domain"],
+            "0 < |x| <= 1e-4 untuk masukan binary64",
+        )
+        self.assertEqual(report["decimal_oracle"]["precision_digits"], 80)
+        self.assertEqual(
+            report["decimal_oracle"]["method"],
+            "deret pangkat bebas pembatalan untuk E dan E'",
+        )
+
+        forward = report["forward_error"]
+        naive_forward = Decimal(forward["naive_relative"])
+        stable_forward = Decimal(forward["scipy_relative"])
+        self.assertGreater(naive_forward, Decimal("1e-9"))
+        self.assertLess(stable_forward, Decimal("1e-15"))
+        self.assertTrue(forward["scipy_is_more_accurate"])
+
+        condition = Decimal(report["conditioning"]["relative_condition_number"])
+        self.assertLess(condition, Decimal("1e-7"))
+        backward = report["backward_error"]
+        self.assertGreater(Decimal(backward["naive_relative_estimate"]), Decimal(1))
+        self.assertLess(
+            Decimal(backward["scipy_relative_estimate"]), Decimal("1e-6")
+        )
+        self.assertFalse(backward["is_exact_inverse_solution"])
+
+        extreme = report["extreme_cancellation"]
+        self.assertEqual(float(extreme["naive"]), 0.0)
+        self.assertEqual(float(extreme["scipy_special_exprel"]), 1.0)
+        self.assertTrue(extreme["math_exp_x_equals_one"])
+        self.assertFalse(
+            report["evidence_boundary"]["proves_stability_for_all_real_inputs"]
+        )
+
+    def test_scipy_exprel_lab_domain_is_explicitly_enforced(self) -> None:
+        for boundary in (
+            unit06.SCIPY_EXPREL_LAB_MIN_ABS,
+            -unit06.SCIPY_EXPREL_LAB_MIN_ABS,
+            unit06.SCIPY_EXPREL_LAB_MAX_ABS,
+            -unit06.SCIPY_EXPREL_LAB_MAX_ABS,
+        ):
+            with self.subTest(boundary=boundary):
+                report = unit06.scipy_exprel_report(boundary)
+                self.assertEqual(report["tested_x"], repr(boundary))
+
+        for invalid in (
+            0.0,
+            unit06.SCIPY_EXPREL_LAB_MAX_ABS * 10,
+        ):
+            with self.subTest(invalid=invalid):
+                with self.assertRaisesRegex(ValueError, r"0 < \|x\|"):
+                    unit06.scipy_exprel_report(invalid)
+
+        for nonfinite in (math.inf, math.nan):
+            with self.subTest(nonfinite=nonfinite):
+                with self.assertRaisesRegex(ValueError, "berhingga"):
+                    unit06.scipy_exprel_report(nonfinite)
+
+    def test_decimal_oracle_resolves_smallest_subnormal_correction(self) -> None:
+        smallest_subnormal = math.ulp(0.0)
+        for x in (smallest_subnormal, -smallest_subnormal):
+            with self.subTest(x=x):
+                report = unit06.scipy_exprel_report(x)
+                oracle = report["decimal_oracle"]
+                self.assertGreaterEqual(oracle["precision_digits"], 370)
+
+                stable_error = Decimal(report["forward_error"]["scipy_absolute"])
+                expected_first_term = Decimal.from_float(abs(x)) / 2
+                self.assertGreater(stable_error, 0)
+                self.assertLess(
+                    abs(stable_error - expected_first_term) / expected_first_term,
+                    Decimal("1e-19"),
+                )
+                self.assertTrue(report["forward_error"]["scipy_is_more_accurate"])
+
+                condition = Decimal(
+                    report["conditioning"]["relative_condition_number"]
+                )
+                self.assertGreater(condition, 0)
+                self.assertLess(
+                    abs(condition - expected_first_term) / expected_first_term,
+                    Decimal("1e-19"),
+                )
+
     def test_forward_and_backward_error_are_small_and_distinct(self) -> None:
         report = unit06.sqrt_forward_backward_report(2)
         forward = Decimal(report["relative_forward_error"])

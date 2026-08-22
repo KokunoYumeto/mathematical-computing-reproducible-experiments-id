@@ -11,6 +11,8 @@ identifier: o002.u04
 Setelah menyelesaikan unit ini, pembaca dapat:
 
 - memulai visualisasi dari pertanyaan yang dapat dinyatakan dengan jelas;
+- membangun grafik secara bertahap melalui `fig` dan `ax`, kemudian
+  `plot`, `scatter`, serta `errorbar`;
 - memetakan variabel ke posisi, tanda, garis, dan interval tanpa menyembunyikan
   satuan;
 - menjelaskan bagaimana pemotongan sumbu dan rasio aspek mengubah kesan visual;
@@ -73,6 +75,161 @@ tertentu.
 Pilih pengodean yang sesuai dengan pertanyaan. Posisi pada sumbu berskala
 berguna untuk membandingkan besaran. Diagram lingkaran tidak sesuai di sini:
 jarak pada waktu berbeda bukan bagian-bagian dari satu keseluruhan.
+
+## Lab bertahap: dari `fig` dan `ax` ke grafik lengkap {#sec-o002-u04-progressive-lab}
+
+Matplotlib memisahkan **gambar keseluruhan** (`fig`) dari **daerah koordinat**
+(`ax`). `fig` mengatur kanvas yang akan disimpan. `ax` menerima data, skala,
+label, dan legenda. Pemisahan ini membuat setiap keputusan terlihat dan dapat
+diuji. Lab berikut dimulai dari kanvas kosong, lalu menambahkan tepat satu
+lapisan pada setiap tahap.
+
+### Tahap 1 - buat `fig` dan `ax` {#sec-o002-u04-progressive-canvas}
+
+```{python}
+#| label: lst-o002-u04-progressive-canvas
+#| output: false
+from matplotlib import pyplot as plt
+from source.code.unit04_visualization import ALT_TEXT, OBSERVATIONS
+
+fig_u04_lab, ax_u04_lab = plt.subplots(figsize=(8.0, 4.8))
+```
+
+Nama variabel dapat berbeda, tetapi pola `fig, ax = plt.subplots(...)` layak
+dipertahankan: pembaca kode langsung tahu objek mana yang disimpan dan objek
+mana yang menerima pengodean data. Ukuran gambar ditetapkan agar tidak
+bergantung pada ukuran jendela interaktif.
+
+Siapkan empat barisan data dari tabel. Daftar dibuat dalam urutan pengamatan
+yang sudah divalidasi.
+
+```{python}
+#| label: lst-o002-u04-progressive-data
+#| output: false
+waktu_u04 = [baris.time_s for baris in OBSERVATIONS]
+jarak_u04 = [baris.measured_distance_m for baris in OBSERVATIONS]
+galat_u04 = [baris.uncertainty_m for baris in OBSERVATIONS]
+model_u04 = [baris.model_distance_m for baris in OBSERVATIONS]
+```
+
+### Tahap 2 - `plot` untuk model {#sec-o002-u04-progressive-plot}
+
+`ax.plot` cocok untuk nilai model yang urut menurut waktu. Garis putus-putus
+menjadi pengodean kedua selain warna.
+
+```{python}
+#| label: lst-o002-u04-progressive-plot
+#| output: false
+garis_model_u04, = ax_u04_lab.plot(
+    waktu_u04,
+    model_u04,
+    color="#D55E00",
+    linestyle="--",
+    linewidth=2,
+    label="Model d = 2t + 1",
+)
+assert garis_model_u04.get_linestyle() == "--"
+```
+
+Koma pada `garis_model_u04, = ...` membongkar daftar satu garis yang
+dikembalikan `plot`. Pada tahap ini belum ada titik pengukuran dan belum ada
+batang ketidakpastian.
+
+### Tahap 3 - `scatter` untuk pengukuran {#sec-o002-u04-progressive-scatter}
+
+`ax.scatter` menambahkan tujuh pengukuran sebagai tanda terpisah. Bentuk
+lingkaran membuat seri tetap dikenali tanpa warna.
+
+```{python}
+#| label: lst-o002-u04-progressive-scatter
+#| output: false
+titik_u04 = ax_u04_lab.scatter(
+    waktu_u04,
+    jarak_u04,
+    marker="o",
+    s=36,
+    color="#0072B2",
+    label="Pengukuran",
+    zorder=3,
+)
+assert len(titik_u04.get_offsets()) == 7
+```
+
+### Tahap 4 - `errorbar` untuk ketidakpastian {#sec-o002-u04-progressive-errorbar}
+
+Batang ketidakpastian merupakan lapisan tersendiri. `fmt="none"` mencegah
+`errorbar` menggambar titik kedua di atas hasil `scatter`.
+
+```{python}
+#| label: lst-o002-u04-progressive-errorbar
+#| output: false
+batang_u04 = ax_u04_lab.errorbar(
+    waktu_u04,
+    jarak_u04,
+    yerr=galat_u04,
+    fmt="none",
+    capsize=4,
+    ecolor="#4D4D4D",
+    label="Ketidakpastian (±0,4 m)",
+    zorder=2,
+)
+assert batang_u04.has_yerr
+```
+
+Nilai `yerr` menyatakan simpangan vertikal dari setiap titik. Arti statistiknya
+tidak berasal dari nama metode; arti tetap harus dinyatakan oleh prosedur
+pengukuran.
+
+### Tahap 5 - label bersatuan dan legenda {#sec-o002-u04-progressive-labels}
+
+Data kini terlihat, tetapi grafik belum dapat ditafsirkan tanpa satuan,
+rentang, dan kunci pengodean.
+
+```{python}
+#| label: lst-o002-u04-progressive-labels
+#| output: false
+ax_u04_lab.set_title("Jarak terukur dan model gerak berkecepatan tetap")
+ax_u04_lab.set_xlabel("Waktu, t (s)")
+ax_u04_lab.set_ylabel("Jarak, d (m)")
+ax_u04_lab.set_xlim(0, 6.25)
+ax_u04_lab.set_ylim(0, 14)
+ax_u04_lab.set_xticks(waktu_u04)
+ax_u04_lab.set_yticks(range(0, 15, 2))
+ax_u04_lab.grid(True, color="#D9D9D9", linewidth=0.8)
+ax_u04_lab.set_axisbelow(True)
+legenda_u04 = ax_u04_lab.legend(loc="upper left", frameon=True)
+fig_u04_lab.subplots_adjust(left=0.11, right=0.97, bottom=0.15, top=0.87)
+
+assert "(s)" in ax_u04_lab.get_xlabel()
+assert "(m)" in ax_u04_lab.get_ylabel()
+assert len(legenda_u04.get_texts()) == 3
+```
+
+### Tahap 6 - deskripsi aksesibel dan penyimpanan deterministik {#sec-o002-u04-progressive-accessible-save}
+
+Gambar statis memerlukan deskripsi yang menyatakan pertanyaan, sumbu, tanda,
+pola, dan batas kesimpulan. Quarto memasangkan deskripsi berikut dengan gambar
+lab. Deskripsi yang sama tersedia dalam konstanta `ALT_TEXT` dan ditulis ke
+artefak teks oleh skrip Unit 4.
+
+```{python}
+#| label: fig-o002-u04-progressive
+#| fig-cap: "Konstruksi lengkap setelah garis model, titik pengukuran, batang ketidakpastian, label bersatuan, dan legenda ditambahkan."
+#| fig-alt: "Grafik tujuh pengukuran jarak terhadap waktu. Titik lingkaran biru dengan batang ketidakpastian 0,4 meter mengikuti garis model jingga putus-putus d sama dengan 2t plus 1; semua nilai model berada dalam interval pengukuran."
+fig_u04_lab
+```
+
+Memanggil `savefig` tanpa menetapkan ukuran, metadata, jenis huruf, dan garam
+SVG dapat menghasilkan byte berbeda. Fungsi `write_artifacts` menetapkan semua
+itu, menyimpan data dan deskripsi bersama gambar, lalu mengikat ketiganya dalam
+manifes SHA-256. Tutup kanvas lab setelah selesai agar proses panjang tidak
+menumpuk gambar di memori.
+
+```{python}
+#| label: lst-o002-u04-progressive-close
+#| output: false
+plt.close(fig_u04_lab)
+```
 
 ## Sumbu, skala, dan satuan {#sec-o002-u04-axes}
 
@@ -284,6 +441,82 @@ tunjukkan bahwa operasi yang diterapkan pada setiap masukan memang menghasilkan
 $x\cdot x$ pada domain yang dinyatakan.
 :::
 
+### Latihan penguasaan - data ke plot ke manifes {#ex-o002-u04-m01}
+
+Jalankan `write_artifacts` pada direktori baru. Buktikan dengan kode bahwa
+alur tersebut menghasilkan data CSV, gambar SVG statis, deskripsi teks, dan
+manifes JSON; bahwa manifes memuat satuan serta deskripsi aksesibel; dan bahwa
+hash ketiga artefak yang dicatat manifes cocok dengan byte sebenarnya.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan `paths = write_artifacts(direktori)`, baca JSON dengan `json.loads`,
+lalu hitung `hashlib.sha256(paths[kunci].read_bytes()).hexdigest()` untuk
+`data`, `figure`, dan `alt_text`.
+:::
+
+::: {.callout-important title="Pemeriksaan mandiri"}
+Kode berikut harus selesai tanpa `AssertionError`. Direktori sementara menjaga
+pemeriksaan agar tidak mengubah artefak rilis.
+
+```{python}
+#| label: chk-o002-u04-m01
+import hashlib
+import json
+from pathlib import Path
+import tempfile
+
+from source.code.unit04_visualization import ALT_TEXT, write_artifacts
+
+with tempfile.TemporaryDirectory() as tmp_u04:
+    paths_u04 = write_artifacts(Path(tmp_u04))
+    manifest_u04 = json.loads(paths_u04["manifest"].read_text(encoding="utf-8"))
+
+    assert set(paths_u04) == {"data", "figure", "alt_text", "manifest"}
+    assert manifest_u04["units"] == {
+        "distance": "m",
+        "time": "s",
+        "uncertainty": "m",
+    }
+    assert manifest_u04["accessibility"]["description"] == ALT_TEXT
+    for kunci_u04 in ("data", "figure", "alt_text"):
+        digest_u04 = hashlib.sha256(paths_u04[kunci_u04].read_bytes()).hexdigest()
+        assert manifest_u04["artifacts"][paths_u04[kunci_u04].name] == digest_u04
+```
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+```{python}
+#| label: sol-o002-u04-m01
+import hashlib
+import json
+from pathlib import Path
+import tempfile
+
+from source.code.unit04_visualization import ALT_TEXT, write_artifacts
+
+with tempfile.TemporaryDirectory() as direktori_u04:
+    artefak_u04 = write_artifacts(Path(direktori_u04))
+    manifes_u04 = json.loads(
+        artefak_u04["manifest"].read_text(encoding="utf-8")
+    )
+
+    assert artefak_u04["data"].suffix == ".csv"
+    assert artefak_u04["figure"].suffix == ".svg"
+    assert artefak_u04["alt_text"].read_text(encoding="utf-8").strip() == ALT_TEXT
+    assert manifes_u04["accessibility"]["svg_metadata"] is True
+    assert manifes_u04["construction"][-1] == "deterministic_save"
+
+    for nama_u04 in ("data", "figure", "alt_text"):
+        byte_u04 = artefak_u04[nama_u04].read_bytes()
+        hash_u04 = hashlib.sha256(byte_u04).hexdigest()
+        assert manifes_u04["artifacts"][artefak_u04[nama_u04].name] == hash_u04
+```
+
+CSV mempertahankan nilai dan satuan, SVG memberi keluaran statis, teks
+alternatif menyediakan jalur nonvisual, dan manifes mengikat byte ketiganya.
+Kecocokan hash membuktikan identitas byte, bukan kebenaran model.
+:::
+
 ## Ringkasan {#sec-o002-u04-summary}
 
 - Visualisasi dimulai dari pertanyaan, bukan pilihan warna.
@@ -293,5 +526,7 @@ $x\cdot x$ pada domain yang dinyatakan.
   statistik secara otomatis.
 - Data bertabel, teks alternatif, gambar, dan manifes hash membuat artefak dapat
   diperiksa melalui lebih dari satu jalur.
+- Konstruksi bertahap melalui `fig`, `ax`, `plot`, `scatter`, dan `errorbar`
+  membuat pengodean, satuan, legenda, serta penyimpanan dapat diuji terpisah.
 - Grafik memberi bukti visual terbatas dan dapat menemukan kejanggalan; bukti
   umum tetap memerlukan argumen yang mencakup seluruh domain.

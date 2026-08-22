@@ -284,6 +284,16 @@ L 558.72 44.928
      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle" x="37.555312" y="169.344" transform="rotate(-90 37.555312 169.344)">Jarak, d (m)</text>
     </g>
    </g>
+   <g id="line2d_31">
+    <path d="M 63.36 275.986286 
+L 142.6176 240.438857 
+L 221.8752 204.891429 
+L 301.1328 169.344 
+L 380.3904 133.796571 
+L 459.648 98.249143 
+L 538.9056 62.701714 
+" clip-path="url(#p0fffc8a21a)" style="fill: none; stroke-dasharray: 7.4,3.2; stroke-dashoffset: 0; stroke: #d55e00; stroke-width: 2"/>
+   </g>
    <g id="LineCollection_1">
     <path d="M 63.36 283.095771 
 L 63.36 268.8768 
@@ -307,7 +317,7 @@ L 459.648 92.917029
 L 538.9056 53.814857 
 " clip-path="url(#p0fffc8a21a)" style="fill: none; stroke: #4d4d4d; stroke-width: 1.5"/>
    </g>
-   <g id="line2d_31">
+   <g id="line2d_32">
     <defs>
      <path id="mffcc04763c" d="M 4 0 
 L -4 -0 
@@ -323,7 +333,7 @@ L -4 -0
      <use xlink:href="#mffcc04763c" x="538.9056" y="68.033829" style="fill: #4d4d4d; stroke: #4d4d4d"/>
     </g>
    </g>
-   <g id="line2d_32">
+   <g id="line2d_33">
     <g clip-path="url(#p0fffc8a21a)">
      <use xlink:href="#mffcc04763c" x="63.36" y="268.8768" style="fill: #4d4d4d; stroke: #4d4d4d"/>
      <use xlink:href="#mffcc04763c" x="142.6176" y="231.552" style="fill: #4d4d4d; stroke: #4d4d4d"/>
@@ -334,17 +344,27 @@ L -4 -0
      <use xlink:href="#mffcc04763c" x="538.9056" y="53.814857" style="fill: #4d4d4d; stroke: #4d4d4d"/>
     </g>
    </g>
-   <g id="line2d_33">
-    <path d="M 63.36 275.986286 
-L 142.6176 240.438857 
-L 221.8752 204.891429 
-L 301.1328 169.344 
-L 380.3904 133.796571 
-L 459.648 98.249143 
-L 538.9056 62.701714 
-" clip-path="url(#p0fffc8a21a)" style="fill: none; stroke-dasharray: 7.4,3.2; stroke-dashoffset: 0; stroke: #d55e00; stroke-width: 2"/>
+   <g id="patch_3">
+    <path d="M 63.36 293.76 
+L 63.36 44.928 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
-   <g id="line2d_34">
+   <g id="patch_4">
+    <path d="M 558.72 293.76 
+L 558.72 44.928 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 63.36 293.76 
+L 558.72 293.76 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 63.36 44.928 
+L 558.72 44.928 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="PathCollection_1">
     <defs>
      <path id="maddfd59835" d="M 0 3 
 C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
@@ -368,44 +388,24 @@ z
      <use xlink:href="#maddfd59835" x="538.9056" y="60.924343" style="fill: #0072b2; stroke: #0072b2"/>
     </g>
    </g>
-   <g id="patch_3">
-    <path d="M 63.36 293.76 
-L 63.36 44.928 
-" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
-   </g>
-   <g id="patch_4">
-    <path d="M 558.72 293.76 
-L 558.72 44.928 
-" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
-   </g>
-   <g id="patch_5">
-    <path d="M 63.36 293.76 
-L 558.72 293.76 
-" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
-   </g>
-   <g id="patch_6">
-    <path d="M 63.36 44.928 
-L 558.72 44.928 
-" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
-   </g>
    <g id="text_18">
     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="311.04" y="38.928" transform="rotate(-0 311.04 38.928)">Jarak terukur dan model gerak berkecepatan tetap</text>
    </g>
    <g id="legend_1">
     <g id="patch_7">
-     <path d="M 70.36 82.28425 
-L 209.77875 82.28425 
-Q 211.77875 82.28425 211.77875 80.28425 
-L 211.77875 51.928 
-Q 211.77875 49.928 209.77875 49.928 
+     <path d="M 70.36 96.962375 
+L 224.569375 96.962375 
+Q 226.569375 96.962375 226.569375 94.962375 
+L 226.569375 51.928 
+Q 226.569375 49.928 224.569375 49.928 
 L 70.36 49.928 
 Q 68.36 49.928 68.36 51.928 
-L 68.36 80.28425 
-Q 68.36 82.28425 70.36 82.28425 
+L 68.36 94.962375 
+Q 68.36 96.962375 70.36 96.962375 
 z
 " style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
     </g>
-    <g id="line2d_35">
+    <g id="line2d_34">
      <path d="M 72.36 58.026437 
 L 82.36 58.026437 
 L 92.36 58.026437 
@@ -414,29 +414,31 @@ L 92.36 58.026437
     <g id="text_19">
      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="100.36" y="61.526437" transform="rotate(-0 100.36 61.526437)">Model d = 2t + 1</text>
     </g>
-    <g id="LineCollection_2">
-     <path d="M 82.36 77.704563 
-L 82.36 67.704563 
-" style="fill: none; stroke: #4d4d4d; stroke-width: 1.5"/>
-    </g>
-    <g id="line2d_36">
+    <g id="PathCollection_2">
      <g>
-      <use xlink:href="#mffcc04763c" x="82.36" y="77.704563" style="fill: #4d4d4d; stroke: #4d4d4d"/>
-     </g>
-    </g>
-    <g id="line2d_37">
-     <g>
-      <use xlink:href="#mffcc04763c" x="82.36" y="67.704563" style="fill: #4d4d4d; stroke: #4d4d4d"/>
-     </g>
-    </g>
-    <g id="line2d_38"/>
-    <g id="line2d_39">
-     <g>
-      <use xlink:href="#maddfd59835" x="82.36" y="72.704563" style="fill: #0072b2; stroke: #0072b2"/>
+      <use xlink:href="#maddfd59835" x="82.36" y="73.579563" style="fill: #0072b2; stroke: #0072b2"/>
      </g>
     </g>
     <g id="text_20">
-     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="100.36" y="76.204563" transform="rotate(-0 100.36 76.204563)">Pengukuran (±0,4 m)</text>
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="100.36" y="76.204563" transform="rotate(-0 100.36 76.204563)">Pengukuran</text>
+    </g>
+    <g id="LineCollection_2">
+     <path d="M 82.36 92.382687 
+L 82.36 82.382687 
+" style="fill: none; stroke: #4d4d4d; stroke-width: 1.5"/>
+    </g>
+    <g id="line2d_35">
+     <g>
+      <use xlink:href="#mffcc04763c" x="82.36" y="92.382687" style="fill: #4d4d4d; stroke: #4d4d4d"/>
+     </g>
+    </g>
+    <g id="line2d_36">
+     <g>
+      <use xlink:href="#mffcc04763c" x="82.36" y="82.382687" style="fill: #4d4d4d; stroke: #4d4d4d"/>
+     </g>
+    </g>
+    <g id="text_21">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="100.36" y="90.882687" transform="rotate(-0 100.36 90.882687)">Ketidakpastian (±0,4 m)</text>
     </g>
    </g>
   </g>

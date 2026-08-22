@@ -18,12 +18,14 @@ Setelah menyelesaikan unit ini, pembaca dapat:
 - menjelaskan batas antara hasil sistem aljabar komputer dan bukti matematis;
 - menghasilkan rekaman simbolik kanonis yang dapat dibandingkan byte demi
   byte; dan
-- mengenali jembatan kecil menuju SageMath tanpa menjadikan SageMath
-  dependensi jalur dasar.
+- memakai SageMath lokal untuk `ZZ`, `QQ`, `RR`, `SR`, parent dan coercion,
+  gelang polinom, faktorisasi, penyelesaian eksak, serta konversi pendekatan
+  yang dinyatakan.
 
 Prasyarat lokal: Unit 1 dan Unit 2, operasi polinomial, persamaan kuadrat, dan
-pengertian domain fungsi. Jalur dasar unit memakai pustaka standar Python dan
-SymPy. Tidak diperlukan kalkulus, aljabar linear, atau SageMath.
+pengertian domain fungsi. Jalur pertama memakai pustaka standar Python dan
+SymPy; lab SageMath 9.5 lokal merupakan bagian wajib unit. Tidak diperlukan
+kalkulus atau aljabar linear.
 
 ## Ekspresi bukan nilai {#sec-o002-u05-expression-value}
 
@@ -188,28 +190,156 @@ Menjalankan perintah yang sama pada lingkungan yang sama harus menghasilkan
 byte identik. Hash bukan bukti kebenaran matematika; ia membuktikan bahwa dua
 urutan byte sama.
 
-## Jembatan SageMath yang opsional {#sec-o002-u05-sage-bridge}
+## Lab SageMath lokal wajib {#sec-o002-u05-sage-bridge}
 
-SageMath bermanfaat ketika satu lingkungan terpadu dibutuhkan untuk aljabar,
-teori bilangan, graf, atau objek eksak yang lebih luas. Ia **bukan** dependensi
-jalur dasar unit ini. Potongan berikut memakai sintaks Python yang dapat
-dijalankan di lingkungan Python milik SageMath:
+SageMath menyatukan banyak struktur matematika dalam satu sistem yang memakai
+sintaks Python. Dalam unit ini, Sage bukan layanan web dan bukan potongan
+opsional. Lab dijalankan lokal dengan SageMath 9.5 yang dibekukan di WSL
+Ubuntu 22.04. SageCell atau layanan jarak jauh tidak memenuhi persyaratan
+karena runtime, ketersediaan jaringan, dan byte hasilnya tidak berada di bawah
+kendali eksperimen lokal.
+
+Jika profil itu belum tersedia, ikuti
+[panduan penyiapan lokal](../../index.qmd#sec-o002-setup) dan jalankan verifikasi
+lock sebelum lab. Perbedaan versi harus dicatat; jangan menyebut profil yang
+berbeda sebagai lingkungan rilis yang identik.
+
+Dari akar proyek pada PowerShell, jalankan:
+
+```text
+wsl.exe -d Ubuntu-22.04 -- /usr/bin/sage -python source/code/unit05_sage_lab.py --output output/unit05-sage-results.json
+wsl.exe -d Ubuntu-22.04 -- /usr/bin/sage -python tests/test_unit05_sage.py
+```
+
+Perintah pertama menulis JSON deterministik ke jalur relatif yang diberikan.
+Perintah kedua menjalankan seluruh tes lab di runtime yang sama. Blok Sage di
+pembaca ini sengaja berupa pagar `python` biasa, bukan blok Quarto
+`{python}`. Karena itu, build Windows tidak mencoba mengimpor Sage melalui
+kernel Python biasa.
+
+### Parent menentukan tempat objek hidup {#sec-o002-u05-sage-parents}
+
+Sage menanyakan `parent()` suatu objek, bukan hanya tipe implementasi Python.
+Empat parent inti lab ini adalah:
+
+| Nama | Parent matematika | Peran |
+|---|---|---|
+| `ZZ` | gelang bilangan bulat | aritmetika bulat eksak |
+| `QQ` | lapangan bilangan rasional | pembagian rasional eksak |
+| `RR` | lapangan real 53 bit | pendekatan titik-mengambang |
+| `SR` | gelang simbolik | ekspresi dan persamaan simbolik |
 
 ```python
-from sage.all import PolynomialRing, QQ, SR, solve
+from sage.all import QQ, RR, SR, ZZ
+
+bilangan_bulat = ZZ(6)
+rasional = QQ(1) / 3
+pendekatan = RR(rasional)
+simbolik = SR(rasional)
+
+print(bilangan_bulat.parent())
+print(rasional.parent())
+print(pendekatan.parent())
+print(simbolik.parent())
+```
+
+Nilai cetak saja tidak cukup. `1/3` dalam `QQ` merupakan nilai eksak, sedangkan
+nilai dalam `RR` adalah pendekatan pada presisi parent-nya.
+
+### Coercion harus dapat dijelaskan {#sec-o002-u05-sage-coercion}
+
+**Coercion** adalah konversi kanonis yang dipilih Sage ketika operasi
+mencampurkan parent. Misalnya, `ZZ(6) + QQ(1)/3` hidup di `QQ` karena ada peta
+kanonis dari `ZZ` ke `QQ`. Lab memeriksa peta `ZZ` ke `QQ`, `QQ` ke `RR`, dan
+`QQ` ke `SR` secara eksplisit.
+
+```python
+from sage.all import QQ, RR, SR, ZZ
+
+assert QQ.has_coerce_map_from(ZZ)
+assert RR.has_coerce_map_from(QQ)
+assert SR.has_coerce_map_from(QQ)
+campuran = ZZ(6) + QQ(1) / 3
+assert campuran.parent() is QQ
+```
+
+Coercion yang tersedia tidak berarti semua perubahan representasi tanpa
+kerugian. Pemetaan `QQ` ke `RR` mengubah rasional eksak menjadi pendekatan.
+Karena itu, kode ilmiah harus menuliskan titik konversinya.
+
+### Gelang polinom dan faktorisasi eksak {#sec-o002-u05-sage-polynomial-ring}
+
+Parent polinom menyimpan gelang koefisien. `PolynomialRing(QQ, "x")`
+menyatakan polinom satu variabel dengan koefisien rasional. Ini lebih spesifik
+daripada sekadar ekspresi simbolik yang kebetulan tampak seperti polinom.
+
+```python
+from sage.all import PolynomialRing, QQ
 
 R = PolynomialRing(QQ, "x")
 x = R.gen()
-print((x**4 - 1).factor())
+p = x**4 - 1
+faktor = p.factor()
 
-y = SR.var("y")
-print(solve(y**2 == 2, y))
+assert p.parent() is R
+assert R.base_ring() is QQ
+assert faktor.prod() == p
+print(faktor)
 ```
 
-Jalankan potongan itu hanya pada instalasi SageMath yang versinya dicatat.
-Hasil baseline tetap diperoleh dan diuji dengan `Fraction` serta SymPy. Jangan
-mengubah keluaran SageMath dan keluaran SymPy menjadi string lalu menyatakan
-keduanya setara; bandingkan objek matematis, domain, dan residualnya.
+Faktorisasi tepatnya $(x-1)(x+1)(x^2+1)$. Pemeriksaan `prod()` mengalikan
+faktor di dalam parent yang sama dan membandingkannya dengan polinom asal.
+
+### Penyelesaian dalam SR dan residual eksak {#sec-o002-u05-sage-solving}
+
+Untuk persamaan simbolik, domain dan parent masih harus dicatat. Lab memakai
+`SR`, meminta solusi berbentuk kamus, lalu mensubstitusikan setiap kandidat ke
+residual.
+
+```python
+from sage.all import SR, solve
+
+y = SR.var("y")
+solusi = solve(y**2 == 2, y, solution_dict=True)
+nilai = [baris[y] for baris in solusi]
+assert all((akar**2 - 2).simplify_full() == 0 for akar in nilai)
+```
+
+Residual nol memeriksa dua kandidat yang dikembalikan. Ia tidak sendirinya
+membuktikan bahwa tidak ada solusi lain pada domain berbeda.
+
+### Konversi pendekatan harus eksplisit {#sec-o002-u05-sage-approximation}
+
+Jangan mengubah objek eksak menjadi desimal hanya agar tampilannya pendek.
+Pertahankan objek asal dan tuliskan parent tujuan:
+
+```python
+from sage.all import QQ, RR
+
+eksak = QQ(1) / 3
+hampiran = RR(eksak)
+assert eksak.parent() is QQ
+assert hampiran.parent() is RR
+print(eksak, hampiran, RR.precision())
+```
+
+`RR(eksak)` adalah keputusan representasi yang dapat ditemukan dalam sumber.
+Rekaman lab menyimpan nilai eksak, teks konversi, nilai pendekatan, parent, dan
+presisi 53 bit.
+
+### Rekaman Sage yang dapat diaudit {#sec-o002-u05-sage-receipt}
+
+`unit05-sage-results.json` mencatat SageMath 9.5, keharusan eksekusi lokal,
+parent, peta coercion, gelang polinom, faktor, solusi, residual, konversi ke
+`RR`, dan `core_sha256`. Semua objek diubah menjadi bentuk JSON yang ditentukan
+sebelum serialisasi. Dua eksekusi dengan runtime yang sama harus menghasilkan
+byte sama.
+
+Skrip menolak versi selain 9.5. Pembatasan ini bukan klaim bahwa versi lain
+salah; ia mengikat bukti kerja pada runtime yang benar-benar diuji. Hasil
+SageMath tetap bukan pengganti bukti umum. Parent dan residual menjelaskan apa
+yang diperiksa oleh komputasi; argumen matematika menjelaskan mengapa klaim
+berlaku pada domainnya.
 
 ## Latihan {#sec-o002-u05-exercises}
 
@@ -296,6 +426,138 @@ urutan dan akhir baris yang tetap. Hash kemudian dapat membandingkan byte,
 sedangkan residual atau ekspansi memeriksa klaim matematis tertentu.
 :::
 
+### Latihan Sage 1 - parent, coercion, dan faktor {#ex-o002-u05-sage-01}
+
+Di SageMath 9.5 lokal, bentuk `ZZ(5)`, `QQ(2)/3`, dan jumlah keduanya. Catat
+parent setiap objek dan jelaskan coercion yang terjadi. Lalu buat gelang
+`QQ[z]`, faktorkan $z^4-1$, dan periksa bahwa hasil kali faktor kembali ke
+polinom asal.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan `parent()`, `QQ.has_coerce_map_from(ZZ)`,
+`PolynomialRing(QQ, "z")`, serta metode `factor()` dan `prod()`.
+:::
+
+::: {.callout-important title="Pemeriksaan mandiri"}
+Jalankan blok ini hanya melalui `/usr/bin/sage -python`, bukan kernel Quarto
+Windows.
+
+```python
+from sage.all import PolynomialRing, QQ, ZZ
+
+a = ZZ(5)
+b = QQ(2) / 3
+c = a + b
+Rz = PolynomialRing(QQ, "z")
+z = Rz.gen()
+pz = z**4 - 1
+fz = pz.factor()
+
+assert a.parent() is ZZ
+assert b.parent() is QQ
+assert c.parent() is QQ
+assert QQ.has_coerce_map_from(ZZ)
+assert Rz.base_ring() is QQ
+assert fz.prod() == pz
+```
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+```python
+from sage.all import PolynomialRing, QQ, ZZ
+
+bilangan_bulat = ZZ(5)
+bilangan_rasional = QQ(2) / 3
+hasil_campuran = bilangan_bulat + bilangan_rasional
+
+assert str(bilangan_bulat.parent()) == "Integer Ring"
+assert str(bilangan_rasional.parent()) == "Rational Field"
+assert hasil_campuran == QQ(17) / 3
+assert hasil_campuran.parent() is QQ
+
+gelang = PolynomialRing(QQ, "z")
+z = gelang.gen()
+polinom = z**4 - 1
+faktorisasi = polinom.factor()
+assert faktorisasi.prod() == polinom
+assert {str(faktor) for faktor, _ in faktorisasi} == {
+    "z - 1",
+    "z + 1",
+    "z^2 + 1",
+}
+```
+
+Sage memakai peta kanonis `ZZ` ke `QQ`, sehingga hasil penjumlahan hidup di
+`QQ` dan tetap eksak. Polinom hidup di `QQ[z]`; mengalikan faktor di parent
+yang sama memberi sertifikat lokal bagi faktorisasi tersebut.
+:::
+
+### Latihan Sage 2 - solusi eksak dan pendekatan {#ex-o002-u05-sage-02}
+
+Selesaikan $w^2=5$ di `SR`, periksa residual setiap solusi secara eksak, lalu
+ubah akar positif secara eksplisit ke `RR`. Simpan nilai eksak, parent asal,
+nilai pendekatan, parent tujuan, dan presisinya. Jelaskan apa yang dibuktikan
+residual dan apa yang tidak.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan `solve(..., solution_dict=True)`, `simplify_full()`, dan `RR(akar)`.
+Jangan mengganti objek `SR` sebelum residual eksak diperiksa.
+:::
+
+::: {.callout-important title="Pemeriksaan mandiri"}
+```python
+from sage.all import RR, SR, solve
+
+w = SR.var("w")
+baris_solusi = solve(w**2 == 5, w, solution_dict=True)
+akar = [baris[w] for baris in baris_solusi]
+
+assert {str(nilai) for nilai in akar} == {"-sqrt(5)", "sqrt(5)"}
+assert all((nilai**2 - 5).simplify_full() == 0 for nilai in akar)
+
+akar_positif = next(nilai for nilai in akar if nilai > 0)
+hampiran = RR(akar_positif)
+assert akar_positif.parent() is SR
+assert hampiran.parent() is RR
+assert RR.precision() == 53
+```
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+```python
+from sage.all import RR, SR, solve
+
+w = SR.var("w")
+solusi = solve(w**2 == 5, w, solution_dict=True)
+nilai_eksak = sorted((baris[w] for baris in solusi), key=str)
+residual_nol = [
+    bool((nilai**2 - 5).simplify_full() == 0)
+    for nilai in nilai_eksak
+]
+
+akar_positif = next(nilai for nilai in nilai_eksak if nilai > 0)
+nilai_hampiran = RR(akar_positif)
+rekaman = {
+    "exact": str(akar_positif),
+    "exact_parent": str(akar_positif.parent()),
+    "approximate": str(nilai_hampiran),
+    "approximate_parent": str(nilai_hampiran.parent()),
+    "precision_bits": RR.precision(),
+}
+
+assert residual_nol == [True, True]
+assert rekaman["exact"] == "sqrt(5)"
+assert rekaman["exact_parent"] == "Symbolic Ring"
+assert rekaman["approximate_parent"].startswith("Real Field")
+assert rekaman["precision_bits"] == 53
+```
+
+Residual eksak memeriksa bahwa dua kandidat memenuhi persamaan. Konversi
+`RR(akar_positif)` menghasilkan pendekatan 53 bit tanpa menghapus rekaman objek
+eksak. Pemeriksaan ini tidak membuktikan kelengkapan algoritme `solve` untuk
+semua persamaan atau semua domain.
+:::
+
 ## Ringkasan {#sec-o002-u05-summary}
 
 - Ekspresi simbolik menyatakan struktur; substitusi menghasilkan nilai pada
@@ -311,5 +573,6 @@ sedangkan residual atau ekspansi memeriksa klaim matematis tertentu.
   klaimnya, bukan pengganti otomatis bagi bukti umum.
 - Representasi kanonis, versi pustaka, dan hash membuat artefak dapat
   dibandingkan.
-- SageMath tersedia sebagai jembatan opsional; baseline Unit 5 tetap memakai
-  Python, `Fraction`, dan SymPy.
+- Lab SageMath 9.5 lokal wajib memakai `ZZ`, `QQ`, `RR`, `SR`, parent dan
+  coercion, gelang polinom, faktorisasi, penyelesaian, residual, serta konversi
+  pendekatan eksplisit; layanan jarak jauh tidak menggantikannya.

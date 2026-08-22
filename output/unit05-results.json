@@ -3,7 +3,7 @@
     "sqrt_x_squared_for_positive_x": "Symbol('x', positive=True)",
     "sqrt_x_squared_for_real_x": "Abs(Symbol('x', real=True))"
   },
-  "core_sha256": "dcc6fba0bc1672f36343f4071ee1418c9f6e45095b71607d5fd1cf728a31f95a",
+  "core_sha256": "a8c88e64377b2983bdec23887ed5d899eec109ae56587f7ea074088a27d20f41",
   "domain_sensitive_cancellation": {
     "cancelled": "Add(Symbol('x'), Integer(1))",
     "excluded_from_original_domain": [
@@ -50,8 +50,14 @@
     "sympy": "1.13.3"
   },
   "sage_bridge": {
-    "required_for_baseline": false,
-    "source": "from sage.all import PolynomialRing, QQ, SR, solve\nR = PolynomialRing(QQ, 'x')\nx = R.gen()\nprint((x**4 - 1).factor())\ny = SR.var('y')\nprint(solve(y**2 == 2, y))\n"
+    "executable_lab": "source/code/unit05_sage_lab.py",
+    "receipt": "output/unit05-sage-results.json",
+    "remote_service_satisfies_requirement": false,
+    "required_for_baseline": true,
+    "required_runtime": "SageMath 9.5",
+    "runtime_command": "/usr/bin/sage -python",
+    "source": "from sage.all import PolynomialRing, QQ, SR, solve\nR = PolynomialRing(QQ, 'x')\nx = R.gen()\nprint((x**4 - 1).factor())\ny = SR.var('y')\nprint(solve(y**2 == 2, y))\n",
+    "test": "tests/test_unit05_sage.py"
   },
   "schema": "o002.unit05.symbolic.v1"
 }

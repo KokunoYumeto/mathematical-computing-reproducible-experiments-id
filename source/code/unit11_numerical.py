@@ -6,7 +6,14 @@ from fractions import Fraction
 import json
 import math
 from pathlib import Path
+import sys
 from typing import Callable, Iterable
+
+import scipy
+from scipy.optimize import root_scalar
+
+
+SCIPY_VERSION = scipy.__version__
 
 
 @dataclass(frozen=True)
@@ -103,6 +110,123 @@ def bisection(
     return BisectionResult(left, right, midpoint, width, iterations)
 
 
+def compare_bisection_with_scipy(
+    function: Callable[[float], float],
+    left: float,
+    right: float,
+    *,
+    original_width_tolerance: float,
+    scipy_xtol: float,
+    scipy_rtol: float = 4 * sys.float_info.epsilon,
+    max_iterations: int = 10_000,
+) -> dict[str, object]:
+    """Bandingkan bagi-dua asli dengan ``scipy.optimize.root_scalar``.
+
+    Perbandingan memverifikasi prasyarat tanda pada ujung dan menjalankan kedua
+    implementasi pada selang yang sama. Toleransinya sengaja dipisah:
+    ``original_width_tolerance`` membatasi lebar selang akhir implementasi asli,
+    sedangkan ``scipy_xtol`` dan ``scipy_rtol`` mengikuti kriteria kedekatan
+    akar SciPy. Dua implementasi yang sepakat memberi bukti kerja, bukan bukti
+    kekontinuan atau teorema akar.
+    """
+
+    tolerances = (original_width_tolerance, scipy_xtol, scipy_rtol)
+    if not all(math.isfinite(value) for value in tolerances):
+        raise ValueError("semua toleransi perbandingan harus berhingga")
+    if original_width_tolerance <= 0 or scipy_xtol <= 0:
+        raise ValueError("toleransi lebar asli dan scipy_xtol harus positif")
+    if scipy_rtol < 4 * sys.float_info.epsilon:
+        raise ValueError("scipy_rtol terlalu kecil untuk binary64")
+
+    f_left = finite_function_value(function, left, label="ujung kiri")
+    f_right = finite_function_value(function, right, label="ujung kanan")
+    sign_change = (f_left < 0) != (f_right < 0)
+    if f_left == 0 or f_right == 0:
+        raise ValueError("perbandingan memerlukan akar yang diapit secara ketat")
+    if not sign_change:
+        raise ValueError("ujung selang harus mempunyai tanda berbeda")
+
+    original = bisection(
+        function,
+        left,
+        right,
+        width_tolerance=original_width_tolerance,
+        max_iterations=max_iterations,
+    )
+    scipy_result = root_scalar(
+        function,
+        bracket=(left, right),
+        method="bisect",
+        xtol=scipy_xtol,
+        rtol=scipy_rtol,
+        maxiter=max_iterations,
+    )
+    if not scipy_result.converged:
+        raise RuntimeError(f"bagi-dua SciPy tidak konvergen: {scipy_result.flag}")
+
+    scipy_root = float(scipy_result.root)
+    if not math.isfinite(scipy_root):
+        raise ValueError("akar SciPy harus berhingga")
+    roots_inside_initial_bracket = (
+        left <= original.midpoint <= right and left <= scipy_root <= right
+    )
+    absolute_difference = abs(original.midpoint - scipy_root)
+    agreement_tolerance = max(
+        original_width_tolerance / 2
+        + scipy_xtol
+        + scipy_rtol * abs(scipy_root),
+        8 * math.ulp(max(abs(original.midpoint), abs(scipy_root), 1.0)),
+    )
+    roots_agree = absolute_difference <= agreement_tolerance
+    if not roots_inside_initial_bracket:
+        raise RuntimeError("hasil bagi-dua keluar dari selang awal")
+    if not roots_agree:
+        raise RuntimeError("implementasi asli dan SciPy tidak sepakat")
+
+    return {
+        "method": "bisect",
+        "scipy_version": SCIPY_VERSION,
+        "initial_bracket": [left, right],
+        "endpoint_values": [f_left, f_right],
+        "tolerances": {
+            "original_width_tolerance": original_width_tolerance,
+            "scipy_xtol": scipy_xtol,
+            "scipy_rtol": scipy_rtol,
+            "semantics": {
+                "original": "batas lebar selang akhir",
+                "scipy": "kriteria kedekatan akar absolut dan relatif",
+            },
+        },
+        "max_iterations": max_iterations,
+        "original": asdict(original),
+        "scipy": {
+            "root": scipy_root,
+            "converged": bool(scipy_result.converged),
+            "flag": str(scipy_result.flag),
+            "iterations": int(scipy_result.iterations),
+            "function_calls": int(scipy_result.function_calls),
+        },
+        "verification": {
+            "strict_sign_change": sign_change,
+            "roots_inside_initial_bracket": roots_inside_initial_bracket,
+            "absolute_root_difference": absolute_difference,
+            "agreement_tolerance": agreement_tolerance,
+            "roots_agree": roots_agree,
+            "original_absolute_residual": abs(
+                finite_function_value(function, original.midpoint, label="akar asli")
+            ),
+            "scipy_absolute_residual": abs(
+                finite_function_value(function, scipy_root, label="akar SciPy")
+            ),
+        },
+        "proof_boundary": (
+            "Kesepakatan dua implementasi pada selang ini adalah bukti kerja. "
+            "Kekontinuan dan jaminan adanya akar berasal dari asumsi dan teorema, "
+            "bukan dari SciPy atau digit hasil."
+        ),
+    }
+
+
 def trapezoid(function: Callable[[float], float], left: float, right: float, intervals: int) -> float:
     if intervals <= 0:
         raise ValueError("intervals harus positif")
@@ -159,12 +283,21 @@ def build_results() -> dict[str, object]:
     bisection_left = 1.0
     bisection_right = 2.0
     bisection_tolerance = 1e-12
+    scipy_xtol = 1e-12
     bisection_max_iterations = 10_000
     root = bisection(
         square_minus_two,
         bisection_left,
         bisection_right,
         width_tolerance=bisection_tolerance,
+        max_iterations=bisection_max_iterations,
+    )
+    bisection_comparison = compare_bisection_with_scipy(
+        square_minus_two,
+        bisection_left,
+        bisection_right,
+        original_width_tolerance=bisection_tolerance,
+        scipy_xtol=scipy_xtol,
         max_iterations=bisection_max_iterations,
     )
 
@@ -233,6 +366,19 @@ def build_results() -> dict[str, object]:
                 "kind": "akar positif eksak",
                 "expression": "sqrt(2)",
                 "decimal": repr(math.sqrt(2.0)),
+            },
+        },
+        "bisection_scipy_comparison": bisection_comparison,
+        "curriculum_routes": {
+            "b80_a30_core": [
+                "bisection",
+                "bisection_scipy_comparison",
+                "error_sources",
+            ],
+            "deferred_extensions_not_b80_core": {
+                "B30": ["quadrature_x_squared"],
+                "B40": ["linear_system"],
+                "B70": ["euler_y_prime_y"],
             },
         },
         "quadrature_x_squared": quadrature,

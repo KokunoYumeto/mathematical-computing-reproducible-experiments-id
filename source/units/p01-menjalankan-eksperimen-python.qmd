@@ -1,0 +1,554 @@
+---
+title: "Primer P01 - Menjalankan Eksperimen Python"
+identifier: o002.p01
+---
+
+::: {#sec-o002-p01}
+:::
+
+## Tujuan belajar {#sec-o002-p01-objectives}
+
+Setelah menyelesaikan primer wajib ini, pembaca dapat:
+
+- memastikan bahwa Python yang dipakai berasal dari lingkungan lokal yang
+  dimaksud dan menjalankan perintah dari terminal;
+- menulis ekspresi, mengikat nilai pada nama, dan mengenali `int`, `float`,
+  `str`, `bool`, serta `None`;
+- memakai operator, memanggil fungsi, mengimpor modul, dan mencari bantuan;
+- membedakan sel Jupyter, blok kode Quarto, dan skrip Python;
+- membaca bagian penting traceback tanpa menebak-nebak;
+- membedakan nilai yang dihitung dari teks atau tampilan yang diperlihatkan;
+  dan
+- menemukan keadaan notebook yang tersembunyi dengan memulai ulang kernel dan
+  menjalankan semua sel dari awal.
+
+Primer ini tidak menganggap pengalaman pemrograman sebelumnya. Anda hanya
+memerlukan operasi aritmetika dasar. Semua kode pendamping primer ini asli,
+berjalan lokal dengan pustaka standar Python, dan berada di
+`source/code/primer01_execution.py`.
+
+## Runtime lokal dan terminal {#sec-o002-p01-runtime-terminal}
+
+**Runtime** adalah program yang benar-benar mengeksekusi kode. Untuk unit ini,
+runtime itu adalah Python lokal. Terminal adalah jendela teks tempat kita
+meminta sistem menjalankan program. Jupyter dan Quarto memakai runtime yang
+sama jika keduanya diarahkan ke lingkungan yang sama.
+
+Dari akar proyek, periksa runtime dengan perintah berikut. Ketik perintahnya,
+bukan tanda prompt yang mungkin muncul di sebelah kirinya.
+
+```text
+python --version
+python -c "print(2 + 3)"
+```
+
+Perintah pertama seharusnya menyebut Python 3. Perintah kedua meminta Python
+menghitung `2 + 3` lalu menulis `5` ke terminal. Jika `python` tidak ditemukan,
+jangan memasang paket secara acak. Ikuti dahulu
+[panduan penyiapan lokal](../../index.qmd#sec-o002-setup), aktifkan lingkungan
+kursus, lalu periksa lagi versi yang aktif.
+
+Tiga pertanyaan awal mencegah banyak hasil yang tidak dapat direproduksi:
+
+1. Perintah apa yang dijalankan?
+2. Dari direktori kerja mana perintah itu dijalankan?
+3. Runtime dan lingkungan mana yang menerima perintah tersebut?
+
+Jalur relatif seperti `source/code/primer01_execution.py` ditafsirkan dari
+direktori kerja. Karena itu, contoh dalam buku ini dijalankan dari akar proyek.
+
+## Ekspresi, nama, dan assignment {#sec-o002-p01-expressions-names}
+
+Ekspresi meminta Python menghasilkan nilai. Angka `4`, ekspresi `2 + 3`, dan
+panggilan `len("data")` masing-masing menghasilkan nilai. Operator `=` adalah
+**assignment**: Python menghitung ruas kanan, lalu mengikat hasilnya pada nama
+di ruas kiri.
+
+```{python}
+#| label: lst-o002-p01-assignment
+panjang = 8
+lebar = 5
+luas = panjang * lebar
+luas
+```
+
+Nama `luas` bukan kotak permanen. Assignment berikutnya dapat mengikat nama
+yang sama pada nilai baru. Untuk memeriksa kesamaan nilai, gunakan `==`, bukan
+`=`.
+
+```{python}
+#| label: lst-o002-p01-equality
+luas == 40
+```
+
+Pilih nama yang menyatakan makna, misalnya `jumlah_sampel`, bukan nama kabur
+seperti `x1`, kecuali simbol pendek itu memang bagian dari model matematika.
+
+## Lima jenis nilai skalar pertama {#sec-o002-p01-scalars}
+
+Nilai skalar awal yang sering dipakai adalah:
+
+| Jenis | Contoh | Maksud awal |
+|---|---|---|
+| `int` | `8` | bilangan bulat |
+| `float` | `0.01` | pendekatan bilangan real |
+| `str` | `"uji A"` | teks |
+| `bool` | `True` | nilai logika benar atau salah |
+| `NoneType` | `None` | belum ada nilai atau tidak ada hasil |
+
+```{python}
+#| label: lst-o002-p01-scalars
+jumlah = 8
+toleransi = 0.01
+label = "uji A"
+lulus = jumlah > 5
+catatan = None
+
+type(jumlah).__name__
+```
+
+Panggil `type(...)` dengan nama lain untuk memeriksa jenisnya satu per satu.
+Daftar, tuple, pengulangan, dan comprehension sengaja baru diperkenalkan di
+P02; primer ini belum memerlukannya.
+
+`None` berbeda dari `0`, `False`, dan string kosong `""`. Ia menyatakan bahwa
+tidak ada nilai yang diberikan. Jangan memakai `None` sebagai angka.
+
+Operator aritmetika dasar ialah `+`, `-`, `*`, `/`, `//`, `%`, dan `**`.
+Pembagian `/` menghasilkan `float`; `//` adalah pembagian lantai; `%` memberi
+sisa yang konsisten dengan pembagian lantai; dan `**` adalah perpangkatan.
+
+```{python}
+#| label: lst-o002-p01-operators
+hasil_tambah = 7 + 2
+hasil_kurang = 7 - 2
+hasil_kali = 7 * 2
+hasil_bagi = 7 / 2
+hasil_bagi_lantai = 7 // 2
+hasil_sisa = 7 % 2
+hasil_pangkat = 7**2
+
+hasil_pangkat
+```
+
+Ketujuh nama itu tetap menyimpan nilai skalar. Tidak ada koleksi yang dibuat;
+daftar dan tuple baru diperkenalkan di P02.
+
+Perbandingan `==`, `!=`, `<`, `<=`, `>`, dan `>=` menghasilkan `bool`.
+Operator `and`, `or`, dan `not` menggabungkan nilai logika. Pakai tanda kurung
+ketika urutan operasi perlu tampak jelas bagi pembaca.
+
+## Panggilan fungsi, impor, dan bantuan {#sec-o002-p01-calls-imports-help}
+
+Fungsi menerima argumen dan dapat mengembalikan nilai. Dalam
+`round(3.14159, ndigits=3)`, `3.14159` adalah argumen posisional dan
+`ndigits=3` adalah argumen kata kunci.
+
+```{python}
+#| label: lst-o002-p01-function-call
+round(3.14159, ndigits=3)
+```
+
+Modul mengelompokkan nama yang dapat dipakai ulang. Impor modul `math`, lalu
+sebut nama modul agar asal fungsi tetap terlihat.
+
+```{python}
+#| label: lst-o002-p01-import
+import math
+
+jari_jari = 3
+luas_lingkaran = math.pi * jari_jari**2
+luas_lingkaran
+```
+
+Gunakan `help(math.sqrt)` pada Python atau `math.sqrt?` di sel Jupyter untuk
+melihat dokumentasi lokal. Bantuan menjelaskan kontrak fungsi, bukan menjamin
+bahwa fungsi tersebut cocok untuk pertanyaan Anda. Periksa arti argumen,
+satuan, domain, nilai kembali, dan kemungkinan galat.
+
+## Sel Jupyter dan blok Quarto {#sec-o002-p01-cells}
+
+Notebook Jupyter mempunyai sel kode dan sel Markdown. Sel kode dikirim ke
+kernel Python; sel Markdown menyimpan uraian, persamaan, dan hubungan antara
+pertanyaan dengan hasil. Quarto memakai pagar kode dalam berkas `.qmd` dan
+dapat menjalankannya saat membangun HTML atau PDF.
+
+Sumber blok kode Quarto tampak seperti ini:
+
+````text
+~~~{python}
+nilai = 6 * 7
+nilai
+~~~
+````
+
+Menjalankan satu sel tidak otomatis menjalankan semua sel di atasnya. Kernel
+menyimpan nama selama proses masih hidup. Nomor eksekusi sel menunjukkan urutan
+yang benar-benar dijalankan; posisi sel pada halaman hanya menunjukkan urutan
+sumber. Perbedaan ini penting bagi reproduksibilitas.
+
+## Komputasi bukan tampilan {#sec-o002-p01-computation-display}
+
+Python dapat menghitung nilai tanpa menampilkannya. Di notebook, nilai ekspresi
+terakhir biasanya dikirim ke mekanisme tampilan. Assignment biasanya tidak
+menampilkan representasi nilai. `print(...)` menulis teks ke keluaran standar.
+Di skrip biasa, ekspresi telanjang seperti `2 + 3` tetap dihitung tetapi tidak
+otomatis dicetak.
+
+```{python}
+#| label: lst-o002-p01-compute-display
+nilai_hitung = 2 + 3
+teks_tampilan = f"2 + 3 = {nilai_hitung}"
+print(teks_tampilan)
+```
+
+`nilai_hitung` adalah `int` bernilai 5. `teks_tampilan` adalah `str` yang
+dipilih untuk komunikasi. Tampilan yang bagus tidak membuktikan bahwa
+komputasi benar, dan nilai di memori belum menjadi artefak tersimpan. Jika
+hasil perlu diaudit, simpan data dan metadata dalam berkas yang ditentukan.
+
+Quarto dapat menangkap keluaran sel untuk dimasukkan ke pembaca. Keluaran itu
+masih harus ditafsirkan: apakah ia nilai, teks diagnostik, gambar, atau pesan
+galat?
+
+## Membaca traceback {#sec-o002-p01-tracebacks}
+
+Ketika Python gagal, ia menampilkan **traceback**. Baca baris terakhir dahulu:
+baris itu memberi jenis galat dan pesan ringkas. Lalu cari frame terdekat yang
+menunjuk berkas serta baris kode Anda. Frame di atasnya menjelaskan jalur
+panggilan yang membawa eksekusi ke sana.
+
+```text
+Traceback (most recent call last):
+  File "eksperimen.py", line 2, in <module>
+    hasil = data * 2
+NameError: name 'data' is not defined
+```
+
+`NameError` berarti nama belum terikat pada ruang nama yang sedang dipakai.
+`TypeError` biasanya berarti operasi menerima jenis nilai yang tidak sesuai.
+`ZeroDivisionError` menyatakan pembagian dengan nol. `SyntaxError` berarti
+sumber tidak dapat diurai sebagai program Python. Pesan itu adalah bukti awal,
+bukan alasan untuk menghapus baris secara acak.
+
+Pada P01, jalankan contoh yang gagal di konsol atau sel latihan, baca
+traceback, lalu perbaiki sebabnya. Sintaks `try`/`except` baru diajarkan di P02;
+blok pemeriksa yang disediakan buku boleh memakainya sebagai scaffolding, tetapi
+Anda belum diminta menulis struktur itu sendiri. Jangan menyembunyikan seluruh
+program hanya agar keluaran terlihat hijau.
+
+## Skrip pertama dan rekaman lokal {#sec-o002-p01-script}
+
+Berkas `.py` adalah sumber skrip yang dapat dijalankan ulang. Dari akar proyek,
+jalankan pendamping P01:
+
+```text
+python source/code/primer01_execution.py --output output/p01-results.json
+```
+
+Skrip menghitung contoh yang sama setiap kali dan menulis rekaman JSON. Ia juga
+mencetak satu pesan lokasi agar manusia tahu berkas mana yang dibuat. Buka
+`output/p01-results.json` sebagai teks. Medan `computed_value` menyimpan nilai
+komputasi, sedangkan `display_text` menyimpan teks yang dipilih untuk pembaca.
+Medan runtime menyebut implementasi dan versi Python yang benar-benar
+menjalankan skrip.
+
+Untuk sekarang, cukup pahami bahwa terminal menjalankan berkas dari awal sampai
+akhir. Struktur modul dan bagian utama skrip akan dibahas dalam P02.
+
+## Keadaan tersembunyi dan restart-run-all {#sec-o002-p01-hidden-state}
+
+Perhatikan dua sel berikut.
+
+```text
+# Sel A
+data = 7
+
+# Sel B
+hasil = data * 2
+```
+
+Jika Sel A pernah dijalankan, Sel B dapat berhasil walaupun Sel A kemudian
+dipindahkan, diubah, atau dihapus dari notebook. Nilai lama `data` masih hidup
+di kernel. Notebook tampak benar, tetapi sumber yang terlihat tidak cukup untuk
+menghasilkan hasil tersebut. Inilah **keadaan tersembunyi**.
+
+Pemeriksaan wajib sebelum menerima notebook:
+
+1. simpan sumber;
+2. pilih **Restart Kernel and Run All Cells**;
+3. jalankan sel dalam urutan sumber dari ruang nama bersih;
+4. pastikan tidak ada input manual yang tidak dicatat; dan
+5. bandingkan artefak yang dihasilkan dengan hasil yang diharapkan.
+
+Notebook pendamping menyediakan tiga sel keadaan yang dapat dijalankan langsung
+dari antarmuka Jupyter. Uji wajibnya ialah: jalankan sel terakhir dengan
+keadaan lama, mulai ulang kernel, buktikan sel itu gagal sendiri, lalu pilih
+**Restart Kernel and Run All Cells** dan buktikan urutan sumber lengkap berhasil.
+Pendamping kode juga mempunyai `run_cells` untuk suite pengujian; tuple,
+dictionary, dan penanganan exception di dalam scaffolding itu dibahas di P02.
+
+Keberhasilan restart-run-all membuktikan bahwa urutan sel yang direkam dapat
+dieksekusi pada lingkungan saat ini. Ia belum membuktikan bahwa model
+matematikanya tepat atau bahwa lingkungan lain akan memberi byte identik.
+
+::: {.content-visible unless-format="epub"}
+Latihan yang sama tersedia sebagai
+[notebook P01 untuk kernel bersih](../notebooks/o002-p01-clean-kernel.ipynb).
+:::
+
+::: {.content-visible when-format="epub"}
+Notebook P01 untuk kernel bersih disertakan pada jalur
+`source/notebooks/o002-p01-clean-kernel.ipynb` dalam paket sumber yang dapat
+diedit dan bundel pembaca luring.
+:::
+
+Notebook itu dapat dijalankan lokal dan menyimpan ketiga pemeriksaan dalam
+urutan sumber yang lengkap; metadata kernelspec-nya menunjuk lingkungan beku
+`o002-frozen` milik proyek.
+
+## Latihan {#sec-o002-p01-exercises}
+
+### Latihan 1 - nilai, jenis, dan operator {#ex-o002-p01-01}
+
+Buat lima nama: `jumlah=8`, `toleransi=0.01`, `label="uji A"`, nilai logika
+`lulus` yang memeriksa apakah `jumlah > 5`, dan `catatan=None`. Hitung pula
+hasil bagi lantai dan sisa pembagian `jumlah` oleh 3. Jalankan kodenya.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan `//` untuk hasil bagi lantai, `%` untuk sisa, dan `type(...)` untuk
+memeriksa jenis nilai.
+:::
+
+::: {.callout-important title="Pemeriksaan mandiri"}
+Tambahkan pemeriksaan berikut di bawah kode Anda. Sel harus selesai tanpa
+`AssertionError`.
+
+```{python}
+#| label: chk-o002-p01-01
+assert type(jumlah) is int
+assert type(toleransi) is float
+assert type(label) is str
+assert type(lulus) is bool and lulus is True
+assert catatan is None
+assert jumlah // 3 == 2
+assert jumlah % 3 == 2
+```
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+```{python}
+#| label: sol-o002-p01-01
+jumlah = 8
+toleransi = 0.01
+label = "uji A"
+lulus = jumlah > 5
+catatan = None
+hasil_bagi = jumlah // 3
+sisa = jumlah % 3
+
+assert hasil_bagi == 2
+assert sisa == 2
+```
+
+Setiap nama mengikat nilai yang dihasilkan ruas kanannya. Perbandingan
+`jumlah > 5` menghasilkan `bool`; `None` bukan angka nol.
+:::
+
+### Latihan 2 - impor, panggilan, dan bantuan {#ex-o002-p01-02}
+
+Impor modul `math`, lalu hitung luas lingkaran berjari-jari 3 dengan fungsi
+`circle_area` dari pendamping P01. Gunakan bantuan lokal untuk menemukan arti
+`math.isclose`, kemudian bandingkan hasil fungsi dengan `math.pi * 3**2`.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Impor pendamping dengan
+`from source.code.primer01_execution import circle_area`. Panggil
+`help(math.isclose)` di konsol terpisah jika keluarannya panjang.
+:::
+
+::: {.callout-important title="Pemeriksaan mandiri"}
+```{python}
+#| label: chk-o002-p01-02
+import math
+from source.code.primer01_execution import circle_area
+
+luas_latihan = circle_area(3)
+assert math.isclose(luas_latihan, math.pi * 9, rel_tol=0.0, abs_tol=1e-15)
+```
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+```{python}
+#| label: sol-o002-p01-02
+import math
+from source.code.primer01_execution import circle_area
+
+jari_jari_latihan = 3
+luas_latihan = circle_area(jari_jari_latihan)
+assert math.isclose(
+    luas_latihan,
+    math.pi * jari_jari_latihan**2,
+    rel_tol=0.0,
+    abs_tol=1e-15,
+)
+```
+
+Impor menyediakan nama modul atau fungsi. Panggilan memberi argumen 3 dan
+mengembalikan nilai. Dokumentasi `isclose` menjelaskan toleransi relatif dan
+absolut yang menjadi bagian dari pemeriksaan.
+:::
+
+### Latihan 3 - membaca dan memperbaiki traceback {#ex-o002-p01-03}
+
+Panggil `circle_area(-2)`, baca traceback, dan sebutkan jenis galat serta pesan
+terakhirnya. Lalu perbaiki masukan menjadi 2 tanpa mengubah fungsi hanya untuk
+menyembunyikan galat.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Baris terakhir menyebut `ValueError`. Jalankan kegagalan di konsol terpisah.
+Blok pemeriksaan berikut adalah scaffolding yang disediakan; sintaks
+`try`/`except`-nya akan dipelajari di P02.
+:::
+
+::: {.callout-important title="Pemeriksaan mandiri"}
+```{python}
+#| label: chk-o002-p01-03
+from source.code.primer01_execution import circle_area
+
+try:
+    circle_area(-2)
+except ValueError as galat_radius:
+    assert str(galat_radius) == "radius tidak boleh negatif"
+else:
+    raise AssertionError("masukan negatif seharusnya ditolak")
+
+assert circle_area(2) > 0
+```
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Jenisnya `ValueError` dan pesannya `radius tidak boleh negatif`. Fungsi menolak
+masukan di luar kontraknya. Solusi yang benar ialah memberi jari-jari
+taknegatif atau memperbaiki sumber data, bukan menghapus pemeriksaan.
+
+```{python}
+#| label: sol-o002-p01-03
+from source.code.primer01_execution import circle_area
+
+jari_jari_sah = 2
+luas_sah = circle_area(jari_jari_sah)
+assert luas_sah > 0
+```
+:::
+
+### Latihan 4 - komputasi, tampilan, dan skrip {#ex-o002-p01-04}
+
+Jalankan skrip P01 dari terminal. Dalam Python, panggil
+`computation_and_display(8, 5)`. Tunjukkan medan yang menyimpan hasil hitung
+dan medan yang hanya menyimpan teks tampilan. Jelaskan mengapa mencetak teks
+tidak sama dengan menyimpan rekaman JSON.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Nilai hitung bertipe `int`; tampilan bertipe `str`. `print` mengirim teks ke
+keluaran standar, sedangkan skrip menulis byte ke jalur yang dinyatakan.
+Pengindeksan dictionary pada blok pemeriksaan disediakan sebagai scaffolding
+dan akan dijelaskan di P02.
+:::
+
+::: {.callout-important title="Pemeriksaan mandiri"}
+```{python}
+#| label: chk-o002-p01-04
+from source.code.primer01_execution import computation_and_display
+
+rekaman_tampilan = computation_and_display(8, 5)
+assert rekaman_tampilan["computed_value"] == 13
+assert rekaman_tampilan["display_text"] == "8 + 5 = 13"
+assert type(rekaman_tampilan["computed_value"]) is int
+assert type(rekaman_tampilan["display_text"]) is str
+```
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+```{python}
+#| label: sol-o002-p01-04
+from source.code.primer01_execution import computation_and_display
+
+rekaman_tampilan = computation_and_display(8, 5)
+nilai_yang_dihitung = rekaman_tampilan["computed_value"]
+teks_yang_ditampilkan = rekaman_tampilan["display_text"]
+assert nilai_yang_dihitung == 13
+assert teks_yang_ditampilkan.endswith("= 13")
+```
+
+Teks terminal dapat hilang ketika terminal ditutup dan tidak mengikat versi
+runtime atau parameter. Berkas JSON dari skrip merupakan artefak yang dapat
+dibaca ulang, diperiksa, dan di-hash. Keduanya tetap harus dinilai terhadap
+pertanyaan matematika yang sebenarnya.
+:::
+
+### Latihan 5 - kernel bersih dan keadaan tersembunyi {#ex-o002-p01-05}
+
+Gunakan notebook P01 untuk menunjukkan tiga fakta: Sel B berhasil pada kernel
+lama yang telah menjalankan Sel A; Sel B gagal dengan `NameError` pada kernel
+bersih; dan urutan A lalu B berhasil setelah **Restart Kernel and Run All
+Cells**. Ini adalah latihan penguasaan wajib.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Buka `source/notebooks/o002-p01-clean-kernel.ipynb`. Ikuti tiga keadaan yang
+ditandai di dalam notebook dan jangan menambahkan nilai manual yang tidak
+tercatat. Blok pemeriksaan di bawah adalah scaffolding tes proyek yang cukup
+dijalankan di P01; list, `Path`, atribut, argumen kata kunci, `subprocess`,
+dan `sys` yang dipakainya dibahas di P02 atau unit proyek berikutnya.
+:::
+
+::: {.callout-important title="Pemeriksaan mandiri"}
+```{python}
+#| label: chk-o002-p01-05
+from pathlib import Path
+import subprocess
+import sys
+
+tes_kernel = subprocess.run(
+    [
+        sys.executable,
+        "-m",
+        "unittest",
+        "tests.test_primer01.Primer01NotebookKernelTests",
+    ],
+    cwd=Path.cwd(),
+    capture_output=True,
+    text=True,
+)
+assert tes_kernel.returncode == 0, tes_kernel.stdout + tes_kernel.stderr
+```
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+```{python}
+#| label: sol-o002-p01-05
+assert "OK" in tes_kernel.stderr
+hasil_pemeriksaan_notebook = "kernel aktual: gagal di luar urutan; run-all bersih lulus"
+hasil_pemeriksaan_notebook
+```
+
+Tes memulai kernel Jupyter sungguhan. Sel B saja gagal dengan `NameError`,
+sedangkan notebook lengkap menjalankan Sel A lalu Sel B dari kernel baru dan
+menghasilkan 14. Urutan sumber, bukan riwayat klik lama, adalah bukti yang dapat
+dijalankan ulang.
+:::
+
+## Ringkasan {#sec-o002-p01-summary}
+
+- Terminal menjalankan perintah dengan runtime dan direktori kerja tertentu.
+- Ekspresi menghasilkan nilai; assignment mengikat nilai itu pada nama.
+- `int`, `float`, `str`, `bool`, dan `None` mempunyai peran berbeda.
+- Fungsi dipanggil dengan argumen; modul diimpor; bantuan lokal menjelaskan
+  kontrak yang harus diperiksa.
+- Notebook dan Quarto menjalankan sel, sedangkan skrip menjalankan berkas dari
+  awal. Urutan eksekusi merupakan bagian dari eksperimen.
+- Nilai komputasi, teks tampilan, dan artefak tersimpan bukan hal yang sama.
+- Traceback memberi lokasi, jenis, dan pesan galat yang harus dibaca sebelum
+  memperbaiki kode.
+- Restart Kernel and Run All Cells mendeteksi keadaan tersembunyi, tetapi tidak
+  menggantikan pemeriksaan matematika atau pembekuan lingkungan.

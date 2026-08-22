@@ -1,20 +1,20 @@
 {
   "pdf": {
-    "bytes": 502373,
-    "page_count": 98,
+    "bytes": 754845,
+    "page_count": 159,
     "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
-    "sha256": "289e744aeef09eb6e546c002e0782a346519a39c5265ae4ef5c9d1e3ce095376"
+    "sha256": "f9d3df201c03107be3a3e6f61dd6798485cf20bc35ae14f2911ab212789b5038"
   },
   "render": {
-    "contact_sheets": 7,
+    "contact_sheets": 10,
     "dpi": 120,
     "manifest_path": "00_control/PDF_VISUAL_RENDER_MANIFEST.csv",
-    "manifest_sha256": "9a66e23f5dbdd4d886ed88b4431f5f947023aef4b8ff2aaf289ffdf77b742bd6",
-    "page_images": 98
+    "manifest_sha256": "c57db3f90fc1bf2ee9427260f8f7ec7c0b4ff540bd23d873eb7c1c89886f00cc",
+    "page_images": 159
   },
   "review": {
-    "inspected_pages": 98,
-    "method": "All 98 page images reviewed through seven contact sheets; pages 8, 9, 12, 68, and 93-98 inspected individually at full render resolution.",
+    "inspected_pages": 159,
+    "method": "Every rendered page inspected at 120 DPI; all 10 contact sheets and selected full-page detail renders reviewed",
     "result": "pass",
     "reviewer": "Codex"
   },

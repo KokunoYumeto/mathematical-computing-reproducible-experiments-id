@@ -16,6 +16,8 @@ Setelah menyelesaikan unit ini, pembaca dapat:
 - membedakan galat maju dari galat mundur;
 - membedakan pengondisian masalah dari stabilitas algoritme;
 - memilih reformulasi dan metode penjumlahan yang lebih stabil;
+- membandingkan evaluasi naif dengan `scipy.special` pada domain yang
+  dinyatakan;
 - menetapkan toleransi sebagai anggaran galat sebelum hasil diperiksa; dan
 - membatasi bukti eksperimen terhadap kasus serta lingkungan yang dijalankan.
 
@@ -144,6 +146,96 @@ membandingkan kedua implementasi dengan referensi `Decimal` berketelitian
 tinggi. Referensi berketelitian tinggi tetap merupakan alat pemeriksaan, bukan
 definisi bukti yang berdiri sendiri.
 
+## SciPy: `exprel` stabil dekat nol {#sec-o002-u06-scipy-exprel}
+
+SciPy menyediakan implementasi khusus bagi fungsi
+
+$$
+E(x)=\frac{e^x-1}{x}\quad (x\ne0),
+\qquad E(0)=1.
+$$
+
+Domain matematisnya adalah seluruh bilangan real setelah nilai di nol
+didefinisikan melalui perpanjangan kontinu tersebut. Lab rinci pada unit ini
+memakai domain komputasional yang lebih sempit, $0<|x|\le10^{-4}$, karena
+galat mundur relatif yang dicatat membagi dengan $|x|$. Oracle `Decimal`
+tidak menghitung `exp(x) - 1`: ia menjumlahkan deret pangkat bagi $E$ dan
+$E'$ tanpa pembatalan. Presisinya sekurang-kurangnya 80 digit dan bertambah
+menurut eksponen $x$, dengan 50 digit penjaga setelah orde $x$. Karena itu,
+koreksi pertama $x/2$ tetap terurai bahkan untuk subnormal binary64 terkecil.
+Batas atas dan pengecualian $x=0$ adalah batas laporan galat lab, bukan batas
+domain matematis `exprel`.
+
+Evaluasi langsung menghitung `exp(x)`, mengurangkan 1, lalu membagi dengan
+`x`. Ketika `x` kecil, `exp(x)` dan 1 hampir sama sehingga pengurangan dapat
+membuang angka signifikan. Pada nilai yang lebih ekstrem, `exp(x)` dapat
+dibulatkan tepat menjadi 1 dan pembilang naif menjadi nol.
+
+```{python}
+#| label: lst-o002-u06-scipy-exprel
+import math
+import scipy
+from scipy import special
+
+x = 1e-8
+naive = (math.exp(x) - 1.0) / x
+stable = float(special.exprel(x))
+
+extreme_x = 1e-16
+extreme_naive = (math.exp(extreme_x) - 1.0) / extreme_x
+extreme_stable = float(special.exprel(extreme_x))
+
+(scipy.__version__, naive, stable, extreme_naive, extreme_stable)
+```
+
+Perbedaan itu tidak otomatis berarti masalah matematis berkondisi buruk.
+Ukuran pengondisian relatif lokal ialah
+
+$$
+\kappa_E(x)=\left|\frac{xE'(x)}{E(x)}\right|.
+$$
+
+Untuk $x\ne0$,
+
+$$
+E'(x)=\frac{(x-1)e^x+1}{x^2}.
+$$
+
+Dekat nol, $E(x)$ mendekati 1, $E'(x)$ mendekati $1/2$, dan
+$\kappa_E(x)$ mendekati $|x|/2$. Formula turunan ini dipakai sebagai alat
+diagnostik yang disediakan; menurunkannya bukan prasyarat A30. Pada
+$x=10^{-8}$, angka kondisi sekitar $5\times10^{-9}$, jadi gangguan relatif
+kecil pada masukan seharusnya tidak diperbesar. Galat besar evaluasi naif
+karena itu merupakan ketidakstabilan algoritmik, bukan kepekaan inheren fungsi.
+
+Skrip pendamping membandingkan kedua hasil dengan referensi deret `Decimal`
+berpresisi adaptif pada domain lab yang dinyatakan. Galat maju yang dicatat
+ialah
+
+$$
+e_f=|\widehat E-E(x)|.
+$$
+
+Untuk memberi pembacaan galat mundur, skrip memakai estimasi orde pertama
+
+$$
+|\Delta x|\approx\frac{e_f}{|E'(x)|}.
+$$
+
+Ini bertanya berapa besar perubahan masukan yang kira-kira diperlukan agar
+keluaran terhitung menjadi keluaran tepat bagi masukan yang berubah. Estimasi
+itu **bukan** solusi invers eksak dan dilabeli demikian di JSON. Untuk
+$x=10^{-8}$, estimasi mundur relatif evaluasi naif lebih besar dari 1,
+sedangkan estimasi SciPy jauh di bawah $10^{-6}$. Galat maju SciPy juga berada
+di bawah $10^{-15}$ secara relatif pada run yang diuji.
+
+Hasil tersebut merupakan bukti kerja bagi nilai, versi SciPy, dan lingkungan
+yang direkam. Ia menunjukkan contoh konkret bahwa implementasi khusus lebih
+akurat daripada formula naif dekat nol. Ia tidak membuktikan bahwa
+`scipy.special.exprel` stabil untuk setiap bilangan real atau setiap backend.
+Klaim umum tetap memerlukan analisis algoritme, model pembulatan, dan
+penanganan rentang.
+
 ## Galat maju dan galat mundur {#sec-o002-u06-forward-backward}
 
 Misalkan masalah meminta $y=f(x)$ dan program menghasilkan $\widehat y$.
@@ -268,9 +360,10 @@ Jalankan dari akar proyek:
 python source/code/unit06_floating.py --output output/unit06-results.json
 ```
 
-Skrip mencatat versi Python, profil binary64, pembatalan, galat maju/mundur,
-pengondisian, penjumlahan, dan keputusan anggaran galat. Bilangan yang perlu
-dibedakan bit demi bit disimpan dengan `repr`, `hex`, atau teks `Decimal`.
+Skrip mencatat versi Python dan SciPy, profil binary64, pembatalan, perbandingan
+`scipy.special.exprel`, galat maju/mundur, pengondisian, penjumlahan, dan
+keputusan anggaran galat. Bilangan yang perlu dibedakan bit demi bit disimpan
+dengan `repr`, `hex`, atau teks `Decimal`.
 JSON memakai UTF-8, kunci terurut, inden tetap, dan akhir baris LF. Medan
 `core_sha256` mengikat rekaman sebelum hash ditambahkan.
 
@@ -389,6 +482,68 @@ hasil kasus tersebut pada lingkungan yang diuji; ia tidak membuktikan bahwa
 `math.fsum` selalu eksak untuk setiap daftar.
 :::
 
+### Latihan SciPy - stabilitas `exprel` {#ex-o002-u06-scipy-01}
+
+Jalankan `scipy_exprel_report(1e-8)` dari kode pendamping. Catat domain
+matematis dan domain lab, angka kondisi relatif, galat maju relatif kedua
+implementasi, serta estimasi galat mundur relatifnya. Tentukan apakah hasil
+naif yang buruk terutama menunjukkan masalah berkondisi buruk atau algoritme
+yang tidak stabil. Ulangi perbandingan nilai pada `x=1e-16` dan batasi klaim
+Anda pada bukti yang benar-benar dijalankan.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Jika angka kondisi jauh di bawah 1 tetapi galat maju naif besar, masalahnya
+bukan penguatan gangguan masukan. Periksa juga apakah `math.exp(1e-16) == 1.0`.
+:::
+
+::: {.callout-important collapse="true" title="Cek yang dapat dijalankan"}
+Dari akar proyek, jalankan:
+
+```text
+python tests/test_unit06.py Unit06FloatingTests.test_scipy_special_exprel_is_stable_near_zero -v
+```
+
+Cek mengikat domain lab, versi/fungsi SciPy, galat maju, estimasi galat mundur,
+pengondisian, pembatalan ekstrem, dan batas bukti. Tes regresi terpisah juga
+menjalankan subnormal binary64 terkecil dan memastikan oracle masih menangkap
+koreksi pertama $x/2$, bukan membulatkannya diam-diam menjadi nol.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+
+```{python}
+#| label: lst-o002-u06-scipy-exercise-solution
+import runpy
+from pprint import pprint
+
+unit06 = runpy.run_path("source/code/unit06_floating.py")
+report = unit06["scipy_exprel_report"](1e-8)
+ringkasan = {
+    "domain": report["mathematical_domain"],
+    "lab": report["laboratory_domain"],
+    "condition": report["conditioning"]["relative_condition_number"],
+    "forward": report["forward_error"],
+    "backward": report["backward_error"],
+    "extreme": report["extreme_cancellation"],
+    "proof": report["evidence_boundary"],
+}
+pprint(ringkasan, sort_dicts=True, width=58)
+```
+
+Domain matematisnya semua bilangan real dengan $E(0)=1$; lab dibatasi pada
+$0<|x|\le10^{-4}$ bagi masukan binary64. Pada $x=10^{-8}$, angka kondisi sekitar
+$5\times10^{-9}$, tetapi galat maju relatif naif lebih besar dari $10^{-9}$
+dan estimasi galat mundur relatifnya lebih besar dari 1. Sebaliknya, galat
+maju relatif SciPy di bawah $10^{-15}$ dan estimasi mundurnya di bawah
+$10^{-6}$. Karena masalahnya berkondisi baik dekat nol, selisih tersebut
+menunjukkan pembatalan pada algoritme naif.
+
+Pada $x=10^{-16}$, `math.exp(x)` membulat menjadi 1 sehingga formula naif
+memberi 0, sedangkan `scipy.special.exprel` memberi 1 pada run ini. Tes tersebut
+tidak membuktikan perilaku semua masukan atau backend; ia hanya memeriksa kasus
+dan lingkungan yang dicatat.
+:::
+
 ## Ringkasan {#sec-o002-u06-summary}
 
 - Bilangan `float` membentuk kisi biner berhingga; `ulp` berubah mengikuti
@@ -396,6 +551,8 @@ hasil kasus tersebut pada lingkungan yang diuji; ia tidak membuktikan bahwa
 - Epsilon, *unit roundoff*, rentang normal, dan rentang subnormal menjawab
   pertanyaan yang berbeda.
 - Pembatalan dapat dihindari melalui reformulasi aljabar sebelum evaluasi.
+- `scipy.special.exprel` memberi contoh fungsi khusus yang dapat dijalankan dan
+  menghindari pembatalan naif dekat nol pada domain lab yang dinyatakan.
 - Galat maju mengukur jawaban; galat mundur mengukur perubahan masalah yang
   membuat jawaban itu eksak.
 - Pengondisian milik masalah, sedangkan stabilitas milik algoritme.

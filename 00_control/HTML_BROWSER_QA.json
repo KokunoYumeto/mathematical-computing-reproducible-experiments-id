@@ -1,0 +1,91 @@
+{
+  "schema": "o002.html-browser-qa.v1",
+  "successful": true,
+  "checked_at": "2026-08-22T19:09:34.7895545+02:00",
+  "target": {
+    "path": "output/index.html",
+    "bytes": 37570,
+    "sha256": "5fb26b6316c5fd807760ca4f6c4e060f8d4ef95779eb04e3029c84c82e92c85a"
+  },
+  "supporting_static_receipt": {
+    "path": "output/HTML_STATIC_QA.json",
+    "bytes": 6755,
+    "sha256": "f5639c1e151b2a338bde8a9d468f22378acef6b1cd4a70ede7d3402f4d1be03a"
+  },
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "result": "pass",
+      "document_client_width": 1425,
+      "document_scroll_width": 1425,
+      "left_navigation_right": 312.4444580078125,
+      "reader_left": 312.4444580078125,
+      "reader_right": 1112.4444580078125,
+      "right_outline_left": 1112.4444580078125,
+      "navigation_overlap_pixels": 0
+    },
+    "narrow": {
+      "width": 390,
+      "height": 844,
+      "result": "pass",
+      "document_client_width": 375,
+      "document_scroll_width": 375,
+      "reader_left": 25.5,
+      "reader_right": 349.6111145019531,
+      "reader_width": 324.1111145019531
+    }
+  },
+  "stress_pages": [
+    "output/index.html",
+    "output/source/units/p02-kontrol-koleksi-fungsi-modul-berkas.html",
+    "output/source/units/04-visualisasi-integritas.html",
+    "output/source/units/05-eksak-simbolik-sage.html",
+    "output/source/units/06-titik-mengambang-stabilitas.html"
+  ],
+  "observations": {
+    "desktop_center_track": "Reader fills the complete body-start/body-end track without overlapping either 250-pixel navigation column.",
+    "narrow_table_region": {
+      "container_width": 324,
+      "content_width": 365,
+      "role": "region",
+      "tabindex": "0",
+      "aria_label": "Tabel yang dapat digulir secara horizontal",
+      "focus_outline": "2.66667px solid rgb(11, 87, 208)"
+    },
+    "code_reflow": "All inspected desktop and narrow code surfaces had scrollWidth equal to clientWidth and used pre-wrap/overflow-wrap:anywhere.",
+    "responsive_figure": {
+      "source_width": 1448,
+      "rendered_width": 324.1111145019531,
+      "container_scroll_width": 324,
+      "max_width": "100%",
+      "alt_text_present": true,
+      "visible_caption_present": true
+    },
+    "keyboard_disclosure": {
+      "role": "button",
+      "tabindex": "0",
+      "enter_changed_aria_expanded": true,
+      "space_changed_aria_expanded": true,
+      "visible_focus": true
+    },
+    "contrast_ratios": {
+      "body_text": 15.43,
+      "heading": 15.43,
+      "link": 4.5,
+      "code": 11.08,
+      "callout": 13.53
+    },
+    "console_warning_or_error_count": 0,
+    "external_runtime_resource_count": 0
+  },
+  "checks": {
+    "centered_reflow": true,
+    "keyboard_navigation": true,
+    "focus_visibility": true,
+    "contrast": true,
+    "console_clean": true,
+    "local_resources": true,
+    "responsive_tables_code_math": true
+  }
+}

@@ -10,6 +10,9 @@ import sys
 import tempfile
 import unittest
 
+from matplotlib.collections import PathCollection
+from matplotlib.container import ErrorbarContainer
+
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULE_PATH = ROOT / "source" / "code" / "unit04_visualization.py"
@@ -86,7 +89,30 @@ class Unit04VisualizationTests(unittest.TestCase):
             )
             self.assertEqual(model_line.get_linestyle(), "--")
             legend_text = [text.get_text() for text in axes.get_legend().get_texts()]
-            self.assertIn("Pengukuran (±0,4 m)", legend_text)
+            self.assertEqual(
+                legend_text,
+                ["Model d = 2t + 1", "Pengukuran", "Ketidakpastian (±0,4 m)"],
+            )
+        finally:
+            unit04.plt.close(figure)
+
+    def test_progressive_construction_exposes_each_matplotlib_stage(self) -> None:
+        figure, axes = unit04.start_figure()
+        try:
+            self.assertEqual(len(axes.lines), 0)
+            model_line = unit04.add_model_line(axes)
+            measurement_points = unit04.add_measurement_points(axes)
+            uncertainty_bars = unit04.add_uncertainty_bars(axes)
+
+            self.assertEqual(model_line.get_label(), "Model d = 2t + 1")
+            self.assertIsInstance(measurement_points, PathCollection)
+            self.assertEqual(len(measurement_points.get_offsets()), 7)
+            self.assertIsInstance(uncertainty_bars, ErrorbarContainer)
+
+            unit04.label_and_finish_axes(axes)
+            self.assertIn("(s)", axes.get_xlabel())
+            self.assertIn("(m)", axes.get_ylabel())
+            self.assertIsNotNone(axes.get_legend())
         finally:
             unit04.plt.close(figure)
 
@@ -103,6 +129,23 @@ class Unit04VisualizationTests(unittest.TestCase):
             self.assertIn(
                 "membuktikan model untuk semua waktu", manifest["claim_limit"]
             )
+            self.assertEqual(
+                manifest["construction"],
+                [
+                    "figure_axes",
+                    "plot_model",
+                    "scatter_measurements",
+                    "errorbar_uncertainty",
+                    "labels_with_units",
+                    "legend",
+                    "accessible_description",
+                    "deterministic_save",
+                ],
+            )
+            self.assertEqual(
+                manifest["accessibility"]["description"], unit04.ALT_TEXT
+            )
+            self.assertTrue(manifest["accessibility"]["svg_metadata"])
             for key in ("data", "figure", "alt_text"):
                 digest = hashlib.sha256(first[key].read_bytes()).hexdigest()
                 self.assertEqual(manifest["artifacts"][first[key].name], digest)
@@ -110,6 +153,18 @@ class Unit04VisualizationTests(unittest.TestCase):
             svg = first["figure"].read_text(encoding="utf-8")
             self.assertIn("dc:description", svg)
             self.assertIn("tujuh pengamatan", svg)
+
+    def test_mastery_exercise_has_stable_additive_id_check_and_solution(self) -> None:
+        qmd = (ROOT / "source" / "units" / "04-visualisasi-integritas.qmd").read_text(
+            encoding="utf-8"
+        )
+        self.assertEqual(qmd.count("#ex-o002-u04-m01"), 1)
+        mastery = qmd.split("#ex-o002-u04-m01", maxsplit=1)[1]
+        self.assertIn('title="Petunjuk"', mastery)
+        self.assertIn('title="Pemeriksaan mandiri"', mastery)
+        self.assertIn('title="Jawaban dan solusi"', mastery)
+        self.assertIn("write_artifacts", mastery)
+        self.assertIn("ALT_TEXT", mastery)
 
 
 if __name__ == "__main__":

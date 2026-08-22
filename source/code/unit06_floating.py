@@ -12,11 +12,17 @@ import json
 import math
 from pathlib import Path
 import platform
+import scipy
+from scipy import special
 import sys
 from typing import Any
 
 
-SCHEMA = "o002.unit06.floating.v1"
+SCHEMA = "o002.unit06.floating.v2"
+SCIPY_EXPREL_LAB_MIN_ABS = math.ulp(0.0)
+SCIPY_EXPREL_LAB_MAX_ABS = 1e-4
+SCIPY_EXPREL_DECIMAL_MIN_PRECISION = 80
+SCIPY_EXPREL_DECIMAL_GUARD_DIGITS = 50
 
 
 def decimal_text(value: Decimal) -> str:
@@ -80,6 +86,163 @@ def cancellation_report(x_integer: int = 10**16) -> dict[str, object]:
         "direct_relative_forward_error": decimal_text(direct_relative),
         "rationalized_relative_forward_error": decimal_text(stable_relative),
         "rationalized_is_more_accurate": stable_error < direct_error,
+    }
+
+
+def naive_exprel(x: float) -> float:
+    """Hitung (exp(x)-1)/x secara langsung, termasuk ekstensi di nol."""
+
+    if not math.isfinite(x):
+        raise ValueError("x harus berhingga")
+    if x == 0.0:
+        return 1.0
+    return (math.exp(x) - 1.0) / x
+
+
+def _decimal_exprel_reference(x: Decimal) -> Decimal:
+    """Hitung exprel dengan deret pangkat tanpa pembatalan pengurangan."""
+
+    if x == 0:
+        return Decimal(1)
+
+    total = Decimal(1)
+    term = Decimal(1)
+    for order in range(1, 10_000):
+        term = term * x / Decimal(order + 1)
+        updated = total + term
+        if updated == total:
+            return total
+        total = updated
+    raise ArithmeticError("deret exprel tidak konvergen pada batas iterasi")
+
+
+def _decimal_exprel_derivative(x: Decimal) -> Decimal:
+    """Hitung turunan exprel dengan deret yang bebas pembatalan."""
+
+    if x == 0:
+        return Decimal(1) / 2
+
+    total = Decimal(0)
+    power = Decimal(1)
+    factorial = Decimal(2)
+    for order in range(1, 10_000):
+        term = Decimal(order) * power / factorial
+        updated = total + term
+        if updated == total:
+            return total
+        total = updated
+        power *= x
+        factorial *= Decimal(order + 2)
+    raise ArithmeticError("deret turunan exprel tidak konvergen pada batas iterasi")
+
+
+def _decimal_exprel_precision(x: Decimal) -> int:
+    """Pertahankan koreksi O(x) bahkan bagi masukan binary64 terkecil."""
+
+    return max(
+        SCIPY_EXPREL_DECIMAL_MIN_PRECISION,
+        -x.copy_abs().adjusted() + SCIPY_EXPREL_DECIMAL_GUARD_DIGITS,
+    )
+
+
+def scipy_exprel_report(x: float = 1e-8) -> dict[str, object]:
+    """Bandingkan scipy.special.exprel dengan evaluasi naif dekat nol.
+
+    Laporan rinci dibatasi ke 0 < |x| <= 1e-4. Oracle menaikkan presisi
+    menurut eksponen x dan memakai deret yang bebas pembatalan, sehingga
+    masukan subnormal binary64 terkecil pun masih mempunyai referensi terurai.
+    Batas atas menjaga aproksimasi galat mundur lokal sesuai tujuan lab.
+    """
+
+    if not math.isfinite(x):
+        raise ValueError("x harus berhingga")
+    magnitude = abs(x)
+    if not SCIPY_EXPREL_LAB_MIN_ABS <= magnitude <= SCIPY_EXPREL_LAB_MAX_ABS:
+        raise ValueError(
+            "domain lab harus memenuhi 0 < |x| <= 1e-4 untuk nilai binary64"
+        )
+
+    naive = naive_exprel(x)
+    stable = float(special.exprel(x))
+    exact_x = Decimal.from_float(x)
+    decimal_precision = _decimal_exprel_precision(exact_x)
+    with localcontext() as context:
+        context.prec = decimal_precision
+        reference = _decimal_exprel_reference(exact_x)
+        derivative = _decimal_exprel_derivative(exact_x)
+        condition_number = abs(exact_x * derivative / reference)
+
+        naive_forward = abs(Decimal.from_float(naive) - reference)
+        stable_forward = abs(Decimal.from_float(stable) - reference)
+        naive_backward_absolute = naive_forward / abs(derivative)
+        stable_backward_absolute = stable_forward / abs(derivative)
+        naive_backward_relative = naive_backward_absolute / abs(exact_x)
+        stable_backward_relative = stable_backward_absolute / abs(exact_x)
+
+    extreme_x = 1e-16
+    extreme_naive = naive_exprel(extreme_x)
+    extreme_stable = float(special.exprel(extreme_x))
+    return {
+        "function": "E(x)=(exp(x)-1)/x, dengan ekstensi kontinu E(0)=1",
+        "mathematical_domain": "semua x real",
+        "laboratory_domain": "0 < |x| <= 1e-4 untuk masukan binary64",
+        "decimal_oracle": {
+            "method": "deret pangkat bebas pembatalan untuk E dan E'",
+            "precision_digits": decimal_precision,
+            "minimum_precision_digits": SCIPY_EXPREL_DECIMAL_MIN_PRECISION,
+            "guard_digits_beyond_x": SCIPY_EXPREL_DECIMAL_GUARD_DIGITS,
+            "lower_absolute_bound": repr(SCIPY_EXPREL_LAB_MIN_ABS),
+            "upper_absolute_bound": repr(SCIPY_EXPREL_LAB_MAX_ABS),
+            "scope": (
+                "Presisi bertambah bersama kecilnya x agar koreksi berorde x "
+                "tetap terurai sampai masukan subnormal binary64 terkecil."
+            ),
+        },
+        "tested_x": repr(x),
+        "scipy": {
+            "function": "scipy.special.exprel",
+            "version": scipy.__version__,
+        },
+        "values": {
+            "naive": repr(naive),
+            "scipy_special_exprel": repr(stable),
+            "high_precision_reference": decimal_text(reference),
+        },
+        "conditioning": {
+            "relative_condition_number": decimal_text(condition_number),
+            "formula": "abs(x*E'(x)/E(x))",
+            "classification": "berkondisi baik dekat nol",
+            "reason": "nilai kondisi mendekati |x|/2 ketika x mendekati nol",
+        },
+        "forward_error": {
+            "naive_absolute": decimal_text(naive_forward),
+            "naive_relative": decimal_text(naive_forward / abs(reference)),
+            "scipy_absolute": decimal_text(stable_forward),
+            "scipy_relative": decimal_text(stable_forward / abs(reference)),
+            "scipy_is_more_accurate": stable_forward < naive_forward,
+        },
+        "backward_error": {
+            "method": "aproksimasi orde pertama abs(delta_x) ~= abs(delta_y)/abs(E'(x))",
+            "naive_absolute_estimate": decimal_text(naive_backward_absolute),
+            "naive_relative_estimate": decimal_text(naive_backward_relative),
+            "scipy_absolute_estimate": decimal_text(stable_backward_absolute),
+            "scipy_relative_estimate": decimal_text(stable_backward_relative),
+            "is_exact_inverse_solution": False,
+        },
+        "extreme_cancellation": {
+            "x": repr(extreme_x),
+            "naive": repr(extreme_naive),
+            "scipy_special_exprel": repr(extreme_stable),
+            "math_exp_x_equals_one": math.exp(extreme_x) == 1.0,
+        },
+        "evidence_boundary": {
+            "executed_case_only": True,
+            "proves_stability_for_all_real_inputs": False,
+            "claim": (
+                "Pelaksanaan ini menunjukkan pembatalan dan perbaikan pada nilai yang "
+                "dicatat; klaim umum memerlukan analisis algoritme dan model pembulatan."
+            ),
+        },
     }
 
 
@@ -245,10 +408,12 @@ def build_results() -> dict[str, Any]:
         "runtime": {
             "implementation": platform.python_implementation(),
             "python": platform.python_version(),
+            "scipy": scipy.__version__,
             "float_format": "IEEE 754 binary64 pada build CPython yang diuji",
         },
         "binary64": binary64_profile(),
         "cancellation": cancellation_report(),
+        "scipy_special_exprel": scipy_exprel_report(),
         "forward_backward_error": sqrt_forward_backward_report(),
         "conditioning": conditioning_report(),
         "summation": summation_report(),
@@ -257,6 +422,7 @@ def build_results() -> dict[str, Any]:
             "experiments_executed": [
                 "binary64_spacing_and_range",
                 "cancellation",
+                "scipy_special_exprel",
                 "sqrt_forward_backward_error",
                 "conditioning",
                 "summation",

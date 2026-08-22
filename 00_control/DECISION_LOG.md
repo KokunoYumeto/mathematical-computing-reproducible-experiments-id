@@ -82,3 +82,86 @@ Sage, SciPy, mastery, prerequisite, lock, format, accessibility, determinism,
 and final-publication repairs. Backend v2 separates
 `standalone_edition_complete=true` from `b80_curriculum_complete=false`; only
 the latter may change after every selected gate passes.
+
+## O002-D012 - New-version release identity
+
+The expanded edition uses the existing Zenodo concept lineage rather than a
+duplicate record. Zenodo draft record `22053905` reserves DOI
+`10.5281/zenodo.22053905` under concept DOI `10.5281/zenodo.22052052` for
+version `2026.08.22.1`; the historical record `22052053` and DOI
+`10.5281/zenodo.22052053` remain immutable. The matching Git tag is
+`v2026.08.22.1`.
+
+## O002-D013 - Finite external archive binding
+
+The editable-source and offline-reader ZIPs contain `backend/catalog.json`, so
+their own byte hashes cannot be embedded in that catalog without a recursive
+self-hash. Their backend artifact records therefore identify stable paths and
+bind to external receipt `receipt-o002-bundle`; `00_control/BUNDLE_QA.json`
+holds their exact bytes and SHA-256 values. Non-archive artifacts retain direct
+byte/hash bindings. Schema and QA reject archive records that reintroduce the
+self-cycle.
+
+## O002-D014 - Complete deterministic B80 boundary
+
+The final reader boundary is 14 units, 75 exercises, 177 passing tests, and a
+159-page PDF. Final source manifests A/B are byte-identical at 9,903 bytes with
+SHA-256 `9f5a3a2403db914cac9ab59baf9c6f6b0a3513c951aa91fdad8b4db40fba2785`;
+final output manifests A/B are byte-identical at 9,187 bytes with SHA-256
+`bf6299dcc2e2fa3d10173cb54f43e075546a84e539a2c31d7b1c070bfeef8613`.
+The PDF SHA-256 is
+`f9d3df201c03107be3a3e6f61dd6798485cf20bc35ae14f2911ab212789b5038`.
+The deterministic editable-source and offline-reader ZIP SHA-256 values are
+`a9dcdc18481b3dc88beee3006d46f1b8187815623534df523bbc70e3e011b9f9`
+and `c3b97c057ed6751ddb2067d4be8ef96a7256e1c9bd25075601f46071eb2dfff9`.
+
+## O002-D015 - Independent preservation during GitHub suspension
+
+Provider suspension is an external GitHub-only blocker, not a reason to strand
+the completed reader. Zenodo record `22053905`, DOI
+`10.5281/zenodo.22053905`, was cleaned and published in the existing concept
+lineage with exactly five frozen artifacts; anonymous metadata and byte
+readback pass. Figshare's public license registry does not offer CC BY-SA 4.0,
+so item `33314742`, DOI `10.6084/m9.figshare.33314742.v1`, is deliberately a
+zero-file CC0 metadata/link record rather than a falsely licensed mirror. It
+links to Zenodo, records the exact five-file inventory and hashes, belongs to
+project `280296`, and is present in Indonesian collection `8668413` version 6.
+GitHub remains deferred until support restores the existing account and
+lineage; no competing repository is created.
+
+## O002-D016 - GitHub restoration transaction frozen locally
+
+The provider suspension does not justify repeated 404/authentication probes or
+a competing repository. The tracked `docs` tree is synchronized to the exact
+accepted output plus `.nojekyll` and verified at 85 files, 4,046,273 bytes,
+tree SHA-256
+`52b7e40cbd7c4c107d7e41d5cc279ab1726f15435ef3fd9940b639096707a388`.
+`00_control/GITHUB_DEFERRED_RELEASE_PLAN.json` freezes the existing repository,
+Pages, branch, tag, five release artifacts, all hashes, and the anonymous
+release/Pages readback gates. No build or content decision remains after
+account restoration; only the narrow existing-lineage transaction remains.
+
+## O002-D017 - Pursuit blocked at the provider-only gate
+
+The identical GitHub account-suspension condition persisted for three
+consecutive goal turns: the original user-triggered turn and two automatic
+continuations. The course, QA, archives, Zenodo publication, Figshare metadata
+preservation, tracked Pages tree, and exact GitHub restoration transaction are
+all complete and verified. No further safe action can satisfy the remaining
+existing-lineage GitHub requirement without the provider restoring the
+account, and repeated 404/authentication attempts are expressly disallowed.
+The pursuit is therefore blocked rather than complete. A user resumption after
+account restoration starts a fresh blocked audit and executes
+`GITHUB_DEFERRED_RELEASE_PLAN.json` without rebuilding the edition.
+
+## O002-D018 - GitHub restoration resumes the frozen transaction
+
+Floris directly reported on 2026-08-22 that GitHub was reinstated. Bounded
+readback confirmed the existing public repository, authenticated owner,
+historical tag, and Pages source `main:/docs`; the former external block is
+closed. Execute the already frozen `v2026.08.22.1` branch/tag/release/Pages
+transaction without rebuilding or creating a competing repository. The sole
+existing Figshare item `33314742` is likewise corrected in place: a compact
+reader-first v2 draft uses the 159-page PDF first and retains exact CC BY-SA
+4.0 text, MIT code, and per-component runtime terms in the description and
+license notice. Neither route is complete until anonymous byte readback passes.

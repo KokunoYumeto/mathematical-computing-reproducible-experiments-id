@@ -1,0 +1,21 @@
+{
+  "artifacts": [
+    {
+      "bytes": 9,
+      "path": "values.txt",
+      "sha256": "d217f4d7cdcbf548d4364953082cf8ddc2248b653329bebc150d7f6a5aaabcf1"
+    },
+    {
+      "bytes": 41,
+      "path": "measurements.csv",
+      "sha256": "9e4dcaafbfbf1f7a46a53436f05b22c5aefbdf4388b99b28e819c82b05482539"
+    },
+    {
+      "bytes": 194,
+      "path": "summary.json",
+      "sha256": "acfe48e0e449cdb8a4fc49d208cbf435df1769b7f7c5c7cfa62ed97faedbcb88"
+    }
+  ],
+  "core_sha256": "479bf790a2ee8bec769e9f08013d6b0273bb01b42bdef0234f69b30007313653",
+  "schema": "o002.p02.bundle-manifest.v1"
+}

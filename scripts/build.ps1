@@ -1,3 +1,8 @@
+param(
+    [ValidateSet('Candidate', 'Final')]
+    [string]$Mode = 'Candidate'
+)
+
 $ErrorActionPreference = 'Stop'
 
 $ProjectRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
@@ -6,15 +11,26 @@ $ControlRoot = [System.IO.Path]::GetFullPath((Join-Path $ProjectRoot '00_control
 $BuildLockPath = Join-Path $ProjectRoot '.o002-build.lock'
 $BuildMarkerPath = Join-Path $ControlRoot 'BUILD_IN_PROGRESS'
 $OutputManifestPath = Join-Path $ControlRoot 'OUTPUT_FILE_MANIFEST.csv'
+$BuildQAPath = Join-Path $OutputRoot 'BUILD_QA.json'
 $ReceiptRoot = Join-Path $ProjectRoot 'tmp\build-receipts'
 $SourceQAReceipt = Join-Path $ReceiptRoot 'SOURCE_QA.json'
 $TestQAReceipt = Join-Path $ReceiptRoot 'TEST_QA.json'
 $ToolchainQAReceipt = Join-Path $ReceiptRoot 'TOOLCHAIN_QA.json'
+$PythonEnvironmentQAReceipt = Join-Path $ReceiptRoot 'PYTHON_ENVIRONMENT_QA.json'
+$PythonEnvironmentLock = Join-Path $ProjectRoot 'environment\python-lock.txt'
+$SageEnvironmentQAReceipt = Join-Path $ReceiptRoot 'SAGE_ENVIRONMENT_QA.json'
+$SageEnvironmentLock = Join-Path $ProjectRoot 'environment\sage-ubuntu22.04-dpkg-lock.txt'
+$SageLabQAReceipt = Join-Path $ReceiptRoot 'SAGE_LAB_QA.json'
+$HtmlStaticQAReceipt = Join-Path $ReceiptRoot 'HTML_STATIC_QA.json'
+$EpubQAReceipt = Join-Path $ReceiptRoot 'EPUB_QA.json'
+$EpubControlReceipt = Join-Path $ControlRoot 'EPUB_QA.json'
+$HtmlBrowserControlReceipt = Join-Path $ControlRoot 'HTML_BROWSER_QA.json'
 $PdfVisualControlReceipt = Join-Path $ControlRoot 'PDF_VISUAL_QA.json'
 $PdfName = 'Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf'
 $PdfPath = Join-Path $OutputRoot $PdfName
 $CatalogPath = Join-Path $ProjectRoot 'backend\catalog.json'
 $OutputCatalogPath = Join-Path $OutputRoot 'backend\catalog.json'
+$UnitSourceRoot = Join-Path $ProjectRoot 'source\units'
 $DefaultPython = $null
 $PythonCandidates = @()
 foreach ($VariableName in @('O002_PYTHON', 'QUARTO_PYTHON')) {
@@ -38,6 +54,14 @@ foreach ($Candidate in $PythonCandidates) {
 }
 if ($null -eq $DefaultPython) {
     throw 'No Python runtime found. Set O002_PYTHON to Python 3.13.1.'
+}
+
+function Remove-QuartoExecutionScratch {
+    if (Test-Path -LiteralPath $UnitSourceRoot -PathType Container) {
+        foreach ($Scratch in Get-ChildItem -LiteralPath $UnitSourceRoot -Filter '*.quarto_ipynb*' -File) {
+            Remove-Item -LiteralPath $Scratch.FullName -Force
+        }
+    }
 }
 
 if (-not $OutputRoot.StartsWith($ProjectRoot + [System.IO.Path]::DirectorySeparatorChar)) {
@@ -67,7 +91,7 @@ if (Test-Path -LiteralPath $OutputManifestPath -PathType Leaf) {
     Remove-Item -LiteralPath $OutputManifestPath -Force
 }
 New-Item -ItemType Directory -Path $ReceiptRoot -Force | Out-Null
-foreach ($Receipt in @($SourceQAReceipt, $TestQAReceipt, $ToolchainQAReceipt)) {
+foreach ($Receipt in @($SourceQAReceipt, $TestQAReceipt, $ToolchainQAReceipt, $PythonEnvironmentQAReceipt, $SageEnvironmentQAReceipt, $SageLabQAReceipt, $HtmlStaticQAReceipt, $EpubQAReceipt)) {
     if (Test-Path -LiteralPath $Receipt -PathType Leaf) {
         Remove-Item -LiteralPath $Receipt -Force
     }
@@ -101,8 +125,16 @@ if ($PythonVersion -ne '3.13.1') {
 & $env:QUARTO_PYTHON -B scripts/toolchain_receipt.py --receipt $ToolchainQAReceipt
 if ($LASTEXITCODE -ne 0) { throw 'Frozen toolchain validation failed.' }
 
-& $env:QUARTO_PYTHON -B scripts/update_backend.py --qa-status pending --pdf-visual-status pending
+& $env:QUARTO_PYTHON -B scripts/python_environment.py verify --lock $PythonEnvironmentLock --receipt $PythonEnvironmentQAReceipt
+if ($LASTEXITCODE -ne 0) { throw 'Resolved Python environment validation failed.' }
+
+& $env:QUARTO_PYTHON -B scripts/sage_environment.py verify --lock $SageEnvironmentLock --receipt $SageEnvironmentQAReceipt
+if ($LASTEXITCODE -ne 0) { throw 'Frozen local Sage environment validation failed.' }
+
+& $env:QUARTO_PYTHON -B scripts/update_backend.py
 if ($LASTEXITCODE -ne 0) { throw 'Backend could not be placed in pending state.' }
+& $env:QUARTO_PYTHON -B scripts/backend_truth_qa.py
+if ($LASTEXITCODE -ne 0) { throw 'Pending backend truth validation failed.' }
 
 & $env:QUARTO_PYTHON -B scripts/source_qa.py --receipt $SourceQAReceipt
 if ($LASTEXITCODE -ne 0) { throw 'Source-structure QA failed.' }
@@ -131,8 +163,16 @@ if (Test-Path -LiteralPath $LegacySiteLibs -PathType Container) {
     Remove-Item -LiteralPath $LegacySiteLibs -Recurse -Force
 }
 
-quarto render
+Remove-QuartoExecutionScratch
+quarto render --execute-daemon-restart
 if ($LASTEXITCODE -ne 0) { throw 'Quarto reader build failed.' }
+Remove-QuartoExecutionScratch
+
+& $env:QUARTO_PYTHON -B source/code/primer01_execution.py --output output/p01-results.json
+if ($LASTEXITCODE -ne 0) { throw 'Primer P01 experiment failed.' }
+
+& $env:QUARTO_PYTHON -B source/code/primer02_control_files.py --output-dir output/primer02-demo
+if ($LASTEXITCODE -ne 0) { throw 'Primer P02 experiment failed.' }
 
 & $env:QUARTO_PYTHON -B source/code/unit01_experiment.py --limit 1000 --output output/unit01-results.json
 if ($LASTEXITCODE -ne 0) { throw 'Unit 1 experiment failed.' }
@@ -148,6 +188,9 @@ if ($LASTEXITCODE -ne 0) { throw 'Unit 4 experiment failed.' }
 
 & $env:QUARTO_PYTHON -B source/code/unit05_symbolic.py --output output/unit05-results.json
 if ($LASTEXITCODE -ne 0) { throw 'Unit 5 experiment failed.' }
+
+& $env:QUARTO_PYTHON -B scripts/sage_lab_qa.py --output output/unit05-sage-results.json --receipt $SageLabQAReceipt
+if ($LASTEXITCODE -ne 0) { throw 'Unit 5 local Sage lab failed.' }
 
 & $env:QUARTO_PYTHON -B source/code/unit06_floating.py --output output/unit06-results.json
 if ($LASTEXITCODE -ne 0) { throw 'Unit 6 experiment failed.' }
@@ -173,20 +216,41 @@ if ($LASTEXITCODE -ne 0) { throw 'Unit 12 verification failed.' }
 Copy-Item -LiteralPath $SourceQAReceipt -Destination (Join-Path $OutputRoot 'SOURCE_QA.json')
 Copy-Item -LiteralPath $TestQAReceipt -Destination (Join-Path $OutputRoot 'TEST_QA.json')
 Copy-Item -LiteralPath $ToolchainQAReceipt -Destination (Join-Path $OutputRoot 'TOOLCHAIN_QA.json')
+Copy-Item -LiteralPath $PythonEnvironmentQAReceipt -Destination (Join-Path $OutputRoot 'PYTHON_ENVIRONMENT_QA.json')
+Copy-Item -LiteralPath $SageEnvironmentQAReceipt -Destination (Join-Path $OutputRoot 'SAGE_ENVIRONMENT_QA.json')
+Copy-Item -LiteralPath $SageLabQAReceipt -Destination (Join-Path $OutputRoot 'SAGE_LAB_QA.json')
+
+& $env:QUARTO_PYTHON -B scripts/html_static_qa.py --output $OutputRoot --receipt $HtmlStaticQAReceipt
+if ($LASTEXITCODE -ne 0) { throw 'Static HTML QA failed.' }
+Copy-Item -LiteralPath $HtmlStaticQAReceipt -Destination (Join-Path $OutputRoot 'HTML_STATIC_QA.json')
+
+$EpubPath = Join-Path $OutputRoot 'Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub'
+& $env:QUARTO_PYTHON -B scripts/epub_qa.py --epub $EpubPath --receipt $EpubQAReceipt
+if ($LASTEXITCODE -ne 0) { throw 'EPUB QA failed.' }
+Copy-Item -LiteralPath $EpubQAReceipt -Destination (Join-Path $OutputRoot 'EPUB_QA.json')
+Copy-Item -LiteralPath $EpubQAReceipt -Destination $EpubControlReceipt -Force
 
 if (-not (Test-Path -LiteralPath $PdfPath -PathType Leaf)) {
     throw "PDF final tidak ditemukan: $PdfPath"
 }
-& $env:QUARTO_PYTHON -B scripts/pdf_visual_receipt.py verify --receipt $PdfVisualControlReceipt --pdf $PdfPath
-if ($LASTEXITCODE -ne 0) { throw 'Durable PDF visual QA receipt does not match the current PDF.' }
-Copy-Item -LiteralPath $PdfVisualControlReceipt -Destination (Join-Path $OutputRoot 'PDF_VISUAL_QA.json')
+if ($Mode -eq 'Final') {
+    if (-not (Test-Path -LiteralPath $HtmlBrowserControlReceipt -PathType Leaf)) {
+        throw 'Final build requires durable HTML browser QA.'
+    }
+    & $env:QUARTO_PYTHON -B scripts/pdf_visual_receipt.py verify --receipt $PdfVisualControlReceipt --pdf $PdfPath
+    if ($LASTEXITCODE -ne 0) { throw 'Durable PDF visual QA receipt does not match the current PDF.' }
+    Copy-Item -LiteralPath $HtmlBrowserControlReceipt -Destination (Join-Path $OutputRoot 'HTML_BROWSER_QA.json') -Force
+    Copy-Item -LiteralPath $PdfVisualControlReceipt -Destination (Join-Path $OutputRoot 'PDF_VISUAL_QA.json')
+}
 
-& $env:QUARTO_PYTHON -B scripts/update_backend.py --qa-status pass --pdf-visual-status pass
-if ($LASTEXITCODE -ne 0) { throw 'Backend completion update failed.' }
+& $env:QUARTO_PYTHON -B scripts/update_backend.py
+if ($LASTEXITCODE -ne 0) { throw 'Backend evidence update failed.' }
+& $env:QUARTO_PYTHON -B scripts/backend_truth_qa.py
+if ($LASTEXITCODE -ne 0) { throw 'Backend truth validation failed.' }
 New-Item -ItemType Directory -Path (Split-Path -Parent $OutputCatalogPath) -Force | Out-Null
 Copy-Item -LiteralPath $CatalogPath -Destination $OutputCatalogPath -Force
 
-& $env:QUARTO_PYTHON -B scripts/qa.py
+& $env:QUARTO_PYTHON -B scripts/qa.py --mode $Mode
 if ($LASTEXITCODE -ne 0) { throw 'Post-build QA failed.' }
 
 & $env:QUARTO_PYTHON -B scripts/make_manifests.py --include-output
@@ -194,12 +258,16 @@ if ($LASTEXITCODE -ne 0) { throw 'Manifest generation failed.' }
 $BuildSucceeded = $true
 Remove-Item -LiteralPath $BuildMarkerPath -Force
 } finally {
+    Remove-QuartoExecutionScratch
     if (-not $BuildSucceeded) {
         if (Test-Path -LiteralPath $OutputManifestPath -PathType Leaf) {
             Remove-Item -LiteralPath $OutputManifestPath -Force
         }
+        if (Test-Path -LiteralPath $BuildQAPath -PathType Leaf) {
+            Remove-Item -LiteralPath $BuildQAPath -Force
+        }
         if (Test-Path -LiteralPath $DefaultPython -PathType Leaf) {
-            & $DefaultPython -B (Join-Path $ProjectRoot 'scripts\update_backend.py') --qa-status pending --pdf-visual-status pending | Out-Null
+            & $DefaultPython -B (Join-Path $ProjectRoot 'scripts\update_backend.py') | Out-Null
         }
     }
     if ($null -ne $BuildLock) {

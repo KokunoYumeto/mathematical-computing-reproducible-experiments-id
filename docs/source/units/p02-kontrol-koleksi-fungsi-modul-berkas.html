@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Kontrol, Koleksi, Fungsi, Modul, dan Berkas – Komputasi Matematis dan Eksperimen yang Dapat Direproduksi</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../source/units/01-komputasi-bukti.html" rel="next">
+<link href="../../source/units/p01-menjalankan-eksperimen-python.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-fd460e4b8aec9c2402a9e5dfeb0c5f8c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Tidak ada hasil",
+    "search-matching-documents-text": "dokumen cocok",
+    "search-copy-link-title": "Salin tautan untuk mencari",
+    "search-hide-matches-text": "Sembunyikan kecocokan lainnya",
+    "search-more-match-text": "kecocokan lainnya di dokumen ini",
+    "search-more-matches-text": "kecocokan lainnya di dokumen ini",
+    "search-clear-button-title": "Hapus",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Batal",
+    "search-submit-button-title": "Kirim",
+    "search-label": "Mencari"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alihkan bilah sisi" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../source/units/p02-kontrol-koleksi-fungsi-modul-berkas.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Kontrol, Koleksi, Fungsi, Modul, dan Berkas</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alihkan bilah sisi" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Mencari" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Komputasi Matematis dan Eksperimen yang Dapat Direproduksi</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Mencari"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Pengantar</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/p01-menjalankan-eksperimen-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Primer P01 - Menjalankan Eksperimen Python</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/p02-kontrol-koleksi-fungsi-modul-berkas.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Kontrol, Koleksi, Fungsi, Modul, dan Berkas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/01-komputasi-bukti.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Komputasi, Representasi, dan Bukti</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/02-objek-fungsi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Objek, Nilai, dan Fungsi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/03-array-vektorisasi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Array, Bentuk, dan Vektorisasi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/04-visualisasi-integritas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualisasi dengan Integritas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/05-eksak-simbolik-sage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Komputasi Eksak dan Simbolik</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/06-titik-mengambang-stabilitas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Titik-Mengambang, Galat, dan Stabilitas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/07-rancangan-eksperimen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Rancangan Eksperimen yang Dapat Diperiksa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/08-pengujian-validasi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Pengujian dan Validasi Komputasi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/09-data-konfigurasi-provenans.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Data, Konfigurasi, dan Provenans</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/10-otomasi-pipa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Otomasi dan Alur Kerja yang Dapat Direproduksi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/11-eksperimen-numerik.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Eksperimen Numerik Berprasyarat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/12-proyek-akhir.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Proyek Akhir yang Dapat Diperiksa</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Daftar Isi</h2>
+   
+  <ul>
+  <li><a href="#sec-o002-p02-objectives" id="toc-sec-o002-p02-objectives" class="nav-link active" data-scroll-target="#sec-o002-p02-objectives"><span class="header-section-number">3.1</span> Tujuan belajar</a></li>
+  <li><a href="#sec-o002-p02-collections" id="toc-sec-o002-p02-collections" class="nav-link" data-scroll-target="#sec-o002-p02-collections"><span class="header-section-number">3.2</span> Empat koleksi dasar</a></li>
+  <li><a href="#sec-o002-p02-if" id="toc-sec-o002-p02-if" class="nav-link" data-scroll-target="#sec-o002-p02-if"><span class="header-section-number">3.3</span> Percabangan dengan <code>if</code></a></li>
+  <li><a href="#sec-o002-p02-loops" id="toc-sec-o002-p02-loops" class="nav-link" data-scroll-target="#sec-o002-p02-loops"><span class="header-section-number">3.4</span> Perulangan eksplisit: <code>for</code> lalu <code>while</code></a>
+  <ul class="collapse">
+  <li><a href="#sec-o002-p02-generator" id="toc-sec-o002-p02-generator" class="nav-link" data-scroll-target="#sec-o002-p02-generator"><span class="header-section-number">3.4.1</span> Dari comprehension ke ekspresi generator</a></li>
+  </ul></li>
+  <li><a href="#sec-o002-p02-functions" id="toc-sec-o002-p02-functions" class="nav-link" data-scroll-target="#sec-o002-p02-functions"><span class="header-section-number">3.5</span> Fungsi, parameter, <code>return</code>, dan ruang lingkup</a></li>
+  <li><a href="#sec-o002-p02-exceptions" id="toc-sec-o002-p02-exceptions" class="nav-link" data-scroll-target="#sec-o002-p02-exceptions"><span class="header-section-number">3.6</span> Pengecualian yang informatif</a></li>
+  <li><a href="#sec-o002-p02-modules" id="toc-sec-o002-p02-modules" class="nav-link" data-scroll-target="#sec-o002-p02-modules"><span class="header-section-number">3.7</span> Modul dan batas <code>__main__</code></a></li>
+  <li><a href="#sec-o002-p02-files" id="toc-sec-o002-p02-files" class="nav-link" data-scroll-target="#sec-o002-p02-files"><span class="header-section-number">3.8</span> Jalur dan tiga format berkas</a>
+  <ul class="collapse">
+  <li><a href="#teks" id="toc-teks" class="nav-link" data-scroll-target="#teks"><span class="header-section-number">3.8.1</span> Teks</a></li>
+  <li><a href="#csv" id="toc-csv" class="nav-link" data-scroll-target="#csv"><span class="header-section-number">3.8.2</span> CSV</a></li>
+  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json"><span class="header-section-number">3.8.3</span> JSON</a></li>
+  </ul></li>
+  <li><a href="#sec-o002-p02-red-green" id="toc-sec-o002-p02-red-green" class="nav-link" data-scroll-target="#sec-o002-p02-red-green"><span class="header-section-number">3.9</span> Tes merah-hijau dengan <code>unittest</code></a></li>
+  <li><a href="#sec-o002-p02-artifact" id="toc-sec-o002-p02-artifact" class="nav-link" data-scroll-target="#sec-o002-p02-artifact"><span class="header-section-number">3.10</span> Artefak pendamping deterministik</a></li>
+  <li><a href="#sec-o002-p02-exercises" id="toc-sec-o002-p02-exercises" class="nav-link" data-scroll-target="#sec-o002-p02-exercises"><span class="header-section-number">3.11</span> Latihan</a>
+  <ul class="collapse">
+  <li><a href="#ex-o002-p02-01" id="toc-ex-o002-p02-01" class="nav-link" data-scroll-target="#ex-o002-p02-01"><span class="header-section-number">3.11.1</span> Latihan 1 - koleksi dan irisan</a></li>
+  <li><a href="#ex-o002-p02-02" id="toc-ex-o002-p02-02" class="nav-link" data-scroll-target="#ex-o002-p02-02"><span class="header-section-number">3.11.2</span> Latihan 2 - aliran kontrol sebelum comprehension</a></li>
+  <li><a href="#ex-o002-p02-03" id="toc-ex-o002-p02-03" class="nav-link" data-scroll-target="#ex-o002-p02-03"><span class="header-section-number">3.11.3</span> Latihan 3 - fungsi, ruang lingkup, dan galat</a></li>
+  <li><a href="#ex-o002-p02-04" id="toc-ex-o002-p02-04" class="nav-link" data-scroll-target="#ex-o002-p02-04"><span class="header-section-number">3.11.4</span> Latihan 4 - modul peserta dan tes merah-hijau</a></li>
+  <li><a href="#ex-o002-p02-05" id="toc-ex-o002-p02-05" class="nav-link" data-scroll-target="#ex-o002-p02-05"><span class="header-section-number">3.11.5</span> Latihan 5 - teks, CSV, JSON, dan manifest</a></li>
+  </ul></li>
+  <li><a href="#sec-o002-p02-summary" id="toc-sec-o002-p02-summary" class="nav-link" data-scroll-target="#sec-o002-p02-summary"><span class="header-section-number">3.12</span> Ringkasan</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Kontrol, Koleksi, Fungsi, Modul, dan Berkas</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="sec-o002-p02">
+
+</div>
+<section id="sec-o002-p02-objectives" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-o002-p02-objectives"><span class="header-section-number">3.1</span> Tujuan belajar</h2>
+<p>Setelah menyelesaikan primer ini, pembaca dapat:</p>
+<ul>
+<li>memilih <code>list</code>, <code>tuple</code>, <code>dict</code>, atau <code>set</code> sesuai dengan maksud data;</li>
+<li>membaca dan mengubah koleksi melalui indeks dan irisan;</li>
+<li>menulis percabangan serta perulangan <code>for</code> dan <code>while</code> secara eksplisit sebelum meringkasnya menjadi <em>comprehension</em>;</li>
+<li>mendefinisikan fungsi dengan parameter, nilai kembalian, dan ruang lingkup lokal yang jelas;</li>
+<li>menolak masukan yang tidak sah dengan pengecualian yang informatif;</li>
+<li>memisahkan kode yang dapat diimpor dari tindakan baris perintah melalui modul dan <code>if __name__ == "__main__"</code>;</li>
+<li>membaca dan menulis teks, CSV, dan JSON memakai <code>Path</code>; dan</li>
+<li>menjalani satu siklus tes merah-hijau nyata dengan <code>unittest</code>.</li>
+</ul>
+<p>Prasyarat lokal: Primer P01. Primer ini tidak menganggap pembaca pernah memprogram sebelumnya dan tidak memerlukan kalkulus, aljabar linear, atau persamaan diferensial.</p>
+</section>
+<section id="sec-o002-p02-collections" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-o002-p02-collections"><span class="header-section-number">3.2</span> Empat koleksi dasar</h2>
+<p>Sebuah koleksi menyimpan beberapa nilai, tetapi jenis koleksi menyatakan kontrak yang berbeda.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Jenis</th>
+<th>Contoh</th>
+<th>Kapan dipilih</th>
+<th>Sifat penting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>list</code></td>
+<td><code>[4, 1, 4]</code></td>
+<td>urutan yang dapat diubah</td>
+<td>berurutan, boleh duplikat</td>
+</tr>
+<tr class="even">
+<td><code>tuple</code></td>
+<td><code>(4, 1, 4)</code></td>
+<td>nilai berurutan yang hendak diperlakukan tetap</td>
+<td>berurutan, tidak dapat diubah</td>
+</tr>
+<tr class="odd">
+<td><code>dict</code></td>
+<td><code>{"S01": 4}</code></td>
+<td>pemetaan kunci ke nilai</td>
+<td>setiap kunci unik</td>
+</tr>
+<tr class="even">
+<td><code>set</code></td>
+<td><code>{1, 4}</code></td>
+<td>keanggotaan atau penghapusan duplikat</td>
+<td>tidak mempunyai indeks</td>
+</tr>
+</tbody>
+</table>
+<p>Gunakan kurung siku untuk mengambil unsur dari daftar atau tuple. Indeks Python dimulai dari nol; indeks negatif dihitung dari akhir.</p>
+<div id="cell-lst-o002-p02-indexing" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>first <span class="op">=</span> values[<span class="dv">0</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>last <span class="op">=</span> values[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>middle <span class="op">=</span> values[<span class="dv">1</span>:<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>(first, last, middle)</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-indexing" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-indexing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.1
+</figcaption>
+<div aria-describedby="lst-o002-p02-indexing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>(4, 2, [1, 4])</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Irisan <code>values[start:stop]</code> memasukkan posisi <code>start</code>, tetapi berhenti sebelum <code>stop</code>. Karena itu, <code>values[1:3]</code> mengambil posisi 1 dan 2. Bentuk <code>values[:]</code> membuat daftar baru dengan nilai yang sama; ia bukan nama kedua bagi daftar lama.</p>
+<p>Daftar dapat diubah. Metode <code>append</code> menambah satu unsur ke daftar yang sama. Tuple tidak menyediakan perubahan itu.</p>
+<div id="cell-lst-o002-p02-list-tuple" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>measurements <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">5</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>measurements.append(<span class="dv">7</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>frozen_measurements <span class="op">=</span> <span class="bu">tuple</span>(measurements)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>(measurements, frozen_measurements)</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-list-tuple" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-list-tuple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.2
+</figcaption>
+<div aria-describedby="lst-o002-p02-list-tuple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>([2, 5, 7], (2, 5, 7))</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Dictionary memakai kunci, bukan posisi, untuk mengambil nilai. Metode <code>get</code> dapat menyediakan nilai bawaan ketika kunci tidak ada. Gunakan pengindeksan biasa jika ketiadaan kunci justru merupakan galat yang harus terlihat.</p>
+<div id="cell-lst-o002-p02-dict-set" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>by_sample <span class="op">=</span> {<span class="st">"S01"</span>: <span class="dv">2</span>, <span class="st">"S02"</span>: <span class="dv">5</span>, <span class="st">"S03"</span>: <span class="dv">2</span>}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sample_ids <span class="op">=</span> <span class="bu">set</span>(by_sample)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>unique_values <span class="op">=</span> <span class="bu">set</span>(by_sample.values())</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>(by_sample[<span class="st">"S02"</span>], by_sample.get(<span class="st">"S99"</span>), sample_ids, unique_values)</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-dict-set" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-dict-set-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.3
+</figcaption>
+<div aria-describedby="lst-o002-p02-dict-set-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>(5, None, {'S01', 'S02', 'S03'}, {2, 5})</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Jangan mengandalkan urutan tampilan sebuah set. Jika hasil harus stabil untuk dibaca atau di-<em>hash</em>, ubah ke daftar terurut, misalnya <code>sorted(unique_values)</code>. Dictionary Python mempertahankan urutan penyisipan, tetapi JSON kanonis pada proyek ini tetap mengurutkan kunci agar urutan kebetulan pembuatan dictionary tidak mengubah byte keluaran.</p>
+</section>
+<section id="sec-o002-p02-if" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-o002-p02-if"><span class="header-section-number">3.3</span> Percabangan dengan <code>if</code></h2>
+<p>Percabangan memilih tindakan berdasarkan nilai boolean. Python hanya menjalankan blok pertama yang kondisinya benar.</p>
+<div id="cell-lst-o002-p02-if" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>residual <span class="op">=</span> <span class="fl">0.0008</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tolerance <span class="op">=</span> <span class="fl">0.001</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> residual <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> <span class="st">"galat: residual tidak boleh negatif"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> residual <span class="op">&lt;=</span> tolerance:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> <span class="st">"lulus pada toleransi yang ditetapkan"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> <span class="st">"belum lulus"</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>status</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-if" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-if-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.4
+</figcaption>
+<div aria-describedby="lst-o002-p02-if-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>'lulus pada toleransi yang ditetapkan'</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Indentasi menentukan blok. Empat spasi adalah kebiasaan proyek ini. Kondisi <code>residual &lt;= tolerance</code> merupakan klaim yang dapat diperiksa untuk satu hasil; ia tidak membuktikan bahwa algoritme benar untuk semua masukan.</p>
+<p>Operator perbandingan menghasilkan <code>True</code> atau <code>False</code>. Gabungkan kondisi dengan <code>and</code>, <code>or</code>, dan <code>not</code>, tetapi jangan membuat satu baris begitu padat hingga aturan domain sulit ditinjau.</p>
+</section>
+<section id="sec-o002-p02-loops" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-o002-p02-loops"><span class="header-section-number">3.4</span> Perulangan eksplisit: <code>for</code> lalu <code>while</code></h2>
+<p>Gunakan <code>for</code> ketika hendak mengunjungi setiap unsur suatu koleksi. Contoh berikut memilih bilangan genap lalu menyimpan kuadratnya.</p>
+<div id="cell-lst-o002-p02-for" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">0</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>even_squares <span class="op">=</span> []</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> values:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> value <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        even_squares.append(value <span class="op">*</span> value)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>even_squares</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-for" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-for-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.5
+</figcaption>
+<div aria-describedby="lst-o002-p02-for-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>[4, 16, 0]</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Keadaan loop dapat dibaca langkah demi langkah: <code>value</code> adalah unsur yang sedang diperiksa dan <code>even_squares</code> menyimpan hasil yang telah diterima. Bentuk eksplisit ini sebaiknya dikuasai sebelum bentuk ringkas berikut.</p>
+<div id="cell-lst-o002-p02-comprehension" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>same_result <span class="op">=</span> [value <span class="op">*</span> value <span class="cf">for</span> value <span class="kw">in</span> values <span class="cf">if</span> value <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>same_result <span class="op">==</span> even_squares</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-comprehension" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="6">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-comprehension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.6
+</figcaption>
+<div aria-describedby="lst-o002-p02-comprehension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>True</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p><em>List comprehension</em> bukan algoritme baru; di sini ia meringkas loop dan percabangan yang sama. Jika transformasi memerlukan beberapa kondisi, penanganan galat, atau pencatatan antara, loop eksplisit biasanya lebih jelas.</p>
+<section id="sec-o002-p02-generator" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="sec-o002-p02-generator"><span class="header-section-number">3.4.1</span> Dari comprehension ke ekspresi generator</h3>
+<p>Kurung siku membangun seluruh list saat itu juga. Bentuk yang sama di dalam kurung biasa membuat <em>ekspresi generator</em>: nilai diproduksi satu per satu saat dikonsumsi. Pemanggilan <code>tuple(...)</code> berikut menghabiskan generator dan menyimpan hasilnya sebagai tuple.</p>
+<div id="cell-lst-o002-p02-generator" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>generated <span class="op">=</span> (value <span class="op">*</span> value <span class="cf">for</span> value <span class="kw">in</span> values <span class="cf">if</span> value <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>frozen_result <span class="op">=</span> <span class="bu">tuple</span>(generated)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>(frozen_result, <span class="bu">tuple</span>(generated))</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-generator" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="7">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-generator-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.7
+</figcaption>
+<div aria-describedby="lst-o002-p02-generator-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>((4, 16, 0), ())</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Hasil kedua adalah tuple kosong karena generator hanya dapat dilalui satu kali. Jadi <code>[expression for ...]</code> menghasilkan list segera, sedangkan <code>tuple(expression for ...)</code> mengonsumsi aliran malas lalu membekukannya. Unit 2 memakai bentuk kedua ketika ingin menerima iterable apa pun tanpa menyimpan dua salinan perantara.</p>
+<p>Gunakan <code>while</code> ketika pengulangan diteruskan selama suatu kondisi masih benar. Harus ada kemajuan yang membuat kondisi akhirnya salah.</p>
+<div id="cell-lst-o002-p02-while" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>current <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>countdown <span class="op">=</span> []</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> current <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    countdown.append(current)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    current <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>countdown.append(<span class="dv">0</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>countdown</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-while" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="8">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-while-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.8
+</figcaption>
+<div aria-describedby="lst-o002-p02-while-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>[3, 2, 1, 0]</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Pada setiap putaran, <code>current</code> berkurang satu dan dibatasi bawah oleh nol. Fakta itu menjelaskan mengapa loop berhenti. Jika baris <code>current -= 1</code> hilang, kondisi selalu benar dan loop tidak selesai.</p>
+</section>
+</section>
+<section id="sec-o002-p02-functions" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-o002-p02-functions"><span class="header-section-number">3.5</span> Fungsi, parameter, <code>return</code>, dan ruang lingkup</h2>
+<p>Fungsi memberi nama pada satu aturan yang dapat dipanggil berulang kali. Parameter adalah nama lokal yang menerima nilai dari pemanggil. <code>return</code> mengirim satu hasil kepada pemanggil.</p>
+<div id="cell-lst-o002-p02-function" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clipped_mean(values, lower<span class="op">=</span><span class="dv">0</span>, upper<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    selected <span class="op">=</span> []</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> value <span class="kw">in</span> values:</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> lower <span class="op">&lt;=</span> value <span class="op">&lt;=</span> upper:</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>            selected.append(value)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> selected:</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"tidak ada nilai di dalam rentang"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(selected) <span class="op">/</span> <span class="bu">len</span>(selected)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>clipped_mean([<span class="op">-</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">20</span>])</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-function" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="9">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.9
+</figcaption>
+<div aria-describedby="lst-o002-p02-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>4.0</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p><code>values</code>, <code>lower</code>, <code>upper</code>, dan <code>selected</code> bersifat lokal bagi pemanggilan. Nama <code>selected</code> tidak tersedia di luar fungsi. Nilai bawaan <code>lower=0</code> dan <code>upper=10</code> dipakai hanya jika pemanggil tidak menggantinya.</p>
+<p>Hindari membuat fungsi matematika bergantung pada variabel global yang dapat berubah tanpa terlihat. Lebih jujur menerima keputusan sebagai parameter dan mengembalikan hasil. Ini membuat masukan, keluaran, dan tes lebih mudah dibaca.</p>
+<p>Sebuah fungsi tanpa <code>return</code> eksplisit mengembalikan <code>None</code>. Mencetak bukan sama dengan mengembalikan: <code>print</code> mengirim teks ke layar, sedangkan <code>return</code> memberikan nilai yang dapat dipakai perhitungan berikutnya.</p>
+</section>
+<section id="sec-o002-p02-exceptions" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="sec-o002-p02-exceptions"><span class="header-section-number">3.6</span> Pengecualian yang informatif</h2>
+<p>Masukan di luar kontrak harus gagal dengan jelas. Gunakan <code>TypeError</code> ketika jenis nilai tidak sesuai dan <code>ValueError</code> ketika jenisnya benar tetapi nilainya di luar domain.</p>
+<div id="cell-lst-o002-p02-exception" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reciprocal(value):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(value, <span class="bu">bool</span>) <span class="kw">or</span> <span class="kw">not</span> <span class="bu">isinstance</span>(value, (<span class="bu">int</span>, <span class="bu">float</span>)):</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="st">"value harus berupa angka"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> value <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"value tidak boleh nol"</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> value</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>(reciprocal(<span class="dv">4</span>), reciprocal(<span class="op">-</span><span class="dv">2</span>))</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-exception" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="10">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-exception-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.10
+</figcaption>
+<div aria-describedby="lst-o002-p02-exception-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>(0.25, -0.5)</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Tangkap pengecualian hanya jika lapisan tersebut tahu cara menanganinya. Contoh pengurai berikut menambahkan nomor baris lalu meneruskan kegagalan.</p>
+<div id="cell-lst-o002-p02-try-except" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_integer_lines(text):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> []</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line_number, raw_line <span class="kw">in</span> <span class="bu">enumerate</span>(text.splitlines(), start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        token <span class="op">=</span> raw_line.strip()</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> token:</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>            values.append(<span class="bu">int</span>(token))</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> error:</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"baris </span><span class="sc">{</span>line_number<span class="sc">}</span><span class="ss"> bukan bilangan bulat: </span><span class="sc">{</span>token<span class="sc">!r}</span><span class="ss">"</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>            ) <span class="im">from</span> error</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> values</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>parse_integer_lines(<span class="st">"2</span><span class="ch">\n\n</span><span class="st">-3</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-try-except" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="11">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-try-except-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.11
+</figcaption>
+<div aria-describedby="lst-o002-p02-try-except-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>[2, -3]</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Jangan memakai <code>except Exception: pass</code>. Bentuk itu menghapus bukti kegagalan dan dapat membiarkan eksperimen menghasilkan keluaran yang tampak lengkap padahal sebagian pemrosesan tidak terjadi.</p>
+</section>
+<section id="sec-o002-p02-modules" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-o002-p02-modules"><span class="header-section-number">3.7</span> Modul dan batas <code>__main__</code></h2>
+<p>Satu berkas Python merupakan modul. Misalkan <code>positive_math.py</code> berisi fungsi berikut.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>positive_math.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23" data-filename="positive_math.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> positive_total(values):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> value <span class="kw">in</span> values:</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> value <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>            total <span class="op">+=</span> value</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(positive_total([<span class="dv">3</span>, <span class="op">-</span><span class="dv">8</span>, <span class="dv">2</span>]))</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">SystemExit</span>(main())</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Ketika dijalankan sebagai <code>python positive_math.py</code>, Python memberi nama khusus <code>"__main__"</code> kepada modul dan memanggil <code>main</code>. Ketika tes menjalankan <code>from positive_math import positive_total</code>, blok tersebut tidak berjalan. Karena itu, impor memperoleh fungsi tanpa diam-diam mencetak, membaca berkas, atau menimpa keluaran.</p>
+<p>Impor modul standar atau pihak ketiga ditulis di bagian atas berkas. Impor lokal menunjuk modul yang menjadi bagian proyek. Nama modul bukan teks untuk dieksekusi; ia adalah batas yang membuat fungsi dapat digunakan dan diuji dari berkas lain.</p>
+</section>
+<section id="sec-o002-p02-files" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="sec-o002-p02-files"><span class="header-section-number">3.8</span> Jalur dan tiga format berkas</h2>
+<p><code>Path</code> membentuk jalur tanpa merangkai pemisah Windows atau POSIX secara manual.</p>
+<div id="cell-lst-o002-p02-path" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>project_root <span class="op">=</span> Path.cwd()</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>input_path <span class="op">=</span> project_root <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"measurements.csv"</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>input_path.as_posix().endswith(<span class="st">"data/measurements.csv"</span>)</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-path" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="12">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.12
+</figcaption>
+<div aria-describedby="lst-o002-p02-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>True</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Simpan jalur relatif terhadap akar proyek di konfigurasi dan manifest. Jangan menyimpan nama folder akun pribadi atau menganggap direktori kerja selalu sama.</p>
+<section id="teks" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="teks"><span class="header-section-number">3.8.1</span> Teks</h3>
+<p>Berkas teks cocok untuk baris sederhana. Nyatakan pengodean UTF-8. Ketika byte harus deterministik lintas sistem, tetapkan akhir baris LF.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>write_text_example.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26" data-filename="write_text_example.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> Path(<span class="st">"output"</span>) <span class="op">/</span> <span class="st">"values.txt"</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>path.parent.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>path.write_text(<span class="st">"2</span><span class="ch">\n</span><span class="st">-1</span><span class="ch">\n</span><span class="st">5</span><span class="ch">\n</span><span class="st">"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>, newline<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="csv" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="csv"><span class="header-section-number">3.8.2</span> CSV</h3>
+<p>CSV menyimpan tabel. Gunakan modul <code>csv</code> agar koma, tanda kutip, dan akhir baris ditangani konsisten. Buka berkas dengan <code>newline=""</code>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>read_csv_example.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27" data-filename="read_csv_example.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> Path(<span class="st">"data/measurements.csv"</span>).<span class="bu">open</span>(</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>, newline<span class="op">=</span><span class="st">""</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>) <span class="im">as</span> stream:</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> csv.DictReader(stream):</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>        rows.append({</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"sample_id"</span>: row[<span class="st">"sample_id"</span>],</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">"value"</span>: <span class="bu">int</span>(row[<span class="st">"value"</span>]),</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>        })</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Nilai dari CSV mula-mula berupa string. Konversi <code>int</code> atau <code>float</code> adalah bagian validasi, bukan sekadar kosmetik.</p>
+</section>
+<section id="json" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="json"><span class="header-section-number">3.8.3</span> JSON</h3>
+<p>JSON menyimpan daftar, pemetaan, string, angka, boolean, dan <code>null</code>. JSON tidak menyimpan objek <code>Path</code>, set, atau fungsi secara langsung. Ubah data ke bentuk yang didukung dan tetapkan aturan serialisasi.</p>
+<div id="cell-lst-o002-p02-json" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> {<span class="st">"count"</span>: <span class="dv">3</span>, <span class="st">"sample_ids"</span>: [<span class="st">"S01"</span>, <span class="st">"S02"</span>, <span class="st">"S03"</span>]}</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>json_text <span class="op">=</span> json.dumps(</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    summary, ensure_ascii<span class="op">=</span><span class="va">False</span>, indent<span class="op">=</span><span class="dv">2</span>, sort_keys<span class="op">=</span><span class="va">True</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>json_text</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-json" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="13">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-json-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.13
+</figcaption>
+<div aria-describedby="lst-o002-p02-json-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>'{\n  "count": 3,\n  "sample_ids": [\n    "S01",\n    "S02",\n    "S03"\n  ]\n}\n'</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>CSV baik untuk tabel datar; JSON baik untuk struktur bertingkat; teks biasa baik untuk format yang sangat sederhana dan dinyatakan. Ekstensi berkas tidak membuktikan isinya sah. Selalu uraikan dan validasi struktur yang dibutuhkan.</p>
+</section>
+</section>
+<section id="sec-o002-p02-red-green" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="sec-o002-p02-red-green"><span class="header-section-number">3.9</span> Tes merah-hijau dengan <code>unittest</code></h2>
+<p>Tes merah-hijau berarti melihat tes gagal karena perilaku yang belum benar, memperbaiki kode, lalu melihat tes yang sama lulus. Jangan menulis kode dan tes yang sudah hijau lalu mengklaim bahwa tahap merah pernah diperiksa.</p>
+<p>Buat dua berkas di direktori latihan kosong. Versi pertama modul sengaja salah:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>positive_math.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30" data-filename="positive_math.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> positive_total(values):</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(values)  <span class="co"># salah: nilai negatif ikut dijumlahkan</span></span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Tes menyatakan perilaku yang dimaksud:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>test_positive_math.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31" data-filename="test_positive_math.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> unittest</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> positive_math <span class="im">import</span> positive_total</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PositiveTotalTests(unittest.TestCase):</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_only_positive_values_are_added(<span class="va">self</span>):</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(positive_total([<span class="dv">3</span>, <span class="op">-</span><span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">0</span>]), <span class="dv">5</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    unittest.main()</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Jalankan:</p>
+<pre class="text"><code>python -m unittest -v test_positive_math.py</code></pre>
+<p>Tes harus <strong>merah</strong>: fungsi salah menghasilkan <code>-3</code>, bukan <code>5</code>. Perbaiki modul dengan loop dan <code>if</code> pada bagian sebelumnya, lalu jalankan perintah yang sama. Tes harus <strong>hijau</strong>. Tambahkan kasus tanpa nilai positif dan kasus masukan yang ditolak. Rekam perintah serta versi Python; warna antarmuka bukan bukti, tetapi status proses dan daftar tes memberi hasil yang dapat diperiksa.</p>
+<p>Tes yang hijau memberi bukti kerja pada kasus yang dijalankan. Ia tidak membuktikan teorema tentang semua program atau semua masukan. Kontrak fungsi, pilihan kasus batas, dan penalaran matematis tetap diperlukan.</p>
+</section>
+<section id="sec-o002-p02-artifact" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="sec-o002-p02-artifact"><span class="header-section-number">3.10</span> Artefak pendamping deterministik</h2>
+<p>Kode pendamping asli berlisensi MIT berada di <code>source/code/primer02_control_files.py</code>. Dari akar proyek, jalankan:</p>
+<pre class="text"><code>python source/code/primer02_control_files.py --output-dir output/primer02-demo</code></pre>
+<p>Perintah tersebut membuat <code>values.txt</code>, <code>measurements.csv</code>, <code>summary.json</code>, dan <code>manifest.json</code>. Semua keluaran memakai UTF-8, LF, urutan medan tetap, dan serialisasi JSON kanonis. Manifest mencatat jalur relatif, ukuran byte, dan SHA-256 dari tiga artefak data. Ia tidak memakai jaringan, waktu saat ini, folder pengguna, atau bilangan acak.</p>
+<p>Jalankan tes pendamping dengan:</p>
+<pre class="text"><code>python tests/test_primer02.py -v</code></pre>
+<p>Tes tersebut memeriksa kontrak, jenis kegagalan, impor tanpa efek samping, hasil empat berkas, ikatan hash, dan dua bundel yang identik secara byte.</p>
+</section>
+<section id="sec-o002-p02-exercises" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="sec-o002-p02-exercises"><span class="header-section-number">3.11</span> Latihan</h2>
+<section id="ex-o002-p02-01" class="level3" data-number="3.11.1">
+<h3 data-number="3.11.1" class="anchored" data-anchor-id="ex-o002-p02-01"><span class="header-section-number">3.11.1</span> Latihan 1 - koleksi dan irisan</h3>
+<p>Dalam modul peserta <code>latihan_p02.py</code>, tulislah <code>collection_report(values)</code> untuk daftar bilangan bulat yang tidak kosong. Kembalikan dictionary dengan unsur pertama, unsur terakhir, irisan tanpa kedua ujung, pasangan dua unsur pertama sebagai tuple, nilai unik yang terurut, dan dictionary <code>positions</code> yang memetakan indeks berbentuk string ke nilai. Tolak daftar kosong dengan <code>ValueError</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Gunakan indeks <code>0</code> dan <code>-1</code>, irisan <code>1:-1</code>, <code>tuple(values[:2])</code>, <code>sorted(set(values))</code>, serta <code>enumerate</code> untuk membentuk <code>positions</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Cek yang dapat dijalankan">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Penting</span>Cek yang dapat dijalankan
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Dari akar proyek, jalankan:</p>
+<pre class="text"><code>python tests/test_primer02.py --learner-module latihan_p02.py --exercise 01</code></pre>
+<p>Cek memuat <code>latihan_p02.py</code> yang Anda tulis, bukan modul jawaban proyek. Ia memeriksa semua medan, urutan hasil, dan penolakan daftar kosong.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="cell-lst-o002-p02-ex01-solution" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> collection_report(values):</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> values:</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"values tidak boleh kosong"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"first"</span>: values[<span class="dv">0</span>],</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"last"</span>: values[<span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"middle"</span>: values[<span class="dv">1</span>:<span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"first_pair"</span>: <span class="bu">tuple</span>(values[:<span class="dv">2</span>]),</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"unique_sorted"</span>: <span class="bu">sorted</span>(<span class="bu">set</span>(values)),</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"positions"</span>: {</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">str</span>(index): value <span class="cf">for</span> index, value <span class="kw">in</span> <span class="bu">enumerate</span>(values)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>collection_report([<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>])</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-ex01-solution" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="14">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-ex01-solution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.14
+</figcaption>
+<div aria-describedby="lst-o002-p02-ex01-solution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>{'first': 4,
+ 'last': 2,
+ 'middle': [1, 4],
+ 'first_pair': (4, 1),
+ 'unique_sorted': [1, 2, 4],
+ 'positions': {'0': 4, '1': 1, '2': 4, '3': 2}}</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Set dipakai hanya untuk keunikan; <code>sorted</code> mengembalikan urutan deterministik. Validasi tipe per unsur dapat ditambahkan sebelum laporan dibentuk.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-p02-02" class="level3" data-number="3.11.2">
+<h3 data-number="3.11.2" class="anchored" data-anchor-id="ex-o002-p02-02"><span class="header-section-number">3.11.2</span> Latihan 2 - aliran kontrol sebelum comprehension</h3>
+<p>Tambahkan ke <code>latihan_p02.py</code> fungsi <code>even_squares_explicit(values)</code> yang, untuk <code>[5, 2, -4, 3, 0]</code>, membangun daftar kuadrat bilangan genap dengan <code>for</code>, <code>if</code>, dan <code>append</code>. Tulis <code>even_squares_comprehension(values)</code> yang setara. Tambahkan <code>countdown(start)</code> dengan <code>while</code> yang menghasilkan <code>[start, ..., 1, 0]</code> dan menolak <code>start &lt; 0</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Suatu bilangan genap memenuhi <code>value % 2 == 0</code>. Pada loop <code>while</code>, kurangi variabel kendali tepat satu kali setiap putaran.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Cek yang dapat dijalankan">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Penting</span>Cek yang dapat dijalankan
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre class="text"><code>python tests/test_primer02.py --learner-module latihan_p02.py --exercise 02</code></pre>
+<p>Cek mengimpor ketiga fungsi dari modul peserta, membandingkan bentuk eksplisit dengan comprehension, dan memeriksa hitung mundur berhenti di nol serta menolak awal negatif.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="cell-lst-o002-p02-ex02-solution" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> even_squares_explicit(values):</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> []</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> value <span class="kw">in</span> values:</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> value <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>            result.append(value <span class="op">*</span> value)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> even_squares_comprehension(values):</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [value <span class="op">*</span> value <span class="cf">for</span> value <span class="kw">in</span> values <span class="cf">if</span> value <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> countdown(start):</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> start <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"start harus taknegatif"</span>)</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> []</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> start <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>        result.append(start)</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>        start <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>    result.append(<span class="dv">0</span>)</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">0</span>]</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>explicit <span class="op">=</span> even_squares_explicit(values)</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>compact <span class="op">=</span> even_squares_comprehension(values)</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>(explicit, compact, countdown(<span class="dv">3</span>))</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-ex02-solution" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="15">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-ex02-solution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.15
+</figcaption>
+<div aria-describedby="lst-o002-p02-ex02-solution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>([4, 16, 0], [4, 16, 0], [3, 2, 1, 0])</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Kedua daftar kuadrat harus sama dengan <code>[4, 16, 0]</code>. Bentuk eksplisit menunjukkan urutan operasi yang kemudian diringkas comprehension.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-p02-03" class="level3" data-number="3.11.3">
+<h3 data-number="3.11.3" class="anchored" data-anchor-id="ex-o002-p02-03"><span class="header-section-number">3.11.3</span> Latihan 3 - fungsi, ruang lingkup, dan galat</h3>
+<p>Tambahkan <code>safe_mean(values)</code> ke <code>latihan_p02.py</code>. Fungsi mengembalikan rata-rata sebagai <code>float</code>, memakai variabel <code>total</code> lokal, menolak koleksi kosong dengan <code>ValueError</code>, dan menolak unsur bukan angka dengan <code>TypeError</code>. Tunjukkan bahwa <code>total</code> tidak dapat diakses setelah fungsi selesai.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Bekukan iterable menjadi tuple, periksa kekosongan, lalu jumlahkan melalui loop. <code>bool</code> sebaiknya ditolak walaupun secara teknis merupakan subkelas <code>int</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Cek yang dapat dijalankan">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Penting</span>Cek yang dapat dijalankan
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre class="text"><code>python tests/test_primer02.py --learner-module latihan_p02.py --exercise 03</code></pre>
+<p>Cek memanggil <code>safe_mean</code> dari modul peserta dan mengharuskan rata-rata tepat untuk contoh serta jenis pengecualian yang berbeda bagi koleksi kosong dan unsur teks.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="cell-lst-o002-p02-ex03-solution" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> safe_mean(values):</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    frozen <span class="op">=</span> <span class="bu">tuple</span>(values)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> frozen:</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"values tidak boleh kosong"</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> value <span class="kw">in</span> frozen:</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(value, <span class="bu">bool</span>) <span class="kw">or</span> <span class="kw">not</span> <span class="bu">isinstance</span>(value, (<span class="bu">int</span>, <span class="bu">float</span>)):</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="st">"setiap unsur harus berupa angka"</span>)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span> value</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total <span class="op">/</span> <span class="bu">len</span>(frozen)</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>safe_mean([<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>])</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-p02-ex03-solution" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="16">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-p02-ex03-solution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.16
+</figcaption>
+<div aria-describedby="lst-o002-p02-ex03-solution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>5.0</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Hasilnya <code>5.0</code>. Nama <code>total</code> hanya hidup di dalam fungsi; mencoba membaca <code>total</code> dari ruang global menghasilkan <code>NameError</code>. Pengecualian itu bukti ruang lingkup, bukan galat yang perlu disembunyikan.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-p02-04" class="level3" data-number="3.11.4">
+<h3 data-number="3.11.4" class="anchored" data-anchor-id="ex-o002-p02-04"><span class="header-section-number">3.11.4</span> Latihan 4 - modul peserta dan tes merah-hijau</h3>
+<p>Buat modul Anda sendiri bernama <code>positive_math.py</code> dan berkas tes <code>test_positive_math.py</code>. Mulailah dengan implementasi salah yang memakai <code>sum(values)</code>, jalankan tes sehingga gagal untuk <code>[3, -8, 2, 0]</code>, lalu perbaiki fungsi memakai loop dan <code>if</code>. Tambahkan tes kasus <code>[-3, 0]</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tes pertama harus mengharapkan <code>5</code>; tes kedua harus mengharapkan <code>0</code>. Simpan pemanggilan demo di dalam batas <code>if __name__ == "__main__"</code> agar impor oleh tes tidak mencetak apa pun.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Cek yang dapat dijalankan">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Penting</span>Cek yang dapat dijalankan
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Di direktori yang berisi kedua berkas peserta, jalankan <code>python -m unittest -v test_positive_math.py</code>. Cek acuan proyek juga tersedia:</p>
+<pre class="text"><code>python tests/test_primer02.py --learner-module positive_math.py --learner-test test_positive_math.py --exercise 04</code></pre>
+<p>Simpan keluaran tahap merah dan tahap hijau sebagai bukti bahwa tes yang sama benar-benar mendeteksi perbaikan. Cek proyek di atas menjalankan berkas tes yang Anda tulis dua kali dalam direktori terisolasi: implementasi <code>sum(values)</code> harus merah dan modul akhir Anda harus hijau. Cek juga mengimpor <code>positive_math.py</code> milik Anda dan memeriksa kasus tambahan.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Isi akhir <code>positive_math.py</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>positive_math.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45" data-filename="positive_math.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> positive_total(values):</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> value <span class="kw">in</span> values:</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> value <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>            total <span class="op">+=</span> value</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(positive_total([<span class="dv">3</span>, <span class="op">-</span><span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">0</span>]))</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">SystemExit</span>(main())</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Isi akhir <code>test_positive_math.py</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>test_positive_math.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46" data-filename="test_positive_math.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> unittest</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> positive_math <span class="im">import</span> positive_total</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PositiveTotalTests(unittest.TestCase):</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mixed_values(<span class="va">self</span>):</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(positive_total([<span class="dv">3</span>, <span class="op">-</span><span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">0</span>]), <span class="dv">5</span>)</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_no_positive_values(<span class="va">self</span>):</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(positive_total([<span class="op">-</span><span class="dv">3</span>, <span class="dv">0</span>]), <span class="dv">0</span>)</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>    unittest.main()</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Versi salah menjadi merah karena <code>sum([3, -8, 2, 0]) == -3</code>. Versi akhir menjadi hijau karena hanya nilai yang memenuhi <code>value &gt; 0</code> dijumlahkan.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-p02-05" class="level3" data-number="3.11.5">
+<h3 data-number="3.11.5" class="anchored" data-anchor-id="ex-o002-p02-05"><span class="header-section-number">3.11.5</span> Latihan 5 - teks, CSV, JSON, dan manifest</h3>
+<p>Tambahkan <code>write_demo_bundle(output_dir)</code> ke <code>latihan_p02.py</code>. Fungsi harus membangun satu direktori keluaran yang berisi: teks satu bilangan per baris; CSV dengan kolom <code>sample_id,value</code>; JSON ringkasan yang konsisten dengan kedua berkas data; dan manifest berisi jalur relatif, ukuran byte, serta SHA-256 ketiga artefak. Tambahkan <code>core_sha256</code> atas bagian inti manifest. Jalankan dua kali ke direktori berbeda dan buktikan semua berkas bersesuaian identik secara byte.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Gunakan <code>Path</code>, <code>encoding="utf-8"</code>, <code>newline=""</code> untuk CSV, <code>lineterminator="\n"</code>, serta <code>json.dumps(..., sort_keys=True, indent=2)</code>. Jangan masukkan waktu saat ini atau jalur absolut ke keluaran.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Cek yang dapat dijalankan">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Penting</span>Cek yang dapat dijalankan
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre class="text"><code>python tests/test_primer02.py --learner-module latihan_p02.py --exercise 05</code></pre>
+<p>Cek memanggil <code>write_demo_bundle</code> dari modul peserta pada dua direktori sementara. Ia mem-parse bilangan teks, kolom dan baris CSV, serta JSON ringkasan; memeriksa konsistensi nilai dan ID sampel; memastikan jalur manifest relatif; mengikat ukuran, SHA-256, dan <code>core_sha256</code> ke byte aktual; lalu membandingkan setiap berkas dari kedua run. Jadi cek latihan ini menilai keluaran yang Anda buat, bukan sekadar menjalankan tes terhadap modul jawaban proyek.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Fungsi <code>write_demo_bundle</code> dalam kode pendamping merupakan solusi acuan. Ia menulis ketiga format, membaca kembali teks dan CSV, membuat ringkasan JSON, lalu mengikat setiap artefak ke manifest. Jalankan:</p>
+<pre class="text"><code>python source/code/primer02_control_files.py --output-dir output/primer02-demo
+python tests/test_primer02.py -v</code></pre>
+<p>Keempat berkas harus ada. <code>manifest.json</code> harus memakai schema <code>o002.p02.bundle-manifest.v1</code>; tiga rekaman artefaknya harus cocok dengan byte aktual. Kesamaan hash membuktikan kesamaan byte pada run yang diperiksa, bukan kebenaran ilmiah data atau program.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-o002-p02-summary" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="sec-o002-p02-summary"><span class="header-section-number">3.12</span> Ringkasan</h2>
+<ul>
+<li>List dan tuple menyimpan urutan; dictionary memetakan kunci; set menyatakan keanggotaan unik tanpa indeks.</li>
+<li><code>if</code>, <code>for</code>, dan <code>while</code> membuat aliran kendali terlihat. Comprehension dipakai setelah loop eksplisit dipahami.</li>
+<li>Fungsi menerima masukan melalui parameter, memakai keadaan lokal, dan mengirim hasil melalui <code>return</code>.</li>
+<li>Pengecualian harus menyatakan pelanggaran kontrak dan tidak boleh ditelan tanpa penanganan.</li>
+<li>Batas <code>__main__</code> menjaga agar impor modul tidak menjalankan efek samping.</li>
+<li><code>Path</code>, UTF-8, parser CSV/JSON, dan serialisasi kanonis membuat pekerjaan berkas lebih portabel dan dapat diperiksa.</li>
+<li>Siklus merah-hijau menunjukkan bahwa tes mampu melihat satu cacat konkret; tes tetap bukan bukti matematis universal.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+(function () {
+  "use strict";
+
+  const selectors = "main table.table, main math[display='block']";
+
+  function labelFor(element) {
+    if (element.matches("table")) {
+      const caption = element.querySelector("caption");
+      return caption && caption.textContent.trim()
+        ? `Tabel yang dapat digulir: ${caption.textContent.trim()}`
+        : "Tabel yang dapat digulir secara horizontal";
+    }
+    return "Rumus yang dapat digulir secara horizontal";
+  }
+
+  function wrapperFor(element) {
+    const parent = element.parentElement;
+    if (parent && parent.classList.contains("o002-scroll-region")) {
+      return parent;
+    }
+    const wrapper = document.createElement("div");
+    wrapper.className = "o002-scroll-region";
+    element.before(wrapper);
+    wrapper.append(element);
+    return wrapper;
+  }
+
+  function update(wrapper) {
+    const overflows = wrapper.scrollWidth > wrapper.clientWidth + 1;
+    if (overflows) {
+      wrapper.tabIndex = 0;
+      wrapper.setAttribute("role", "region");
+      wrapper.setAttribute("aria-label", wrapper.dataset.o002Label);
+    } else {
+      wrapper.removeAttribute("tabindex");
+      wrapper.removeAttribute("role");
+      wrapper.removeAttribute("aria-label");
+    }
+  }
+
+  function initialize() {
+    const wrappers = [];
+    document.querySelectorAll(selectors).forEach((element) => {
+      const wrapper = wrapperFor(element);
+      wrapper.dataset.o002Label = labelFor(element);
+      wrappers.push(wrapper);
+    });
+    const refresh = () => wrappers.forEach(update);
+    refresh();
+    window.addEventListener("resize", refresh, { passive: true });
+
+    document
+      .querySelectorAll(".callout-header[data-bs-toggle='collapse']")
+      .forEach((header) => {
+        header.tabIndex = 0;
+        header.setAttribute("role", "button");
+        header.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") {
+            return;
+          }
+          event.preventDefault();
+          header.click();
+        });
+      });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initialize, { once: true });
+  } else {
+    initialize();
+  }
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Disalin!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Disalin!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../source/units/p01-menjalankan-eksperimen-python.html" class="pagination-link" aria-label="Primer P01 - Menjalankan Eksperimen Python">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Primer P01 - Menjalankan Eksperimen Python</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../source/units/01-komputasi-bukti.html" class="pagination-link" aria-label="Komputasi, Representasi, dan Bukti">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Komputasi, Representasi, dan Bukti</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

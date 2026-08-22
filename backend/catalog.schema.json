@@ -10,9 +10,16 @@
     "sources",
     "components",
     "units",
+    "exercises",
+    "artifacts",
+    "labs",
+    "environments",
+    "prerequisite_routes",
     "relations",
+    "receipts",
     "qa",
     "historical_release",
+    "planned_release",
     "architecture",
     "cursor"
   ],
@@ -33,15 +40,45 @@
     },
     "sources": {
       "type": "array",
+      "minItems": 1,
       "items": {"$ref": "#/$defs/source"}
     },
     "components": {
       "type": "array",
+      "minItems": 42,
       "items": {"$ref": "#/$defs/component"}
     },
     "units": {
       "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
       "items": {"$ref": "#/$defs/unit"}
+    },
+    "exercises": {
+      "type": "array",
+      "minItems": 75,
+      "items": {"$ref": "#/$defs/exercise"}
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/artifact"}
+    },
+    "labs": {
+      "type": "array",
+      "minItems": 4,
+      "items": {"$ref": "#/$defs/lab"}
+    },
+    "environments": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"$ref": "#/$defs/environment"}
+    },
+    "prerequisite_routes": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/prerequisite_route"}
     },
     "relations": {
       "type": "array",
@@ -49,22 +86,43 @@
         "type": "object",
         "required": ["type", "from", "to"],
         "properties": {
-          "type": {"enum": ["precedes", "uses_component", "implements"]},
+          "type": {
+            "enum": [
+              "precedes",
+              "uses_component",
+              "implements",
+              "uses_environment",
+              "produces",
+              "validated_by",
+              "requires_prerequisite"
+            ]
+          },
           "from": {"type": "string", "minLength": 1},
           "to": {"type": "string", "minLength": 1}
         },
         "additionalProperties": false
       }
     },
+    "receipts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/receipt"}
+    },
     "qa": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "status", "evidence"],
+        "required": ["id", "scope", "required_for_b80", "status", "evidence", "receipt_ids"],
         "properties": {
           "id": {"type": "string", "pattern": "^qa-o002-"},
+          "scope": {"enum": ["historical_standalone", "current_b80", "external_preservation"]},
+          "required_for_b80": {"type": "boolean"},
           "status": {"enum": ["pass", "pending", "not_applicable"]},
-          "evidence": {"type": "string", "minLength": 1}
+          "evidence": {"type": "string", "minLength": 1},
+          "receipt_ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string", "pattern": "^receipt-o002-"}
+          }
         },
         "additionalProperties": false
       }
@@ -82,6 +140,24 @@
       },
       "additionalProperties": false
     },
+    "planned_release": {
+      "type": "object",
+      "required": ["version", "tag", "record_id", "doi", "status", "artifact_ids"],
+      "properties": {
+        "version": {"const": "2026.08.22.1"},
+        "tag": {"const": "v2026.08.22.1"},
+        "record_id": {"const": 22053905},
+        "doi": {"const": "10.5281/zenodo.22053905"},
+        "status": {"enum": ["in_progress", "b80_complete", "published"]},
+        "artifact_ids": {
+          "type": "array",
+          "minItems": 5,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^art-o002-"}
+        }
+      },
+      "additionalProperties": false
+    },
     "architecture": {
       "type": "object",
       "required": ["status", "required_unit_ids", "admitted_unit_ids", "open_requirements"],
@@ -96,11 +172,14 @@
         },
         "admitted_unit_ids": {
           "type": "array",
+          "minItems": 14,
+          "maxItems": 14,
           "uniqueItems": true,
           "items": {"type": "string", "pattern": "^o002\\.(?:p|u)[0-9]{2}$"}
         },
         "open_requirements": {
           "type": "array",
+          "uniqueItems": true,
           "items": {"type": "string", "minLength": 1}
         }
       },
@@ -108,7 +187,16 @@
     },
     "cursor": {
       "type": "object",
-      "required": ["last_admitted_unit", "next_unit", "boundary", "standalone_edition_complete", "b80_curriculum_complete", "admitted_unit_count", "selected_unit_count"],
+      "required": [
+        "last_admitted_unit",
+        "next_unit",
+        "next_work_item",
+        "boundary",
+        "standalone_edition_complete",
+        "b80_curriculum_complete",
+        "admitted_unit_count",
+        "selected_unit_count"
+      ],
       "properties": {
         "last_admitted_unit": {"type": "string", "pattern": "^o002\\.(?:p|u)[0-9]{2}$"},
         "next_unit": {
@@ -117,10 +205,16 @@
             {"type": "null"}
           ]
         },
+        "next_work_item": {
+          "oneOf": [
+            {"type": "string", "minLength": 1},
+            {"type": "null"}
+          ]
+        },
         "boundary": {"type": "string", "minLength": 1},
-        "standalone_edition_complete": {"type": "boolean"},
+        "standalone_edition_complete": {"const": true},
         "b80_curriculum_complete": {"type": "boolean"},
-        "admitted_unit_count": {"type": "integer", "minimum": 0, "maximum": 14},
+        "admitted_unit_count": {"const": 14},
         "selected_unit_count": {"const": 14}
       },
       "additionalProperties": false
@@ -129,7 +223,7 @@
   "$defs": {
     "source": {
       "type": "object",
-      "required": ["id", "title", "role", "license", "identity"],
+      "required": ["id", "title", "role", "license", "identity", "used_in_current_units"],
       "properties": {
         "id": {"type": "string", "pattern": "^src-o002-"},
         "title": {"type": "string", "minLength": 1},
@@ -145,7 +239,7 @@
       "required": ["id", "kind", "source", "license", "path"],
       "properties": {
         "id": {"type": "string", "pattern": "^cmp-o002-"},
-        "kind": {"enum": ["reader_text", "software", "data", "figure"]},
+        "kind": {"enum": ["reader_text", "software", "test", "data", "figure"]},
         "source": {"type": "string", "pattern": "^src-o002-"},
         "license": {"type": "string", "minLength": 1},
         "path": {"type": "string", "minLength": 1}
@@ -154,7 +248,16 @@
     },
     "unit": {
       "type": "object",
-      "required": ["id", "title", "standalone_status", "curriculum_status", "reader_path", "sections", "exercises", "components"],
+      "required": [
+        "id",
+        "title",
+        "standalone_status",
+        "curriculum_status",
+        "reader_path",
+        "sections",
+        "exercises",
+        "components"
+      ],
       "properties": {
         "id": {"type": "string", "pattern": "^o002\\.(?:p|u)[0-9]{2}$"},
         "title": {"type": "string", "minLength": 1},
@@ -163,15 +266,308 @@
         "reader_path": {"type": "string", "minLength": 1},
         "sections": {
           "type": "array",
-          "items": {"type": "string", "pattern": "^sec-o002-(?:p|u)[0-9]{2}"}
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^sec-o002-(?:p|u)[0-9]{2}[a-z0-9-]*$"}
         },
         "exercises": {
           "type": "array",
-          "items": {"type": "string", "pattern": "^ex-o002-(?:p|u)[0-9]{2}-[0-9]{2}$"}
+          "minItems": 5,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^ex-o002-(?:p|u)[0-9]{2}-(?:[0-9]{2}|[a-z][a-z0-9-]*[0-9]{2})$"}
         },
         "components": {
           "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
           "items": {"type": "string", "pattern": "^cmp-o002-"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "exercise_evidence": {
+      "type": "object",
+      "required": ["status", "source_anchor", "label"],
+      "properties": {
+        "status": {"enum": ["complete", "executable", "not_present", "pending"]},
+        "source_anchor": {"type": "string", "pattern": "^ex-o002-"},
+        "label": {
+          "oneOf": [
+            {"type": "string", "minLength": 1},
+            {"type": "null"}
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "exercise": {
+      "type": "object",
+      "required": [
+        "id",
+        "unit",
+        "sequence",
+        "kind",
+        "title",
+        "source_path",
+        "curriculum_status",
+        "hint",
+        "check",
+        "solution"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^ex-o002-(?:p|u)[0-9]{2}-(?:[0-9]{2}|[a-z][a-z0-9-]*[0-9]{2})$"},
+        "unit": {"type": "string", "pattern": "^o002\\.(?:p|u)[0-9]{2}$"},
+        "sequence": {"type": "integer", "minimum": 1},
+        "kind": {"enum": ["core", "mastery"]},
+        "title": {"type": "string", "minLength": 1},
+        "source_path": {"type": "string", "minLength": 1},
+        "curriculum_status": {"enum": ["complete", "prerequisite_deferred", "pending"]},
+        "hint": {"$ref": "#/$defs/exercise_evidence"},
+        "check": {"$ref": "#/$defs/exercise_evidence"},
+        "solution": {"$ref": "#/$defs/exercise_evidence"}
+      },
+      "additionalProperties": false
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["id", "kind", "path", "producer", "state"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^art-o002-"},
+        "kind": {
+          "enum": [
+            "result_json",
+            "data_csv",
+            "figure_svg",
+            "accessibility_text",
+            "manifest_json",
+            "notebook",
+            "bundle",
+            "reader_html",
+            "reader_pdf",
+            "reader_epub",
+            "source_archive"
+          ]
+        },
+        "path": {"type": "string", "minLength": 1},
+        "producer": {"type": "string", "minLength": 1},
+        "state": {"enum": ["current", "declared", "historical_release"]},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "receipt_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^receipt-o002-"}
+        },
+        "members": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^art-o002-"}
+        },
+        "accessibility_description": {"type": "string", "pattern": "^art-o002-"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "id": {
+                "enum": ["art-o002-source-archive", "art-o002-offline-bundle"]
+              },
+              "state": {"const": "current"}
+            },
+            "required": ["id", "state"]
+          },
+          "then": {
+            "required": ["receipt_ids"],
+            "properties": {
+              "receipt_ids": {
+                "contains": {"const": "receipt-o002-bundle"}
+              }
+            },
+            "not": {
+              "anyOf": [
+                {"required": ["bytes"]},
+                {"required": ["sha256"]}
+              ]
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "receipt": {
+      "type": "object",
+      "required": ["id", "kind", "path", "schema", "status", "binding"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^receipt-o002-"},
+        "kind": {
+          "enum": [
+            "lab_result",
+            "lab_qa",
+            "bundle_qa",
+            "build_determinism_qa",
+            "html_browser_qa",
+            "pdf_visual_qa",
+            "epub_qa",
+            "publication_qa"
+          ]
+        },
+        "path": {"type": "string", "pattern": "^00_control/"},
+        "schema": {"type": "string", "pattern": "^o002\\."},
+        "status": {"const": "pass"},
+        "binding": {"enum": ["bound", "external"]},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"binding": {"const": "bound"}},
+            "required": ["binding"]
+          },
+          "then": {"required": ["bytes", "sha256"]}
+        },
+        {
+          "if": {
+            "properties": {"binding": {"const": "external"}},
+            "required": ["binding"]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {"required": ["bytes"]},
+                {"required": ["sha256"]}
+              ]
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "lab": {
+      "type": "object",
+      "required": [
+        "id",
+        "unit",
+        "kind",
+        "status",
+        "environment",
+        "exercise_ids",
+        "artifact_ids",
+        "source_paths",
+        "requirements",
+        "evidence"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^lab-o002-"},
+        "unit": {"type": "string", "pattern": "^o002\\.(?:p|u)[0-9]{2}$"},
+        "kind": {"enum": ["plotting", "sagemath", "scipy"]},
+        "status": {"enum": ["complete", "pending"]},
+        "environment": {"type": "string", "pattern": "^env-o002-"},
+        "exercise_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^ex-o002-"}
+        },
+        "artifact_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^art-o002-"}
+        },
+        "source_paths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "requirements": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "evidence": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "environment": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "runtime_version",
+        "platform",
+        "availability",
+        "status",
+        "lock",
+        "receipt",
+        "package_count",
+        "required_packages"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^env-o002-"},
+        "kind": {"enum": ["python", "sagemath"]},
+        "runtime_version": {"type": "string", "minLength": 1},
+        "platform": {"type": "string", "minLength": 1},
+        "availability": {"enum": ["native", "local_wsl", "unavailable"]},
+        "status": {"enum": ["current", "pending"]},
+        "lock": {
+          "type": "object",
+          "required": ["path", "bytes", "sha256"],
+          "properties": {
+            "path": {"type": "string", "minLength": 1},
+            "bytes": {"type": "integer", "minimum": 1},
+            "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+          },
+          "additionalProperties": false
+        },
+        "receipt": {
+          "type": "object",
+          "required": ["path", "bytes", "sha256", "schema"],
+          "properties": {
+            "path": {"type": "string", "minLength": 1},
+            "bytes": {"type": "integer", "minimum": 1},
+            "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "schema": {"type": "string", "pattern": "^o002\\."}
+          },
+          "additionalProperties": false
+        },
+        "package_count": {"type": "integer", "minimum": 1},
+        "required_packages": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "additionalProperties": false
+    },
+    "prerequisite_route": {
+      "type": "object",
+      "required": ["id", "unit", "title", "prerequisite", "gate_id", "status", "required_for_b80", "sections", "exercises"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^route-o002-u11-"},
+        "unit": {"const": "o002.u11"},
+        "title": {"type": "string", "minLength": 1},
+        "prerequisite": {"enum": ["A30", "B30", "B40", "B70"]},
+        "gate_id": {
+          "oneOf": [
+            {"type": "string", "pattern": "^gate-o002-u11-(?:b30|b40|b70)$"},
+            {"type": "null"}
+          ]
+        },
+        "status": {"enum": ["core", "deferred"]},
+        "required_for_b80": {"type": "boolean"},
+        "sections": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^sec-o002-u11-"}
+        },
+        "exercises": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^ex-o002-u11-"}
         }
       },
       "additionalProperties": false

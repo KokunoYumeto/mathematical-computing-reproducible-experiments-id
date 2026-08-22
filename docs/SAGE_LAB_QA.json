@@ -1,0 +1,39 @@
+{
+  "result": {
+    "bytes": 2219,
+    "path": "output/unit05-sage-results.json",
+    "sha256": "3b1a401d81985124804e6fb536020fb542acdfea6a635e500f0f3bbe72593b78"
+  },
+  "runtime": {
+    "environment_lock": {
+      "bytes": 34181,
+      "path": "environment/sage-ubuntu22.04-dpkg-lock.txt",
+      "sha256": "bbd7f235834660681327b975a816b71aabd6d31946e6c875bf55d06224a5d802"
+    },
+    "environment_receipt": {
+      "bytes": 575,
+      "path": "environment/SAGE_ENVIRONMENT_RECEIPT.json",
+      "sha256": "5fe62bee0260a17d7f44e488cd58312a7c4b3894ac93a09af837b18273194451"
+    },
+    "sage": "9.5",
+    "wsl_distribution": "Ubuntu-22.04"
+  },
+  "schema": "o002.sage-lab-qa.v1",
+  "source": {
+    "bytes": 5701,
+    "path": "source/code/unit05_sage_lab.py",
+    "sha256": "a3c57376f7a4d237a3b38e0afbd8251a448bcf1ad4c765d8b7216586a0a0a0d2"
+  },
+  "successful": true,
+  "test_source": {
+    "bytes": 6183,
+    "path": "tests/test_unit05_sage.py",
+    "sha256": "ee77ad56ea9fbd84f16d3e15ecfe1e937db8e3c0e74d298213d4d016c8d55d88"
+  },
+  "tests": {
+    "command": "sage -python tests/test_unit05_sage.py",
+    "errors": 0,
+    "failures": 0,
+    "tests_run": 7
+  }
+}

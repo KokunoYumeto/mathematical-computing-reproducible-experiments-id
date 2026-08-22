@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Visualisasi dengan Integritas – Komputasi Matematis dan Eksperimen yang Dapat Direproduksi</title>
+<title>7&nbsp; Visualisasi dengan Integritas – Komputasi Matematis dan Eksperimen yang Dapat Direproduksi</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -86,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alihkan bilah sisi" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../source/units/04-visualisasi-integritas.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualisasi dengan Integritas</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../source/units/04-visualisasi-integritas.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualisasi dengan Integritas</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alihkan bilah sisi" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Mencari" onclick="window.quartoOpenSearch();">
@@ -119,74 +154,86 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../source/units/p01-menjalankan-eksperimen-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Primer P01 - Menjalankan Eksperimen Python</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/p02-kontrol-koleksi-fungsi-modul-berkas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Kontrol, Koleksi, Fungsi, Modul, dan Berkas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../source/units/01-komputasi-bukti.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Komputasi, Representasi, dan Bukti</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Komputasi, Representasi, dan Bukti</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../source/units/02-objek-fungsi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Objek, Nilai, dan Fungsi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Objek, Nilai, dan Fungsi</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../source/units/03-array-vektorisasi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Array, Bentuk, dan Vektorisasi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Array, Bentuk, dan Vektorisasi</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../source/units/04-visualisasi-integritas.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualisasi dengan Integritas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualisasi dengan Integritas</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../source/units/05-eksak-simbolik-sage.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Komputasi Eksak dan Simbolik</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Komputasi Eksak dan Simbolik</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../source/units/06-titik-mengambang-stabilitas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Titik-Mengambang, Galat, dan Stabilitas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Titik-Mengambang, Galat, dan Stabilitas</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../source/units/07-rancangan-eksperimen.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Rancangan Eksperimen yang Dapat Diperiksa</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Rancangan Eksperimen yang Dapat Diperiksa</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../source/units/08-pengujian-validasi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pengujian dan Validasi Komputasi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Pengujian dan Validasi Komputasi</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../source/units/09-data-konfigurasi-provenans.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data, Konfigurasi, dan Provenans</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Data, Konfigurasi, dan Provenans</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../source/units/10-otomasi-pipa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Otomasi dan Alur Kerja yang Dapat Direproduksi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Otomasi dan Alur Kerja yang Dapat Direproduksi</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../source/units/11-eksperimen-numerik.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Eksperimen Numerik Berprasyarat</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Eksperimen Numerik Berprasyarat</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../source/units/12-proyek-akhir.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Proyek Akhir yang Dapat Diperiksa</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Proyek Akhir yang Dapat Diperiksa</span></span></a>
   </div>
 </li>
     </ul>
@@ -199,24 +246,34 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Daftar Isi</h2>
    
   <ul>
-  <li><a href="#sec-o002-u04-objectives" id="toc-sec-o002-u04-objectives" class="nav-link active" data-scroll-target="#sec-o002-u04-objectives"><span class="header-section-number">5.1</span> Tujuan belajar</a></li>
-  <li><a href="#sec-o002-u04-purpose" id="toc-sec-o002-u04-purpose" class="nav-link" data-scroll-target="#sec-o002-u04-purpose"><span class="header-section-number">5.2</span> Gambar dimulai dari pertanyaan</a></li>
-  <li><a href="#sec-o002-u04-encoding" id="toc-sec-o002-u04-encoding" class="nav-link" data-scroll-target="#sec-o002-u04-encoding"><span class="header-section-number">5.3</span> Pengodean: apa berarti apa?</a></li>
-  <li><a href="#sec-o002-u04-axes" id="toc-sec-o002-u04-axes" class="nav-link" data-scroll-target="#sec-o002-u04-axes"><span class="header-section-number">5.4</span> Sumbu, skala, dan satuan</a></li>
-  <li><a href="#sec-o002-u04-aspect" id="toc-sec-o002-u04-aspect" class="nav-link" data-scroll-target="#sec-o002-u04-aspect"><span class="header-section-number">5.5</span> Rasio aspek dan kemiringan</a></li>
-  <li><a href="#sec-o002-u04-uncertainty" id="toc-sec-o002-u04-uncertainty" class="nav-link" data-scroll-target="#sec-o002-u04-uncertainty"><span class="header-section-number">5.6</span> Ketidakpastian bukan dekorasi</a></li>
-  <li><a href="#sec-o002-u04-accessibility" id="toc-sec-o002-u04-accessibility" class="nav-link" data-scroll-target="#sec-o002-u04-accessibility"><span class="header-section-number">5.7</span> Deskripsi tekstual dan aksesibilitas</a></li>
-  <li><a href="#sec-o002-u04-artifacts" id="toc-sec-o002-u04-artifacts" class="nav-link" data-scroll-target="#sec-o002-u04-artifacts"><span class="header-section-number">5.8</span> Artefak deterministik</a></li>
-  <li><a href="#sec-o002-u04-proof" id="toc-sec-o002-u04-proof" class="nav-link" data-scroll-target="#sec-o002-u04-proof"><span class="header-section-number">5.9</span> Bukti visual dan bukti matematis</a></li>
-  <li><a href="#sec-o002-u04-exercises" id="toc-sec-o002-u04-exercises" class="nav-link" data-scroll-target="#sec-o002-u04-exercises"><span class="header-section-number">5.10</span> Latihan</a>
+  <li><a href="#sec-o002-u04-objectives" id="toc-sec-o002-u04-objectives" class="nav-link active" data-scroll-target="#sec-o002-u04-objectives"><span class="header-section-number">7.1</span> Tujuan belajar</a></li>
+  <li><a href="#sec-o002-u04-purpose" id="toc-sec-o002-u04-purpose" class="nav-link" data-scroll-target="#sec-o002-u04-purpose"><span class="header-section-number">7.2</span> Gambar dimulai dari pertanyaan</a></li>
+  <li><a href="#sec-o002-u04-encoding" id="toc-sec-o002-u04-encoding" class="nav-link" data-scroll-target="#sec-o002-u04-encoding"><span class="header-section-number">7.3</span> Pengodean: apa berarti apa?</a></li>
+  <li><a href="#sec-o002-u04-progressive-lab" id="toc-sec-o002-u04-progressive-lab" class="nav-link" data-scroll-target="#sec-o002-u04-progressive-lab"><span class="header-section-number">7.4</span> Lab bertahap: dari <code>fig</code> dan <code>ax</code> ke grafik lengkap</a>
   <ul class="collapse">
-  <li><a href="#ex-o002-u04-01" id="toc-ex-o002-u04-01" class="nav-link" data-scroll-target="#ex-o002-u04-01"><span class="header-section-number">5.10.1</span> Latihan 1 - pertanyaan dan pengodean</a></li>
-  <li><a href="#ex-o002-u04-02" id="toc-ex-o002-u04-02" class="nav-link" data-scroll-target="#ex-o002-u04-02"><span class="header-section-number">5.10.2</span> Latihan 2 - sumbu terpotong</a></li>
-  <li><a href="#ex-o002-u04-03" id="toc-ex-o002-u04-03" class="nav-link" data-scroll-target="#ex-o002-u04-03"><span class="header-section-number">5.10.3</span> Latihan 3 - makna batang galat</a></li>
-  <li><a href="#ex-o002-u04-04" id="toc-ex-o002-u04-04" class="nav-link" data-scroll-target="#ex-o002-u04-04"><span class="header-section-number">5.10.4</span> Latihan 4 - deskripsi aksesibel</a></li>
-  <li><a href="#ex-o002-u04-05" id="toc-ex-o002-u04-05" class="nav-link" data-scroll-target="#ex-o002-u04-05"><span class="header-section-number">5.10.5</span> Latihan 5 - gambar dan bukti</a></li>
+  <li><a href="#sec-o002-u04-progressive-canvas" id="toc-sec-o002-u04-progressive-canvas" class="nav-link" data-scroll-target="#sec-o002-u04-progressive-canvas"><span class="header-section-number">7.4.1</span> Tahap 1 - buat <code>fig</code> dan <code>ax</code></a></li>
+  <li><a href="#sec-o002-u04-progressive-plot" id="toc-sec-o002-u04-progressive-plot" class="nav-link" data-scroll-target="#sec-o002-u04-progressive-plot"><span class="header-section-number">7.4.2</span> Tahap 2 - <code>plot</code> untuk model</a></li>
+  <li><a href="#sec-o002-u04-progressive-scatter" id="toc-sec-o002-u04-progressive-scatter" class="nav-link" data-scroll-target="#sec-o002-u04-progressive-scatter"><span class="header-section-number">7.4.3</span> Tahap 3 - <code>scatter</code> untuk pengukuran</a></li>
+  <li><a href="#sec-o002-u04-progressive-errorbar" id="toc-sec-o002-u04-progressive-errorbar" class="nav-link" data-scroll-target="#sec-o002-u04-progressive-errorbar"><span class="header-section-number">7.4.4</span> Tahap 4 - <code>errorbar</code> untuk ketidakpastian</a></li>
+  <li><a href="#sec-o002-u04-progressive-labels" id="toc-sec-o002-u04-progressive-labels" class="nav-link" data-scroll-target="#sec-o002-u04-progressive-labels"><span class="header-section-number">7.4.5</span> Tahap 5 - label bersatuan dan legenda</a></li>
+  <li><a href="#sec-o002-u04-progressive-accessible-save" id="toc-sec-o002-u04-progressive-accessible-save" class="nav-link" data-scroll-target="#sec-o002-u04-progressive-accessible-save"><span class="header-section-number">7.4.6</span> Tahap 6 - deskripsi aksesibel dan penyimpanan deterministik</a></li>
   </ul></li>
-  <li><a href="#sec-o002-u04-summary" id="toc-sec-o002-u04-summary" class="nav-link" data-scroll-target="#sec-o002-u04-summary"><span class="header-section-number">5.11</span> Ringkasan</a></li>
+  <li><a href="#sec-o002-u04-axes" id="toc-sec-o002-u04-axes" class="nav-link" data-scroll-target="#sec-o002-u04-axes"><span class="header-section-number">7.5</span> Sumbu, skala, dan satuan</a></li>
+  <li><a href="#sec-o002-u04-aspect" id="toc-sec-o002-u04-aspect" class="nav-link" data-scroll-target="#sec-o002-u04-aspect"><span class="header-section-number">7.6</span> Rasio aspek dan kemiringan</a></li>
+  <li><a href="#sec-o002-u04-uncertainty" id="toc-sec-o002-u04-uncertainty" class="nav-link" data-scroll-target="#sec-o002-u04-uncertainty"><span class="header-section-number">7.7</span> Ketidakpastian bukan dekorasi</a></li>
+  <li><a href="#sec-o002-u04-accessibility" id="toc-sec-o002-u04-accessibility" class="nav-link" data-scroll-target="#sec-o002-u04-accessibility"><span class="header-section-number">7.8</span> Deskripsi tekstual dan aksesibilitas</a></li>
+  <li><a href="#sec-o002-u04-artifacts" id="toc-sec-o002-u04-artifacts" class="nav-link" data-scroll-target="#sec-o002-u04-artifacts"><span class="header-section-number">7.9</span> Artefak deterministik</a></li>
+  <li><a href="#sec-o002-u04-proof" id="toc-sec-o002-u04-proof" class="nav-link" data-scroll-target="#sec-o002-u04-proof"><span class="header-section-number">7.10</span> Bukti visual dan bukti matematis</a></li>
+  <li><a href="#sec-o002-u04-exercises" id="toc-sec-o002-u04-exercises" class="nav-link" data-scroll-target="#sec-o002-u04-exercises"><span class="header-section-number">7.11</span> Latihan</a>
+  <ul class="collapse">
+  <li><a href="#ex-o002-u04-01" id="toc-ex-o002-u04-01" class="nav-link" data-scroll-target="#ex-o002-u04-01"><span class="header-section-number">7.11.1</span> Latihan 1 - pertanyaan dan pengodean</a></li>
+  <li><a href="#ex-o002-u04-02" id="toc-ex-o002-u04-02" class="nav-link" data-scroll-target="#ex-o002-u04-02"><span class="header-section-number">7.11.2</span> Latihan 2 - sumbu terpotong</a></li>
+  <li><a href="#ex-o002-u04-03" id="toc-ex-o002-u04-03" class="nav-link" data-scroll-target="#ex-o002-u04-03"><span class="header-section-number">7.11.3</span> Latihan 3 - makna batang galat</a></li>
+  <li><a href="#ex-o002-u04-04" id="toc-ex-o002-u04-04" class="nav-link" data-scroll-target="#ex-o002-u04-04"><span class="header-section-number">7.11.4</span> Latihan 4 - deskripsi aksesibel</a></li>
+  <li><a href="#ex-o002-u04-05" id="toc-ex-o002-u04-05" class="nav-link" data-scroll-target="#ex-o002-u04-05"><span class="header-section-number">7.11.5</span> Latihan 5 - gambar dan bukti</a></li>
+  <li><a href="#ex-o002-u04-m01" id="toc-ex-o002-u04-m01" class="nav-link" data-scroll-target="#ex-o002-u04-m01"><span class="header-section-number">7.11.6</span> Latihan penguasaan - data ke plot ke manifes</a></li>
+  </ul></li>
+  <li><a href="#sec-o002-u04-summary" id="toc-sec-o002-u04-summary" class="nav-link" data-scroll-target="#sec-o002-u04-summary"><span class="header-section-number">7.12</span> Ringkasan</a></li>
   </ul>
 </nav>
     </div>
@@ -225,7 +282,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualisasi dengan Integritas</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualisasi dengan Integritas</span></h1>
 </div>
 
 
@@ -245,11 +302,12 @@ ul.task-list li input[type="checkbox"] {
 <div id="sec-o002-u04">
 
 </div>
-<section id="sec-o002-u04-objectives" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="sec-o002-u04-objectives"><span class="header-section-number">5.1</span> Tujuan belajar</h2>
+<section id="sec-o002-u04-objectives" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="sec-o002-u04-objectives"><span class="header-section-number">7.1</span> Tujuan belajar</h2>
 <p>Setelah menyelesaikan unit ini, pembaca dapat:</p>
 <ul>
 <li>memulai visualisasi dari pertanyaan yang dapat dinyatakan dengan jelas;</li>
+<li>membangun grafik secara bertahap melalui <code>fig</code> dan <code>ax</code>, kemudian <code>plot</code>, <code>scatter</code>, serta <code>errorbar</code>;</li>
 <li>memetakan variabel ke posisi, tanda, garis, dan interval tanpa menyembunyikan satuan;</li>
 <li>menjelaskan bagaimana pemotongan sumbu dan rasio aspek mengubah kesan visual;</li>
 <li>menyajikan ketidakpastian tanpa memberinya makna statistik yang tidak ditetapkan;</li>
@@ -258,8 +316,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Prasyarat lokal: Unit 1, koordinat Kartesius, persamaan garis lurus, rasio, dan interval pada tingkat A30. Unit ini tidak memerlukan kalkulus.</p>
 </section>
-<section id="sec-o002-u04-purpose" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="sec-o002-u04-purpose"><span class="header-section-number">5.2</span> Gambar dimulai dari pertanyaan</h2>
+<section id="sec-o002-u04-purpose" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="sec-o002-u04-purpose"><span class="header-section-number">7.2</span> Gambar dimulai dari pertanyaan</h2>
 <p>Grafik bukan hiasan yang ditambahkan setelah perhitungan selesai. Grafik adalah argumen terstruktur tentang data. Sebelum memilih warna atau jenis garis, nyatakan pertanyaannya.</p>
 <p>Dalam unit ini pertanyaannya adalah:</p>
 <blockquote class="blockquote">
@@ -328,8 +386,8 @@ ul.task-list li input[type="checkbox"] {
 </table>
 <p>Karena pertanyaannya membandingkan pengukuran dengan model, grafik harus menampilkan keduanya. Menampilkan hanya garis model akan menghapus bukti pengukuran; menampilkan hanya titik akan menyembunyikan objek pembanding.</p>
 </section>
-<section id="sec-o002-u04-encoding" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="sec-o002-u04-encoding"><span class="header-section-number">5.3</span> Pengodean: apa berarti apa?</h2>
+<section id="sec-o002-u04-encoding" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="sec-o002-u04-encoding"><span class="header-section-number">7.3</span> Pengodean: apa berarti apa?</h2>
 <p>Setiap unsur visual harus mempunyai arti yang dapat dituliskan tanpa melihat gambar.</p>
 <table class="caption-top table">
 <thead>
@@ -364,8 +422,172 @@ ul.task-list li input[type="checkbox"] {
 <p>Warna membantu membedakan unsur, tetapi tidak boleh menjadi satu-satunya pengodean. Titik berbentuk lingkaran dan garis putus-putus tetap dapat dibedakan pada cetakan abu-abu atau oleh pembaca yang tidak membedakan warna tertentu.</p>
 <p>Pilih pengodean yang sesuai dengan pertanyaan. Posisi pada sumbu berskala berguna untuk membandingkan besaran. Diagram lingkaran tidak sesuai di sini: jarak pada waktu berbeda bukan bagian-bagian dari satu keseluruhan.</p>
 </section>
-<section id="sec-o002-u04-axes" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="sec-o002-u04-axes"><span class="header-section-number">5.4</span> Sumbu, skala, dan satuan</h2>
+<section id="sec-o002-u04-progressive-lab" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="sec-o002-u04-progressive-lab"><span class="header-section-number">7.4</span> Lab bertahap: dari <code>fig</code> dan <code>ax</code> ke grafik lengkap</h2>
+<p>Matplotlib memisahkan <strong>gambar keseluruhan</strong> (<code>fig</code>) dari <strong>daerah koordinat</strong> (<code>ax</code>). <code>fig</code> mengatur kanvas yang akan disimpan. <code>ax</code> menerima data, skala, label, dan legenda. Pemisahan ini membuat setiap keputusan terlihat dan dapat diuji. Lab berikut dimulai dari kanvas kosong, lalu menambahkan tepat satu lapisan pada setiap tahap.</p>
+<section id="sec-o002-u04-progressive-canvas" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="sec-o002-u04-progressive-canvas"><span class="header-section-number">7.4.1</span> Tahap 1 - buat <code>fig</code> dan <code>ax</code></h3>
+<div id="lst-o002-u04-progressive-canvas" class="cell listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-u04-progressive-canvas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;7.1
+</figcaption>
+<div aria-describedby="lst-o002-u04-progressive-canvas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> source.code.unit04_visualization <span class="im">import</span> ALT_TEXT, OBSERVATIONS</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fig_u04_lab, ax_u04_lab <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">8.0</span>, <span class="fl">4.8</span>))</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>Nama variabel dapat berbeda, tetapi pola <code>fig, ax = plt.subplots(...)</code> layak dipertahankan: pembaca kode langsung tahu objek mana yang disimpan dan objek mana yang menerima pengodean data. Ukuran gambar ditetapkan agar tidak bergantung pada ukuran jendela interaktif.</p>
+<p>Siapkan empat barisan data dari tabel. Daftar dibuat dalam urutan pengamatan yang sudah divalidasi.</p>
+<div id="lst-o002-u04-progressive-data" class="cell listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-u04-progressive-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;7.2
+</figcaption>
+<div aria-describedby="lst-o002-u04-progressive-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>waktu_u04 <span class="op">=</span> [baris.time_s <span class="cf">for</span> baris <span class="kw">in</span> OBSERVATIONS]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>jarak_u04 <span class="op">=</span> [baris.measured_distance_m <span class="cf">for</span> baris <span class="kw">in</span> OBSERVATIONS]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>galat_u04 <span class="op">=</span> [baris.uncertainty_m <span class="cf">for</span> baris <span class="kw">in</span> OBSERVATIONS]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>model_u04 <span class="op">=</span> [baris.model_distance_m <span class="cf">for</span> baris <span class="kw">in</span> OBSERVATIONS]</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="sec-o002-u04-progressive-plot" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="sec-o002-u04-progressive-plot"><span class="header-section-number">7.4.2</span> Tahap 2 - <code>plot</code> untuk model</h3>
+<p><code>ax.plot</code> cocok untuk nilai model yang urut menurut waktu. Garis putus-putus menjadi pengodean kedua selain warna.</p>
+<div id="lst-o002-u04-progressive-plot" class="cell listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-u04-progressive-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;7.3
+</figcaption>
+<div aria-describedby="lst-o002-u04-progressive-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>garis_model_u04, <span class="op">=</span> ax_u04_lab.plot(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    waktu_u04,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    model_u04,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"#D55E00"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">"--"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Model d = 2t + 1"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> garis_model_u04.get_linestyle() <span class="op">==</span> <span class="st">"--"</span></span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>Koma pada <code>garis_model_u04, = ...</code> membongkar daftar satu garis yang dikembalikan <code>plot</code>. Pada tahap ini belum ada titik pengukuran dan belum ada batang ketidakpastian.</p>
+</section>
+<section id="sec-o002-u04-progressive-scatter" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="sec-o002-u04-progressive-scatter"><span class="header-section-number">7.4.3</span> Tahap 3 - <code>scatter</code> untuk pengukuran</h3>
+<p><code>ax.scatter</code> menambahkan tujuh pengukuran sebagai tanda terpisah. Bentuk lingkaran membuat seri tetap dikenali tanpa warna.</p>
+<div id="lst-o002-u04-progressive-scatter" class="cell listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-u04-progressive-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;7.4
+</figcaption>
+<div aria-describedby="lst-o002-u04-progressive-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>titik_u04 <span class="op">=</span> ax_u04_lab.scatter(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    waktu_u04,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    jarak_u04,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">"o"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">36</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"#0072B2"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Pengukuran"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    zorder<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(titik_u04.get_offsets()) <span class="op">==</span> <span class="dv">7</span></span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="sec-o002-u04-progressive-errorbar" class="level3" data-number="7.4.4">
+<h3 data-number="7.4.4" class="anchored" data-anchor-id="sec-o002-u04-progressive-errorbar"><span class="header-section-number">7.4.4</span> Tahap 4 - <code>errorbar</code> untuk ketidakpastian</h3>
+<p>Batang ketidakpastian merupakan lapisan tersendiri. <code>fmt="none"</code> mencegah <code>errorbar</code> menggambar titik kedua di atas hasil <code>scatter</code>.</p>
+<div id="lst-o002-u04-progressive-errorbar" class="cell listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-u04-progressive-errorbar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;7.5
+</figcaption>
+<div aria-describedby="lst-o002-u04-progressive-errorbar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>batang_u04 <span class="op">=</span> ax_u04_lab.errorbar(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    waktu_u04,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    jarak_u04,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    yerr<span class="op">=</span>galat_u04,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">=</span><span class="st">"none"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    capsize<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    ecolor<span class="op">=</span><span class="st">"#4D4D4D"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Ketidakpastian (±0,4 m)"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    zorder<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> batang_u04.has_yerr</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>Nilai <code>yerr</code> menyatakan simpangan vertikal dari setiap titik. Arti statistiknya tidak berasal dari nama metode; arti tetap harus dinyatakan oleh prosedur pengukuran.</p>
+</section>
+<section id="sec-o002-u04-progressive-labels" class="level3" data-number="7.4.5">
+<h3 data-number="7.4.5" class="anchored" data-anchor-id="sec-o002-u04-progressive-labels"><span class="header-section-number">7.4.5</span> Tahap 5 - label bersatuan dan legenda</h3>
+<p>Data kini terlihat, tetapi grafik belum dapat ditafsirkan tanpa satuan, rentang, dan kunci pengodean.</p>
+<div id="lst-o002-u04-progressive-labels" class="cell listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="6">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-u04-progressive-labels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;7.6
+</figcaption>
+<div aria-describedby="lst-o002-u04-progressive-labels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ax_u04_lab.set_title(<span class="st">"Jarak terukur dan model gerak berkecepatan tetap"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ax_u04_lab.set_xlabel(<span class="st">"Waktu, t (s)"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ax_u04_lab.set_ylabel(<span class="st">"Jarak, d (m)"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ax_u04_lab.set_xlim(<span class="dv">0</span>, <span class="fl">6.25</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>ax_u04_lab.set_ylim(<span class="dv">0</span>, <span class="dv">14</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ax_u04_lab.set_xticks(waktu_u04)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ax_u04_lab.set_yticks(<span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">2</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax_u04_lab.grid(<span class="va">True</span>, color<span class="op">=</span><span class="st">"#D9D9D9"</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ax_u04_lab.set_axisbelow(<span class="va">True</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>legenda_u04 <span class="op">=</span> ax_u04_lab.legend(loc<span class="op">=</span><span class="st">"upper left"</span>, frameon<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>fig_u04_lab.subplots_adjust(left<span class="op">=</span><span class="fl">0.11</span>, right<span class="op">=</span><span class="fl">0.97</span>, bottom<span class="op">=</span><span class="fl">0.15</span>, top<span class="op">=</span><span class="fl">0.87</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">"(s)"</span> <span class="kw">in</span> ax_u04_lab.get_xlabel()</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">"(m)"</span> <span class="kw">in</span> ax_u04_lab.get_ylabel()</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(legenda_u04.get_texts()) <span class="op">==</span> <span class="dv">3</span></span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="sec-o002-u04-progressive-accessible-save" class="level3" data-number="7.4.6">
+<h3 data-number="7.4.6" class="anchored" data-anchor-id="sec-o002-u04-progressive-accessible-save"><span class="header-section-number">7.4.6</span> Tahap 6 - deskripsi aksesibel dan penyimpanan deterministik</h3>
+<p>Gambar statis memerlukan deskripsi yang menyatakan pertanyaan, sumbu, tanda, pola, dan batas kesimpulan. Quarto memasangkan deskripsi berikut dengan gambar lab. Deskripsi yang sama tersedia dalam konstanta <code>ALT_TEXT</code> dan ditulis ke artefak teks oleh skrip Unit 4.</p>
+<div id="cell-fig-o002-u04-progressive" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig_u04_lab</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div id="fig-o002-u04-progressive" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Grafik tujuh pengukuran jarak terhadap waktu. Titik lingkaran biru dengan batang ketidakpastian 0,4 meter mengikuti garis model jingga putus-putus d sama dengan 2t plus 1; semua nilai model berada dalam interval pengukuran.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-o002-u04-progressive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-visualisasi-integritas_files/figure-html/fig-o002-u04-progressive-output-1.png" alt="Grafik tujuh pengukuran jarak terhadap waktu. Titik lingkaran biru dengan batang ketidakpastian 0,4 meter mengikuti garis model jingga putus-putus d sama dengan 2t plus 1; semua nilai model berada dalam interval pengukuran." width="724" height="412" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-o002-u04-progressive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar&nbsp;7.1: Konstruksi lengkap setelah garis model, titik pengukuran, batang ketidakpastian, label bersatuan, dan legenda ditambahkan.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Memanggil <code>savefig</code> tanpa menetapkan ukuran, metadata, jenis huruf, dan garam SVG dapat menghasilkan byte berbeda. Fungsi <code>write_artifacts</code> menetapkan semua itu, menyimpan data dan deskripsi bersama gambar, lalu mengikat ketiganya dalam manifes SHA-256. Tutup kanvas lab setelah selesai agar proses panjang tidak menumpuk gambar di memori.</p>
+<div id="lst-o002-u04-progressive-close" class="cell listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="8">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-u04-progressive-close-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;7.7
+</figcaption>
+<div aria-describedby="lst-o002-u04-progressive-close-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.close(fig_u04_lab)</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-o002-u04-axes" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="sec-o002-u04-axes"><span class="header-section-number">7.5</span> Sumbu, skala, dan satuan</h2>
 <p>Label <code>Waktu, t (s)</code> menyatakan nama variabel, lambang, dan satuan. Label <code>Jarak, d (m)</code> melakukan hal yang sama. Angka tanpa satuan tidak cukup ketika besaran fisis sedang dibandingkan.</p>
 <p>Sumbu tegak pada gambar Unit 4 dimulai dari nol. Keputusan ini membuat tinggi visual sebanding dengan jarak yang dinyatakan. Memulai dari nol bukan aturan mutlak untuk semua grafik garis, tetapi pemotongan harus terlihat jelas dan tidak boleh dipakai untuk membesar-besarkan selisih.</p>
 <p>Misalkan dua batang menyatakan 98 dan 100. Dengan garis dasar nol, rasio tingginya adalah</p>
@@ -378,22 +600,22 @@ ul.task-list li input[type="checkbox"] {
 </annotation></semantics></math></p>
 <p>Selisih datanya tetap 2, tetapi batang kedua tampak tiga kali setinggi batang pertama. Pemotongan tersebut dapat berguna untuk melihat perubahan kecil, namun garis dasar dan nilai sebenarnya harus dinyatakan dengan terang.</p>
 </section>
-<section id="sec-o002-u04-aspect" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="sec-o002-u04-aspect"><span class="header-section-number">5.5</span> Rasio aspek dan kemiringan</h2>
+<section id="sec-o002-u04-aspect" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="sec-o002-u04-aspect"><span class="header-section-number">7.6</span> Rasio aspek dan kemiringan</h2>
 <p>Rasio aspek adalah perbandingan lebar dan tinggi daerah gambar. Grafik yang sangat sempit dapat membuat garis yang sama tampak curam; grafik yang sangat lebar dapat membuatnya tampak datar. Kemiringan matematis model tetap</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">Δ</mi><mi>d</mi></mrow><mrow><mi mathvariant="normal">Δ</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mn>2</mn><mspace width="0.222em"></mspace><mtext mathvariant="normal">m/s</mtext><mo>,</mo></mrow><annotation encoding="application/x-tex">
 m=\frac{\Delta d}{\Delta t}=2\ \text{m/s},
 </annotation></semantics></math></p>
 <p>apa pun ukuran gambar di layar. Karena itu, baca nilai sumbu dan satuannya, bukan sudut piksel semata. Skrip unit menetapkan ukuran gambar dan batas sumbu secara eksplisit agar hasil tidak berubah mengikuti ukuran jendela.</p>
 </section>
-<section id="sec-o002-u04-uncertainty" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="sec-o002-u04-uncertainty"><span class="header-section-number">5.6</span> Ketidakpastian bukan dekorasi</h2>
+<section id="sec-o002-u04-uncertainty" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="sec-o002-u04-uncertainty"><span class="header-section-number">7.7</span> Ketidakpastian bukan dekorasi</h2>
 <p>Pada contoh ini, batang galat berarti interval toleransi pengukuran <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mi>d</mi><mo>−</mo><mn>0</mn><mo>,</mo><mn>4</mn><mo>,</mo><mi>d</mi><mo>+</mo><mn>0</mn><mo>,</mo><mn>4</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[d-0{,}4,d+0{,}4]</annotation></semantics></math> meter. Batang itu <strong>bukan</strong> otomatis simpangan baku, interval kepercayaan, atau rentang semua nilai yang mungkin. Makna tersebut baru sah jika prosedur pengukuran atau model statistik menetapkannya.</p>
 <p>Semua nilai model berada di dalam interval pengukuran. Pernyataan yang sah adalah “data ini konsisten dengan model pada tujuh waktu yang diperiksa.” Pernyataan yang terlalu kuat adalah “data membuktikan bahwa model selalu benar.” Model lain juga mungkin cocok dengan tujuh interval yang sama.</p>
 <p>Ketika membandingkan dua seri, gunakan definisi ketidakpastian yang sama atau jelaskan perbedaannya. Batang dengan makna berbeda tidak boleh dibandingkan seolah-olah identik.</p>
 </section>
-<section id="sec-o002-u04-accessibility" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="sec-o002-u04-accessibility"><span class="header-section-number">5.7</span> Deskripsi tekstual dan aksesibilitas</h2>
+<section id="sec-o002-u04-accessibility" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="sec-o002-u04-accessibility"><span class="header-section-number">7.8</span> Deskripsi tekstual dan aksesibilitas</h2>
 <p>Teks alternatif yang berguna tidak sekadar berkata “grafik garis”. Ia memuat:</p>
 <ol type="1">
 <li>tujuan grafik;</li>
@@ -405,8 +627,8 @@ m=\frac{\Delta d}{\Delta t}=2\ \text{m/s},
 <p>Skrip Unit 4 menanamkan judul dan deskripsi ke metadata SVG serta menulis deskripsi yang sama sebagai <code>unit04-alt.txt</code>. Data tetap tersedia sebagai CSV, sehingga pembaca tidak dipaksa memperoleh nilai dari posisi visual saja.</p>
 <p>Legenda, bentuk, dan jenis garis juga mengulang informasi warna. Pengulangan semacam ini bukan pemborosan: ia membuat informasi dapat diakses melalui lebih dari satu petunjuk.</p>
 </section>
-<section id="sec-o002-u04-artifacts" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="sec-o002-u04-artifacts"><span class="header-section-number">5.8</span> Artefak deterministik</h2>
+<section id="sec-o002-u04-artifacts" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="sec-o002-u04-artifacts"><span class="header-section-number">7.9</span> Artefak deterministik</h2>
 <p>Jalankan dari akar proyek:</p>
 <pre class="text"><code>python source/code/unit04_visualization.py --output-dir output/unit04</code></pre>
 <p>Perintah itu menghasilkan empat berkas:</p>
@@ -419,8 +641,8 @@ m=\frac{\Delta d}{\Delta t}=2\ \text{m/s},
 <p>Skrip tidak memakai jaringan, waktu saat ini, atau bilangan acak. Urutan data, format angka, jenis huruf, ukuran gambar, garam pengenal SVG, dan metadata ditetapkan. Pada lingkungan perangkat lunak yang sama, dua eksekusi harus menghasilkan byte yang sama.</p>
 <p>Deterministik tidak berarti benar. Kesalahan yang ditulis secara deterministik tetap merupakan kesalahan. Hash membantu memastikan bahwa dua orang memeriksa byte yang sama; tes dan penalaran memeriksa apakah byte itu mewakili maksud yang benar.</p>
 </section>
-<section id="sec-o002-u04-proof" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="sec-o002-u04-proof"><span class="header-section-number">5.9</span> Bukti visual dan bukti matematis</h2>
+<section id="sec-o002-u04-proof" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="sec-o002-u04-proof"><span class="header-section-number">7.10</span> Bukti visual dan bukti matematis</h2>
 <p>Gambar dapat menunjukkan pola, anomali, dan calon contoh penyangkal. Ia sangat berguna untuk mengajukan pertanyaan berikutnya. Akan tetapi, tujuh titik tidak membuktikan persamaan bagi semua waktu.</p>
 <p>Jika gerak <strong>didefinisikan</strong> mempunyai posisi awal 1 meter dan kecepatan tetap 2 meter per detik, maka persamaan</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>+</mo><mn>2</mn><mi>t</mi></mrow><annotation encoding="application/x-tex">
@@ -429,10 +651,10 @@ d(t)=1+2t
 <p>mengikuti definisi gerak berkecepatan tetap. Itu adalah argumen model. Grafik kemudian memeriksa apakah pengukuran terbatas konsisten dengan konsekuensi model tersebut.</p>
 <p>Sebaliknya, satu pengamatan yang intervalnya tidak memuat nilai model dapat menjadi bukti bahwa model, ketidakpastian, data, atau implementasi perlu diperiksa. Ia tidak secara otomatis mengatakan bagian mana yang salah.</p>
 </section>
-<section id="sec-o002-u04-exercises" class="level2" data-number="5.10">
-<h2 data-number="5.10" class="anchored" data-anchor-id="sec-o002-u04-exercises"><span class="header-section-number">5.10</span> Latihan</h2>
-<section id="ex-o002-u04-01" class="level3" data-number="5.10.1">
-<h3 data-number="5.10.1" class="anchored" data-anchor-id="ex-o002-u04-01"><span class="header-section-number">5.10.1</span> Latihan 1 - pertanyaan dan pengodean</h3>
+<section id="sec-o002-u04-exercises" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="sec-o002-u04-exercises"><span class="header-section-number">7.11</span> Latihan</h2>
+<section id="ex-o002-u04-01" class="level3" data-number="7.11.1">
+<h3 data-number="7.11.1" class="anchored" data-anchor-id="ex-o002-u04-01"><span class="header-section-number">7.11.1</span> Latihan 1 - pertanyaan dan pengodean</h3>
 <p>Seorang teman membuat grafik tujuh pengukuran tetapi tidak menampilkan garis model. Sebutkan informasi yang hilang dan satu perbaikan yang tidak hanya mengandalkan warna.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -467,8 +689,8 @@ d(t)=1+2t
 </div>
 </div>
 </section>
-<section id="ex-o002-u04-02" class="level3" data-number="5.10.2">
-<h3 data-number="5.10.2" class="anchored" data-anchor-id="ex-o002-u04-02"><span class="header-section-number">5.10.2</span> Latihan 2 - sumbu terpotong</h3>
+<section id="ex-o002-u04-02" class="level3" data-number="7.11.2">
+<h3 data-number="7.11.2" class="anchored" data-anchor-id="ex-o002-u04-02"><span class="header-section-number">7.11.2</span> Latihan 2 - sumbu terpotong</h3>
 <p>Dua nilai adalah 98 dan 100. Hitung rasio tinggi tampaknya untuk garis dasar 0 dan 97. Jelaskan mengapa judul “nilai kedua tiga kali lebih besar” tidak sah.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -503,8 +725,8 @@ d(t)=1+2t
 </div>
 </div>
 </section>
-<section id="ex-o002-u04-03" class="level3" data-number="5.10.3">
-<h3 data-number="5.10.3" class="anchored" data-anchor-id="ex-o002-u04-03"><span class="header-section-number">5.10.3</span> Latihan 3 - makna batang galat</h3>
+<section id="ex-o002-u04-03" class="level3" data-number="7.11.3">
+<h3 data-number="7.11.3" class="anchored" data-anchor-id="ex-o002-u04-03"><span class="header-section-number">7.11.3</span> Latihan 3 - makna batang galat</h3>
 <p>Apakah batang <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>±</mi><mn>0</mn><mo>,</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">\pm0{,}4</annotation></semantics></math> meter pada unit ini merupakan interval kepercayaan 95%? Tuliskan pernyataan yang sah tentang batang tersebut.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -539,8 +761,8 @@ d(t)=1+2t
 </div>
 </div>
 </section>
-<section id="ex-o002-u04-04" class="level3" data-number="5.10.4">
-<h3 data-number="5.10.4" class="anchored" data-anchor-id="ex-o002-u04-04"><span class="header-section-number">5.10.4</span> Latihan 4 - deskripsi aksesibel</h3>
+<section id="ex-o002-u04-04" class="level3" data-number="7.11.4">
+<h3 data-number="7.11.4" class="anchored" data-anchor-id="ex-o002-u04-04"><span class="header-section-number">7.11.4</span> Latihan 4 - deskripsi aksesibel</h3>
 <p>Tuliskan teks alternatif dua atau tiga kalimat untuk grafik Unit 4. Jangan sekadar mengulang judul.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
@@ -575,8 +797,8 @@ d(t)=1+2t
 </div>
 </div>
 </section>
-<section id="ex-o002-u04-05" class="level3" data-number="5.10.5">
-<h3 data-number="5.10.5" class="anchored" data-anchor-id="ex-o002-u04-05"><span class="header-section-number">5.10.5</span> Latihan 5 - gambar dan bukti</h3>
+<section id="ex-o002-u04-05" class="level3" data-number="7.11.5">
+<h3 data-number="7.11.5" class="anchored" data-anchor-id="ex-o002-u04-05"><span class="header-section-number">7.11.5</span> Latihan 5 - gambar dan bukti</h3>
 <p>Grafik menunjukkan 1.000 titik tepat pada kurva <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">y=x^2</annotation></semantics></math>. Apakah hal itu membuktikan bahwa program selalu menghitung kuadrat dengan benar? Berikan satu langkah komputasional dan satu langkah matematis yang memperkuat pemeriksaan.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
@@ -611,15 +833,114 @@ d(t)=1+2t
 </div>
 </div>
 </section>
+<section id="ex-o002-u04-m01" class="level3" data-number="7.11.6">
+<h3 data-number="7.11.6" class="anchored" data-anchor-id="ex-o002-u04-m01"><span class="header-section-number">7.11.6</span> Latihan penguasaan - data ke plot ke manifes</h3>
+<p>Jalankan <code>write_artifacts</code> pada direktori baru. Buktikan dengan kode bahwa alur tersebut menghasilkan data CSV, gambar SVG statis, deskripsi teks, dan manifes JSON; bahwa manifes memuat satuan serta deskripsi aksesibel; dan bahwa hash ketiga artefak yang dicatat manifes cocok dengan byte sebenarnya.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Gunakan <code>paths = write_artifacts(direktori)</code>, baca JSON dengan <code>json.loads</code>, lalu hitung <code>hashlib.sha256(paths[kunci].read_bytes()).hexdigest()</code> untuk <code>data</code>, <code>figure</code>, dan <code>alt_text</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Pemeriksaan mandiri">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Penting</span>Pemeriksaan mandiri
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Kode berikut harus selesai tanpa <code>AssertionError</code>. Direktori sementara menjaga pemeriksaan agar tidak mengubah artefak rilis.</p>
+<div id="chk-o002-u04-m01" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tempfile</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> source.code.unit04_visualization <span class="im">import</span> ALT_TEXT, write_artifacts</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> tempfile.TemporaryDirectory() <span class="im">as</span> tmp_u04:</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    paths_u04 <span class="op">=</span> write_artifacts(Path(tmp_u04))</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    manifest_u04 <span class="op">=</span> json.loads(paths_u04[<span class="st">"manifest"</span>].read_text(encoding<span class="op">=</span><span class="st">"utf-8"</span>))</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">set</span>(paths_u04) <span class="op">==</span> {<span class="st">"data"</span>, <span class="st">"figure"</span>, <span class="st">"alt_text"</span>, <span class="st">"manifest"</span>}</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> manifest_u04[<span class="st">"units"</span>] <span class="op">==</span> {</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"distance"</span>: <span class="st">"m"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"time"</span>: <span class="st">"s"</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"uncertainty"</span>: <span class="st">"m"</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> manifest_u04[<span class="st">"accessibility"</span>][<span class="st">"description"</span>] <span class="op">==</span> ALT_TEXT</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> kunci_u04 <span class="kw">in</span> (<span class="st">"data"</span>, <span class="st">"figure"</span>, <span class="st">"alt_text"</span>):</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        digest_u04 <span class="op">=</span> hashlib.sha256(paths_u04[kunci_u04].read_bytes()).hexdigest()</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> manifest_u04[<span class="st">"artifacts"</span>][paths_u04[kunci_u04].name] <span class="op">==</span> digest_u04</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="sol-o002-u04-m01" class="cell proof solution" data-execution_count="10">
+<p><span class="proof-title"><em>Pemecahan 7.1</em>. </span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tempfile</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> source.code.unit04_visualization <span class="im">import</span> ALT_TEXT, write_artifacts</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> tempfile.TemporaryDirectory() <span class="im">as</span> direktori_u04:</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    artefak_u04 <span class="op">=</span> write_artifacts(Path(direktori_u04))</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    manifes_u04 <span class="op">=</span> json.loads(</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        artefak_u04[<span class="st">"manifest"</span>].read_text(encoding<span class="op">=</span><span class="st">"utf-8"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> artefak_u04[<span class="st">"data"</span>].suffix <span class="op">==</span> <span class="st">".csv"</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> artefak_u04[<span class="st">"figure"</span>].suffix <span class="op">==</span> <span class="st">".svg"</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> artefak_u04[<span class="st">"alt_text"</span>].read_text(encoding<span class="op">=</span><span class="st">"utf-8"</span>).strip() <span class="op">==</span> ALT_TEXT</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> manifes_u04[<span class="st">"accessibility"</span>][<span class="st">"svg_metadata"</span>] <span class="kw">is</span> <span class="va">True</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> manifes_u04[<span class="st">"construction"</span>][<span class="op">-</span><span class="dv">1</span>] <span class="op">==</span> <span class="st">"deterministic_save"</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> nama_u04 <span class="kw">in</span> (<span class="st">"data"</span>, <span class="st">"figure"</span>, <span class="st">"alt_text"</span>):</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>        byte_u04 <span class="op">=</span> artefak_u04[nama_u04].read_bytes()</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        hash_u04 <span class="op">=</span> hashlib.sha256(byte_u04).hexdigest()</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> manifes_u04[<span class="st">"artifacts"</span>][artefak_u04[nama_u04].name] <span class="op">==</span> hash_u04</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>CSV mempertahankan nilai dan satuan, SVG memberi keluaran statis, teks alternatif menyediakan jalur nonvisual, dan manifes mengikat byte ketiganya. Kecocokan hash membuktikan identitas byte, bukan kebenaran model.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="sec-o002-u04-summary" class="level2" data-number="5.11">
-<h2 data-number="5.11" class="anchored" data-anchor-id="sec-o002-u04-summary"><span class="header-section-number">5.11</span> Ringkasan</h2>
+</section>
+<section id="sec-o002-u04-summary" class="level2" data-number="7.12">
+<h2 data-number="7.12" class="anchored" data-anchor-id="sec-o002-u04-summary"><span class="header-section-number">7.12</span> Ringkasan</h2>
 <ul>
 <li>Visualisasi dimulai dari pertanyaan, bukan pilihan warna.</li>
 <li>Posisi, tanda, garis, sumbu, skala, dan satuan harus mempunyai arti eksplisit.</li>
 <li>Sumbu terpotong dan rasio aspek dapat mengubah kesan tanpa mengubah data.</li>
 <li>Makna ketidakpastian harus dinyatakan; batang galat tidak membawa makna statistik secara otomatis.</li>
 <li>Data bertabel, teks alternatif, gambar, dan manifes hash membuat artefak dapat diperiksa melalui lebih dari satu jalur.</li>
+<li>Konstruksi bertahap melalui <code>fig</code>, <code>ax</code>, <code>plot</code>, <code>scatter</code>, dan <code>errorbar</code> membuat pengodean, satuan, legenda, serta penyimpanan dapat diuji terpisah.</li>
 <li>Grafik memberi bukti visual terbatas dan dapat menemukan kejanggalan; bukti umum tetap memerlukan argumen yang mencakup seluruh domain.</li>
 </ul>
 
@@ -627,6 +948,80 @@ d(t)=1+2t
 </section>
 
 </main> <!-- /main -->
+<script>
+(function () {
+  "use strict";
+
+  const selectors = "main table.table, main math[display='block']";
+
+  function labelFor(element) {
+    if (element.matches("table")) {
+      const caption = element.querySelector("caption");
+      return caption && caption.textContent.trim()
+        ? `Tabel yang dapat digulir: ${caption.textContent.trim()}`
+        : "Tabel yang dapat digulir secara horizontal";
+    }
+    return "Rumus yang dapat digulir secara horizontal";
+  }
+
+  function wrapperFor(element) {
+    const parent = element.parentElement;
+    if (parent && parent.classList.contains("o002-scroll-region")) {
+      return parent;
+    }
+    const wrapper = document.createElement("div");
+    wrapper.className = "o002-scroll-region";
+    element.before(wrapper);
+    wrapper.append(element);
+    return wrapper;
+  }
+
+  function update(wrapper) {
+    const overflows = wrapper.scrollWidth > wrapper.clientWidth + 1;
+    if (overflows) {
+      wrapper.tabIndex = 0;
+      wrapper.setAttribute("role", "region");
+      wrapper.setAttribute("aria-label", wrapper.dataset.o002Label);
+    } else {
+      wrapper.removeAttribute("tabindex");
+      wrapper.removeAttribute("role");
+      wrapper.removeAttribute("aria-label");
+    }
+  }
+
+  function initialize() {
+    const wrappers = [];
+    document.querySelectorAll(selectors).forEach((element) => {
+      const wrapper = wrapperFor(element);
+      wrapper.dataset.o002Label = labelFor(element);
+      wrappers.push(wrapper);
+    });
+    const refresh = () => wrappers.forEach(update);
+    refresh();
+    window.addEventListener("resize", refresh, { passive: true });
+
+    document
+      .querySelectorAll(".callout-header[data-bs-toggle='collapse']")
+      .forEach((header) => {
+        header.tabIndex = 0;
+        header.setAttribute("role", "button");
+        header.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") {
+            return;
+          }
+          event.preventDefault();
+          header.click();
+        });
+      });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initialize, { once: true });
+  } else {
+    initialize();
+  }
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -1030,12 +1425,12 @@ d(t)=1+2t
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../source/units/03-array-vektorisasi.html" class="pagination-link" aria-label="Array, Bentuk, dan Vektorisasi">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Array, Bentuk, dan Vektorisasi</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Array, Bentuk, dan Vektorisasi</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../source/units/05-eksak-simbolik-sage.html" class="pagination-link" aria-label="Komputasi Eksak dan Simbolik">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Komputasi Eksak dan Simbolik</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Komputasi Eksak dan Simbolik</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

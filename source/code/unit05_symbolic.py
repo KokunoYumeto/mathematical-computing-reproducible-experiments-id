@@ -1,8 +1,8 @@
 """Komputasi eksak dan simbolik yang dapat diperiksa untuk Unit 5.
 
-Kode asli proyek O002. SageMath hanya muncul sebagai jembatan opsional berupa
-teks sumber; jalur dasar modul ini memerlukan Python, pustaka standar, dan
-SymPy.
+Kode asli proyek O002. Modul Windows ini memakai Python, pustaka standar, dan
+SymPy. Lab SageMath lokal yang wajib berada di ``unit05_sage_lab.py`` dan
+dijalankan terpisah oleh Python milik SageMath 9.5.
 """
 
 from __future__ import annotations
@@ -96,7 +96,7 @@ def canonical_expression(expression: sp.Expr) -> str:
 
 
 def sage_bridge_source() -> str:
-    """Kembalikan jembatan kecil yang dapat dijalankan oleh Python SageMath."""
+    """Kembalikan ringkasan sintaks Sage, bukan pengganti lab wajib."""
 
     return (
         "from sage.all import PolynomialRing, QQ, SR, solve\n"
@@ -165,8 +165,14 @@ def build_results() -> dict[str, Any]:
             "zero_residuals": [sp.simplify(item**2 - 2) == 0 for item in solutions],
         },
         "sage_bridge": {
-            "required_for_baseline": False,
+            "required_for_baseline": True,
             "source": sage_bridge_source(),
+            "executable_lab": "source/code/unit05_sage_lab.py",
+            "test": "tests/test_unit05_sage.py",
+            "required_runtime": "SageMath 9.5",
+            "runtime_command": "/usr/bin/sage -python",
+            "receipt": "output/unit05-sage-results.json",
+            "remote_service_satisfies_requirement": False,
         },
     }
     digest = hashlib.sha256(canonical_json_bytes(core)).hexdigest()

@@ -1,0 +1,131 @@
+{
+  "schema": "o002.github-deferred-release.v1",
+  "status": "deferred_external_account_suspension",
+  "prepared_date": "2026-08-22",
+  "attempt_policy": {
+    "attempt_now": false,
+    "resume_condition": "GitHub support restores the existing account and repository lineage",
+    "no_competing_repository": true,
+    "no_rebuild_required": true,
+    "credential_file": "C:/Users/Floris/Downloads/Github Tokens.md",
+    "credential_handling": "read only at runtime; never echo, log, commit, or place in a URL"
+  },
+  "existing_lineage": {
+    "repository": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id",
+    "pages": "https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/",
+    "historical_tag": "v2026.08.22",
+    "historical_commit": "c7cd59c6887d22c587ff9c807826c582f8191400",
+    "historical_release": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22",
+    "target_branch": "codex/b80-final-architecture",
+    "target_tag": "v2026.08.22.1",
+    "target_release": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22.1"
+  },
+  "accepted_manifests": {
+    "source": {
+      "path": "00_control/SOURCE_FILE_MANIFEST_FINAL_B.csv",
+      "bytes": 9903,
+      "sha256": "9f5a3a2403db914cac9ab59baf9c6f6b0a3513c951aa91fdad8b4db40fba2785"
+    },
+    "output": {
+      "path": "00_control/OUTPUT_FILE_MANIFEST_FINAL_B.csv",
+      "bytes": 9187,
+      "sha256": "bf6299dcc2e2fa3d10173cb54f43e075546a84e539a2c31d7b1c070bfeef8613",
+      "row_count": 84,
+      "content_bytes": 4046272
+    },
+    "determinism": {
+      "path": "00_control/BUILD_DETERMINISM_QA.json",
+      "bytes": 2507,
+      "sha256": "9153c48d670c57e4be1a1bc472bfc1656c5e8c09538c6fec0c45d30072263df6"
+    }
+  },
+  "tracked_pages_staging": {
+    "path": "docs",
+    "source": "output plus docs/.nojekyll",
+    "file_count": 85,
+    "content_bytes": 4046273,
+    "tree_digest_algorithm": "SHA-256 over sorted UTF-8 rows path<TAB>bytes<TAB>sha256<LF>",
+    "tree_sha256": "52b7e40cbd7c4c107d7e41d5cc279ab1726f15435ef3fd9940b639096707a388",
+    "output_docs_byte_match": true,
+    "nojekyll": {
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "key_files": [
+      {
+        "path": "docs/index.html",
+        "bytes": 37570,
+        "sha256": "5fb26b6316c5fd807760ca4f6c4e060f8d4ef95779eb04e3029c84c82e92c85a"
+      },
+      {
+        "path": "docs/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+        "bytes": 754845,
+        "sha256": "f9d3df201c03107be3a3e6f61dd6798485cf20bc35ae14f2911ab212789b5038"
+      },
+      {
+        "path": "docs/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+        "bytes": 291212,
+        "sha256": "8e9e35dd54be8524a8b7752df0a7285749db4c80fc5a10271eb841c01c0c748d"
+      },
+      {
+        "path": "docs/backend/catalog.json",
+        "bytes": 110511,
+        "sha256": "447a7ae670a8232a08b24db4ab6288df6f0c3b4d46462206b173830fc55c085d"
+      }
+    ]
+  },
+  "release_assets": [
+    {
+      "path": "output/index.html",
+      "filename": "index.html",
+      "bytes": 37570,
+      "sha256": "5fb26b6316c5fd807760ca4f6c4e060f8d4ef95779eb04e3029c84c82e92c85a"
+    },
+    {
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+      "filename": "Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+      "bytes": 754845,
+      "sha256": "f9d3df201c03107be3a3e6f61dd6798485cf20bc35ae14f2911ab212789b5038"
+    },
+    {
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+      "filename": "Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+      "bytes": 291212,
+      "sha256": "8e9e35dd54be8524a8b7752df0a7285749db4c80fc5a10271eb841c01c0c748d"
+    },
+    {
+      "path": "release/O002_B80_ID_EDITABLE_SOURCE_2026-08-22-1.zip",
+      "filename": "O002_B80_ID_EDITABLE_SOURCE_2026-08-22-1.zip",
+      "bytes": 316923,
+      "sha256": "a9dcdc18481b3dc88beee3006d46f1b8187815623534df523bbc70e3e011b9f9"
+    },
+    {
+      "path": "release/O002_B80_ID_OFFLINE_READER_2026-08-22-1.zip",
+      "filename": "O002_B80_ID_OFFLINE_READER_2026-08-22-1.zip",
+      "bytes": 1613660,
+      "sha256": "c3b97c057ed6751ddb2067d4be8ef96a7256e1c9bd25075601f46071eb2dfff9"
+    }
+  ],
+  "release_asset_count": 5,
+  "release_asset_bytes": 3014210,
+  "resume_transaction": [
+    "Authenticate only after the account-restoration condition is true.",
+    "Use narrowly scoped Git inspection in this repository only; never scan the workspace root.",
+    "Commit the complete current source/control/backend plus the already-synchronized docs tree on the existing lineage.",
+    "Push the existing target branch, create immutable tag v2026.08.22.1, and create one release with exactly the five frozen assets above.",
+    "Allow the existing docs-based Pages publication to build from the accepted 85-file tracked tree.",
+    "Anonymously verify repository visibility, tag-to-commit identity, exact five-asset inventory, every release asset byte/hash, Pages build state, and all 85 Pages files against the tree digest.",
+    "Persist the GitHub/Pages result in the final cross-lineage receipt and mark the pursuit goal complete only after every check passes."
+  ],
+  "required_anonymous_readback": {
+    "repository_http": 200,
+    "release_asset_count": 5,
+    "release_asset_bytes": 3014210,
+    "pages_file_count": 85,
+    "release_assets_sha256": true,
+    "pages_tree_sha256": true,
+    "tag_commit_identity": true,
+    "no_missing_or_extra_release_assets": true,
+    "no_missing_or_extra_pages_files": true
+  }
+}

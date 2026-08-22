@@ -1,0 +1,43 @@
+{
+  "circle_area_radius_3": 28.274333882308138,
+  "clean_run": {
+    "data": 7,
+    "hasil": 14
+  },
+  "computation_and_display": {
+    "computed_value": 5,
+    "display_text": "2 + 3 = 5"
+  },
+  "runtime": {
+    "implementation": "CPython",
+    "python": "3.13.1"
+  },
+  "scalars": [
+    {
+      "name": "jumlah",
+      "type": "int",
+      "value": 8
+    },
+    {
+      "name": "toleransi",
+      "type": "float",
+      "value": 0.01
+    },
+    {
+      "name": "label",
+      "type": "str",
+      "value": "uji A"
+    },
+    {
+      "name": "lulus",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "catatan",
+      "type": "NoneType",
+      "value": null
+    }
+  ],
+  "schema": "o002.p01.execution.v1"
+}

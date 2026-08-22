@@ -1,22 +1,51 @@
+#quarto-document-content.content {
+  min-width: 0;
+}
+
+main pre {
+  max-width: 100%;
+}
+
+main pre > code {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+main img.figure-img {
+  height: auto;
+  max-width: 100%;
+}
+
+@media (min-width: 1200px) {
+  body.nav-sidebar
+    #quarto-content.page-columns
+    > main#quarto-document-content.content {
+    grid-column: body-start / body-end;
+    box-sizing: border-box;
+    padding-inline: clamp(1rem, 2vw, 2rem);
+    width: 100%;
+    max-width: none;
+    justify-self: stretch;
+  }
+}
+
 @media (max-width: 767.98px) {
-  main table.table {
-    display: block;
+  main .o002-scroll-region {
     max-width: 100%;
     overflow-x: auto;
     overscroll-behavior-inline: contain;
   }
 
-  main pre {
-    max-width: 100%;
+  main .o002-scroll-region > table.table {
+    margin-bottom: 0;
   }
 
-  main pre > code {
-    overflow-wrap: anywhere;
-    white-space: pre-wrap;
-  }
-  main math[display="block"] {
+  main .o002-scroll-region > math[display="block"] {
     display: block;
-    max-width: 100%;
-    overflow-x: auto;
   }
+}
+
+main .o002-scroll-region[tabindex="0"]:focus-visible {
+  outline: 3px solid #0b57d0;
+  outline-offset: 3px;
 }

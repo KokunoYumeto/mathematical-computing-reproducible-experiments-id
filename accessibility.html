@@ -1,0 +1,74 @@
+<script>
+(function () {
+  "use strict";
+
+  const selectors = "main table.table, main math[display='block']";
+
+  function labelFor(element) {
+    if (element.matches("table")) {
+      const caption = element.querySelector("caption");
+      return caption && caption.textContent.trim()
+        ? `Tabel yang dapat digulir: ${caption.textContent.trim()}`
+        : "Tabel yang dapat digulir secara horizontal";
+    }
+    return "Rumus yang dapat digulir secara horizontal";
+  }
+
+  function wrapperFor(element) {
+    const parent = element.parentElement;
+    if (parent && parent.classList.contains("o002-scroll-region")) {
+      return parent;
+    }
+    const wrapper = document.createElement("div");
+    wrapper.className = "o002-scroll-region";
+    element.before(wrapper);
+    wrapper.append(element);
+    return wrapper;
+  }
+
+  function update(wrapper) {
+    const overflows = wrapper.scrollWidth > wrapper.clientWidth + 1;
+    if (overflows) {
+      wrapper.tabIndex = 0;
+      wrapper.setAttribute("role", "region");
+      wrapper.setAttribute("aria-label", wrapper.dataset.o002Label);
+    } else {
+      wrapper.removeAttribute("tabindex");
+      wrapper.removeAttribute("role");
+      wrapper.removeAttribute("aria-label");
+    }
+  }
+
+  function initialize() {
+    const wrappers = [];
+    document.querySelectorAll(selectors).forEach((element) => {
+      const wrapper = wrapperFor(element);
+      wrapper.dataset.o002Label = labelFor(element);
+      wrappers.push(wrapper);
+    });
+    const refresh = () => wrappers.forEach(update);
+    refresh();
+    window.addEventListener("resize", refresh, { passive: true });
+
+    document
+      .querySelectorAll(".callout-header[data-bs-toggle='collapse']")
+      .forEach((header) => {
+        header.tabIndex = 0;
+        header.setAttribute("role", "button");
+        header.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") {
+            return;
+          }
+          event.preventDefault();
+          header.click();
+        });
+      });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initialize, { once: true });
+  } else {
+    initialize();
+  }
+})();
+</script>

@@ -1,0 +1,201 @@
+{
+  "checks": {
+    "css_runtime_resource_closure": true,
+    "heading_order": true,
+    "image_alternatives": true,
+    "language_id": true,
+    "local_links_and_fragments": true,
+    "local_profile_paths_absent": true,
+    "local_runtime_resource_closure": true,
+    "mathml_present": true,
+    "offline_runtime_resources": true,
+    "unique_ids": true
+  },
+  "counts": {
+    "css_files_checked": 5,
+    "embedded_runtime_resources": 64,
+    "external_links": 3,
+    "images": 1,
+    "links": 1355,
+    "local_links": 1352,
+    "local_runtime_references": 257,
+    "mathml_elements": 272,
+    "pages": 15
+  },
+  "output_inventory": [
+    {
+      "bytes": 37570,
+      "path": "index.html",
+      "sha256": "5fb26b6316c5fd807760ca4f6c4e060f8d4ef95779eb04e3029c84c82e92c85a"
+    },
+    {
+      "bytes": 59017,
+      "path": "source/units/01-komputasi-bukti.html",
+      "sha256": "b52bde4b1c448ef744c210f4155eb76e2417eca0bc68073177c4fbad56402bbc"
+    },
+    {
+      "bytes": 61703,
+      "path": "source/units/02-objek-fungsi.html",
+      "sha256": "837baf0e6782b3867b7c2c0023872bea25fd24e544f425a2d209b4604691b399"
+    },
+    {
+      "bytes": 70847,
+      "path": "source/units/03-array-vektorisasi.html",
+      "sha256": "5c674025ea0b1d66473f06d244e00324b682c45e014b8493e9b4a6cd444bc4e9"
+    },
+    {
+      "bytes": 98491,
+      "path": "source/units/04-visualisasi-integritas.html",
+      "sha256": "15375e543cf39f56fb879235cef6c1468ab6d8ed3ad4018cffac97bd91f95a1a"
+    },
+    {
+      "bytes": 113350,
+      "path": "source/units/05-eksak-simbolik-sage.html",
+      "sha256": "1a4238b38c0bf77d90de2485fa32b971e820504ce392b42f8cffe2a0afecd156"
+    },
+    {
+      "bytes": 112454,
+      "path": "source/units/06-titik-mengambang-stabilitas.html",
+      "sha256": "fd5bb9e43e01fcfcb8e46a3500f554f2e9ed45935cc286d0d3a5f3315a5a6472"
+    },
+    {
+      "bytes": 62429,
+      "path": "source/units/07-rancangan-eksperimen.html",
+      "sha256": "6cf1a48c0a716aed78f0d083ec09aa0ea08181c05a521bcc0b29de3c07cca711"
+    },
+    {
+      "bytes": 76860,
+      "path": "source/units/08-pengujian-validasi.html",
+      "sha256": "6d559ee77449f7cd9869a3dd186b9a4bc8c0d5f72d16b299ead7377ff7b71862"
+    },
+    {
+      "bytes": 64285,
+      "path": "source/units/09-data-konfigurasi-provenans.html",
+      "sha256": "1386019766d7a82f570f39114b52aed301e623c4e3155aba4165faf11342ddb6"
+    },
+    {
+      "bytes": 52393,
+      "path": "source/units/10-otomasi-pipa.html",
+      "sha256": "13438fc5c39e9f8839e5e15fb1a7150f3299fc15d63c7dccce664f1f25eb45af"
+    },
+    {
+      "bytes": 86864,
+      "path": "source/units/11-eksperimen-numerik.html",
+      "sha256": "e0e8785deab7472ceb789ac478461d3e2d5767b35357e1e91f615c94bd1b4821"
+    },
+    {
+      "bytes": 52844,
+      "path": "source/units/12-proyek-akhir.html",
+      "sha256": "9f1979acee1d0841b7516a6242f2761019dd137fea9a2db7079a1165c7b5c943"
+    },
+    {
+      "bytes": 92953,
+      "path": "source/units/p01-menjalankan-eksperimen-python.html",
+      "sha256": "25ea249f2db6fb3415f8c529597bf0845a4e9f781d452d71f3e96dee51a4454e"
+    },
+    {
+      "bytes": 123218,
+      "path": "source/units/p02-kontrol-koleksi-fungsi-modul-berkas.html",
+      "sha256": "a841cfda9dd6274005e700355aa93a319860d1074b9f8582cef31ba3568b986a"
+    }
+  ],
+  "runtime_resource_inventory": [
+    {
+      "bytes": 508361,
+      "path": "site_libs/bootstrap/bootstrap-fd460e4b8aec9c2402a9e5dfeb0c5f8c.min.css",
+      "sha256": "e760513c2ef1e44efe8978394d9255ccb962d3198c3766b1a8aed98202987bb0"
+    },
+    {
+      "bytes": 99464,
+      "path": "site_libs/bootstrap/bootstrap-icons.css",
+      "sha256": "01253947f506e030589e4f33fc7ec7ccdfb9505e2e596dedf16445f12e243c0a"
+    },
+    {
+      "bytes": 180288,
+      "path": "site_libs/bootstrap/bootstrap-icons.woff",
+      "sha256": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15"
+    },
+    {
+      "bytes": 80668,
+      "path": "site_libs/bootstrap/bootstrap.min.js",
+      "sha256": "d2ea6c1e0cabca20d18e924b25a1cd0187c38ba7c33f60ab06e1b0402b9bcdb5"
+    },
+    {
+      "bytes": 9160,
+      "path": "site_libs/clipboard/clipboard.min.js",
+      "sha256": "e17a1d816e13c0826e0ed7febfabc3277f45571234bde0bf9120829a7169edc9"
+    },
+    {
+      "bytes": 5888,
+      "path": "site_libs/quarto-html/anchor.min.js",
+      "sha256": "69098e105d990f834cff1b7886d873444228ff63c590e5ff834d568f1115ed8b"
+    },
+    {
+      "bytes": 20084,
+      "path": "site_libs/quarto-html/popper.min.js",
+      "sha256": "4d50586b184724d39ddfe0f6582861664eddd5e806e5a79e0dbaa832361414d0"
+    },
+    {
+      "bytes": 3678,
+      "path": "site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css",
+      "sha256": "96d688dbd4c2de66404fd9b0e75d5b62573cbece9ee7011ca24d8bce1bbe044c"
+    },
+    {
+      "bytes": 26830,
+      "path": "site_libs/quarto-html/quarto.js",
+      "sha256": "4ecb60f215d96b2af0fe9d985c71e32863b1c993a64725a416ac18b5991c59c6"
+    },
+    {
+      "bytes": 2882,
+      "path": "site_libs/quarto-html/tabsets/tabsets.js",
+      "sha256": "a9c226bf70e82eaf5476f619cecfb70b4446b87ce4d1634d6404b0b2ba006d15"
+    },
+    {
+      "bytes": 1409,
+      "path": "site_libs/quarto-html/tippy.css",
+      "sha256": "5969f497d9158d7682f8219c6f13fa67269cdf5bf50a3931d95327151dee5678"
+    },
+    {
+      "bytes": 24033,
+      "path": "site_libs/quarto-html/tippy.umd.min.js",
+      "sha256": "41181eeec6d7ba64cb9165f0e95563e34e026bde79e7c13aeec83270429b6fae"
+    },
+    {
+      "bytes": 4570,
+      "path": "site_libs/quarto-nav/headroom.min.js",
+      "sha256": "5b80cc4165a661a3f2060d6bdb5ccff591f04c4f8e39a06c12d3c2544587cb17"
+    },
+    {
+      "bytes": 9636,
+      "path": "site_libs/quarto-nav/quarto-nav.js",
+      "sha256": "a3e9c8c52dd54d783a6d9294357ef104d17d03faf0a404b592216c0d71a9f717"
+    },
+    {
+      "bytes": 96397,
+      "path": "site_libs/quarto-search/autocomplete.umd.js",
+      "sha256": "cd9db3b7d812139a4679a2566ea8f01b2a80159490a60b9e9e813e81b5e00a05"
+    },
+    {
+      "bytes": 23539,
+      "path": "site_libs/quarto-search/fuse.min.js",
+      "sha256": "c57339c3fa16b1d69d9a6b46749a8139ef8d4fc9bbfe48144ff897aa7d4222ec"
+    },
+    {
+      "bytes": 43121,
+      "path": "site_libs/quarto-search/quarto-search.js",
+      "sha256": "1a23221f499b3993dc66ca5c8913e4e6602dfa4652337e9fbf75139ded5ece68"
+    },
+    {
+      "bytes": 66746,
+      "path": "source/units/04-visualisasi-integritas_files/figure-html/fig-o002-u04-progressive-output-1.png",
+      "sha256": "c1c315a903ab55c9837adb5fdc656f8e145529b07d9c2cdf47f9b3aba041ecef"
+    },
+    {
+      "bytes": 939,
+      "path": "styles.css",
+      "sha256": "5026261e74e139ac200e6f0135671697742499572dee4491d9a4e97c68eaf4ce"
+    }
+  ],
+  "schema": "o002.html-static-qa.v1",
+  "successful": true
+}

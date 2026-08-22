@@ -3,21 +3,33 @@ project:
   output-dir: output
   execute-dir: project
   resources:
-    - LICENSE-TEXT.md
-    - LICENSE-CODE.md
-    - THIRD_PARTY.md
-    - RUNTIME-LICENSES.md
-    - LICENSE-RUNTIME-APACHE-2.0.txt
-    - backend/catalog.json
-    - 00_control/SOURCE_SELECTION.md
+    - /LICENSE-TEXT.md
+    - /LICENSE-CODE.md
+    - /THIRD_PARTY.md
+    - /RUNTIME-LICENSES.md
+    - /LICENSE-RUNTIME-APACHE-2.0.txt
+    - /backend/catalog.json
+    - /00_control/SOURCE_SELECTION.md
+    - /00_control/SAGE_LAB_QA.json
+    - /00_control/SAGE_LAB_RESULT.json
+    - /environment/python-lock.txt
+    - /environment/PYTHON_ENVIRONMENT_RECEIPT.json
+    - /environment/sage-ubuntu22.04-dpkg-lock.txt
+    - /environment/SAGE_ENVIRONMENT_RECEIPT.json
+    - /requirements-build.txt
+    - /source/notebooks/o002-p01-clean-kernel.ipynb
 
 book:
   title: "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi"
   subtitle: "B80 - Bahasa Indonesia"
-  author: "Kontributor proyek O002"
-  date: "2026-08-21"
+  author: "Floris"
+  date: "2026-08-22"
+  version: "2026.08.22.1"
+  doi: "10.5281/zenodo.22053905"
   chapters:
     - index.qmd
+    - source/units/p01-menjalankan-eksperimen-python.qmd
+    - source/units/p02-kontrol-koleksi-fungsi-modul-berkas.qmd
     - source/units/01-komputasi-bukti.qmd
     - source/units/02-objek-fungsi.qmd
     - source/units/03-array-vektorisasi.qmd
@@ -38,6 +50,7 @@ execute:
   enabled: true
   cache: false
   freeze: false
+  daemon: true
   error: false
   warning: false
 
@@ -50,6 +63,7 @@ format:
     html-math-method: mathml
     css: styles.css
     embed-resources: false
+    include-after-body: accessibility.html
   pdf:
     documentclass: scrreprt
     toc: true
@@ -57,6 +71,17 @@ format:
     code-overflow: wrap
     include-in-header:
       text: |
+        \usepackage{fvextra}
+        \RecustomVerbatimEnvironment{Highlighting}{Verbatim}{
+          commandchars=\\\{\},
+          breaklines=true,
+          breakanywhere=true,
+          breaksymbolleft={},
+          breaksymbolright={}
+        }
         \RedeclareSectionCommand[tocnumwidth=2.8em]{chapter}
         \RedeclareSectionCommand[tocnumwidth=4.6em]{section}
         \RedeclareSectionCommand[tocnumwidth=6.0em]{subsection}
+  epub:
+    toc: true
+    number-sections: true

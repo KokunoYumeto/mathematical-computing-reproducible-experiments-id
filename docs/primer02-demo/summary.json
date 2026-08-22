@@ -1,0 +1,16 @@
+{
+  "count": 4,
+  "even_squares": [
+    4,
+    4
+  ],
+  "mean": 2.0,
+  "positive_total": 9,
+  "sample_ids": [
+    "S01",
+    "S02",
+    "S03",
+    "S04"
+  ],
+  "schema": "o002.p02.summary.v1"
+}

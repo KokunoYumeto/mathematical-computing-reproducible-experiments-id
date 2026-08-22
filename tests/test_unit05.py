@@ -57,7 +57,7 @@ class Unit05SymbolicTests(unittest.TestCase):
             all(sp.simplify(item**2 - 2) == 0 for item in unit05.exact_real_solutions())
         )
 
-    def test_canonical_output_is_repeatable_and_sage_is_optional(self) -> None:
+    def test_canonical_output_is_repeatable_and_sage_lab_is_required(self) -> None:
         payload = unit05.build_results()
         with tempfile.TemporaryDirectory() as directory:
             first = Path(directory) / "first.json"
@@ -68,9 +68,31 @@ class Unit05SymbolicTests(unittest.TestCase):
             parsed = json.loads(first.read_text(encoding="utf-8"))
         self.assertEqual(parsed["schema"], "o002.unit05.symbolic.v1")
         self.assertEqual(parsed["exact_fraction"]["result"], "3/10")
-        self.assertFalse(parsed["sage_bridge"]["required_for_baseline"])
+        self.assertTrue(parsed["sage_bridge"]["required_for_baseline"])
         self.assertIn("from sage.all import", parsed["sage_bridge"]["source"])
+        self.assertEqual(
+            parsed["sage_bridge"]["executable_lab"],
+            "source/code/unit05_sage_lab.py",
+        )
+        self.assertEqual(parsed["sage_bridge"]["required_runtime"], "SageMath 9.5")
+        self.assertFalse(
+            parsed["sage_bridge"]["remote_service_satisfies_requirement"]
+        )
         self.assertEqual(len(parsed["core_sha256"]), 64)
+
+    def test_reader_declares_required_sage_lab_and_two_mastery_exercises(self) -> None:
+        qmd = (ROOT / "source" / "units" / "05-eksak-simbolik-sage.qmd").read_text(
+            encoding="utf-8"
+        )
+        for exercise_id in ("#ex-o002-u05-sage-01", "#ex-o002-u05-sage-02"):
+            self.assertEqual(qmd.count(exercise_id), 1)
+            exercise = qmd.split(exercise_id, maxsplit=1)[1]
+            self.assertIn('title="Petunjuk"', exercise)
+            self.assertIn('title="Pemeriksaan mandiri"', exercise)
+            self.assertIn('title="Jawaban dan solusi"', exercise)
+        self.assertIn("SageMath 9.5", qmd)
+        self.assertIn("/usr/bin/sage -python", qmd)
+        self.assertNotIn("Jembatan SageMath yang opsional", qmd)
 
 
 if __name__ == "__main__":

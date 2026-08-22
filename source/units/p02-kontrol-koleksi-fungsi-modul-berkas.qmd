@@ -1,0 +1,729 @@
+---
+title: "Kontrol, Koleksi, Fungsi, Modul, dan Berkas"
+identifier: o002.p02
+---
+
+::: {#sec-o002-p02}
+:::
+
+## Tujuan belajar {#sec-o002-p02-objectives}
+
+Setelah menyelesaikan primer ini, pembaca dapat:
+
+- memilih `list`, `tuple`, `dict`, atau `set` sesuai dengan maksud data;
+- membaca dan mengubah koleksi melalui indeks dan irisan;
+- menulis percabangan serta perulangan `for` dan `while` secara eksplisit
+  sebelum meringkasnya menjadi *comprehension*;
+- mendefinisikan fungsi dengan parameter, nilai kembalian, dan ruang lingkup
+  lokal yang jelas;
+- menolak masukan yang tidak sah dengan pengecualian yang informatif;
+- memisahkan kode yang dapat diimpor dari tindakan baris perintah melalui
+  modul dan `if __name__ == "__main__"`;
+- membaca dan menulis teks, CSV, dan JSON memakai `Path`; dan
+- menjalani satu siklus tes merah-hijau nyata dengan `unittest`.
+
+Prasyarat lokal: Primer P01. Primer ini tidak menganggap pembaca pernah
+memprogram sebelumnya dan tidak memerlukan kalkulus, aljabar linear, atau
+persamaan diferensial.
+
+## Empat koleksi dasar {#sec-o002-p02-collections}
+
+Sebuah koleksi menyimpan beberapa nilai, tetapi jenis koleksi menyatakan
+kontrak yang berbeda.
+
+| Jenis | Contoh | Kapan dipilih | Sifat penting |
+|---|---|---|---|
+| `list` | `[4, 1, 4]` | urutan yang dapat diubah | berurutan, boleh duplikat |
+| `tuple` | `(4, 1, 4)` | nilai berurutan yang hendak diperlakukan tetap | berurutan, tidak dapat diubah |
+| `dict` | `{"S01": 4}` | pemetaan kunci ke nilai | setiap kunci unik |
+| `set` | `{1, 4}` | keanggotaan atau penghapusan duplikat | tidak mempunyai indeks |
+
+Gunakan kurung siku untuk mengambil unsur dari daftar atau tuple. Indeks
+Python dimulai dari nol; indeks negatif dihitung dari akhir.
+
+```{python}
+#| label: lst-o002-p02-indexing
+values = [4, 1, 4, 2]
+first = values[0]
+last = values[-1]
+middle = values[1:-1]
+(first, last, middle)
+```
+
+Irisan `values[start:stop]` memasukkan posisi `start`, tetapi berhenti sebelum
+`stop`. Karena itu, `values[1:3]` mengambil posisi 1 dan 2. Bentuk `values[:]`
+membuat daftar baru dengan nilai yang sama; ia bukan nama kedua bagi daftar
+lama.
+
+Daftar dapat diubah. Metode `append` menambah satu unsur ke daftar yang sama.
+Tuple tidak menyediakan perubahan itu.
+
+```{python}
+#| label: lst-o002-p02-list-tuple
+measurements = [2, 5]
+measurements.append(7)
+frozen_measurements = tuple(measurements)
+(measurements, frozen_measurements)
+```
+
+Dictionary memakai kunci, bukan posisi, untuk mengambil nilai. Metode `get`
+dapat menyediakan nilai bawaan ketika kunci tidak ada. Gunakan pengindeksan
+biasa jika ketiadaan kunci justru merupakan galat yang harus terlihat.
+
+```{python}
+#| label: lst-o002-p02-dict-set
+by_sample = {"S01": 2, "S02": 5, "S03": 2}
+sample_ids = set(by_sample)
+unique_values = set(by_sample.values())
+(by_sample["S02"], by_sample.get("S99"), sample_ids, unique_values)
+```
+
+Jangan mengandalkan urutan tampilan sebuah set. Jika hasil harus stabil untuk
+dibaca atau di-*hash*, ubah ke daftar terurut, misalnya
+`sorted(unique_values)`. Dictionary Python mempertahankan urutan penyisipan,
+tetapi JSON kanonis pada proyek ini tetap mengurutkan kunci agar urutan
+kebetulan pembuatan dictionary tidak mengubah byte keluaran.
+
+## Percabangan dengan `if` {#sec-o002-p02-if}
+
+Percabangan memilih tindakan berdasarkan nilai boolean. Python hanya
+menjalankan blok pertama yang kondisinya benar.
+
+```{python}
+#| label: lst-o002-p02-if
+residual = 0.0008
+tolerance = 0.001
+
+if residual < 0:
+    status = "galat: residual tidak boleh negatif"
+elif residual <= tolerance:
+    status = "lulus pada toleransi yang ditetapkan"
+else:
+    status = "belum lulus"
+
+status
+```
+
+Indentasi menentukan blok. Empat spasi adalah kebiasaan proyek ini. Kondisi
+`residual <= tolerance` merupakan klaim yang dapat diperiksa untuk satu hasil;
+ia tidak membuktikan bahwa algoritme benar untuk semua masukan.
+
+Operator perbandingan menghasilkan `True` atau `False`. Gabungkan kondisi
+dengan `and`, `or`, dan `not`, tetapi jangan membuat satu baris begitu padat
+hingga aturan domain sulit ditinjau.
+
+## Perulangan eksplisit: `for` lalu `while` {#sec-o002-p02-loops}
+
+Gunakan `for` ketika hendak mengunjungi setiap unsur suatu koleksi. Contoh
+berikut memilih bilangan genap lalu menyimpan kuadratnya.
+
+```{python}
+#| label: lst-o002-p02-for
+values = [5, 2, -4, 3, 0]
+even_squares = []
+
+for value in values:
+    if value % 2 == 0:
+        even_squares.append(value * value)
+
+even_squares
+```
+
+Keadaan loop dapat dibaca langkah demi langkah: `value` adalah unsur yang
+sedang diperiksa dan `even_squares` menyimpan hasil yang telah diterima. Bentuk
+eksplisit ini sebaiknya dikuasai sebelum bentuk ringkas berikut.
+
+```{python}
+#| label: lst-o002-p02-comprehension
+same_result = [value * value for value in values if value % 2 == 0]
+same_result == even_squares
+```
+
+*List comprehension* bukan algoritme baru; di sini ia meringkas loop dan
+percabangan yang sama. Jika transformasi memerlukan beberapa kondisi,
+penanganan galat, atau pencatatan antara, loop eksplisit biasanya lebih jelas.
+
+### Dari comprehension ke ekspresi generator {#sec-o002-p02-generator}
+
+Kurung siku membangun seluruh list saat itu juga. Bentuk yang sama di dalam
+kurung biasa membuat *ekspresi generator*: nilai diproduksi satu per satu saat
+dikonsumsi. Pemanggilan `tuple(...)` berikut menghabiskan generator dan
+menyimpan hasilnya sebagai tuple.
+
+```{python}
+#| label: lst-o002-p02-generator
+generated = (value * value for value in values if value % 2 == 0)
+frozen_result = tuple(generated)
+(frozen_result, tuple(generated))
+```
+
+Hasil kedua adalah tuple kosong karena generator hanya dapat dilalui satu kali.
+Jadi `[expression for ...]` menghasilkan list segera, sedangkan
+`tuple(expression for ...)` mengonsumsi aliran malas lalu membekukannya. Unit 2
+memakai bentuk kedua ketika ingin menerima iterable apa pun tanpa menyimpan dua
+salinan perantara.
+
+Gunakan `while` ketika pengulangan diteruskan selama suatu kondisi masih
+benar. Harus ada kemajuan yang membuat kondisi akhirnya salah.
+
+```{python}
+#| label: lst-o002-p02-while
+current = 3
+countdown = []
+
+while current > 0:
+    countdown.append(current)
+    current -= 1
+
+countdown.append(0)
+countdown
+```
+
+Pada setiap putaran, `current` berkurang satu dan dibatasi bawah oleh nol.
+Fakta itu menjelaskan mengapa loop berhenti. Jika baris `current -= 1`
+hilang, kondisi selalu benar dan loop tidak selesai.
+
+## Fungsi, parameter, `return`, dan ruang lingkup {#sec-o002-p02-functions}
+
+Fungsi memberi nama pada satu aturan yang dapat dipanggil berulang kali.
+Parameter adalah nama lokal yang menerima nilai dari pemanggil. `return`
+mengirim satu hasil kepada pemanggil.
+
+```{python}
+#| label: lst-o002-p02-function
+def clipped_mean(values, lower=0, upper=10):
+    selected = []
+    for value in values:
+        if lower <= value <= upper:
+            selected.append(value)
+    if not selected:
+        raise ValueError("tidak ada nilai di dalam rentang")
+    return sum(selected) / len(selected)
+
+clipped_mean([-4, 2, 6, 20])
+```
+
+`values`, `lower`, `upper`, dan `selected` bersifat lokal bagi pemanggilan.
+Nama `selected` tidak tersedia di luar fungsi. Nilai bawaan `lower=0` dan
+`upper=10` dipakai hanya jika pemanggil tidak menggantinya.
+
+Hindari membuat fungsi matematika bergantung pada variabel global yang dapat
+berubah tanpa terlihat. Lebih jujur menerima keputusan sebagai parameter dan
+mengembalikan hasil. Ini membuat masukan, keluaran, dan tes lebih mudah dibaca.
+
+Sebuah fungsi tanpa `return` eksplisit mengembalikan `None`. Mencetak bukan
+sama dengan mengembalikan: `print` mengirim teks ke layar, sedangkan `return`
+memberikan nilai yang dapat dipakai perhitungan berikutnya.
+
+## Pengecualian yang informatif {#sec-o002-p02-exceptions}
+
+Masukan di luar kontrak harus gagal dengan jelas. Gunakan `TypeError` ketika
+jenis nilai tidak sesuai dan `ValueError` ketika jenisnya benar tetapi nilainya
+di luar domain.
+
+```{python}
+#| label: lst-o002-p02-exception
+def reciprocal(value):
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise TypeError("value harus berupa angka")
+    if value == 0:
+        raise ValueError("value tidak boleh nol")
+    return 1 / value
+
+(reciprocal(4), reciprocal(-2))
+```
+
+Tangkap pengecualian hanya jika lapisan tersebut tahu cara menanganinya.
+Contoh pengurai berikut menambahkan nomor baris lalu meneruskan kegagalan.
+
+```{python}
+#| label: lst-o002-p02-try-except
+def parse_integer_lines(text):
+    values = []
+    for line_number, raw_line in enumerate(text.splitlines(), start=1):
+        token = raw_line.strip()
+        if not token:
+            continue
+        try:
+            values.append(int(token))
+        except ValueError as error:
+            raise ValueError(
+                f"baris {line_number} bukan bilangan bulat: {token!r}"
+            ) from error
+    return values
+
+parse_integer_lines("2\n\n-3\n")
+```
+
+Jangan memakai `except Exception: pass`. Bentuk itu menghapus bukti kegagalan
+dan dapat membiarkan eksperimen menghasilkan keluaran yang tampak lengkap
+padahal sebagian pemrosesan tidak terjadi.
+
+## Modul dan batas `__main__` {#sec-o002-p02-modules}
+
+Satu berkas Python merupakan modul. Misalkan `positive_math.py` berisi fungsi
+berikut.
+
+```{.python filename="positive_math.py"}
+def positive_total(values):
+    total = 0
+    for value in values:
+        if value > 0:
+            total += value
+    return total
+
+
+def main():
+    print(positive_total([3, -8, 2]))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
+Ketika dijalankan sebagai `python positive_math.py`, Python memberi nama
+khusus `"__main__"` kepada modul dan memanggil `main`. Ketika tes menjalankan
+`from positive_math import positive_total`, blok tersebut tidak berjalan.
+Karena itu, impor memperoleh fungsi tanpa diam-diam mencetak, membaca berkas,
+atau menimpa keluaran.
+
+Impor modul standar atau pihak ketiga ditulis di bagian atas berkas. Impor
+lokal menunjuk modul yang menjadi bagian proyek. Nama modul bukan teks untuk
+dieksekusi; ia adalah batas yang membuat fungsi dapat digunakan dan diuji dari
+berkas lain.
+
+## Jalur dan tiga format berkas {#sec-o002-p02-files}
+
+`Path` membentuk jalur tanpa merangkai pemisah Windows atau POSIX secara
+manual.
+
+```{python}
+#| label: lst-o002-p02-path
+from pathlib import Path
+
+project_root = Path.cwd()
+input_path = project_root / "data" / "measurements.csv"
+input_path.as_posix().endswith("data/measurements.csv")
+```
+
+Simpan jalur relatif terhadap akar proyek di konfigurasi dan manifest. Jangan
+menyimpan nama folder akun pribadi atau menganggap direktori kerja selalu sama.
+
+### Teks
+
+Berkas teks cocok untuk baris sederhana. Nyatakan pengodean UTF-8. Ketika byte
+harus deterministik lintas sistem, tetapkan akhir baris LF.
+
+```{.python filename="write_text_example.py"}
+from pathlib import Path
+
+path = Path("output") / "values.txt"
+path.parent.mkdir(parents=True, exist_ok=True)
+path.write_text("2\n-1\n5\n", encoding="utf-8", newline="\n")
+```
+
+### CSV
+
+CSV menyimpan tabel. Gunakan modul `csv` agar koma, tanda kutip, dan akhir baris
+ditangani konsisten. Buka berkas dengan `newline=""`.
+
+```{.python filename="read_csv_example.py"}
+import csv
+from pathlib import Path
+
+rows = []
+with Path("data/measurements.csv").open(
+    "r", encoding="utf-8", newline=""
+) as stream:
+    for row in csv.DictReader(stream):
+        rows.append({
+            "sample_id": row["sample_id"],
+            "value": int(row["value"]),
+        })
+```
+
+Nilai dari CSV mula-mula berupa string. Konversi `int` atau `float` adalah
+bagian validasi, bukan sekadar kosmetik.
+
+### JSON
+
+JSON menyimpan daftar, pemetaan, string, angka, boolean, dan `null`. JSON tidak
+menyimpan objek `Path`, set, atau fungsi secara langsung. Ubah data ke bentuk
+yang didukung dan tetapkan aturan serialisasi.
+
+```{python}
+#| label: lst-o002-p02-json
+import json
+
+summary = {"count": 3, "sample_ids": ["S01", "S02", "S03"]}
+json_text = json.dumps(
+    summary, ensure_ascii=False, indent=2, sort_keys=True
+) + "\n"
+json_text
+```
+
+CSV baik untuk tabel datar; JSON baik untuk struktur bertingkat; teks biasa
+baik untuk format yang sangat sederhana dan dinyatakan. Ekstensi berkas tidak
+membuktikan isinya sah. Selalu uraikan dan validasi struktur yang dibutuhkan.
+
+## Tes merah-hijau dengan `unittest` {#sec-o002-p02-red-green}
+
+Tes merah-hijau berarti melihat tes gagal karena perilaku yang belum benar,
+memperbaiki kode, lalu melihat tes yang sama lulus. Jangan menulis kode dan tes
+yang sudah hijau lalu mengklaim bahwa tahap merah pernah diperiksa.
+
+Buat dua berkas di direktori latihan kosong. Versi pertama modul sengaja salah:
+
+```{.python filename="positive_math.py"}
+def positive_total(values):
+    return sum(values)  # salah: nilai negatif ikut dijumlahkan
+```
+
+Tes menyatakan perilaku yang dimaksud:
+
+```{.python filename="test_positive_math.py"}
+import unittest
+
+from positive_math import positive_total
+
+
+class PositiveTotalTests(unittest.TestCase):
+    def test_only_positive_values_are_added(self):
+        self.assertEqual(positive_total([3, -8, 2, 0]), 5)
+
+
+if __name__ == "__main__":
+    unittest.main()
+```
+
+Jalankan:
+
+```text
+python -m unittest -v test_positive_math.py
+```
+
+Tes harus **merah**: fungsi salah menghasilkan `-3`, bukan `5`. Perbaiki modul
+dengan loop dan `if` pada bagian sebelumnya, lalu jalankan perintah yang sama.
+Tes harus **hijau**. Tambahkan kasus tanpa nilai positif dan kasus masukan yang
+ditolak. Rekam perintah serta versi Python; warna antarmuka bukan bukti, tetapi
+status proses dan daftar tes memberi hasil yang dapat diperiksa.
+
+Tes yang hijau memberi bukti kerja pada kasus yang dijalankan. Ia tidak
+membuktikan teorema tentang semua program atau semua masukan. Kontrak fungsi,
+pilihan kasus batas, dan penalaran matematis tetap diperlukan.
+
+## Artefak pendamping deterministik {#sec-o002-p02-artifact}
+
+Kode pendamping asli berlisensi MIT berada di
+`source/code/primer02_control_files.py`. Dari akar proyek, jalankan:
+
+```text
+python source/code/primer02_control_files.py --output-dir output/primer02-demo
+```
+
+Perintah tersebut membuat `values.txt`, `measurements.csv`, `summary.json`, dan
+`manifest.json`. Semua keluaran memakai UTF-8, LF, urutan medan tetap, dan
+serialisasi JSON kanonis. Manifest mencatat jalur relatif, ukuran byte, dan
+SHA-256 dari tiga artefak data. Ia tidak memakai jaringan, waktu saat ini,
+folder pengguna, atau bilangan acak.
+
+Jalankan tes pendamping dengan:
+
+```text
+python tests/test_primer02.py -v
+```
+
+Tes tersebut memeriksa kontrak, jenis kegagalan, impor tanpa efek samping,
+hasil empat berkas, ikatan hash, dan dua bundel yang identik secara byte.
+
+## Latihan {#sec-o002-p02-exercises}
+
+### Latihan 1 - koleksi dan irisan {#ex-o002-p02-01}
+
+Dalam modul peserta `latihan_p02.py`, tulislah `collection_report(values)`
+untuk daftar bilangan bulat yang tidak kosong. Kembalikan dictionary dengan
+unsur pertama, unsur terakhir, irisan tanpa kedua ujung, pasangan dua unsur
+pertama sebagai tuple, nilai unik yang terurut, dan dictionary `positions`
+yang memetakan indeks berbentuk string ke nilai. Tolak daftar kosong dengan
+`ValueError`.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan indeks `0` dan `-1`, irisan `1:-1`, `tuple(values[:2])`,
+`sorted(set(values))`, serta `enumerate` untuk membentuk `positions`.
+:::
+
+::: {.callout-important collapse="true" title="Cek yang dapat dijalankan"}
+Dari akar proyek, jalankan:
+
+```text
+python tests/test_primer02.py --learner-module latihan_p02.py --exercise 01
+```
+
+Cek memuat `latihan_p02.py` yang Anda tulis, bukan modul jawaban proyek. Ia
+memeriksa semua medan, urutan hasil, dan penolakan daftar kosong.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+
+```{python}
+#| label: lst-o002-p02-ex01-solution
+def collection_report(values):
+    if not values:
+        raise ValueError("values tidak boleh kosong")
+    return {
+        "first": values[0],
+        "last": values[-1],
+        "middle": values[1:-1],
+        "first_pair": tuple(values[:2]),
+        "unique_sorted": sorted(set(values)),
+        "positions": {
+            str(index): value for index, value in enumerate(values)
+        },
+    }
+
+collection_report([4, 1, 4, 2])
+```
+
+Set dipakai hanya untuk keunikan; `sorted` mengembalikan urutan deterministik.
+Validasi tipe per unsur dapat ditambahkan sebelum laporan dibentuk.
+:::
+
+### Latihan 2 - aliran kontrol sebelum comprehension {#ex-o002-p02-02}
+
+Tambahkan ke `latihan_p02.py` fungsi `even_squares_explicit(values)` yang,
+untuk `[5, 2, -4, 3, 0]`, membangun daftar kuadrat bilangan genap dengan
+`for`, `if`, dan `append`. Tulis `even_squares_comprehension(values)` yang
+setara. Tambahkan `countdown(start)` dengan `while` yang menghasilkan
+`[start, ..., 1, 0]` dan menolak `start < 0`.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Suatu bilangan genap memenuhi `value % 2 == 0`. Pada loop `while`, kurangi
+variabel kendali tepat satu kali setiap putaran.
+:::
+
+::: {.callout-important collapse="true" title="Cek yang dapat dijalankan"}
+
+```text
+python tests/test_primer02.py --learner-module latihan_p02.py --exercise 02
+```
+
+Cek mengimpor ketiga fungsi dari modul peserta, membandingkan bentuk eksplisit
+dengan comprehension, dan memeriksa hitung mundur berhenti di nol serta
+menolak awal negatif.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+
+```{python}
+#| label: lst-o002-p02-ex02-solution
+def even_squares_explicit(values):
+    result = []
+    for value in values:
+        if value % 2 == 0:
+            result.append(value * value)
+    return result
+
+def even_squares_comprehension(values):
+    return [value * value for value in values if value % 2 == 0]
+
+def countdown(start):
+    if start < 0:
+        raise ValueError("start harus taknegatif")
+    result = []
+    while start > 0:
+        result.append(start)
+        start -= 1
+    result.append(0)
+    return result
+
+values = [5, 2, -4, 3, 0]
+explicit = even_squares_explicit(values)
+compact = even_squares_comprehension(values)
+(explicit, compact, countdown(3))
+```
+
+Kedua daftar kuadrat harus sama dengan `[4, 16, 0]`. Bentuk eksplisit
+menunjukkan urutan operasi yang kemudian diringkas comprehension.
+:::
+
+### Latihan 3 - fungsi, ruang lingkup, dan galat {#ex-o002-p02-03}
+
+Tambahkan `safe_mean(values)` ke `latihan_p02.py`. Fungsi mengembalikan
+rata-rata sebagai `float`, memakai variabel `total` lokal, menolak koleksi
+kosong dengan `ValueError`, dan menolak unsur bukan angka dengan `TypeError`.
+Tunjukkan bahwa `total` tidak dapat diakses setelah fungsi selesai.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Bekukan iterable menjadi tuple, periksa kekosongan, lalu jumlahkan melalui loop.
+`bool` sebaiknya ditolak walaupun secara teknis merupakan subkelas `int`.
+:::
+
+::: {.callout-important collapse="true" title="Cek yang dapat dijalankan"}
+
+```text
+python tests/test_primer02.py --learner-module latihan_p02.py --exercise 03
+```
+
+Cek memanggil `safe_mean` dari modul peserta dan mengharuskan rata-rata tepat
+untuk contoh serta jenis pengecualian yang berbeda bagi koleksi kosong dan
+unsur teks.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+
+```{python}
+#| label: lst-o002-p02-ex03-solution
+def safe_mean(values):
+    frozen = tuple(values)
+    if not frozen:
+        raise ValueError("values tidak boleh kosong")
+    total = 0.0
+    for value in frozen:
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise TypeError("setiap unsur harus berupa angka")
+        total += value
+    return total / len(frozen)
+
+safe_mean([2, 4, 9])
+```
+
+Hasilnya `5.0`. Nama `total` hanya hidup di dalam fungsi; mencoba membaca
+`total` dari ruang global menghasilkan `NameError`. Pengecualian itu bukti
+ruang lingkup, bukan galat yang perlu disembunyikan.
+:::
+
+### Latihan 4 - modul peserta dan tes merah-hijau {#ex-o002-p02-04}
+
+Buat modul Anda sendiri bernama `positive_math.py` dan berkas tes
+`test_positive_math.py`. Mulailah dengan implementasi salah yang memakai
+`sum(values)`, jalankan tes sehingga gagal untuk `[3, -8, 2, 0]`, lalu perbaiki
+fungsi memakai loop dan `if`. Tambahkan tes kasus `[-3, 0]`.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Tes pertama harus mengharapkan `5`; tes kedua harus mengharapkan `0`. Simpan
+pemanggilan demo di dalam batas `if __name__ == "__main__"` agar impor oleh tes
+tidak mencetak apa pun.
+:::
+
+::: {.callout-important collapse="true" title="Cek yang dapat dijalankan"}
+Di direktori yang berisi kedua berkas peserta, jalankan
+`python -m unittest -v test_positive_math.py`. Cek acuan proyek juga tersedia:
+
+```text
+python tests/test_primer02.py --learner-module positive_math.py --learner-test test_positive_math.py --exercise 04
+```
+
+Simpan keluaran tahap merah dan tahap hijau sebagai bukti bahwa tes yang sama
+benar-benar mendeteksi perbaikan. Cek proyek di atas menjalankan berkas tes yang
+Anda tulis dua kali dalam direktori terisolasi: implementasi `sum(values)` harus
+merah dan modul akhir Anda harus hijau. Cek juga mengimpor `positive_math.py`
+milik Anda dan memeriksa kasus tambahan.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Isi akhir `positive_math.py`:
+
+```{.python filename="positive_math.py"}
+def positive_total(values):
+    total = 0
+    for value in values:
+        if value > 0:
+            total += value
+    return total
+
+
+def main():
+    print(positive_total([3, -8, 2, 0]))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
+Isi akhir `test_positive_math.py`:
+
+```{.python filename="test_positive_math.py"}
+import unittest
+
+from positive_math import positive_total
+
+
+class PositiveTotalTests(unittest.TestCase):
+    def test_mixed_values(self):
+        self.assertEqual(positive_total([3, -8, 2, 0]), 5)
+
+    def test_no_positive_values(self):
+        self.assertEqual(positive_total([-3, 0]), 0)
+
+
+if __name__ == "__main__":
+    unittest.main()
+```
+
+Versi salah menjadi merah karena `sum([3, -8, 2, 0]) == -3`. Versi akhir
+menjadi hijau karena hanya nilai yang memenuhi `value > 0` dijumlahkan.
+:::
+
+### Latihan 5 - teks, CSV, JSON, dan manifest {#ex-o002-p02-05}
+
+Tambahkan `write_demo_bundle(output_dir)` ke `latihan_p02.py`. Fungsi harus
+membangun satu direktori keluaran yang berisi: teks satu bilangan per baris;
+CSV dengan kolom `sample_id,value`; JSON ringkasan yang konsisten dengan kedua
+berkas data; dan manifest berisi jalur relatif, ukuran byte, serta SHA-256
+ketiga artefak. Tambahkan `core_sha256` atas bagian inti manifest. Jalankan dua
+kali ke direktori berbeda dan buktikan semua berkas bersesuaian identik secara
+byte.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan `Path`, `encoding="utf-8"`, `newline=""` untuk CSV,
+`lineterminator="\n"`, serta `json.dumps(..., sort_keys=True, indent=2)`.
+Jangan masukkan waktu saat ini atau jalur absolut ke keluaran.
+:::
+
+::: {.callout-important collapse="true" title="Cek yang dapat dijalankan"}
+
+```text
+python tests/test_primer02.py --learner-module latihan_p02.py --exercise 05
+```
+
+Cek memanggil `write_demo_bundle` dari modul peserta pada dua direktori
+sementara. Ia mem-parse bilangan teks, kolom dan baris CSV, serta JSON ringkasan;
+memeriksa konsistensi nilai dan ID sampel; memastikan jalur manifest relatif;
+mengikat ukuran, SHA-256, dan `core_sha256` ke byte aktual; lalu membandingkan
+setiap berkas dari kedua run. Jadi cek latihan ini menilai keluaran yang Anda
+buat, bukan sekadar menjalankan tes terhadap modul jawaban proyek.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Fungsi `write_demo_bundle` dalam kode pendamping merupakan solusi acuan. Ia
+menulis ketiga format, membaca kembali teks dan CSV, membuat ringkasan JSON,
+lalu mengikat setiap artefak ke manifest. Jalankan:
+
+```text
+python source/code/primer02_control_files.py --output-dir output/primer02-demo
+python tests/test_primer02.py -v
+```
+
+Keempat berkas harus ada. `manifest.json` harus memakai schema
+`o002.p02.bundle-manifest.v1`; tiga rekaman artefaknya harus cocok dengan byte
+aktual. Kesamaan hash membuktikan kesamaan byte pada run yang diperiksa, bukan
+kebenaran ilmiah data atau program.
+:::
+
+## Ringkasan {#sec-o002-p02-summary}
+
+- List dan tuple menyimpan urutan; dictionary memetakan kunci; set menyatakan
+  keanggotaan unik tanpa indeks.
+- `if`, `for`, dan `while` membuat aliran kendali terlihat. Comprehension
+  dipakai setelah loop eksplisit dipahami.
+- Fungsi menerima masukan melalui parameter, memakai keadaan lokal, dan
+  mengirim hasil melalui `return`.
+- Pengecualian harus menyatakan pelanggaran kontrak dan tidak boleh ditelan
+  tanpa penanganan.
+- Batas `__main__` menjaga agar impor modul tidak menjalankan efek samping.
+- `Path`, UTF-8, parser CSV/JSON, dan serialisasi kanonis membuat pekerjaan
+  berkas lebih portabel dan dapat diperiksa.
+- Siklus merah-hijau menunjukkan bahwa tes mampu melihat satu cacat konkret;
+  tes tetap bukan bukti matematis universal.

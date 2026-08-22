@@ -1,43 +1,141 @@
 {
+  "backend": {
+    "b80_curriculum_complete": true,
+    "bytes": 110511,
+    "path": "backend/catalog.json",
+    "sha256": "447a7ae670a8232a08b24db4ab6288df6f0c3b4d46462206b173830fc55c085d"
+  },
   "checks": {
-    "backend_schema_and_references": true,
-    "complete_12_unit_reader": true,
-    "experiment_json": true,
-    "frozen_toolchain_versions": true,
-    "html_ids_unique_per_document": true,
-    "html_lang_id": true,
-    "html_mathml_offline": true,
-    "html_runtime_resources_local": true,
+    "backend_schema_truth_and_references": true,
+    "determinism_may_follow_first_final_build": true,
+    "epub_structure_accessibility": true,
+    "exact_75_exercises": true,
+    "experiment_artifact_closure": true,
+    "html_static_offline_mathml_links_ids": true,
+    "licenses_and_provenance_packaged": true,
     "local_profile_paths_absent": true,
-    "pdf_all_pages_visual_pass": true,
-    "reader_license_notice_and_files": true,
-    "reader_provenance_records_packaged": true,
-    "runtime_component_inventory": true,
-    "stable_reader_ids": true,
-    "test_receipt_invocation_exact": true,
-    "unit04_artifact_closure": true,
-    "unit12_package_verification": true
+    "notebook_clean_kernel": true,
+    "ordered_14_unit_reader": true,
+    "pdf_signature": true,
+    "python_and_sage_locks": true,
+    "sage_local_execution": true,
+    "scipy_version_bound": true
+  },
+  "epub": {
+    "checks": {
+      "container_and_opf": true,
+      "css_runtime_resource_closure": true,
+      "image_alternatives": true,
+      "language_id": true,
+      "local_links_and_fragments": true,
+      "local_profile_paths_absent": true,
+      "local_runtime_resource_closure": true,
+      "manifest_and_spine_closure": true,
+      "mathml_present_and_declared": true,
+      "ocf_mimetype": true,
+      "publication_metadata": true,
+      "safe_unique_member_paths": true,
+      "unique_ids": true
+    },
+    "counts": {
+      "css_documents": 1,
+      "embedded_runtime_resources": 85,
+      "external_hyperlinks": 2,
+      "images": 1,
+      "local_links": 1077,
+      "local_runtime_references": 18,
+      "manifest_items": 20,
+      "mathml_elements": 272,
+      "members": 24,
+      "spine_documents": 17,
+      "xhtml_documents": 17
+    },
+    "epub": {
+      "bytes": 291212,
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+      "sha256": "8e9e35dd54be8524a8b7752df0a7285749db4c80fc5a10271eb841c01c0c748d"
+    },
+    "metadata": {
+      "creator": "Floris",
+      "identifier": "o002.frontmatter.intro",
+      "language": "id",
+      "modified": "2026-08-21T00:00:00Z",
+      "opf_rootfile": "EPUB/content.opf",
+      "title": "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi"
+    },
+    "schema": "o002.epub-qa.v1",
+    "successful": true
   },
   "files": [
     {
-      "bytes": 6851,
+      "bytes": 1160,
+      "path": "output/00_control/SAGE_LAB_QA.json",
+      "sha256": "fde7f99fc34fb988d75fea143411a89dda298801a445eed20d1100a9f183f37b"
+    },
+    {
+      "bytes": 2219,
+      "path": "output/00_control/SAGE_LAB_RESULT.json",
+      "sha256": "3b1a401d81985124804e6fb536020fb542acdfea6a635e500f0f3bbe72593b78"
+    },
+    {
+      "bytes": 8144,
       "path": "output/00_control/SOURCE_SELECTION.md",
-      "sha256": "273c9548d4e40df3ff0a5869b7f46e0073e3f176a4358f49f70d412b78967950"
+      "sha256": "9c44d8b8a08fb5f695ff7313dd37755dd9bf55cdd01859b44680b110c347ffce"
     },
     {
-      "bytes": 20695,
+      "bytes": 110511,
       "path": "output/backend/catalog.json",
-      "sha256": "7d8eb9a3f9fc398e5abea77e517046f5feb37eb3e1197048555d3b9646aa21bf"
+      "sha256": "447a7ae670a8232a08b24db4ab6288df6f0c3b4d46462206b173830fc55c085d"
     },
     {
-      "bytes": 30374,
+      "bytes": 1846,
+      "path": "output/environment/python-lock.txt",
+      "sha256": "28d1f9a5d2b341628fbc5e182ca523da1cfa33473e5714493f8ca18893c31d9a"
+    },
+    {
+      "bytes": 17231,
+      "path": "output/environment/PYTHON_ENVIRONMENT_RECEIPT.json",
+      "sha256": "6cff49e768dcb06752191d821e2577c45856313245af6f701f4ab05e2bc56918"
+    },
+    {
+      "bytes": 34181,
+      "path": "output/environment/sage-ubuntu22.04-dpkg-lock.txt",
+      "sha256": "bbd7f235834660681327b975a816b71aabd6d31946e6c875bf55d06224a5d802"
+    },
+    {
+      "bytes": 575,
+      "path": "output/environment/SAGE_ENVIRONMENT_RECEIPT.json",
+      "sha256": "5fe62bee0260a17d7f44e488cd58312a7c4b3894ac93a09af837b18273194451"
+    },
+    {
+      "bytes": 1316,
+      "path": "output/EPUB_QA.json",
+      "sha256": "d49073419637cc6ae99778c08220fa7987bbf432d4c43d458cc7d046c3317864"
+    },
+    {
+      "bytes": 2886,
+      "path": "output/HTML_BROWSER_QA.json",
+      "sha256": "015e2ecdd9ddec77b3cc7a4af6f992fe60175425520ba830b1d711483cc7efee"
+    },
+    {
+      "bytes": 6755,
+      "path": "output/HTML_STATIC_QA.json",
+      "sha256": "f5639c1e151b2a338bde8a9d468f22378acef6b1cd4a70ede7d3402f4d1be03a"
+    },
+    {
+      "bytes": 37570,
       "path": "output/index.html",
-      "sha256": "c44e5f71a7066ae780e7f59c95eebc69645dea03051f71280ff546b90d5a58a1"
+      "sha256": "5fb26b6316c5fd807760ca4f6c4e060f8d4ef95779eb04e3029c84c82e92c85a"
     },
     {
-      "bytes": 502373,
+      "bytes": 291212,
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+      "sha256": "8e9e35dd54be8524a8b7752df0a7285749db4c80fc5a10271eb841c01c0c748d"
+    },
+    {
+      "bytes": 754845,
       "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
-      "sha256": "289e744aeef09eb6e546c002e0782a346519a39c5265ae4ef5c9d1e3ce095376"
+      "sha256": "f9d3df201c03107be3a3e6f61dd6798485cf20bc35ae14f2911ab212789b5038"
     },
     {
       "bytes": 1083,
@@ -55,9 +153,44 @@
       "sha256": "afa51324d3c7c936969b2721bbe1b7103ab3db62d38069b5742fd35f675d50a0"
     },
     {
-      "bytes": 751,
+      "bytes": 727,
+      "path": "output/p01-results.json",
+      "sha256": "4079404b5b0c36f8fdd242ab344d850bf1e077e4fbe3332c588490f6422ac454"
+    },
+    {
+      "bytes": 728,
       "path": "output/PDF_VISUAL_QA.json",
-      "sha256": "a51fb79f7fdd0f5e6a42eee4b70fd72778ddd6fa0259a361ebd2afe31e530bca"
+      "sha256": "4599c9b7c41ef614646d13d5fe7af4310518e4eb07f0c5211312e5aaceedadb2"
+    },
+    {
+      "bytes": 589,
+      "path": "output/primer02-demo/manifest.json",
+      "sha256": "5396ea1f60aa8399db69df9433dbd93f30c14de857d0e9b55e66124217cc52cb"
+    },
+    {
+      "bytes": 41,
+      "path": "output/primer02-demo/measurements.csv",
+      "sha256": "9e4dcaafbfbf1f7a46a53436f05b22c5aefbdf4388b99b28e819c82b05482539"
+    },
+    {
+      "bytes": 194,
+      "path": "output/primer02-demo/summary.json",
+      "sha256": "acfe48e0e449cdb8a4fc49d208cbf435df1769b7f7c5c7cfa62ed97faedbcb88"
+    },
+    {
+      "bytes": 9,
+      "path": "output/primer02-demo/values.txt",
+      "sha256": "d217f4d7cdcbf548d4364953082cf8ddc2248b653329bebc150d7f6a5aaabcf1"
+    },
+    {
+      "bytes": 17231,
+      "path": "output/PYTHON_ENVIRONMENT_QA.json",
+      "sha256": "6cff49e768dcb06752191d821e2577c45856313245af6f701f4ab05e2bc56918"
+    },
+    {
+      "bytes": 223,
+      "path": "output/requirements-build.txt",
+      "sha256": "0df875f011f6101b403738298aa22e5927014eb873b02777e7f340b18b0b669b"
     },
     {
       "bytes": 3425,
@@ -65,9 +198,19 @@
       "sha256": "980c602f8f427ba13547259edcc8d2dccb607be8ce87aa7ceb72fd3f1ef88f30"
     },
     {
-      "bytes": 193715,
+      "bytes": 575,
+      "path": "output/SAGE_ENVIRONMENT_QA.json",
+      "sha256": "5fe62bee0260a17d7f44e488cd58312a7c4b3894ac93a09af837b18273194451"
+    },
+    {
+      "bytes": 1160,
+      "path": "output/SAGE_LAB_QA.json",
+      "sha256": "2d168627740290447b416c45a6e50e8d24099fa7ddc5a20ac416bbdb41ea7c23"
+    },
+    {
+      "bytes": 283695,
       "path": "output/search.json",
-      "sha256": "8461c28814b570fc1ba7ca8044f626689f07b805e7acb74afda586115206355e"
+      "sha256": "7dcae6099e8b1f45da090dbbdc8e31d052b69fc5bbbf627de2edafe35946dcb9"
     },
     {
       "bytes": 508361,
@@ -155,89 +298,109 @@
       "sha256": "1a23221f499b3993dc66ca5c8913e4e6602dfa4652337e9fbf75139ded5ece68"
     },
     {
-      "bytes": 55914,
+      "bytes": 4014,
+      "path": "output/source/notebooks/o002-p01-clean-kernel.ipynb",
+      "sha256": "aaed184f0a5601a7567a66e5a0ac0ef55d80a665fcb522405962e174419f21c2"
+    },
+    {
+      "bytes": 59017,
       "path": "output/source/units/01-komputasi-bukti.html",
-      "sha256": "891f78cbee7d34f57b74da6de69b8c5bccc10f12aeb4fa0d612e54fed179d8f1"
+      "sha256": "b52bde4b1c448ef744c210f4155eb76e2417eca0bc68073177c4fbad56402bbc"
     },
     {
-      "bytes": 58762,
+      "bytes": 61703,
       "path": "output/source/units/02-objek-fungsi.html",
-      "sha256": "69460e63c03ca362cde8022df5df4178d7c51d955cf9ff8354c440e5e19c1bf6"
+      "sha256": "837baf0e6782b3867b7c2c0023872bea25fd24e544f425a2d209b4604691b399"
     },
     {
-      "bytes": 67906,
+      "bytes": 70847,
       "path": "output/source/units/03-array-vektorisasi.html",
-      "sha256": "ceb81e22ec5d7df37f3c7ea5e34c333af7f5c6b39c825ab1d65d85e1ebc99107"
+      "sha256": "5c674025ea0b1d66473f06d244e00324b682c45e014b8493e9b4a6cd444bc4e9"
     },
     {
-      "bytes": 60127,
+      "bytes": 98491,
       "path": "output/source/units/04-visualisasi-integritas.html",
-      "sha256": "3c9e0365346b20a146a7f8a7b877cd539fc10e3dea6450ee0dc03f8713adae8b"
+      "sha256": "15375e543cf39f56fb879235cef6c1468ab6d8ed3ad4018cffac97bd91f95a1a"
     },
     {
-      "bytes": 75460,
+      "bytes": 66746,
+      "path": "output/source/units/04-visualisasi-integritas_files/figure-html/fig-o002-u04-progressive-output-1.png",
+      "sha256": "c1c315a903ab55c9837adb5fdc656f8e145529b07d9c2cdf47f9b3aba041ecef"
+    },
+    {
+      "bytes": 113350,
       "path": "output/source/units/05-eksak-simbolik-sage.html",
-      "sha256": "a76e30345f6c30e91e34bc5f2a42beee529f4347400b3182d90d2bda8658e572"
+      "sha256": "1a4238b38c0bf77d90de2485fa32b971e820504ce392b42f8cffe2a0afecd156"
     },
     {
-      "bytes": 83957,
+      "bytes": 112454,
       "path": "output/source/units/06-titik-mengambang-stabilitas.html",
-      "sha256": "5f127c55efcab4e60ef7407a41d60c112c3f7d88d9b8ddf38bab216724e9c479"
+      "sha256": "fd5bb9e43e01fcfcb8e46a3500f554f2e9ed45935cc286d0d3a5f3315a5a6472"
     },
     {
-      "bytes": 59412,
+      "bytes": 62429,
       "path": "output/source/units/07-rancangan-eksperimen.html",
-      "sha256": "2a52540e98cd68d1b05f8358ddfcace3f433bafbd56e6a368ea6aeb93dd2bde5"
+      "sha256": "6cf1a48c0a716aed78f0d083ec09aa0ea08181c05a521bcc0b29de3c07cca711"
     },
     {
-      "bytes": 73840,
+      "bytes": 76860,
       "path": "output/source/units/08-pengujian-validasi.html",
-      "sha256": "8583189017559b9aded8e289dc437b45a2e2f695e72769150e3fe9e033ec50b7"
+      "sha256": "6d559ee77449f7cd9869a3dd186b9a4bc8c0d5f72d16b299ead7377ff7b71862"
     },
     {
-      "bytes": 61343,
+      "bytes": 64285,
       "path": "output/source/units/09-data-konfigurasi-provenans.html",
-      "sha256": "a0dab9d388c6a4118bf7aeb1b8c76e2a17dfde286de3abd863bbd6ed9ae85a6e"
+      "sha256": "1386019766d7a82f570f39114b52aed301e623c4e3155aba4165faf11342ddb6"
     },
     {
-      "bytes": 49452,
+      "bytes": 52393,
       "path": "output/source/units/10-otomasi-pipa.html",
-      "sha256": "39648c926b04ddd4ff8d8dc3977b52d2e372726294dc04c985490e44561eae2a"
+      "sha256": "13438fc5c39e9f8839e5e15fb1a7150f3299fc15d63c7dccce664f1f25eb45af"
     },
     {
-      "bytes": 60904,
+      "bytes": 86864,
       "path": "output/source/units/11-eksperimen-numerik.html",
-      "sha256": "63b04174fa326f8c1bb38ea9b76bd7f84cd485359f991ac5165324eb324a763e"
+      "sha256": "e0e8785deab7472ceb789ac478461d3e2d5767b35357e1e91f615c94bd1b4821"
     },
     {
-      "bytes": 49903,
+      "bytes": 52844,
       "path": "output/source/units/12-proyek-akhir.html",
-      "sha256": "9fb9d8d51906d59a5f5bc10ae995336f2ce6cf8fa2ec4caa59e9ee3b143b8418"
+      "sha256": "9f1979acee1d0841b7516a6242f2761019dd137fea9a2db7079a1165c7b5c943"
+    },
+    {
+      "bytes": 92953,
+      "path": "output/source/units/p01-menjalankan-eksperimen-python.html",
+      "sha256": "25ea249f2db6fb3415f8c529597bf0845a4e9f781d452d71f3e96dee51a4454e"
+    },
+    {
+      "bytes": 123218,
+      "path": "output/source/units/p02-kontrol-koleksi-fungsi-modul-berkas.html",
+      "sha256": "a841cfda9dd6274005e700355aa93a319860d1074b9f8582cef31ba3568b986a"
     },
     {
       "bytes": 96,
       "path": "output/SOURCE_QA.json",
-      "sha256": "c0cfb5cc97194d9ea9224013f883a8876a3f8301be9d333c058f11f3da84f47b"
+      "sha256": "21aa8027ac6bf524c1dbabc89183dfbb36fbb7dbfa7194cd14d7c7e3c34bb3b9"
     },
     {
-      "bytes": 380,
+      "bytes": 939,
       "path": "output/styles.css",
-      "sha256": "cadd4dee138cee52d118807db84a1f1c27b71b63a97495a19cc274561095d9a1"
+      "sha256": "5026261e74e139ac200e6f0135671697742499572dee4491d9a4e97c68eaf4ce"
     },
     {
       "bytes": 290,
       "path": "output/TEST_QA.json",
-      "sha256": "fd99841678c1d6ab13242747ed2cef33e50a7e9e798f000af02ae8b0c93d56f9"
+      "sha256": "b638859fc58dfc021b5ee547fa947ac60c0a5bf137f90153e562a41dea1922d4"
     },
     {
-      "bytes": 1598,
+      "bytes": 1683,
       "path": "output/THIRD_PARTY.md",
-      "sha256": "5fb147c587a21dc7555f0956b456ca4450b85579e87fdf535818878fa83a4fe4"
+      "sha256": "776ea5d26a89aa159d7fb88db9127b59fd8ff12237481288bc401d48202c0f61"
     },
     {
-      "bytes": 271,
+      "bytes": 407,
       "path": "output/TOOLCHAIN_QA.json",
-      "sha256": "6e38ac29060b39079c8e80cb0bb75433cb5745ef4c10dff7472b1d09ab4b34e0"
+      "sha256": "772cfad4316293b69981a24c154054b3824cbe2c1d5aa8e61e2f4d8d93fab393"
     },
     {
       "bytes": 771,
@@ -265,24 +428,29 @@
       "sha256": "f510ee30b5adc1cf470f75c2552ea8254a4513a107e3506dc4ad8c033c6f03be"
     },
     {
-      "bytes": 18742,
+      "bytes": 18947,
       "path": "output/unit04/unit04-figure.svg",
-      "sha256": "5b7d7be5000706220b3f7ab7ce394018246d8c2b7ed01c630a7672bd24c8c5a0"
+      "sha256": "fd4cfa793ece466a52201efbd9b1c6c5413f24d0c3602adc6a7b8698ef28c81b"
     },
     {
-      "bytes": 886,
+      "bytes": 1729,
       "path": "output/unit04/unit04-manifest.json",
-      "sha256": "8d155adf8ad52ec8fb27bdec11f546e7d1e9befd07d17482175bb41dc052f4cb"
+      "sha256": "addf0fc5d8eb05f30dd2efa553278f84e472024097514bd4f92ce591824a51d9"
     },
     {
-      "bytes": 1853,
+      "bytes": 2138,
       "path": "output/unit05-results.json",
-      "sha256": "28788f790fea38aa307ced8caea48f7eda9c9a0574b6f2071b46494f601da68c"
+      "sha256": "cd771d15c170fca705eb1e187cb4e57785e0cfdc7616a2ad9106eeca2bcdabc3"
     },
     {
-      "bytes": 3432,
+      "bytes": 2219,
+      "path": "output/unit05-sage-results.json",
+      "sha256": "3b1a401d81985124804e6fb536020fb542acdfea6a635e500f0f3bbe72593b78"
+    },
+    {
+      "bytes": 5763,
       "path": "output/unit06-results.json",
-      "sha256": "5c361c992c5fdd03d2704bb0498ffa532b4dbc8112e2edfe90304d6543b0c5f6"
+      "sha256": "52b8670158d3eef649802e4652e6be6bd6ab1a0e21e72d62eb07c5b6127fa051"
     },
     {
       "bytes": 11641,
@@ -305,9 +473,9 @@
       "sha256": "6ddb011417bc5f1a6f9e5b60590822d38b57522be77a921022aca327c6b5c3aa"
     },
     {
-      "bytes": 2657,
+      "bytes": 4404,
       "path": "output/unit11-results.json",
-      "sha256": "598e6cf6bebaa238819ddce7b05a654c3eddccbf76fecbbf43947f291514826a"
+      "sha256": "3f95a579c20e8543b37cc7e8ccc530f5586eac16d3253a6ea4bd7ad1252f17bc"
     },
     {
       "bytes": 1806,
@@ -315,35 +483,1297 @@
       "sha256": "9234f0e1def6bc5780f04023b3ab2061708237ad1711045ca27f4fc92eb2dd0d"
     }
   ],
-  "pdf_visual_qa": {
-    "pdf": {
-      "bytes": 502373,
-      "page_count": 98,
-      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
-      "sha256": "289e744aeef09eb6e546c002e0782a346519a39c5265ae4ef5c9d1e3ce095376"
-    },
-    "render": {
-      "contact_sheets": 7,
-      "dpi": 120,
-      "manifest_path": "00_control/PDF_VISUAL_RENDER_MANIFEST.csv",
-      "manifest_sha256": "9a66e23f5dbdd4d886ed88b4431f5f947023aef4b8ff2aaf289ffdf77b742bd6",
-      "page_images": 98
-    },
-    "review": {
-      "inspected_pages": 98,
-      "method": "All 98 page images reviewed through seven contact sheets; pages 8, 9, 12, 68, and 93-98 inspected individually at full render resolution.",
-      "result": "pass",
-      "reviewer": "Codex"
-    },
-    "schema": "o002.pdf-visual-qa.v1"
+  "final_evidence": {
+    "required": false
   },
-  "schema": "o002.build-qa.v1",
+  "html_static": {
+    "checks": {
+      "css_runtime_resource_closure": true,
+      "heading_order": true,
+      "image_alternatives": true,
+      "language_id": true,
+      "local_links_and_fragments": true,
+      "local_profile_paths_absent": true,
+      "local_runtime_resource_closure": true,
+      "mathml_present": true,
+      "offline_runtime_resources": true,
+      "unique_ids": true
+    },
+    "counts": {
+      "css_files_checked": 5,
+      "embedded_runtime_resources": 64,
+      "external_links": 3,
+      "images": 1,
+      "links": 1355,
+      "local_links": 1352,
+      "local_runtime_references": 257,
+      "mathml_elements": 272,
+      "pages": 15
+    },
+    "output_inventory": [
+      {
+        "bytes": 37570,
+        "path": "index.html",
+        "sha256": "5fb26b6316c5fd807760ca4f6c4e060f8d4ef95779eb04e3029c84c82e92c85a"
+      },
+      {
+        "bytes": 59017,
+        "path": "source/units/01-komputasi-bukti.html",
+        "sha256": "b52bde4b1c448ef744c210f4155eb76e2417eca0bc68073177c4fbad56402bbc"
+      },
+      {
+        "bytes": 61703,
+        "path": "source/units/02-objek-fungsi.html",
+        "sha256": "837baf0e6782b3867b7c2c0023872bea25fd24e544f425a2d209b4604691b399"
+      },
+      {
+        "bytes": 70847,
+        "path": "source/units/03-array-vektorisasi.html",
+        "sha256": "5c674025ea0b1d66473f06d244e00324b682c45e014b8493e9b4a6cd444bc4e9"
+      },
+      {
+        "bytes": 98491,
+        "path": "source/units/04-visualisasi-integritas.html",
+        "sha256": "15375e543cf39f56fb879235cef6c1468ab6d8ed3ad4018cffac97bd91f95a1a"
+      },
+      {
+        "bytes": 113350,
+        "path": "source/units/05-eksak-simbolik-sage.html",
+        "sha256": "1a4238b38c0bf77d90de2485fa32b971e820504ce392b42f8cffe2a0afecd156"
+      },
+      {
+        "bytes": 112454,
+        "path": "source/units/06-titik-mengambang-stabilitas.html",
+        "sha256": "fd5bb9e43e01fcfcb8e46a3500f554f2e9ed45935cc286d0d3a5f3315a5a6472"
+      },
+      {
+        "bytes": 62429,
+        "path": "source/units/07-rancangan-eksperimen.html",
+        "sha256": "6cf1a48c0a716aed78f0d083ec09aa0ea08181c05a521bcc0b29de3c07cca711"
+      },
+      {
+        "bytes": 76860,
+        "path": "source/units/08-pengujian-validasi.html",
+        "sha256": "6d559ee77449f7cd9869a3dd186b9a4bc8c0d5f72d16b299ead7377ff7b71862"
+      },
+      {
+        "bytes": 64285,
+        "path": "source/units/09-data-konfigurasi-provenans.html",
+        "sha256": "1386019766d7a82f570f39114b52aed301e623c4e3155aba4165faf11342ddb6"
+      },
+      {
+        "bytes": 52393,
+        "path": "source/units/10-otomasi-pipa.html",
+        "sha256": "13438fc5c39e9f8839e5e15fb1a7150f3299fc15d63c7dccce664f1f25eb45af"
+      },
+      {
+        "bytes": 86864,
+        "path": "source/units/11-eksperimen-numerik.html",
+        "sha256": "e0e8785deab7472ceb789ac478461d3e2d5767b35357e1e91f615c94bd1b4821"
+      },
+      {
+        "bytes": 52844,
+        "path": "source/units/12-proyek-akhir.html",
+        "sha256": "9f1979acee1d0841b7516a6242f2761019dd137fea9a2db7079a1165c7b5c943"
+      },
+      {
+        "bytes": 92953,
+        "path": "source/units/p01-menjalankan-eksperimen-python.html",
+        "sha256": "25ea249f2db6fb3415f8c529597bf0845a4e9f781d452d71f3e96dee51a4454e"
+      },
+      {
+        "bytes": 123218,
+        "path": "source/units/p02-kontrol-koleksi-fungsi-modul-berkas.html",
+        "sha256": "a841cfda9dd6274005e700355aa93a319860d1074b9f8582cef31ba3568b986a"
+      }
+    ],
+    "runtime_resource_inventory": [
+      {
+        "bytes": 508361,
+        "path": "site_libs/bootstrap/bootstrap-fd460e4b8aec9c2402a9e5dfeb0c5f8c.min.css",
+        "sha256": "e760513c2ef1e44efe8978394d9255ccb962d3198c3766b1a8aed98202987bb0"
+      },
+      {
+        "bytes": 99464,
+        "path": "site_libs/bootstrap/bootstrap-icons.css",
+        "sha256": "01253947f506e030589e4f33fc7ec7ccdfb9505e2e596dedf16445f12e243c0a"
+      },
+      {
+        "bytes": 180288,
+        "path": "site_libs/bootstrap/bootstrap-icons.woff",
+        "sha256": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15"
+      },
+      {
+        "bytes": 80668,
+        "path": "site_libs/bootstrap/bootstrap.min.js",
+        "sha256": "d2ea6c1e0cabca20d18e924b25a1cd0187c38ba7c33f60ab06e1b0402b9bcdb5"
+      },
+      {
+        "bytes": 9160,
+        "path": "site_libs/clipboard/clipboard.min.js",
+        "sha256": "e17a1d816e13c0826e0ed7febfabc3277f45571234bde0bf9120829a7169edc9"
+      },
+      {
+        "bytes": 5888,
+        "path": "site_libs/quarto-html/anchor.min.js",
+        "sha256": "69098e105d990f834cff1b7886d873444228ff63c590e5ff834d568f1115ed8b"
+      },
+      {
+        "bytes": 20084,
+        "path": "site_libs/quarto-html/popper.min.js",
+        "sha256": "4d50586b184724d39ddfe0f6582861664eddd5e806e5a79e0dbaa832361414d0"
+      },
+      {
+        "bytes": 3678,
+        "path": "site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css",
+        "sha256": "96d688dbd4c2de66404fd9b0e75d5b62573cbece9ee7011ca24d8bce1bbe044c"
+      },
+      {
+        "bytes": 26830,
+        "path": "site_libs/quarto-html/quarto.js",
+        "sha256": "4ecb60f215d96b2af0fe9d985c71e32863b1c993a64725a416ac18b5991c59c6"
+      },
+      {
+        "bytes": 2882,
+        "path": "site_libs/quarto-html/tabsets/tabsets.js",
+        "sha256": "a9c226bf70e82eaf5476f619cecfb70b4446b87ce4d1634d6404b0b2ba006d15"
+      },
+      {
+        "bytes": 1409,
+        "path": "site_libs/quarto-html/tippy.css",
+        "sha256": "5969f497d9158d7682f8219c6f13fa67269cdf5bf50a3931d95327151dee5678"
+      },
+      {
+        "bytes": 24033,
+        "path": "site_libs/quarto-html/tippy.umd.min.js",
+        "sha256": "41181eeec6d7ba64cb9165f0e95563e34e026bde79e7c13aeec83270429b6fae"
+      },
+      {
+        "bytes": 4570,
+        "path": "site_libs/quarto-nav/headroom.min.js",
+        "sha256": "5b80cc4165a661a3f2060d6bdb5ccff591f04c4f8e39a06c12d3c2544587cb17"
+      },
+      {
+        "bytes": 9636,
+        "path": "site_libs/quarto-nav/quarto-nav.js",
+        "sha256": "a3e9c8c52dd54d783a6d9294357ef104d17d03faf0a404b592216c0d71a9f717"
+      },
+      {
+        "bytes": 96397,
+        "path": "site_libs/quarto-search/autocomplete.umd.js",
+        "sha256": "cd9db3b7d812139a4679a2566ea8f01b2a80159490a60b9e9e813e81b5e00a05"
+      },
+      {
+        "bytes": 23539,
+        "path": "site_libs/quarto-search/fuse.min.js",
+        "sha256": "c57339c3fa16b1d69d9a6b46749a8139ef8d4fc9bbfe48144ff897aa7d4222ec"
+      },
+      {
+        "bytes": 43121,
+        "path": "site_libs/quarto-search/quarto-search.js",
+        "sha256": "1a23221f499b3993dc66ca5c8913e4e6602dfa4652337e9fbf75139ded5ece68"
+      },
+      {
+        "bytes": 66746,
+        "path": "source/units/04-visualisasi-integritas_files/figure-html/fig-o002-u04-progressive-output-1.png",
+        "sha256": "c1c315a903ab55c9837adb5fdc656f8e145529b07d9c2cdf47f9b3aba041ecef"
+      },
+      {
+        "bytes": 939,
+        "path": "styles.css",
+        "sha256": "5026261e74e139ac200e6f0135671697742499572dee4491d9a4e97c68eaf4ce"
+      }
+    ],
+    "schema": "o002.html-static-qa.v1",
+    "successful": true
+  },
+  "mode": "Candidate",
+  "mode_gates": {
+    "build_determinism_receipt": "may_follow_first_final_build",
+    "final_visual_browser_receipts": "not_required",
+    "publication_receipt": "external_to_build"
+  },
+  "python_environment": {
+    "closure_complete": true,
+    "dependency_edges": [
+      {
+        "from": "anyio",
+        "to": "idna"
+      },
+      {
+        "from": "anyio",
+        "to": "sniffio"
+      },
+      {
+        "from": "argon2-cffi",
+        "to": "argon2-cffi-bindings"
+      },
+      {
+        "from": "argon2-cffi-bindings",
+        "to": "cffi"
+      },
+      {
+        "from": "beautifulsoup4",
+        "to": "soupsieve"
+      },
+      {
+        "from": "beautifulsoup4",
+        "to": "typing-extensions"
+      },
+      {
+        "from": "bleach",
+        "to": "webencodings"
+      },
+      {
+        "from": "cffi",
+        "to": "pycparser"
+      },
+      {
+        "from": "comm",
+        "to": "traitlets"
+      },
+      {
+        "from": "contourpy",
+        "to": "numpy"
+      },
+      {
+        "from": "httpcore",
+        "to": "certifi"
+      },
+      {
+        "from": "httpcore",
+        "to": "h11"
+      },
+      {
+        "from": "httpx",
+        "to": "anyio"
+      },
+      {
+        "from": "httpx",
+        "to": "certifi"
+      },
+      {
+        "from": "httpx",
+        "to": "httpcore"
+      },
+      {
+        "from": "httpx",
+        "to": "idna"
+      },
+      {
+        "from": "ipykernel",
+        "to": "comm"
+      },
+      {
+        "from": "ipykernel",
+        "to": "debugpy"
+      },
+      {
+        "from": "ipykernel",
+        "to": "ipython"
+      },
+      {
+        "from": "ipykernel",
+        "to": "jupyter-client"
+      },
+      {
+        "from": "ipykernel",
+        "to": "jupyter-core"
+      },
+      {
+        "from": "ipykernel",
+        "to": "matplotlib-inline"
+      },
+      {
+        "from": "ipykernel",
+        "to": "nest-asyncio"
+      },
+      {
+        "from": "ipykernel",
+        "to": "packaging"
+      },
+      {
+        "from": "ipykernel",
+        "to": "psutil"
+      },
+      {
+        "from": "ipykernel",
+        "to": "pyzmq"
+      },
+      {
+        "from": "ipykernel",
+        "to": "tornado"
+      },
+      {
+        "from": "ipykernel",
+        "to": "traitlets"
+      },
+      {
+        "from": "ipython",
+        "to": "colorama"
+      },
+      {
+        "from": "ipython",
+        "to": "decorator"
+      },
+      {
+        "from": "ipython",
+        "to": "jedi"
+      },
+      {
+        "from": "ipython",
+        "to": "matplotlib-inline"
+      },
+      {
+        "from": "ipython",
+        "to": "prompt-toolkit"
+      },
+      {
+        "from": "ipython",
+        "to": "pygments"
+      },
+      {
+        "from": "ipython",
+        "to": "stack-data"
+      },
+      {
+        "from": "ipython",
+        "to": "traitlets"
+      },
+      {
+        "from": "jedi",
+        "to": "parso"
+      },
+      {
+        "from": "jinja2",
+        "to": "markupsafe"
+      },
+      {
+        "from": "jsonschema",
+        "to": "attrs"
+      },
+      {
+        "from": "jsonschema",
+        "to": "jsonschema-specifications"
+      },
+      {
+        "from": "jsonschema",
+        "to": "referencing"
+      },
+      {
+        "from": "jsonschema",
+        "to": "rpds-py"
+      },
+      {
+        "from": "jsonschema-specifications",
+        "to": "referencing"
+      },
+      {
+        "from": "jupyter-client",
+        "to": "jupyter-core"
+      },
+      {
+        "from": "jupyter-client",
+        "to": "python-dateutil"
+      },
+      {
+        "from": "jupyter-client",
+        "to": "pyzmq"
+      },
+      {
+        "from": "jupyter-client",
+        "to": "tornado"
+      },
+      {
+        "from": "jupyter-client",
+        "to": "traitlets"
+      },
+      {
+        "from": "jupyter-core",
+        "to": "platformdirs"
+      },
+      {
+        "from": "jupyter-core",
+        "to": "pywin32"
+      },
+      {
+        "from": "jupyter-core",
+        "to": "traitlets"
+      },
+      {
+        "from": "jupyter-events",
+        "to": "jsonschema"
+      },
+      {
+        "from": "jupyter-events",
+        "to": "packaging"
+      },
+      {
+        "from": "jupyter-events",
+        "to": "python-json-logger"
+      },
+      {
+        "from": "jupyter-events",
+        "to": "pyyaml"
+      },
+      {
+        "from": "jupyter-events",
+        "to": "referencing"
+      },
+      {
+        "from": "jupyter-events",
+        "to": "rfc3339-validator"
+      },
+      {
+        "from": "jupyter-events",
+        "to": "rfc3986-validator"
+      },
+      {
+        "from": "jupyter-events",
+        "to": "traitlets"
+      },
+      {
+        "from": "jupyter-lsp",
+        "to": "jupyter-server"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "anyio"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "argon2-cffi"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "jinja2"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "jupyter-client"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "jupyter-core"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "jupyter-events"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "jupyter-server-terminals"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "nbconvert"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "nbformat"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "overrides"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "packaging"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "prometheus-client"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "pywinpty"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "pyzmq"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "send2trash"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "terminado"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "tornado"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "traitlets"
+      },
+      {
+        "from": "jupyter-server",
+        "to": "websocket-client"
+      },
+      {
+        "from": "jupyter-server-terminals",
+        "to": "pywinpty"
+      },
+      {
+        "from": "jupyter-server-terminals",
+        "to": "terminado"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "async-lru"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "httpx"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "ipykernel"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "jinja2"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "jupyter-core"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "jupyter-lsp"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "jupyter-server"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "jupyterlab-server"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "notebook-shim"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "packaging"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "setuptools"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "tornado"
+      },
+      {
+        "from": "jupyterlab",
+        "to": "traitlets"
+      },
+      {
+        "from": "jupyterlab-server",
+        "to": "babel"
+      },
+      {
+        "from": "jupyterlab-server",
+        "to": "jinja2"
+      },
+      {
+        "from": "jupyterlab-server",
+        "to": "json5"
+      },
+      {
+        "from": "jupyterlab-server",
+        "to": "jsonschema"
+      },
+      {
+        "from": "jupyterlab-server",
+        "to": "jupyter-server"
+      },
+      {
+        "from": "jupyterlab-server",
+        "to": "packaging"
+      },
+      {
+        "from": "jupyterlab-server",
+        "to": "requests"
+      },
+      {
+        "from": "matplotlib",
+        "to": "contourpy"
+      },
+      {
+        "from": "matplotlib",
+        "to": "cycler"
+      },
+      {
+        "from": "matplotlib",
+        "to": "fonttools"
+      },
+      {
+        "from": "matplotlib",
+        "to": "kiwisolver"
+      },
+      {
+        "from": "matplotlib",
+        "to": "numpy"
+      },
+      {
+        "from": "matplotlib",
+        "to": "packaging"
+      },
+      {
+        "from": "matplotlib",
+        "to": "pillow"
+      },
+      {
+        "from": "matplotlib",
+        "to": "pyparsing"
+      },
+      {
+        "from": "matplotlib",
+        "to": "python-dateutil"
+      },
+      {
+        "from": "matplotlib-inline",
+        "to": "traitlets"
+      },
+      {
+        "from": "nbclient",
+        "to": "jupyter-client"
+      },
+      {
+        "from": "nbclient",
+        "to": "jupyter-core"
+      },
+      {
+        "from": "nbclient",
+        "to": "nbformat"
+      },
+      {
+        "from": "nbclient",
+        "to": "traitlets"
+      },
+      {
+        "from": "nbconvert",
+        "to": "beautifulsoup4"
+      },
+      {
+        "from": "nbconvert",
+        "to": "bleach"
+      },
+      {
+        "from": "nbconvert",
+        "to": "defusedxml"
+      },
+      {
+        "from": "nbconvert",
+        "to": "jinja2"
+      },
+      {
+        "from": "nbconvert",
+        "to": "jupyter-core"
+      },
+      {
+        "from": "nbconvert",
+        "to": "jupyterlab-pygments"
+      },
+      {
+        "from": "nbconvert",
+        "to": "markupsafe"
+      },
+      {
+        "from": "nbconvert",
+        "to": "mistune"
+      },
+      {
+        "from": "nbconvert",
+        "to": "nbclient"
+      },
+      {
+        "from": "nbconvert",
+        "to": "nbformat"
+      },
+      {
+        "from": "nbconvert",
+        "to": "packaging"
+      },
+      {
+        "from": "nbconvert",
+        "to": "pandocfilters"
+      },
+      {
+        "from": "nbconvert",
+        "to": "pygments"
+      },
+      {
+        "from": "nbconvert",
+        "to": "traitlets"
+      },
+      {
+        "from": "nbformat",
+        "to": "fastjsonschema"
+      },
+      {
+        "from": "nbformat",
+        "to": "jsonschema"
+      },
+      {
+        "from": "nbformat",
+        "to": "jupyter-core"
+      },
+      {
+        "from": "nbformat",
+        "to": "traitlets"
+      },
+      {
+        "from": "notebook",
+        "to": "jupyter-server"
+      },
+      {
+        "from": "notebook",
+        "to": "jupyterlab"
+      },
+      {
+        "from": "notebook",
+        "to": "jupyterlab-server"
+      },
+      {
+        "from": "notebook",
+        "to": "notebook-shim"
+      },
+      {
+        "from": "notebook",
+        "to": "tornado"
+      },
+      {
+        "from": "notebook-shim",
+        "to": "jupyter-server"
+      },
+      {
+        "from": "prompt-toolkit",
+        "to": "wcwidth"
+      },
+      {
+        "from": "python-dateutil",
+        "to": "six"
+      },
+      {
+        "from": "referencing",
+        "to": "attrs"
+      },
+      {
+        "from": "referencing",
+        "to": "rpds-py"
+      },
+      {
+        "from": "requests",
+        "to": "certifi"
+      },
+      {
+        "from": "requests",
+        "to": "charset-normalizer"
+      },
+      {
+        "from": "requests",
+        "to": "idna"
+      },
+      {
+        "from": "requests",
+        "to": "urllib3"
+      },
+      {
+        "from": "rfc3339-validator",
+        "to": "six"
+      },
+      {
+        "from": "scipy",
+        "to": "numpy"
+      },
+      {
+        "from": "stack-data",
+        "to": "asttokens"
+      },
+      {
+        "from": "stack-data",
+        "to": "executing"
+      },
+      {
+        "from": "stack-data",
+        "to": "pure-eval"
+      },
+      {
+        "from": "sympy",
+        "to": "mpmath"
+      },
+      {
+        "from": "terminado",
+        "to": "pywinpty"
+      },
+      {
+        "from": "terminado",
+        "to": "tornado"
+      }
+    ],
+    "direct_roots": [
+      "ipykernel",
+      "ipython",
+      "jsonschema",
+      "jupyter-client",
+      "jupyter-core",
+      "jupyterlab",
+      "matplotlib",
+      "nbclient",
+      "nbformat",
+      "numpy",
+      "notebook",
+      "scipy",
+      "sympy"
+    ],
+    "lock": {
+      "bytes": 1846,
+      "path": "environment/python-lock.txt",
+      "sha256": "28d1f9a5d2b341628fbc5e182ca523da1cfa33473e5714493f8ca18893c31d9a"
+    },
+    "matches_runtime": true,
+    "package_count": 95,
+    "packages": [
+      {
+        "name": "anyio",
+        "version": "4.7.0"
+      },
+      {
+        "name": "argon2-cffi",
+        "version": "23.1.0"
+      },
+      {
+        "name": "argon2-cffi-bindings",
+        "version": "21.2.0"
+      },
+      {
+        "name": "asttokens",
+        "version": "3.0.0"
+      },
+      {
+        "name": "async-lru",
+        "version": "2.0.4"
+      },
+      {
+        "name": "attrs",
+        "version": "24.3.0"
+      },
+      {
+        "name": "babel",
+        "version": "2.17.0"
+      },
+      {
+        "name": "beautifulsoup4",
+        "version": "4.13.3"
+      },
+      {
+        "name": "bleach",
+        "version": "6.2.0"
+      },
+      {
+        "name": "certifi",
+        "version": "2024.12.14"
+      },
+      {
+        "name": "cffi",
+        "version": "1.17.1"
+      },
+      {
+        "name": "charset-normalizer",
+        "version": "3.4.0"
+      },
+      {
+        "name": "colorama",
+        "version": "0.4.6"
+      },
+      {
+        "name": "comm",
+        "version": "0.2.2"
+      },
+      {
+        "name": "contourpy",
+        "version": "1.3.1"
+      },
+      {
+        "name": "cycler",
+        "version": "0.12.1"
+      },
+      {
+        "name": "debugpy",
+        "version": "1.8.12"
+      },
+      {
+        "name": "decorator",
+        "version": "5.2.1"
+      },
+      {
+        "name": "defusedxml",
+        "version": "0.7.1"
+      },
+      {
+        "name": "executing",
+        "version": "2.2.0"
+      },
+      {
+        "name": "fastjsonschema",
+        "version": "2.21.1"
+      },
+      {
+        "name": "fonttools",
+        "version": "4.56.0"
+      },
+      {
+        "name": "h11",
+        "version": "0.14.0"
+      },
+      {
+        "name": "httpcore",
+        "version": "1.0.7"
+      },
+      {
+        "name": "httpx",
+        "version": "0.28.1"
+      },
+      {
+        "name": "idna",
+        "version": "3.10"
+      },
+      {
+        "name": "ipykernel",
+        "version": "6.29.5"
+      },
+      {
+        "name": "ipython",
+        "version": "8.32.0"
+      },
+      {
+        "name": "jedi",
+        "version": "0.19.2"
+      },
+      {
+        "name": "jinja2",
+        "version": "3.1.5"
+      },
+      {
+        "name": "json5",
+        "version": "0.10.0"
+      },
+      {
+        "name": "jsonschema",
+        "version": "4.23.0"
+      },
+      {
+        "name": "jsonschema-specifications",
+        "version": "2024.10.1"
+      },
+      {
+        "name": "jupyter-client",
+        "version": "8.6.3"
+      },
+      {
+        "name": "jupyter-core",
+        "version": "5.7.2"
+      },
+      {
+        "name": "jupyter-events",
+        "version": "0.12.0"
+      },
+      {
+        "name": "jupyter-lsp",
+        "version": "2.2.5"
+      },
+      {
+        "name": "jupyter-server",
+        "version": "2.15.0"
+      },
+      {
+        "name": "jupyter-server-terminals",
+        "version": "0.5.3"
+      },
+      {
+        "name": "jupyterlab",
+        "version": "4.3.5"
+      },
+      {
+        "name": "jupyterlab-pygments",
+        "version": "0.3.0"
+      },
+      {
+        "name": "jupyterlab-server",
+        "version": "2.27.3"
+      },
+      {
+        "name": "kiwisolver",
+        "version": "1.4.8"
+      },
+      {
+        "name": "markupsafe",
+        "version": "3.0.2"
+      },
+      {
+        "name": "matplotlib",
+        "version": "3.10.1"
+      },
+      {
+        "name": "matplotlib-inline",
+        "version": "0.1.7"
+      },
+      {
+        "name": "mistune",
+        "version": "3.1.2"
+      },
+      {
+        "name": "mpmath",
+        "version": "1.3.0"
+      },
+      {
+        "name": "nbclient",
+        "version": "0.10.2"
+      },
+      {
+        "name": "nbconvert",
+        "version": "7.16.6"
+      },
+      {
+        "name": "nbformat",
+        "version": "5.10.4"
+      },
+      {
+        "name": "nest-asyncio",
+        "version": "1.6.0"
+      },
+      {
+        "name": "notebook",
+        "version": "7.3.2"
+      },
+      {
+        "name": "notebook-shim",
+        "version": "0.2.4"
+      },
+      {
+        "name": "numpy",
+        "version": "2.1.3"
+      },
+      {
+        "name": "overrides",
+        "version": "7.7.0"
+      },
+      {
+        "name": "packaging",
+        "version": "24.2"
+      },
+      {
+        "name": "pandocfilters",
+        "version": "1.5.1"
+      },
+      {
+        "name": "parso",
+        "version": "0.8.4"
+      },
+      {
+        "name": "pillow",
+        "version": "11.1.0"
+      },
+      {
+        "name": "platformdirs",
+        "version": "4.3.6"
+      },
+      {
+        "name": "prometheus-client",
+        "version": "0.21.1"
+      },
+      {
+        "name": "prompt-toolkit",
+        "version": "3.0.50"
+      },
+      {
+        "name": "psutil",
+        "version": "7.0.0"
+      },
+      {
+        "name": "pure-eval",
+        "version": "0.2.3"
+      },
+      {
+        "name": "pycparser",
+        "version": "2.22"
+      },
+      {
+        "name": "pygments",
+        "version": "2.19.1"
+      },
+      {
+        "name": "pyparsing",
+        "version": "3.2.1"
+      },
+      {
+        "name": "python-dateutil",
+        "version": "2.9.0.post0"
+      },
+      {
+        "name": "python-json-logger",
+        "version": "3.2.1"
+      },
+      {
+        "name": "pywin32",
+        "version": "308"
+      },
+      {
+        "name": "pywinpty",
+        "version": "2.0.15"
+      },
+      {
+        "name": "pyyaml",
+        "version": "6.0.2"
+      },
+      {
+        "name": "pyzmq",
+        "version": "26.2.1"
+      },
+      {
+        "name": "referencing",
+        "version": "0.36.2"
+      },
+      {
+        "name": "requests",
+        "version": "2.32.3"
+      },
+      {
+        "name": "rfc3339-validator",
+        "version": "0.1.4"
+      },
+      {
+        "name": "rfc3986-validator",
+        "version": "0.1.1"
+      },
+      {
+        "name": "rpds-py",
+        "version": "0.23.1"
+      },
+      {
+        "name": "scipy",
+        "version": "1.15.2"
+      },
+      {
+        "name": "send2trash",
+        "version": "1.8.3"
+      },
+      {
+        "name": "setuptools",
+        "version": "75.8.2"
+      },
+      {
+        "name": "six",
+        "version": "1.17.0"
+      },
+      {
+        "name": "sniffio",
+        "version": "1.3.1"
+      },
+      {
+        "name": "soupsieve",
+        "version": "2.6"
+      },
+      {
+        "name": "stack-data",
+        "version": "0.6.3"
+      },
+      {
+        "name": "sympy",
+        "version": "1.13.3"
+      },
+      {
+        "name": "terminado",
+        "version": "0.18.1"
+      },
+      {
+        "name": "tornado",
+        "version": "6.4.2"
+      },
+      {
+        "name": "traitlets",
+        "version": "5.14.3"
+      },
+      {
+        "name": "typing-extensions",
+        "version": "4.12.2"
+      },
+      {
+        "name": "urllib3",
+        "version": "2.2.3"
+      },
+      {
+        "name": "wcwidth",
+        "version": "0.2.13"
+      },
+      {
+        "name": "webencodings",
+        "version": "0.5.1"
+      },
+      {
+        "name": "websocket-client",
+        "version": "1.8.0"
+      }
+    ],
+    "python": {
+      "implementation": "CPython",
+      "version": "3.13.1"
+    },
+    "schema": "o002.python-environment.v1"
+  },
+  "sage_lab": {
+    "result": {
+      "bytes": 2219,
+      "path": "output/unit05-sage-results.json",
+      "sha256": "3b1a401d81985124804e6fb536020fb542acdfea6a635e500f0f3bbe72593b78"
+    },
+    "runtime": {
+      "environment_lock": {
+        "bytes": 34181,
+        "path": "environment/sage-ubuntu22.04-dpkg-lock.txt",
+        "sha256": "bbd7f235834660681327b975a816b71aabd6d31946e6c875bf55d06224a5d802"
+      },
+      "environment_receipt": {
+        "bytes": 575,
+        "path": "environment/SAGE_ENVIRONMENT_RECEIPT.json",
+        "sha256": "5fe62bee0260a17d7f44e488cd58312a7c4b3894ac93a09af837b18273194451"
+      },
+      "sage": "9.5",
+      "wsl_distribution": "Ubuntu-22.04"
+    },
+    "schema": "o002.sage-lab-qa.v1",
+    "source": {
+      "bytes": 5701,
+      "path": "source/code/unit05_sage_lab.py",
+      "sha256": "a3c57376f7a4d237a3b38e0afbd8251a448bcf1ad4c765d8b7216586a0a0a0d2"
+    },
+    "successful": true,
+    "test_source": {
+      "bytes": 6183,
+      "path": "tests/test_unit05_sage.py",
+      "sha256": "ee77ad56ea9fbd84f16d3e15ecfe1e937db8e3c0e74d298213d4d016c8d55d88"
+    },
+    "tests": {
+      "command": "sage -python tests/test_unit05_sage.py",
+      "errors": 0,
+      "failures": 0,
+      "tests_run": 7
+    }
+  },
+  "schema": "o002.build-qa.v2",
   "source_qa": {
     "errors": 0,
-    "schema": "o002.source-qa.v1",
+    "schema": "o002.source-qa.v2",
     "successful": true,
-    "unit_triplets": 12
+    "unit_triplets": 14
   },
+  "successful": true,
   "tests": {
     "command": "python -B scripts/run_tests.py --receipt tmp/build-receipts/TEST_QA.json",
     "errors": 0,
@@ -353,7 +1783,7 @@
     "schema": "o002.test-qa.v1",
     "skipped": 0,
     "successful": true,
-    "tests_run": 115,
+    "tests_run": 177,
     "unexpected_successes": 0
   },
   "toolchain": {
@@ -361,13 +1791,17 @@
       "luahbtex": "1.25.7",
       "miktex": "26.5",
       "python": "3.13.1",
-      "quarto": "1.9.37"
+      "python_implementation": "CPython",
+      "quarto": "1.9.37",
+      "quarto_pandoc": "3.8.3"
     },
     "luahbtex": "1.25.7",
     "matches_expected": true,
     "miktex": "26.5",
     "python": "3.13.1",
+    "python_implementation": "CPython",
     "quarto": "1.9.37",
+    "quarto_pandoc": "3.8.3",
     "schema": "o002.toolchain-qa.v1"
   }
 }

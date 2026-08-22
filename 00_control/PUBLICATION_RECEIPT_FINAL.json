@@ -1,0 +1,65 @@
+{
+  "artifacts": [
+    {
+      "anonymous_readback": "pass",
+      "bytes": 37570,
+      "filename": "index.html",
+      "path": "output/index.html",
+      "public_url": "https://zenodo.org/api/records/22053905/files/index.html/content",
+      "sha256": "5fb26b6316c5fd807760ca4f6c4e060f8d4ef95779eb04e3029c84c82e92c85a"
+    },
+    {
+      "anonymous_readback": "pass",
+      "bytes": 754845,
+      "filename": "Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+      "public_url": "https://zenodo.org/api/records/22053905/files/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf/content",
+      "sha256": "f9d3df201c03107be3a3e6f61dd6798485cf20bc35ae14f2911ab212789b5038"
+    },
+    {
+      "anonymous_readback": "pass",
+      "bytes": 291212,
+      "filename": "Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+      "public_url": "https://zenodo.org/api/records/22053905/files/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub/content",
+      "sha256": "8e9e35dd54be8524a8b7752df0a7285749db4c80fc5a10271eb841c01c0c748d"
+    },
+    {
+      "anonymous_readback": "pass",
+      "bytes": 316923,
+      "filename": "O002_B80_ID_EDITABLE_SOURCE_2026-08-22-1.zip",
+      "path": "release/O002_B80_ID_EDITABLE_SOURCE_2026-08-22-1.zip",
+      "public_url": "https://zenodo.org/api/records/22053905/files/O002_B80_ID_EDITABLE_SOURCE_2026-08-22-1.zip/content",
+      "sha256": "a9dcdc18481b3dc88beee3006d46f1b8187815623534df523bbc70e3e011b9f9"
+    },
+    {
+      "anonymous_readback": "pass",
+      "bytes": 1613660,
+      "filename": "O002_B80_ID_OFFLINE_READER_2026-08-22-1.zip",
+      "path": "release/O002_B80_ID_OFFLINE_READER_2026-08-22-1.zip",
+      "public_url": "https://zenodo.org/api/records/22053905/files/O002_B80_ID_OFFLINE_READER_2026-08-22-1.zip/content",
+      "sha256": "c3b97c057ed6751ddb2067d4be8ef96a7256e1c9bd25075601f46071eb2dfff9"
+    }
+  ],
+  "github": {
+    "reason": "account suspension is under support review",
+    "status": "deferred"
+  },
+  "phase": "finalized",
+  "publication_date": "2026-08-22",
+  "schema": "o002.publication-final.v1",
+  "scope_label": "complete O002/B80 edition; GitHub mirror deferred",
+  "successful": true,
+  "version": "2026.08.22.1",
+  "zenodo": {
+    "anonymous_file_readback": "pass",
+    "anonymous_metadata_readback": "pass",
+    "concept_doi": "10.5281/zenodo.22052052",
+    "doi": "10.5281/zenodo.22053905",
+    "file_count": 5,
+    "record": "https://zenodo.org/records/22053905",
+    "record_id": 22053905,
+    "state": "done",
+    "submitted": true
+  }
+}

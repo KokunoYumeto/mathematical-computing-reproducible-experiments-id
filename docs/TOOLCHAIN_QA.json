@@ -3,12 +3,16 @@
     "luahbtex": "1.25.7",
     "miktex": "26.5",
     "python": "3.13.1",
-    "quarto": "1.9.37"
+    "python_implementation": "CPython",
+    "quarto": "1.9.37",
+    "quarto_pandoc": "3.8.3"
   },
   "luahbtex": "1.25.7",
   "matches_expected": true,
   "miktex": "26.5",
   "python": "3.13.1",
+  "python_implementation": "CPython",
   "quarto": "1.9.37",
+  "quarto_pandoc": "3.8.3",
   "schema": "o002.toolchain-qa.v1"
 }

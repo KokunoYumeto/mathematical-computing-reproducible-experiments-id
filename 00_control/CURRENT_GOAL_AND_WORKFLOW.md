@@ -1,7 +1,7 @@
 # O002/B80 current goal and workflow
 
 Status date: 2026-08-22  
-Status: active final-curriculum expansion  
+Status: active publication transaction after GitHub account restoration  
 Branch: `codex/b80-final-architecture`  
 Historical release preserved: `v2026.08.22`, DOI `10.5281/zenodo.22052053`
 
@@ -15,7 +15,7 @@ External books remain comparators unless exact bytes are admitted/licensed. Read
 
 Workflow: (1) store the handoff verbatim in 00_control\FINAL_ARCHITECTURE_HANDOFF.md and this goal in CURRENT_GOAL_AND_WORKFLOW.md. (2) Correct truth: standalone_edition_complete=true, b80_curriculum_complete=false; validate and push on a development branch while released Pages stay unchanged. (3) Produce P01 then P02 contiguously with natural id-ID prose, IDs, code, tests, exercises/hints/checks/solutions, artifacts and relations; run source/test/schema QA and push each boundary. (4) Implement Unit 4/5/6/11 and mastery additions with local evidence. (5) Freeze a resolved Python environment including NumPy/SciPy/SymPy/Matplotlib/Jupyter/testing and transitives plus Python/Quarto/Pandoc/LuaHBTeX/TeX identities and lock hash; separately freeze exact local Sage or immutable open-container digest and bind local Sage run/test receipts. Remote service is insufficient. (6) Record 14 units, labs, environments, exercises, solutions, artifacts and prerequisite gates in the schema-backed backend; hard-fail omissions/extras and restore b80_curriculum_complete only after every gate. (7) Build offline HTML, PDF, EPUB, editable source, registry, provenance/licenses, notebook supplement and learner bundle; require two clean identical manifests. (8) Inspect every PDF page; verify HTML desktop/narrow geometry, keyboard, contrast, console, links, MathML, local resources and descriptions; never claim tagged PDF accessibility without proof. (9) Independently audit content, code, tests, locks, Sage/SciPy evidence, manifests, truth, rights and accessibility. (10) Publish immediately to the same GitHub/Pages/release lineage and a new Zenodo version; anonymously hash-read every artifact and persist receipts.
 
-Durable authority under 00_control: CURRENT_GOAL_AND_WORKFLOW.md, FINAL_ARCHITECTURE_HANDOFF.md, CURRENT_STATE.md, CURRENT_CURSOR.json, DECISION_LOG.md, COURSE_PLAN.md, BUILD_BASELINE.md, environment/Sage/SciPy receipts, manifests and PUBLICATION_RECEIPT.json. At each boundary record hashes, gates and next action. Complete only when gates pass.
+Durable authority under 00_control: CURRENT_GOAL_AND_WORKFLOW.md, FINAL_ARCHITECTURE_HANDOFF.md, CURRENT_STATE.md, CURRENT_CURSOR.json, DECISION_LOG.md, COURSE_PLAN.md, BUILD_BASELINE.md, environment/Sage/SciPy receipts, manifests, PUBLICATION_RECEIPT.json, PUBLICATION_RECEIPT_FINAL.json, and FIGSHARE_PUBLICATION_RECEIPT.json. At each boundary record hashes, gates and next action. Complete only when gates pass.
 
 ## External authority receipts
 
@@ -24,8 +24,18 @@ Durable authority under 00_control: CURRENT_GOAL_AND_WORKFLOW.md, FINAL_ARCHITEC
 
 ## Current exact cursor
 
-The accepted standalone edition remains 12 units/60 exercises and published.
-The selected B80 curriculum is incomplete. The next executable action is to
-change the schema/backend/control truth so both facts coexist explicitly,
-validate that state, and push the first truth-correction checkpoint before
-admitting P01.
+The selected B80 edition is complete at 14 units, 75 exercises, 177 passing
+tests, and 159 PDF pages. Two final builds have identical source/output
+manifests. Zenodo version `2026.08.22.1`, DOI
+`10.5281/zenodo.22053905`, is public with five exact artifacts and anonymous
+byte readback. On 2026-08-22 Floris reported that GitHub was reinstated; the
+existing repository, Pages configuration, authenticated account, public
+visibility, and historical lineage have been reverified. Execute the frozen
+`GITHUB_DEFERRED_RELEASE_PLAN.json` transaction without rebuilding: commit and
+push the current branch, fast-forward `main`, tag/release `v2026.08.22.1` with
+the exact five assets, then anonymously verify repository, tag, release bytes,
+and the 85-file Pages tree. Figshare item `33314742` remains the sole item; its
+reader-first v2 correction is an in-place draft with completed uploads reused
+by ID after a transient rate-based API firewall response. Finish and publish
+that same v2, anonymously hash-read all seven compact files, update durable
+receipts, and complete the pursuit only after both public routes pass.

@@ -1,5 +1,357 @@
 {
+  "architecture": {
+    "admitted_unit_ids": [
+      "o002.p01",
+      "o002.p02",
+      "o002.u01",
+      "o002.u02",
+      "o002.u03",
+      "o002.u04",
+      "o002.u05",
+      "o002.u06",
+      "o002.u07",
+      "o002.u08",
+      "o002.u09",
+      "o002.u10",
+      "o002.u11",
+      "o002.u12"
+    ],
+    "open_requirements": [],
+    "required_unit_ids": [
+      "o002.p01",
+      "o002.p02",
+      "o002.u01",
+      "o002.u02",
+      "o002.u03",
+      "o002.u04",
+      "o002.u05",
+      "o002.u06",
+      "o002.u07",
+      "o002.u08",
+      "o002.u09",
+      "o002.u10",
+      "o002.u11",
+      "o002.u12"
+    ],
+    "status": "complete"
+  },
+  "artifacts": [
+    {
+      "bytes": 727,
+      "id": "art-o002-p01-results",
+      "kind": "result_json",
+      "path": "output/p01-results.json",
+      "producer": "cmp-o002-p01-code",
+      "sha256": "4079404b5b0c36f8fdd242ab344d850bf1e077e4fbe3332c588490f6422ac454",
+      "state": "current"
+    },
+    {
+      "bytes": 4014,
+      "id": "art-o002-p01-notebook",
+      "kind": "notebook",
+      "path": "source/notebooks/o002-p01-clean-kernel.ipynb",
+      "producer": "cmp-o002-p01-notebook-generator",
+      "sha256": "aaed184f0a5601a7567a66e5a0ac0ef55d80a665fcb522405962e174419f21c2",
+      "state": "current"
+    },
+    {
+      "bytes": 9,
+      "id": "art-o002-p02-values",
+      "kind": "accessibility_text",
+      "path": "output/primer02-demo/values.txt",
+      "producer": "cmp-o002-p02-code",
+      "sha256": "d217f4d7cdcbf548d4364953082cf8ddc2248b653329bebc150d7f6a5aaabcf1",
+      "state": "current"
+    },
+    {
+      "bytes": 41,
+      "id": "art-o002-p02-measurements",
+      "kind": "data_csv",
+      "path": "output/primer02-demo/measurements.csv",
+      "producer": "cmp-o002-p02-code",
+      "sha256": "9e4dcaafbfbf1f7a46a53436f05b22c5aefbdf4388b99b28e819c82b05482539",
+      "state": "current"
+    },
+    {
+      "bytes": 194,
+      "id": "art-o002-p02-summary",
+      "kind": "result_json",
+      "path": "output/primer02-demo/summary.json",
+      "producer": "cmp-o002-p02-code",
+      "sha256": "acfe48e0e449cdb8a4fc49d208cbf435df1769b7f7c5c7cfa62ed97faedbcb88",
+      "state": "current"
+    },
+    {
+      "bytes": 589,
+      "id": "art-o002-p02-manifest",
+      "kind": "manifest_json",
+      "members": [
+        "art-o002-p02-values",
+        "art-o002-p02-measurements",
+        "art-o002-p02-summary"
+      ],
+      "path": "output/primer02-demo/manifest.json",
+      "producer": "cmp-o002-p02-code",
+      "sha256": "5396ea1f60aa8399db69df9433dbd93f30c14de857d0e9b55e66124217cc52cb",
+      "state": "current"
+    },
+    {
+      "bytes": 771,
+      "id": "art-o002-u01-results",
+      "kind": "result_json",
+      "path": "output/unit01-results.json",
+      "producer": "cmp-o002-u01-code",
+      "sha256": "343fdc4f3fe8e45807b9f2a8eaedb1e3820749b26fbe78861c6fb183a3580a6d",
+      "state": "current"
+    },
+    {
+      "bytes": 339,
+      "id": "art-o002-u02-results",
+      "kind": "result_json",
+      "path": "output/unit02-results.json",
+      "producer": "cmp-o002-u02-code",
+      "sha256": "05d2ad13548932aacb18ba5b52545e431a65a9723e9458d9f51155863c21e18a",
+      "state": "current"
+    },
+    {
+      "bytes": 1635,
+      "id": "art-o002-u03-results",
+      "kind": "result_json",
+      "path": "output/unit03-results.json",
+      "producer": "cmp-o002-u03-code",
+      "sha256": "dbc8673b8cdc94fcab512f64c8856168593c84c293ee57cdb2b6d7c86c3b29d4",
+      "state": "current"
+    },
+    {
+      "bytes": 2138,
+      "id": "art-o002-u05-results",
+      "kind": "result_json",
+      "path": "output/unit05-results.json",
+      "producer": "cmp-o002-u05-code",
+      "sha256": "cd771d15c170fca705eb1e187cb4e57785e0cfdc7616a2ad9106eeca2bcdabc3",
+      "state": "current"
+    },
+    {
+      "bytes": 11641,
+      "id": "art-o002-u07-results",
+      "kind": "result_json",
+      "path": "output/unit07-results.json",
+      "producer": "cmp-o002-u07-code",
+      "sha256": "bea53712e4feeea054080c041f603f4095f2ece746e9068b2d7b21f3a5c369ef",
+      "state": "current"
+    },
+    {
+      "bytes": 1895,
+      "id": "art-o002-u08-results",
+      "kind": "result_json",
+      "path": "output/unit08-results.json",
+      "producer": "cmp-o002-u08-code",
+      "sha256": "bff1ac901d5e970df75e9963e291afa257d89595b93f1ae48b17006428bacca3",
+      "state": "current"
+    },
+    {
+      "bytes": 7110,
+      "id": "art-o002-u09-results",
+      "kind": "result_json",
+      "path": "output/unit09-results.json",
+      "producer": "cmp-o002-u09-code",
+      "sha256": "9ba59ea2333f57a9f19fb9aff0cc00deb2b74972151bc8efbed1de5fd170c54f",
+      "state": "current"
+    },
+    {
+      "bytes": 1261,
+      "id": "art-o002-u10-results",
+      "kind": "result_json",
+      "path": "output/unit10-results.json",
+      "producer": "cmp-o002-u10-code",
+      "sha256": "6ddb011417bc5f1a6f9e5b60590822d38b57522be77a921022aca327c6b5c3aa",
+      "state": "current"
+    },
+    {
+      "bytes": 1806,
+      "id": "art-o002-u12-results",
+      "kind": "result_json",
+      "path": "output/unit12-results.json",
+      "producer": "cmp-o002-u12-code",
+      "sha256": "9234f0e1def6bc5780f04023b3ab2061708237ad1711045ca27f4fc92eb2dd0d",
+      "state": "current"
+    },
+    {
+      "bytes": 160,
+      "id": "art-o002-u04-data",
+      "kind": "data_csv",
+      "path": "output/unit04/unit04-data.csv",
+      "producer": "lab-o002-u04-plotting-m01",
+      "sha256": "f510ee30b5adc1cf470f75c2552ea8254a4513a107e3506dc4ad8c033c6f03be",
+      "state": "current"
+    },
+    {
+      "accessibility_description": "art-o002-u04-alt",
+      "bytes": 18947,
+      "id": "art-o002-u04-figure",
+      "kind": "figure_svg",
+      "path": "output/unit04/unit04-figure.svg",
+      "producer": "lab-o002-u04-plotting-m01",
+      "sha256": "fd4cfa793ece466a52201efbd9b1c6c5413f24d0c3602adc6a7b8698ef28c81b",
+      "state": "current"
+    },
+    {
+      "bytes": 479,
+      "id": "art-o002-u04-alt",
+      "kind": "accessibility_text",
+      "path": "output/unit04/unit04-alt.txt",
+      "producer": "lab-o002-u04-plotting-m01",
+      "sha256": "c68df3a88d557ec461d6b38240f7c177e95b41c7489c67b8b58a92095ec48e52",
+      "state": "current"
+    },
+    {
+      "bytes": 1729,
+      "id": "art-o002-u04-manifest",
+      "kind": "manifest_json",
+      "members": [
+        "art-o002-u04-data",
+        "art-o002-u04-figure",
+        "art-o002-u04-alt"
+      ],
+      "path": "output/unit04/unit04-manifest.json",
+      "producer": "lab-o002-u04-plotting-m01",
+      "sha256": "addf0fc5d8eb05f30dd2efa553278f84e472024097514bd4f92ce591824a51d9",
+      "state": "current"
+    },
+    {
+      "bytes": 2219,
+      "id": "art-o002-u05-sage-results",
+      "kind": "result_json",
+      "path": "00_control/SAGE_LAB_RESULT.json",
+      "producer": "lab-o002-u05-sage",
+      "receipt_ids": [
+        "receipt-o002-sage-lab-result",
+        "receipt-o002-sage-lab-qa"
+      ],
+      "sha256": "3b1a401d81985124804e6fb536020fb542acdfea6a635e500f0f3bbe72593b78",
+      "state": "current"
+    },
+    {
+      "bytes": 5763,
+      "id": "art-o002-u06-results",
+      "kind": "result_json",
+      "path": "output/unit06-results.json",
+      "producer": "lab-o002-u06-scipy",
+      "sha256": "52b8670158d3eef649802e4652e6be6bd6ab1a0e21e72d62eb07c5b6127fa051",
+      "state": "current"
+    },
+    {
+      "bytes": 4404,
+      "id": "art-o002-u11-results",
+      "kind": "result_json",
+      "path": "output/unit11-results.json",
+      "producer": "lab-o002-u11-scipy",
+      "sha256": "3f95a579c20e8543b37cc7e8ccc530f5586eac16d3253a6ea4bd7ad1252f17bc",
+      "state": "current"
+    },
+    {
+      "bytes": 37570,
+      "id": "art-o002-reader-html",
+      "kind": "reader_html",
+      "path": "output/index.html",
+      "producer": "pipeline-o002-build",
+      "receipt_ids": [
+        "receipt-o002-bundle",
+        "receipt-o002-html-browser"
+      ],
+      "sha256": "5fb26b6316c5fd807760ca4f6c4e060f8d4ef95779eb04e3029c84c82e92c85a",
+      "state": "current"
+    },
+    {
+      "bytes": 754845,
+      "id": "art-o002-reader-pdf",
+      "kind": "reader_pdf",
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+      "producer": "pipeline-o002-build",
+      "receipt_ids": [
+        "receipt-o002-bundle",
+        "receipt-o002-pdf-visual"
+      ],
+      "sha256": "f9d3df201c03107be3a3e6f61dd6798485cf20bc35ae14f2911ab212789b5038",
+      "state": "current"
+    },
+    {
+      "bytes": 291212,
+      "id": "art-o002-reader-epub",
+      "kind": "reader_epub",
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+      "producer": "pipeline-o002-build",
+      "receipt_ids": [
+        "receipt-o002-bundle",
+        "receipt-o002-epub"
+      ],
+      "sha256": "8e9e35dd54be8524a8b7752df0a7285749db4c80fc5a10271eb841c01c0c748d",
+      "state": "current"
+    },
+    {
+      "id": "art-o002-source-archive",
+      "kind": "source_archive",
+      "path": "release/O002_B80_ID_EDITABLE_SOURCE_2026-08-22-1.zip",
+      "producer": "pipeline-o002-build",
+      "receipt_ids": [
+        "receipt-o002-bundle"
+      ],
+      "state": "current"
+    },
+    {
+      "id": "art-o002-offline-bundle",
+      "kind": "bundle",
+      "path": "release/O002_B80_ID_OFFLINE_READER_2026-08-22-1.zip",
+      "producer": "pipeline-o002-build",
+      "receipt_ids": [
+        "receipt-o002-bundle"
+      ],
+      "state": "current"
+    }
+  ],
   "components": [
+    {
+      "id": "cmp-o002-p01-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/p01-menjalankan-eksperimen-python.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-p01-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/primer01_execution.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-p01-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_primer01.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-p02-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/p02-kontrol-koleksi-fungsi-modul-berkas.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-p02-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/primer02_control_files.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-p02-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_primer02.py",
+      "source": "src-o002-original"
+    },
     {
       "id": "cmp-o002-u01-text",
       "kind": "reader_text",
@@ -12,6 +364,13 @@
       "kind": "software",
       "license": "MIT",
       "path": "source/code/unit01_experiment.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u01-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit01.py",
       "source": "src-o002-original"
     },
     {
@@ -29,6 +388,13 @@
       "source": "src-o002-original"
     },
     {
+      "id": "cmp-o002-u02-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit02.py",
+      "source": "src-o002-original"
+    },
+    {
       "id": "cmp-o002-u03-text",
       "kind": "reader_text",
       "license": "CC BY-SA 4.0",
@@ -40,6 +406,13 @@
       "kind": "software",
       "license": "MIT",
       "path": "source/code/unit03_arrays.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u03-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit03.py",
       "source": "src-o002-original"
     },
     {
@@ -57,6 +430,13 @@
       "source": "src-o002-original"
     },
     {
+      "id": "cmp-o002-u04-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit04.py",
+      "source": "src-o002-original"
+    },
+    {
       "id": "cmp-o002-u05-text",
       "kind": "reader_text",
       "license": "CC BY-SA 4.0",
@@ -68,6 +448,13 @@
       "kind": "software",
       "license": "MIT",
       "path": "source/code/unit05_symbolic.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u05-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit05.py",
       "source": "src-o002-original"
     },
     {
@@ -85,6 +472,13 @@
       "source": "src-o002-original"
     },
     {
+      "id": "cmp-o002-u06-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit06.py",
+      "source": "src-o002-original"
+    },
+    {
       "id": "cmp-o002-u07-text",
       "kind": "reader_text",
       "license": "CC BY-SA 4.0",
@@ -96,6 +490,13 @@
       "kind": "software",
       "license": "MIT",
       "path": "source/code/unit07_experiment_design.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u07-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit07.py",
       "source": "src-o002-original"
     },
     {
@@ -113,6 +514,13 @@
       "source": "src-o002-original"
     },
     {
+      "id": "cmp-o002-u08-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit08.py",
+      "source": "src-o002-original"
+    },
+    {
       "id": "cmp-o002-u09-text",
       "kind": "reader_text",
       "license": "CC BY-SA 4.0",
@@ -124,6 +532,13 @@
       "kind": "software",
       "license": "MIT",
       "path": "source/code/unit09_provenance.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u09-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit09.py",
       "source": "src-o002-original"
     },
     {
@@ -141,6 +556,13 @@
       "source": "src-o002-original"
     },
     {
+      "id": "cmp-o002-u10-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit10.py",
+      "source": "src-o002-original"
+    },
+    {
       "id": "cmp-o002-u11-text",
       "kind": "reader_text",
       "license": "CC BY-SA 4.0",
@@ -152,6 +574,13 @@
       "kind": "software",
       "license": "MIT",
       "path": "source/code/unit11_numerical.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u11-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit11.py",
       "source": "src-o002-original"
     },
     {
@@ -167,49 +596,2338 @@
       "license": "MIT",
       "path": "source/code/unit12_capstone.py",
       "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u12-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit12.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-p01-notebook-generator",
+      "kind": "software",
+      "license": "MIT",
+      "path": "scripts/make_notebook_supplement.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-p01-notebook-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_notebook_supplement.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u05-sage-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit05_sage_lab.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u05-sage-test",
+      "kind": "test",
+      "license": "MIT",
+      "path": "tests/test_unit05_sage.py",
+      "source": "src-o002-original"
     }
   ],
   "course": {
     "id": "B80",
     "prerequisite": "A30",
     "project_id": "O002",
+    "selected_unit_count": 14,
     "title": "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi"
   },
   "cursor": {
-    "boundary": "complete 12-unit id-ID edition",
-    "edition_complete": true,
-    "last_complete_unit": "o002.u12",
-    "next_unit": null
+    "admitted_unit_count": 14,
+    "b80_curriculum_complete": true,
+    "boundary": "all 14 selected units and every curricular/build/accessibility gate pass",
+    "last_admitted_unit": "o002.u12",
+    "next_unit": null,
+    "next_work_item": null,
+    "selected_unit_count": 14,
+    "standalone_edition_complete": true
   },
+  "environments": [
+    {
+      "availability": "native",
+      "id": "env-o002-python",
+      "kind": "python",
+      "lock": {
+        "bytes": 1846,
+        "path": "environment/python-lock.txt",
+        "sha256": "28d1f9a5d2b341628fbc5e182ca523da1cfa33473e5714493f8ca18893c31d9a"
+      },
+      "package_count": 95,
+      "platform": "OS-independent package identities; native Windows execution",
+      "receipt": {
+        "bytes": 17231,
+        "path": "environment/PYTHON_ENVIRONMENT_RECEIPT.json",
+        "schema": "o002.python-environment.v1",
+        "sha256": "6cff49e768dcb06752191d821e2577c45856313245af6f701f4ab05e2bc56918"
+      },
+      "required_packages": [
+        "ipykernel",
+        "ipython",
+        "jsonschema",
+        "jupyter-client",
+        "jupyter-core",
+        "jupyterlab",
+        "matplotlib",
+        "nbclient",
+        "nbformat",
+        "numpy",
+        "notebook",
+        "scipy",
+        "sympy"
+      ],
+      "runtime_version": "CPython 3.13.1",
+      "status": "current"
+    },
+    {
+      "availability": "local_wsl",
+      "id": "env-o002-sage",
+      "kind": "sagemath",
+      "lock": {
+        "bytes": 34181,
+        "path": "environment/sage-ubuntu22.04-dpkg-lock.txt",
+        "sha256": "bbd7f235834660681327b975a816b71aabd6d31946e6c875bf55d06224a5d802"
+      },
+      "package_count": 1064,
+      "platform": "WSL Ubuntu 22.04 x86_64",
+      "receipt": {
+        "bytes": 575,
+        "path": "environment/SAGE_ENVIRONMENT_RECEIPT.json",
+        "schema": "o002.sage-environment.v1",
+        "sha256": "5fe62bee0260a17d7f44e488cd58312a7c4b3894ac93a09af837b18273194451"
+      },
+      "required_packages": [
+        "python3-sage==9.5-4",
+        "sagemath==9.5-4"
+      ],
+      "runtime_version": "SageMath 9.5; apt sagemath 9.5-4",
+      "status": "current"
+    }
+  ],
+  "exercises": [
+    {
+      "check": {
+        "label": "chk-o002-p01-01",
+        "source_anchor": "ex-o002-p01-01",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-p01-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-p01-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "sol-o002-p01-01",
+        "source_anchor": "ex-o002-p01-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/p01-menjalankan-eksperimen-python.qmd",
+      "title": "Latihan 1 - nilai, jenis, dan operator",
+      "unit": "o002.p01"
+    },
+    {
+      "check": {
+        "label": "chk-o002-p01-02",
+        "source_anchor": "ex-o002-p01-02",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-p01-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-p01-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "sol-o002-p01-02",
+        "source_anchor": "ex-o002-p01-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/p01-menjalankan-eksperimen-python.qmd",
+      "title": "Latihan 2 - impor, panggilan, dan bantuan",
+      "unit": "o002.p01"
+    },
+    {
+      "check": {
+        "label": "chk-o002-p01-03",
+        "source_anchor": "ex-o002-p01-03",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-p01-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-p01-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "sol-o002-p01-03",
+        "source_anchor": "ex-o002-p01-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/p01-menjalankan-eksperimen-python.qmd",
+      "title": "Latihan 3 - membaca dan memperbaiki traceback",
+      "unit": "o002.p01"
+    },
+    {
+      "check": {
+        "label": "chk-o002-p01-04",
+        "source_anchor": "ex-o002-p01-04",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-p01-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-p01-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "sol-o002-p01-04",
+        "source_anchor": "ex-o002-p01-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/p01-menjalankan-eksperimen-python.qmd",
+      "title": "Latihan 4 - komputasi, tampilan, dan skrip",
+      "unit": "o002.p01"
+    },
+    {
+      "check": {
+        "label": "chk-o002-p01-05",
+        "source_anchor": "ex-o002-p01-05",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-p01-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-p01-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "sol-o002-p01-05",
+        "source_anchor": "ex-o002-p01-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/p01-menjalankan-eksperimen-python.qmd",
+      "title": "Latihan 5 - kernel bersih dan keadaan tersembunyi",
+      "unit": "o002.p01"
+    },
+    {
+      "check": {
+        "label": "Cek yang dapat dijalankan",
+        "source_anchor": "ex-o002-p02-01",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-p02-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-p02-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-p02-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/p02-kontrol-koleksi-fungsi-modul-berkas.qmd",
+      "title": "Latihan 1 - koleksi dan irisan",
+      "unit": "o002.p02"
+    },
+    {
+      "check": {
+        "label": "Cek yang dapat dijalankan",
+        "source_anchor": "ex-o002-p02-02",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-p02-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-p02-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-p02-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/p02-kontrol-koleksi-fungsi-modul-berkas.qmd",
+      "title": "Latihan 2 - aliran kontrol sebelum comprehension",
+      "unit": "o002.p02"
+    },
+    {
+      "check": {
+        "label": "Cek yang dapat dijalankan",
+        "source_anchor": "ex-o002-p02-03",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-p02-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-p02-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-p02-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/p02-kontrol-koleksi-fungsi-modul-berkas.qmd",
+      "title": "Latihan 3 - fungsi, ruang lingkup, dan galat",
+      "unit": "o002.p02"
+    },
+    {
+      "check": {
+        "label": "Cek yang dapat dijalankan",
+        "source_anchor": "ex-o002-p02-04",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-p02-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-p02-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-p02-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/p02-kontrol-koleksi-fungsi-modul-berkas.qmd",
+      "title": "Latihan 4 - modul peserta dan tes merah-hijau",
+      "unit": "o002.p02"
+    },
+    {
+      "check": {
+        "label": "Cek yang dapat dijalankan",
+        "source_anchor": "ex-o002-p02-05",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-p02-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-p02-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-p02-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/p02-kontrol-koleksi-fungsi-modul-berkas.qmd",
+      "title": "Latihan 5 - teks, CSV, JSON, dan manifest",
+      "unit": "o002.p02"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u01-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u01-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u01-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u01-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/01-komputasi-bukti.qmd",
+      "title": "Latihan 1 - representasi",
+      "unit": "o002.u01"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u01-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u01-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u01-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u01-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/01-komputasi-bukti.qmd",
+      "title": "Latihan 2 - spesifikasi toleransi",
+      "unit": "o002.u01"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u01-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u01-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u01-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u01-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/01-komputasi-bukti.qmd",
+      "title": "Latihan 3 - batas eksperimen",
+      "unit": "o002.u01"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u01-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u01-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u01-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u01-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/01-komputasi-bukti.qmd",
+      "title": "Latihan 4 - contoh penyangkal",
+      "unit": "o002.u01"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u01-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u01-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u01-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u01-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/01-komputasi-bukti.qmd",
+      "title": "Latihan 5 - rekaman eksperimen",
+      "unit": "o002.u01"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u02-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u02-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u02-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u02-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/02-objek-fungsi.qmd",
+      "title": "Latihan 1 - memilih representasi",
+      "unit": "o002.u02"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u02-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u02-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u02-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u02-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/02-objek-fungsi.qmd",
+      "title": "Latihan 2 - nilai dan identitas",
+      "unit": "o002.u02"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u02-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u02-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u02-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u02-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/02-objek-fungsi.qmd",
+      "title": "Latihan 3 - kontrak fungsi",
+      "unit": "o002.u02"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u02-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u02-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u02-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u02-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/02-objek-fungsi.qmd",
+      "title": "Latihan 4 - alias yang berbahaya",
+      "unit": "o002.u02"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u02-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u02-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u02-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u02-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/02-objek-fungsi.qmd",
+      "title": "Latihan 5 - tes dan bukti",
+      "unit": "o002.u02"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u03-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u03-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u03-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u03-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/03-array-vektorisasi.qmd",
+      "title": "Latihan 1 - bentuk dan makna sumbu",
+      "unit": "o002.u03"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u03-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u03-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u03-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u03-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/03-array-vektorisasi.qmd",
+      "title": "Latihan 2 - vektorisasi dan invarian",
+      "unit": "o002.u03"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u03-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u03-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u03-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u03-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/03-array-vektorisasi.qmd",
+      "title": "Latihan 3 - kontrak broadcasting",
+      "unit": "o002.u03"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u03-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u03-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u03-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u03-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/03-array-vektorisasi.qmd",
+      "title": "Latihan 4 - melacak *view*",
+      "unit": "o002.u03"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u03-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u03-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u03-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u03-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/03-array-vektorisasi.qmd",
+      "title": "Latihan 5 - eksperimen bukan bukti umum",
+      "unit": "o002.u03"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u04-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u04-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u04-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u04-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/04-visualisasi-integritas.qmd",
+      "title": "Latihan 1 - pertanyaan dan pengodean",
+      "unit": "o002.u04"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u04-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u04-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u04-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u04-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/04-visualisasi-integritas.qmd",
+      "title": "Latihan 2 - sumbu terpotong",
+      "unit": "o002.u04"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u04-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u04-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u04-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u04-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/04-visualisasi-integritas.qmd",
+      "title": "Latihan 3 - makna batang galat",
+      "unit": "o002.u04"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u04-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u04-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u04-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u04-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/04-visualisasi-integritas.qmd",
+      "title": "Latihan 4 - deskripsi aksesibel",
+      "unit": "o002.u04"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u04-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u04-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u04-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u04-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/04-visualisasi-integritas.qmd",
+      "title": "Latihan 5 - gambar dan bukti",
+      "unit": "o002.u04"
+    },
+    {
+      "check": {
+        "label": "chk-o002-u04-m01",
+        "source_anchor": "ex-o002-u04-m01",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u04-m01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u04-m01",
+      "kind": "mastery",
+      "sequence": 6,
+      "solution": {
+        "label": "sol-o002-u04-m01",
+        "source_anchor": "ex-o002-u04-m01",
+        "status": "complete"
+      },
+      "source_path": "source/units/04-visualisasi-integritas.qmd",
+      "title": "Latihan penguasaan - data ke plot ke manifes",
+      "unit": "o002.u04"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u05-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u05-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u05-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u05-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/05-eksak-simbolik-sage.qmd",
+      "title": "Latihan 1 - ekspresi dan nilai",
+      "unit": "o002.u05"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u05-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u05-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u05-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u05-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/05-eksak-simbolik-sage.qmd",
+      "title": "Latihan 2 - asumsi yang hilang",
+      "unit": "o002.u05"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u05-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u05-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u05-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u05-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/05-eksak-simbolik-sage.qmd",
+      "title": "Latihan 3 - ekuivalensi dan domain",
+      "unit": "o002.u05"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u05-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u05-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u05-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u05-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/05-eksak-simbolik-sage.qmd",
+      "title": "Latihan 4 - faktor, akar, dan pemeriksaan",
+      "unit": "o002.u05"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u05-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u05-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u05-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u05-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/05-eksak-simbolik-sage.qmd",
+      "title": "Latihan 5 - artefak simbolik yang stabil",
+      "unit": "o002.u05"
+    },
+    {
+      "check": {
+        "label": "Cek yang dapat dijalankan",
+        "source_anchor": "ex-o002-u05-sage-01",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u05-sage-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u05-sage-01",
+      "kind": "mastery",
+      "sequence": 6,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u05-sage-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/05-eksak-simbolik-sage.qmd",
+      "title": "Latihan Sage 1 - parent, coercion, dan faktor",
+      "unit": "o002.u05"
+    },
+    {
+      "check": {
+        "label": "Cek yang dapat dijalankan",
+        "source_anchor": "ex-o002-u05-sage-02",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u05-sage-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u05-sage-02",
+      "kind": "mastery",
+      "sequence": 7,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u05-sage-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/05-eksak-simbolik-sage.qmd",
+      "title": "Latihan Sage 2 - solusi eksak dan pendekatan",
+      "unit": "o002.u05"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u06-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u06-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u06-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u06-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/06-titik-mengambang-stabilitas.qmd",
+      "title": "Latihan 1 - `ulp` dan kenaikan yang hilang",
+      "unit": "o002.u06"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u06-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u06-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u06-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u06-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/06-titik-mengambang-stabilitas.qmd",
+      "title": "Latihan 2 - membuang pembatalan",
+      "unit": "o002.u06"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u06-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u06-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u06-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u06-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/06-titik-mengambang-stabilitas.qmd",
+      "title": "Latihan 3 - galat maju dan mundur",
+      "unit": "o002.u06"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u06-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u06-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u06-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u06-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/06-titik-mengambang-stabilitas.qmd",
+      "title": "Latihan 4 - kondisi atau algoritme?",
+      "unit": "o002.u06"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u06-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u06-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u06-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u06-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/06-titik-mengambang-stabilitas.qmd",
+      "title": "Latihan 5 - jumlah, toleransi, dan batas klaim",
+      "unit": "o002.u06"
+    },
+    {
+      "check": {
+        "label": "Cek yang dapat dijalankan",
+        "source_anchor": "ex-o002-u06-scipy-01",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u06-scipy-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u06-scipy-01",
+      "kind": "mastery",
+      "sequence": 6,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u06-scipy-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/06-titik-mengambang-stabilitas.qmd",
+      "title": "Latihan SciPy - stabilitas `exprel`",
+      "unit": "o002.u06"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u07-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u07-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u07-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u07-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/07-rancangan-eksperimen.qmd",
+      "title": "Latihan 1 - variabel dan perancu",
+      "unit": "o002.u07"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u07-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u07-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u07-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u07-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/07-rancangan-eksperimen.qmd",
+      "title": "Latihan 2 - benih bukan mesin waktu",
+      "unit": "o002.u07"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u07-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u07-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u07-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u07-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/07-rancangan-eksperimen.qmd",
+      "title": "Latihan 3 - pemilihan dan holdout",
+      "unit": "o002.u07"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u07-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u07-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u07-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u07-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/07-rancangan-eksperimen.qmd",
+      "title": "Latihan 4 - ukuran efek dan aturan berhenti",
+      "unit": "o002.u07"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u07-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u07-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u07-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u07-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/07-rancangan-eksperimen.qmd",
+      "title": "Latihan 5 - hasil negatif dan batas bukti",
+      "unit": "o002.u07"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u08-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u08-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u08-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u08-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/08-pengujian-validasi.qmd",
+      "title": "Latihan 1 - memilih assertion",
+      "unit": "o002.u08"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u08-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u08-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u08-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u08-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/08-pengujian-validasi.qmd",
+      "title": "Latihan 2 - membangun oracle",
+      "unit": "o002.u08"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u08-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u08-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u08-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u08-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/08-pengujian-validasi.qmd",
+      "title": "Latihan 3 - hubungan metamorfik",
+      "unit": "o002.u08"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u08-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u08-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u08-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u08-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/08-pengujian-validasi.qmd",
+      "title": "Latihan 4 - tes regresi batas",
+      "unit": "o002.u08"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u08-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u08-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u08-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u08-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/08-pengujian-validasi.qmd",
+      "title": "Latihan 5 - batas bukti pengujian",
+      "unit": "o002.u08"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u09-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u09-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u09-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u09-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/09-data-konfigurasi-provenans.qmd",
+      "title": "Latihan 1 - mentah, turunan, dan garis keturunan",
+      "unit": "o002.u09"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u09-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u09-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u09-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u09-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/09-data-konfigurasi-provenans.qmd",
+      "title": "Latihan 2 - schema dan satuan",
+      "unit": "o002.u09"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u09-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u09-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u09-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u09-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/09-data-konfigurasi-provenans.qmd",
+      "title": "Latihan 3 - konfigurasi dan jalur aman",
+      "unit": "o002.u09"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u09-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u09-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u09-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u09-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/09-data-konfigurasi-provenans.qmd",
+      "title": "Latihan 4 - hak dan privasi",
+      "unit": "o002.u09"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u09-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u09-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u09-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u09-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/09-data-konfigurasi-provenans.qmd",
+      "title": "Latihan 5 - semantik, byte, dan hash",
+      "unit": "o002.u09"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u10-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u10-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u10-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u10-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/10-otomasi-pipa.qmd",
+      "title": "Latihan 1 - urutan tugas",
+      "unit": "o002.u10"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u10-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u10-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u10-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u10-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/10-otomasi-pipa.qmd",
+      "title": "Latihan 2 - siklus",
+      "unit": "o002.u10"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u10-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u10-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u10-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u10-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/10-otomasi-pipa.qmd",
+      "title": "Latihan 3 - cap waktu",
+      "unit": "o002.u10"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u10-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u10-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u10-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u10-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/10-otomasi-pipa.qmd",
+      "title": "Latihan 4 - kegagalan penulisan",
+      "unit": "o002.u10"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u10-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u10-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u10-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u10-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/10-otomasi-pipa.qmd",
+      "title": "Latihan 5 - alur kerja hijau",
+      "unit": "o002.u10"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u11-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u11-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u11-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u11-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/11-eksperimen-numerik.qmd",
+      "title": "Latihan 1 - invarian bagi-dua",
+      "unit": "o002.u11"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u11-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u11-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u11-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u11-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/11-eksperimen-numerik.qmd",
+      "title": "Latihan 2 - batas iterasi",
+      "unit": "o002.u11"
+    },
+    {
+      "check": {
+        "label": "chk-o002-u11-s01",
+        "source_anchor": "ex-o002-u11-s01",
+        "status": "executable"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u11-s01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u11-s01",
+      "kind": "mastery",
+      "sequence": 3,
+      "solution": {
+        "label": "sol-o002-u11-s01",
+        "source_anchor": "ex-o002-u11-s01",
+        "status": "complete"
+      },
+      "source_path": "source/units/11-eksperimen-numerik.qmd",
+      "title": "Latihan SciPy - dua implementasi pada akar kubik",
+      "unit": "o002.u11"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u11-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "prerequisite_deferred",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u11-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u11-03",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u11-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/11-eksperimen-numerik.qmd",
+      "title": "Latihan 3 - pemeriksaan kuadratur",
+      "unit": "o002.u11"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u11-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "prerequisite_deferred",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u11-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u11-04",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u11-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/11-eksperimen-numerik.qmd",
+      "title": "Latihan 4 - residual bukan galat solusi",
+      "unit": "o002.u11"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u11-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "prerequisite_deferred",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u11-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u11-05",
+      "kind": "core",
+      "sequence": 6,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u11-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/11-eksperimen-numerik.qmd",
+      "title": "Latihan 5 - eksperimen Euler",
+      "unit": "o002.u11"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u12-01",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u12-01",
+        "status": "complete"
+      },
+      "id": "ex-o002-u12-01",
+      "kind": "core",
+      "sequence": 1,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u12-01",
+        "status": "complete"
+      },
+      "source_path": "source/units/12-proyek-akhir.qmd",
+      "title": "Latihan 1 - klasifikasi klaim",
+      "unit": "o002.u12"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u12-02",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u12-02",
+        "status": "complete"
+      },
+      "id": "ex-o002-u12-02",
+      "kind": "core",
+      "sequence": 2,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u12-02",
+        "status": "complete"
+      },
+      "source_path": "source/units/12-proyek-akhir.qmd",
+      "title": "Latihan 2 - manifest yang belum lengkap",
+      "unit": "o002.u12"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u12-03",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u12-03",
+        "status": "complete"
+      },
+      "id": "ex-o002-u12-03",
+      "kind": "core",
+      "sequence": 3,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u12-03",
+        "status": "complete"
+      },
+      "source_path": "source/units/12-proyek-akhir.qmd",
+      "title": "Latihan 3 - jalur berbahaya",
+      "unit": "o002.u12"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u12-04",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u12-04",
+        "status": "complete"
+      },
+      "id": "ex-o002-u12-04",
+      "kind": "core",
+      "sequence": 4,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u12-04",
+        "status": "complete"
+      },
+      "source_path": "source/units/12-proyek-akhir.qmd",
+      "title": "Latihan 4 - reproduksi tidak identik",
+      "unit": "o002.u12"
+    },
+    {
+      "check": {
+        "label": null,
+        "source_anchor": "ex-o002-u12-05",
+        "status": "not_present"
+      },
+      "curriculum_status": "complete",
+      "hint": {
+        "label": "Petunjuk",
+        "source_anchor": "ex-o002-u12-05",
+        "status": "complete"
+      },
+      "id": "ex-o002-u12-05",
+      "kind": "core",
+      "sequence": 5,
+      "solution": {
+        "label": "Jawaban dan solusi",
+        "source_anchor": "ex-o002-u12-05",
+        "status": "complete"
+      },
+      "source_path": "source/units/12-proyek-akhir.qmd",
+      "title": "Latihan 5 - tanggapan tinjauan",
+      "unit": "o002.u12"
+    }
+  ],
+  "historical_release": {
+    "doi": "10.5281/zenodo.22052053",
+    "exercise_count": 60,
+    "tag": "v2026.08.22",
+    "unit_count": 12,
+    "verified": true,
+    "version": "2026.08.22"
+  },
+  "labs": [
+    {
+      "artifact_ids": [
+        "art-o002-u04-data",
+        "art-o002-u04-figure",
+        "art-o002-u04-alt",
+        "art-o002-u04-manifest"
+      ],
+      "environment": "env-o002-python",
+      "evidence": "current executable mastery exercise and four current output artifacts",
+      "exercise_ids": [
+        "ex-o002-u04-m01"
+      ],
+      "id": "lab-o002-u04-plotting-m01",
+      "kind": "plotting",
+      "requirements": [
+        "progressive fig/ax plot scatter errorbar construction",
+        "labels units legend and accessible description",
+        "deterministic data-to-plot-to-manifest mastery"
+      ],
+      "source_paths": [
+        "source/units/04-visualisasi-integritas.qmd",
+        "source/code/unit04_visualization.py",
+        "tests/test_unit04.py"
+      ],
+      "status": "complete",
+      "unit": "o002.u04"
+    },
+    {
+      "artifact_ids": [
+        "art-o002-u05-sage-results"
+      ],
+      "environment": "env-o002-sage",
+      "evidence": "Sage 9.5 lab result and seven-test local execution receipt are bound",
+      "exercise_ids": [
+        "ex-o002-u05-sage-01",
+        "ex-o002-u05-sage-02"
+      ],
+      "id": "lab-o002-u05-sage",
+      "kind": "sagemath",
+      "requirements": [
+        "local execution of ZZ QQ RR SR and coercion",
+        "polynomial factorization solving and approximation",
+        "two executable Sage mastery exercises with full solutions"
+      ],
+      "source_paths": [
+        "source/units/05-eksak-simbolik-sage.qmd",
+        "source/code/unit05_symbolic.py",
+        "source/code/unit05_sage_lab.py",
+        "tests/test_unit05.py",
+        "tests/test_unit05_sage.py"
+      ],
+      "status": "complete",
+      "unit": "o002.u05"
+    },
+    {
+      "artifact_ids": [
+        "art-o002-u06-results"
+      ],
+      "environment": "env-o002-python",
+      "evidence": "current SciPy content, mastery exercise, code, and executable tests",
+      "exercise_ids": [
+        "ex-o002-u06-scipy-01"
+      ],
+      "id": "lab-o002-u06-scipy",
+      "kind": "scipy",
+      "requirements": [
+        "scipy.special.exprel stable-versus-naive comparison",
+        "domain conditioning forward/backward error and proof boundary",
+        "executable mastery exercise and tests"
+      ],
+      "source_paths": [
+        "source/units/06-titik-mengambang-stabilitas.qmd",
+        "source/code/unit06_floating.py",
+        "tests/test_unit06.py"
+      ],
+      "status": "complete",
+      "unit": "o002.u06"
+    },
+    {
+      "artifact_ids": [
+        "art-o002-u11-results"
+      ],
+      "environment": "env-o002-python",
+      "evidence": "current SciPy comparison, mastery exercise, code, and executable tests",
+      "exercise_ids": [
+        "ex-o002-u11-s01"
+      ],
+      "id": "lab-o002-u11-scipy",
+      "kind": "scipy",
+      "requirements": [
+        "original bisection versus scipy.optimize.root_scalar(method=bisect)",
+        "version bracketing convergence residual and result validation",
+        "executable A30 mastery exercise and tests"
+      ],
+      "source_paths": [
+        "source/units/11-eksperimen-numerik.qmd",
+        "source/code/unit11_numerical.py",
+        "tests/test_unit11.py"
+      ],
+      "status": "complete",
+      "unit": "o002.u11"
+    }
+  ],
   "language": "id-ID",
+  "planned_release": {
+    "artifact_ids": [
+      "art-o002-reader-html",
+      "art-o002-reader-pdf",
+      "art-o002-reader-epub",
+      "art-o002-source-archive",
+      "art-o002-offline-bundle"
+    ],
+    "doi": "10.5281/zenodo.22053905",
+    "record_id": 22053905,
+    "status": "published",
+    "tag": "v2026.08.22.1",
+    "version": "2026.08.22.1"
+  },
+  "prerequisite_routes": [
+    {
+      "exercises": [
+        "ex-o002-u11-01",
+        "ex-o002-u11-02",
+        "ex-o002-u11-s01"
+      ],
+      "gate_id": null,
+      "id": "route-o002-u11-a30",
+      "prerequisite": "A30",
+      "required_for_b80": true,
+      "sections": [
+        "sec-o002-u11-method-theorem",
+        "sec-o002-u11-bisection",
+        "sec-o002-u11-scipy-bisection",
+        "sec-o002-u11-error-sources",
+        "sec-o002-u11-artifacts"
+      ],
+      "status": "core",
+      "title": "Jalur inti A30/B80: metode, bagi-dua, SciPy, dan sumber galat",
+      "unit": "o002.u11"
+    },
+    {
+      "exercises": [
+        "ex-o002-u11-03"
+      ],
+      "gate_id": "gate-o002-u11-b30",
+      "id": "route-o002-u11-b30",
+      "prerequisite": "B30",
+      "required_for_b80": false,
+      "sections": [
+        "sec-o002-u11-quadrature"
+      ],
+      "status": "deferred",
+      "title": "Jalur B30: kuadratur",
+      "unit": "o002.u11"
+    },
+    {
+      "exercises": [
+        "ex-o002-u11-04"
+      ],
+      "gate_id": "gate-o002-u11-b40",
+      "id": "route-o002-u11-b40",
+      "prerequisite": "B40",
+      "required_for_b80": false,
+      "sections": [
+        "sec-o002-u11-linear"
+      ],
+      "status": "deferred",
+      "title": "Jalur B40: sistem linear",
+      "unit": "o002.u11"
+    },
+    {
+      "exercises": [
+        "ex-o002-u11-05"
+      ],
+      "gate_id": "gate-o002-u11-b70",
+      "id": "route-o002-u11-b70",
+      "prerequisite": "B70",
+      "required_for_b80": false,
+      "sections": [
+        "sec-o002-u11-euler"
+      ],
+      "status": "deferred",
+      "title": "Jalur B70: langkah Euler",
+      "unit": "o002.u11"
+    }
+  ],
   "qa": [
     {
-      "evidence": "12 units; stable IDs; five hint-and-solution exercises per unit",
-      "id": "qa-o002-source-structure",
+      "evidence": "immutable v2026.08.22 release: 12 units and 60 exercises",
+      "id": "qa-o002-standalone-release",
+      "receipt_ids": [],
+      "required_for_b80": false,
+      "scope": "historical_standalone",
       "status": "pass"
     },
     {
-      "evidence": "complete standard-library/scientific-Python test suite at final boundary",
-      "id": "qa-o002-tests",
+      "evidence": "ordered 14-unit source with P01/P02 and stable existing unit IDs",
+      "id": "qa-o002-b80-source-structure",
+      "receipt_ids": [],
+      "required_for_b80": true,
+      "scope": "current_b80",
       "status": "pass"
     },
     {
-      "evidence": "Quarto HTML and LuaLaTeX PDF build at final boundary",
-      "id": "qa-o002-reader-build",
+      "evidence": "verified 95-package Python lock and matching runtime receipt",
+      "id": "qa-o002-python-environment",
+      "receipt_ids": [],
+      "required_for_b80": true,
+      "scope": "current_b80",
       "status": "pass"
     },
     {
-      "evidence": "all final PDF pages rendered and inspected",
-      "id": "qa-o002-pdf-visual",
+      "evidence": "verified Ubuntu 22.04 Sage 9.5 lock and matching runtime receipt",
+      "id": "qa-o002-sage-environment",
+      "receipt_ids": [],
+      "required_for_b80": true,
+      "scope": "current_b80",
       "status": "pass"
     },
     {
-      "evidence": "no audio or interactive widget surface in this edition",
-      "id": "qa-o002-audio",
-      "status": "not_applicable"
+      "evidence": "progressive plotting lab, executable m01, accessible output, and manifest",
+      "id": "qa-o002-u04-plotting-mastery",
+      "receipt_ids": [],
+      "required_for_b80": true,
+      "scope": "current_b80",
+      "status": "pass"
+    },
+    {
+      "evidence": "local Sage 9.5 result and seven-test execution receipt are verified",
+      "id": "qa-o002-u05-sage-lab",
+      "receipt_ids": [
+        "receipt-o002-sage-lab-result",
+        "receipt-o002-sage-lab-qa"
+      ],
+      "required_for_b80": true,
+      "scope": "current_b80",
+      "status": "pass"
+    },
+    {
+      "evidence": "scipy.special.exprel comparison, mastery exercise, and executable tests",
+      "id": "qa-o002-u06-scipy-lab",
+      "receipt_ids": [],
+      "required_for_b80": true,
+      "scope": "current_b80",
+      "status": "pass"
+    },
+    {
+      "evidence": "root_scalar comparison, mastery exercise, and explicit A30/B30/B40/B70 routes",
+      "id": "qa-o002-u11-scipy-and-routes",
+      "receipt_ids": [],
+      "required_for_b80": true,
+      "scope": "current_b80",
+      "status": "pass"
+    },
+    {
+      "evidence": "current deterministic clean-kernel notebook supplement and frozen-kernel validation",
+      "id": "qa-o002-p01-notebook-supplement",
+      "receipt_ids": [],
+      "required_for_b80": true,
+      "scope": "current_b80",
+      "status": "pass"
+    },
+    {
+      "evidence": "all admitted expression is original CC BY-SA 4.0 text and MIT code",
+      "id": "qa-o002-rights-provenance",
+      "receipt_ids": [],
+      "required_for_b80": true,
+      "scope": "current_b80",
+      "status": "pass"
+    },
+    {
+      "evidence": "versioned HTML PDF EPUB source archive and offline bundle identities are verified",
+      "id": "qa-o002-reader-formats-and-bundle",
+      "receipt_ids": [
+        "receipt-o002-bundle"
+      ],
+      "required_for_b80": true,
+      "scope": "current_b80",
+      "status": "pass"
+    },
+    {
+      "evidence": "two clean source/output manifest pairs are byte-identical",
+      "id": "qa-o002-two-clean-builds",
+      "receipt_ids": [
+        "receipt-o002-build-determinism"
+      ],
+      "required_for_b80": true,
+      "scope": "current_b80",
+      "status": "pass"
+    },
+    {
+      "evidence": "PDF all-page review plus HTML browser and EPUB accessibility receipts pass",
+      "id": "qa-o002-final-accessibility",
+      "receipt_ids": [
+        "receipt-o002-html-browser",
+        "receipt-o002-pdf-visual",
+        "receipt-o002-epub"
+      ],
+      "required_for_b80": true,
+      "scope": "current_b80",
+      "status": "pass"
+    },
+    {
+      "evidence": "Zenodo anonymous byte readback is verified; GitHub publication is deferred while the account suspension is under support review",
+      "id": "qa-o002-final-publication",
+      "receipt_ids": [
+        "receipt-o002-publication-final"
+      ],
+      "required_for_b80": false,
+      "scope": "external_preservation",
+      "status": "pass"
+    },
+    {
+      "evidence": "schema-backed topology and closure invariants pass at this boundary",
+      "id": "qa-o002-backend-truth",
+      "receipt_ids": [],
+      "required_for_b80": true,
+      "scope": "current_b80",
+      "status": "pass"
+    }
+  ],
+  "receipts": [
+    {
+      "binding": "bound",
+      "bytes": 2219,
+      "id": "receipt-o002-sage-lab-result",
+      "kind": "lab_result",
+      "path": "00_control/SAGE_LAB_RESULT.json",
+      "schema": "o002.unit05.sage-lab.v1",
+      "sha256": "3b1a401d81985124804e6fb536020fb542acdfea6a635e500f0f3bbe72593b78",
+      "status": "pass"
+    },
+    {
+      "binding": "bound",
+      "bytes": 1160,
+      "id": "receipt-o002-sage-lab-qa",
+      "kind": "lab_qa",
+      "path": "00_control/SAGE_LAB_QA.json",
+      "schema": "o002.sage-lab-qa.v1",
+      "sha256": "fde7f99fc34fb988d75fea143411a89dda298801a445eed20d1100a9f183f37b",
+      "status": "pass"
+    },
+    {
+      "binding": "external",
+      "id": "receipt-o002-bundle",
+      "kind": "bundle_qa",
+      "path": "00_control/BUNDLE_QA.json",
+      "schema": "o002.bundle-receipt.v1",
+      "status": "pass"
+    },
+    {
+      "binding": "external",
+      "id": "receipt-o002-build-determinism",
+      "kind": "build_determinism_qa",
+      "path": "00_control/BUILD_DETERMINISM_QA.json",
+      "schema": "o002.build-determinism.v1",
+      "status": "pass"
+    },
+    {
+      "binding": "bound",
+      "bytes": 2886,
+      "id": "receipt-o002-html-browser",
+      "kind": "html_browser_qa",
+      "path": "00_control/HTML_BROWSER_QA.json",
+      "schema": "o002.html-browser-qa.v1",
+      "sha256": "015e2ecdd9ddec77b3cc7a4af6f992fe60175425520ba830b1d711483cc7efee",
+      "status": "pass"
+    },
+    {
+      "binding": "bound",
+      "bytes": 728,
+      "id": "receipt-o002-pdf-visual",
+      "kind": "pdf_visual_qa",
+      "path": "00_control/PDF_VISUAL_QA.json",
+      "schema": "o002.pdf-visual-qa.v1",
+      "sha256": "4599c9b7c41ef614646d13d5fe7af4310518e4eb07f0c5211312e5aaceedadb2",
+      "status": "pass"
+    },
+    {
+      "binding": "external",
+      "id": "receipt-o002-epub",
+      "kind": "epub_qa",
+      "path": "00_control/EPUB_QA.json",
+      "schema": "o002.epub-qa.v1",
+      "status": "pass"
+    },
+    {
+      "binding": "external",
+      "id": "receipt-o002-publication-final",
+      "kind": "publication_qa",
+      "path": "00_control/PUBLICATION_RECEIPT_FINAL.json",
+      "schema": "o002.publication-final.v1",
+      "status": "pass"
     }
   ],
   "relations": [
+    {
+      "from": "o002.p01",
+      "to": "o002.p02",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.p02",
+      "to": "o002.u01",
+      "type": "precedes"
+    },
     {
       "from": "o002.u01",
       "to": "o002.u02",
@@ -266,6 +2984,46 @@
       "type": "precedes"
     },
     {
+      "from": "o002.p01",
+      "to": "cmp-o002-p01-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.p01",
+      "to": "cmp-o002-p01-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.p01",
+      "to": "cmp-o002-p01-test",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.p01",
+      "to": "cmp-o002-p01-notebook-generator",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.p01",
+      "to": "cmp-o002-p01-notebook-test",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.p02",
+      "to": "cmp-o002-p02-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.p02",
+      "to": "cmp-o002-p02-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.p02",
+      "to": "cmp-o002-p02-test",
+      "type": "uses_component"
+    },
+    {
       "from": "o002.u01",
       "to": "cmp-o002-u01-text",
       "type": "uses_component"
@@ -273,6 +3031,11 @@
     {
       "from": "o002.u01",
       "to": "cmp-o002-u01-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u01",
+      "to": "cmp-o002-u01-test",
       "type": "uses_component"
     },
     {
@@ -286,6 +3049,11 @@
       "type": "uses_component"
     },
     {
+      "from": "o002.u02",
+      "to": "cmp-o002-u02-test",
+      "type": "uses_component"
+    },
+    {
       "from": "o002.u03",
       "to": "cmp-o002-u03-text",
       "type": "uses_component"
@@ -293,6 +3061,11 @@
     {
       "from": "o002.u03",
       "to": "cmp-o002-u03-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u03",
+      "to": "cmp-o002-u03-test",
       "type": "uses_component"
     },
     {
@@ -306,6 +3079,11 @@
       "type": "uses_component"
     },
     {
+      "from": "o002.u04",
+      "to": "cmp-o002-u04-test",
+      "type": "uses_component"
+    },
+    {
       "from": "o002.u05",
       "to": "cmp-o002-u05-text",
       "type": "uses_component"
@@ -313,6 +3091,21 @@
     {
       "from": "o002.u05",
       "to": "cmp-o002-u05-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u05",
+      "to": "cmp-o002-u05-test",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u05",
+      "to": "cmp-o002-u05-sage-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u05",
+      "to": "cmp-o002-u05-sage-test",
       "type": "uses_component"
     },
     {
@@ -326,6 +3119,11 @@
       "type": "uses_component"
     },
     {
+      "from": "o002.u06",
+      "to": "cmp-o002-u06-test",
+      "type": "uses_component"
+    },
+    {
       "from": "o002.u07",
       "to": "cmp-o002-u07-text",
       "type": "uses_component"
@@ -333,6 +3131,11 @@
     {
       "from": "o002.u07",
       "to": "cmp-o002-u07-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u07",
+      "to": "cmp-o002-u07-test",
       "type": "uses_component"
     },
     {
@@ -346,6 +3149,11 @@
       "type": "uses_component"
     },
     {
+      "from": "o002.u08",
+      "to": "cmp-o002-u08-test",
+      "type": "uses_component"
+    },
+    {
       "from": "o002.u09",
       "to": "cmp-o002-u09-text",
       "type": "uses_component"
@@ -353,6 +3161,11 @@
     {
       "from": "o002.u09",
       "to": "cmp-o002-u09-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u09",
+      "to": "cmp-o002-u09-test",
       "type": "uses_component"
     },
     {
@@ -366,6 +3179,11 @@
       "type": "uses_component"
     },
     {
+      "from": "o002.u10",
+      "to": "cmp-o002-u10-test",
+      "type": "uses_component"
+    },
+    {
       "from": "o002.u11",
       "to": "cmp-o002-u11-text",
       "type": "uses_component"
@@ -373,6 +3191,11 @@
     {
       "from": "o002.u11",
       "to": "cmp-o002-u11-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u11",
+      "to": "cmp-o002-u11-test",
       "type": "uses_component"
     },
     {
@@ -384,9 +3207,309 @@
       "from": "o002.u12",
       "to": "cmp-o002-u12-code",
       "type": "uses_component"
+    },
+    {
+      "from": "o002.u12",
+      "to": "cmp-o002-u12-test",
+      "type": "uses_component"
+    },
+    {
+      "from": "ex-o002-p01-01",
+      "to": "cmp-o002-p01-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-p01-02",
+      "to": "cmp-o002-p01-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-p01-03",
+      "to": "cmp-o002-p01-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-p01-04",
+      "to": "cmp-o002-p01-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-p01-05",
+      "to": "cmp-o002-p01-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-p02-01",
+      "to": "cmp-o002-p02-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-p02-02",
+      "to": "cmp-o002-p02-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-p02-03",
+      "to": "cmp-o002-p02-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-p02-04",
+      "to": "cmp-o002-p02-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-p02-05",
+      "to": "cmp-o002-p02-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-u04-m01",
+      "to": "cmp-o002-u04-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-u05-sage-01",
+      "to": "cmp-o002-u05-sage-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-u05-sage-02",
+      "to": "cmp-o002-u05-sage-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-u06-scipy-01",
+      "to": "cmp-o002-u06-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "ex-o002-u11-s01",
+      "to": "cmp-o002-u11-test",
+      "type": "validated_by"
+    },
+    {
+      "from": "o002.u04",
+      "to": "lab-o002-u04-plotting-m01",
+      "type": "implements"
+    },
+    {
+      "from": "lab-o002-u04-plotting-m01",
+      "to": "env-o002-python",
+      "type": "uses_environment"
+    },
+    {
+      "from": "lab-o002-u04-plotting-m01",
+      "to": "art-o002-u04-data",
+      "type": "produces"
+    },
+    {
+      "from": "lab-o002-u04-plotting-m01",
+      "to": "art-o002-u04-figure",
+      "type": "produces"
+    },
+    {
+      "from": "lab-o002-u04-plotting-m01",
+      "to": "art-o002-u04-alt",
+      "type": "produces"
+    },
+    {
+      "from": "lab-o002-u04-plotting-m01",
+      "to": "art-o002-u04-manifest",
+      "type": "produces"
+    },
+    {
+      "from": "o002.u05",
+      "to": "lab-o002-u05-sage",
+      "type": "implements"
+    },
+    {
+      "from": "lab-o002-u05-sage",
+      "to": "env-o002-sage",
+      "type": "uses_environment"
+    },
+    {
+      "from": "lab-o002-u05-sage",
+      "to": "art-o002-u05-sage-results",
+      "type": "produces"
+    },
+    {
+      "from": "o002.u06",
+      "to": "lab-o002-u06-scipy",
+      "type": "implements"
+    },
+    {
+      "from": "lab-o002-u06-scipy",
+      "to": "env-o002-python",
+      "type": "uses_environment"
+    },
+    {
+      "from": "lab-o002-u06-scipy",
+      "to": "art-o002-u06-results",
+      "type": "produces"
+    },
+    {
+      "from": "o002.u11",
+      "to": "lab-o002-u11-scipy",
+      "type": "implements"
+    },
+    {
+      "from": "lab-o002-u11-scipy",
+      "to": "env-o002-python",
+      "type": "uses_environment"
+    },
+    {
+      "from": "lab-o002-u11-scipy",
+      "to": "art-o002-u11-results",
+      "type": "produces"
+    },
+    {
+      "from": "o002.u11",
+      "to": "route-o002-u11-a30",
+      "type": "implements"
+    },
+    {
+      "from": "route-o002-u11-a30",
+      "to": "A30",
+      "type": "requires_prerequisite"
+    },
+    {
+      "from": "o002.u11",
+      "to": "route-o002-u11-b30",
+      "type": "implements"
+    },
+    {
+      "from": "route-o002-u11-b30",
+      "to": "B30",
+      "type": "requires_prerequisite"
+    },
+    {
+      "from": "o002.u11",
+      "to": "route-o002-u11-b40",
+      "type": "implements"
+    },
+    {
+      "from": "route-o002-u11-b40",
+      "to": "B40",
+      "type": "requires_prerequisite"
+    },
+    {
+      "from": "o002.u11",
+      "to": "route-o002-u11-b70",
+      "type": "implements"
+    },
+    {
+      "from": "route-o002-u11-b70",
+      "to": "B70",
+      "type": "requires_prerequisite"
+    },
+    {
+      "from": "cmp-o002-p01-code",
+      "to": "art-o002-p01-results",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-p01-notebook-generator",
+      "to": "art-o002-p01-notebook",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-p02-code",
+      "to": "art-o002-p02-values",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-p02-code",
+      "to": "art-o002-p02-measurements",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-p02-code",
+      "to": "art-o002-p02-summary",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-p02-code",
+      "to": "art-o002-p02-manifest",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-u01-code",
+      "to": "art-o002-u01-results",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-u02-code",
+      "to": "art-o002-u02-results",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-u03-code",
+      "to": "art-o002-u03-results",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-u05-code",
+      "to": "art-o002-u05-results",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-u07-code",
+      "to": "art-o002-u07-results",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-u08-code",
+      "to": "art-o002-u08-results",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-u09-code",
+      "to": "art-o002-u09-results",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-u10-code",
+      "to": "art-o002-u10-results",
+      "type": "produces"
+    },
+    {
+      "from": "cmp-o002-u12-code",
+      "to": "art-o002-u12-results",
+      "type": "produces"
+    },
+    {
+      "from": "pipeline-o002-build",
+      "to": "art-o002-reader-html",
+      "type": "produces"
+    },
+    {
+      "from": "pipeline-o002-build",
+      "to": "art-o002-reader-pdf",
+      "type": "produces"
+    },
+    {
+      "from": "pipeline-o002-build",
+      "to": "art-o002-reader-epub",
+      "type": "produces"
+    },
+    {
+      "from": "pipeline-o002-build",
+      "to": "art-o002-source-archive",
+      "type": "produces"
+    },
+    {
+      "from": "pipeline-o002-build",
+      "to": "art-o002-offline-bundle",
+      "type": "produces"
+    },
+    {
+      "from": "art-o002-p01-notebook",
+      "to": "cmp-o002-p01-notebook-test",
+      "type": "validated_by"
     }
   ],
-  "schema_version": "o002.backend.v1",
+  "schema_version": "o002.backend.v2",
   "sources": [
     {
       "id": "src-o002-original",
@@ -399,8 +3522,8 @@
     {
       "id": "src-o002-walls",
       "identity": "commit 0687916182ab3ddc9e922d4a6eb603609ba91c36; tree b66a9c79aa7144a75d3f83ba53bba4ff8961f91b",
-      "license": "CC BY-NC-SA 4.0; separate/unclear component rights retained",
-      "role": "bounded_donor",
+      "license": "CC BY-NC-SA 4.0; separate component rights remain separate",
+      "role": "comparison_only",
       "title": "Mathematical Python",
       "used_in_current_units": false
     },
@@ -408,25 +3531,114 @@
       "id": "src-o002-rse",
       "identity": "commit 62217e6606842ab9752fcf8e73954d1eb4a3cf07; tree f570f30bb8ace202550c474e81eb3414e8976be5",
       "license": "CC BY 4.0 text; MIT code; excluded components remain separate",
-      "role": "bounded_donor",
+      "role": "comparison_only",
       "title": "Research Software Engineering with Python",
       "used_in_current_units": false
     },
     {
       "id": "src-o002-spl",
-      "identity": "comparison freeze 817a97d8d9a26eeb4e735a402420cd34dd7e89fc; archive not yet admitted",
+      "identity": "commit 817a97d8d9a26eeb4e735a402420cd34dd7e89fc; tree 4af72a3d18cf9bfd32ccbf0c1ea099dd4ba65689",
       "license": "CC BY 4.0",
       "role": "comparison_only",
       "title": "Scientific Python Lectures",
+      "used_in_current_units": false
+    },
+    {
+      "id": "src-o002-fangohr",
+      "identity": "official repository fangohr/introduction-to-python-for-computational-science-and-engineering; DOI 10.5281/zenodo.1411868",
+      "license": "CC BY-NC 4.0",
+      "role": "comparison_only",
+      "title": "Introduction to Python for Computational Science and Engineering",
+      "used_in_current_units": false
+    },
+    {
+      "id": "src-o002-sage-tutorial",
+      "identity": "commit 686dc1a8d420c2e0aabadd4f602d9a0aa4690c50; src/doc/en/tutorial",
+      "license": "CC BY-SA 3.0",
+      "role": "comparison_only",
+      "title": "Official Sage Tutorial 10.9",
       "used_in_current_units": false
     }
   ],
   "units": [
     {
       "components": [
-        "cmp-o002-u01-text",
-        "cmp-o002-u01-code"
+        "cmp-o002-p01-text",
+        "cmp-o002-p01-code",
+        "cmp-o002-p01-test",
+        "cmp-o002-p01-notebook-generator",
+        "cmp-o002-p01-notebook-test"
       ],
+      "curriculum_status": "complete",
+      "exercises": [
+        "ex-o002-p01-01",
+        "ex-o002-p01-02",
+        "ex-o002-p01-03",
+        "ex-o002-p01-04",
+        "ex-o002-p01-05"
+      ],
+      "id": "o002.p01",
+      "reader_path": "source/units/p01-menjalankan-eksperimen-python.qmd",
+      "sections": [
+        "sec-o002-p01",
+        "sec-o002-p01-objectives",
+        "sec-o002-p01-runtime-terminal",
+        "sec-o002-p01-expressions-names",
+        "sec-o002-p01-scalars",
+        "sec-o002-p01-calls-imports-help",
+        "sec-o002-p01-cells",
+        "sec-o002-p01-computation-display",
+        "sec-o002-p01-tracebacks",
+        "sec-o002-p01-script",
+        "sec-o002-p01-hidden-state",
+        "sec-o002-p01-exercises",
+        "sec-o002-p01-summary"
+      ],
+      "standalone_status": "not_applicable",
+      "title": "Primer P01 - Menjalankan Eksperimen Python"
+    },
+    {
+      "components": [
+        "cmp-o002-p02-text",
+        "cmp-o002-p02-code",
+        "cmp-o002-p02-test"
+      ],
+      "curriculum_status": "complete",
+      "exercises": [
+        "ex-o002-p02-01",
+        "ex-o002-p02-02",
+        "ex-o002-p02-03",
+        "ex-o002-p02-04",
+        "ex-o002-p02-05"
+      ],
+      "id": "o002.p02",
+      "reader_path": "source/units/p02-kontrol-koleksi-fungsi-modul-berkas.qmd",
+      "sections": [
+        "sec-o002-p02",
+        "sec-o002-p02-objectives",
+        "sec-o002-p02-collections",
+        "sec-o002-p02-if",
+        "sec-o002-p02-loops",
+        "sec-o002-p02-generator",
+        "sec-o002-p02-functions",
+        "sec-o002-p02-exceptions",
+        "sec-o002-p02-modules",
+        "sec-o002-p02-files",
+        "sec-o002-p02-red-green",
+        "sec-o002-p02-artifact",
+        "sec-o002-p02-exercises",
+        "sec-o002-p02-summary"
+      ],
+      "standalone_status": "not_applicable",
+      "title": "Kontrol, Koleksi, Fungsi, Modul, dan Berkas"
+    },
+    {
+      "components": [
+        "cmp-o002-u01-text",
+        "cmp-o002-u01-code",
+        "cmp-o002-u01-test"
+      ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u01-01",
         "ex-o002-u01-02",
@@ -447,14 +3659,16 @@
         "sec-o002-u01-exercises",
         "sec-o002-u01-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Komputasi, Representasi, dan Bukti"
     },
     {
       "components": [
         "cmp-o002-u02-text",
-        "cmp-o002-u02-code"
+        "cmp-o002-u02-code",
+        "cmp-o002-u02-test"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u02-01",
         "ex-o002-u02-02",
@@ -476,14 +3690,16 @@
         "sec-o002-u02-exercises",
         "sec-o002-u02-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Objek, Nilai, dan Fungsi"
     },
     {
       "components": [
         "cmp-o002-u03-text",
-        "cmp-o002-u03-code"
+        "cmp-o002-u03-code",
+        "cmp-o002-u03-test"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u03-01",
         "ex-o002-u03-02",
@@ -506,20 +3722,23 @@
         "sec-o002-u03-exercises",
         "sec-o002-u03-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Array, Bentuk, dan Vektorisasi"
     },
     {
       "components": [
         "cmp-o002-u04-text",
-        "cmp-o002-u04-code"
+        "cmp-o002-u04-code",
+        "cmp-o002-u04-test"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u04-01",
         "ex-o002-u04-02",
         "ex-o002-u04-03",
         "ex-o002-u04-04",
-        "ex-o002-u04-05"
+        "ex-o002-u04-05",
+        "ex-o002-u04-m01"
       ],
       "id": "o002.u04",
       "reader_path": "source/units/04-visualisasi-integritas.qmd",
@@ -528,6 +3747,13 @@
         "sec-o002-u04-objectives",
         "sec-o002-u04-purpose",
         "sec-o002-u04-encoding",
+        "sec-o002-u04-progressive-lab",
+        "sec-o002-u04-progressive-canvas",
+        "sec-o002-u04-progressive-plot",
+        "sec-o002-u04-progressive-scatter",
+        "sec-o002-u04-progressive-errorbar",
+        "sec-o002-u04-progressive-labels",
+        "sec-o002-u04-progressive-accessible-save",
         "sec-o002-u04-axes",
         "sec-o002-u04-aspect",
         "sec-o002-u04-uncertainty",
@@ -537,20 +3763,26 @@
         "sec-o002-u04-exercises",
         "sec-o002-u04-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Visualisasi dengan Integritas"
     },
     {
       "components": [
         "cmp-o002-u05-text",
-        "cmp-o002-u05-code"
+        "cmp-o002-u05-code",
+        "cmp-o002-u05-test",
+        "cmp-o002-u05-sage-code",
+        "cmp-o002-u05-sage-test"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u05-01",
         "ex-o002-u05-02",
         "ex-o002-u05-03",
         "ex-o002-u05-04",
-        "ex-o002-u05-05"
+        "ex-o002-u05-05",
+        "ex-o002-u05-sage-01",
+        "ex-o002-u05-sage-02"
       ],
       "id": "o002.u05",
       "reader_path": "source/units/05-eksak-simbolik-sage.qmd",
@@ -564,23 +3796,32 @@
         "sec-o002-u05-result-proof",
         "sec-o002-u05-canonical-output",
         "sec-o002-u05-sage-bridge",
+        "sec-o002-u05-sage-parents",
+        "sec-o002-u05-sage-coercion",
+        "sec-o002-u05-sage-polynomial-ring",
+        "sec-o002-u05-sage-solving",
+        "sec-o002-u05-sage-approximation",
+        "sec-o002-u05-sage-receipt",
         "sec-o002-u05-exercises",
         "sec-o002-u05-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Komputasi Eksak dan Simbolik"
     },
     {
       "components": [
         "cmp-o002-u06-text",
-        "cmp-o002-u06-code"
+        "cmp-o002-u06-code",
+        "cmp-o002-u06-test"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u06-01",
         "ex-o002-u06-02",
         "ex-o002-u06-03",
         "ex-o002-u06-04",
-        "ex-o002-u06-05"
+        "ex-o002-u06-05",
+        "ex-o002-u06-scipy-01"
       ],
       "id": "o002.u06",
       "reader_path": "source/units/06-titik-mengambang-stabilitas.qmd",
@@ -591,6 +3832,7 @@
         "sec-o002-u06-ulp-epsilon",
         "sec-o002-u06-range",
         "sec-o002-u06-cancellation",
+        "sec-o002-u06-scipy-exprel",
         "sec-o002-u06-forward-backward",
         "sec-o002-u06-conditioning-stability",
         "sec-o002-u06-summation",
@@ -599,14 +3841,16 @@
         "sec-o002-u06-exercises",
         "sec-o002-u06-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Titik-Mengambang, Galat, dan Stabilitas"
     },
     {
       "components": [
         "cmp-o002-u07-text",
-        "cmp-o002-u07-code"
+        "cmp-o002-u07-code",
+        "cmp-o002-u07-test"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u07-01",
         "ex-o002-u07-02",
@@ -632,14 +3876,16 @@
         "sec-o002-u07-exercises",
         "sec-o002-u07-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Rancangan Eksperimen yang Dapat Diperiksa"
     },
     {
       "components": [
         "cmp-o002-u08-text",
-        "cmp-o002-u08-code"
+        "cmp-o002-u08-code",
+        "cmp-o002-u08-test"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u08-01",
         "ex-o002-u08-02",
@@ -665,14 +3911,16 @@
         "sec-o002-u08-exercises",
         "sec-o002-u08-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Pengujian dan Validasi Komputasi"
     },
     {
       "components": [
         "cmp-o002-u09-text",
-        "cmp-o002-u09-code"
+        "cmp-o002-u09-code",
+        "cmp-o002-u09-test"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u09-01",
         "ex-o002-u09-02",
@@ -698,14 +3946,16 @@
         "sec-o002-u09-exercises",
         "sec-o002-u09-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Data, Konfigurasi, dan Provenans"
     },
     {
       "components": [
         "cmp-o002-u10-text",
-        "cmp-o002-u10-code"
+        "cmp-o002-u10-code",
+        "cmp-o002-u10-test"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u10-01",
         "ex-o002-u10-02",
@@ -728,17 +3978,20 @@
         "sec-o002-u10-exercises",
         "sec-o002-u10-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Otomasi dan Alur Kerja yang Dapat Direproduksi"
     },
     {
       "components": [
         "cmp-o002-u11-text",
-        "cmp-o002-u11-code"
+        "cmp-o002-u11-code",
+        "cmp-o002-u11-test"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u11-01",
         "ex-o002-u11-02",
+        "ex-o002-u11-s01",
         "ex-o002-u11-03",
         "ex-o002-u11-04",
         "ex-o002-u11-05"
@@ -750,6 +4003,7 @@
         "sec-o002-u11-objectives",
         "sec-o002-u11-method-theorem",
         "sec-o002-u11-bisection",
+        "sec-o002-u11-scipy-bisection",
         "sec-o002-u11-quadrature",
         "sec-o002-u11-linear",
         "sec-o002-u11-euler",
@@ -758,14 +4012,16 @@
         "sec-o002-u11-exercises",
         "sec-o002-u11-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Eksperimen Numerik Berprasyarat"
     },
     {
       "components": [
         "cmp-o002-u12-text",
-        "cmp-o002-u12-code"
+        "cmp-o002-u12-code",
+        "cmp-o002-u12-test"
       ],
+      "curriculum_status": "complete",
       "exercises": [
         "ex-o002-u12-01",
         "ex-o002-u12-02",
@@ -787,7 +4043,7 @@
         "sec-o002-u12-exercises",
         "sec-o002-u12-summary"
       ],
-      "status": "complete",
+      "standalone_status": "complete",
       "title": "Proyek Akhir yang Dapat Diperiksa"
     }
   ]

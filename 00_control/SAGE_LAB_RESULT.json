@@ -1,0 +1,90 @@
+{
+  "core_sha256": "8295fb00d46acd404fff162cf8d8ff592e4d59d2fea092da02b8248baf27b257",
+  "explicit_approximation": {
+    "approximate": {
+      "parent": "Real Field with 53 bits of precision",
+      "precision_bits": 53,
+      "value": "0.333333333333333"
+    },
+    "conversion": "RR(QQ(1)/3)",
+    "conversion_is_explicit": true,
+    "exact": {
+      "parent": "Rational Field",
+      "value": "1/3"
+    },
+    "repeat_conversion_difference": "0.000000000000000"
+  },
+  "parents_and_coercion": {
+    "coercion_maps": {
+      "QQ_to_RR": true,
+      "QQ_to_SR": true,
+      "ZZ_to_QQ": true
+    },
+    "mixed_ZZ_plus_QQ": {
+      "parent": "Rational Field",
+      "value": "19/3"
+    },
+    "objects": {
+      "integer": {
+        "parent": "Integer Ring",
+        "value": "6"
+      },
+      "rational": {
+        "parent": "Rational Field",
+        "value": "1/3"
+      },
+      "real": {
+        "parent": "Real Field with 53 bits of precision",
+        "precision_bits": 53,
+        "value": "0.333333333333333"
+      },
+      "symbolic": {
+        "parent": "Symbolic Ring",
+        "value": "1/3"
+      }
+    }
+  },
+  "polynomial_ring": {
+    "base_ring": "Rational Field",
+    "expands_back": true,
+    "factorization": "(x - 1) * (x + 1) * (x^2 + 1)",
+    "factors": [
+      {
+        "factor": "x - 1",
+        "multiplicity": 1
+      },
+      {
+        "factor": "x + 1",
+        "multiplicity": 1
+      },
+      {
+        "factor": "x^2 + 1",
+        "multiplicity": 1
+      }
+    ],
+    "generator": "x",
+    "parent": "Univariate Polynomial Ring in x over Rational Field",
+    "polynomial": "x^4 - 1"
+  },
+  "proof_boundary": "Parent, coercion, factorization, solusi, dan residual diperiksa pada objek ini. Keluaran Sage tidak menggantikan pembuktian klaim umum.",
+  "runtime": {
+    "invocation": "/usr/bin/sage -python",
+    "local_execution_required": true,
+    "remote_service_satisfies_requirement": false,
+    "required_sage": "9.5",
+    "sage": "9.5"
+  },
+  "schema": "o002.unit05.sage-lab.v1",
+  "symbolic_solving": {
+    "equation": "y^2 == 2",
+    "parent": "Symbolic Ring",
+    "solutions": [
+      "-sqrt(2)",
+      "sqrt(2)"
+    ],
+    "zero_residuals": [
+      true,
+      true
+    ]
+  }
+}

@@ -1,0 +1,1002 @@
+{
+  "archives": [
+    {
+      "bundle_kind": "editable_source",
+      "bytes": 316923,
+      "content_bytes": 1048451,
+      "content_entry_count": 99,
+      "embedded_manifest": {
+        "bytes": 16404,
+        "path": "BUNDLE_MANIFEST.json",
+        "sha256": "e76942bfb9beb1b8b0cade279af2a06a81cfa13834c78d2b071bf91c94c44617"
+      },
+      "entries": [
+        {
+          "bytes": 16404,
+          "path": "BUNDLE_MANIFEST.json",
+          "sha256": "e76942bfb9beb1b8b0cade279af2a06a81cfa13834c78d2b071bf91c94c44617"
+        },
+        {
+          "bytes": 86,
+          "path": ".gitattributes",
+          "sha256": "89052ece0bb16466b063d40c107136bb9ac6ecae906028df0a91d454afe4292d"
+        },
+        {
+          "bytes": 127,
+          "path": ".gitignore",
+          "sha256": "279d0bf0c6e4aa53996543c0f3b06037f849861622a3a0b9d9387bcfa5e4d36f"
+        },
+        {
+          "bytes": 83844,
+          "path": "00_control/AUTHORITY_FILE_MANIFEST.csv",
+          "sha256": "219a3fa6e0c52f335e08cab3d50b71a37a1c70edd19c526dcc4b5c69ecc5633f"
+        },
+        {
+          "bytes": 5440,
+          "path": "00_control/BUILD_BASELINE.md",
+          "sha256": "5798c793031f4893bc93ab3057e65cc44bd83dddde4c644214225a7c995b4bf6"
+        },
+        {
+          "bytes": 1160,
+          "path": "00_control/SAGE_LAB_QA.json",
+          "sha256": "fde7f99fc34fb988d75fea143411a89dda298801a445eed20d1100a9f183f37b"
+        },
+        {
+          "bytes": 2219,
+          "path": "00_control/SAGE_LAB_RESULT.json",
+          "sha256": "3b1a401d81985124804e6fb536020fb542acdfea6a635e500f0f3bbe72593b78"
+        },
+        {
+          "bytes": 8144,
+          "path": "00_control/SOURCE_SELECTION.md",
+          "sha256": "9c44d8b8a08fb5f695ff7313dd37755dd9bf55cdd01859b44680b110c347ffce"
+        },
+        {
+          "bytes": 2496,
+          "path": "_quarto.yml",
+          "sha256": "d4ea6c64c636121f94bfd27f45cc4afe458bbb5e750d2cc29a19e04f694de8f4"
+        },
+        {
+          "bytes": 2218,
+          "path": "accessibility.html",
+          "sha256": "97f367d5896283ca4d09b1e36dbf14338f2cd63f65ad36858aa7c00ab2a5aa6a"
+        },
+        {
+          "bytes": 110511,
+          "path": "backend/catalog.json",
+          "sha256": "447a7ae670a8232a08b24db4ab6288df6f0c3b4d46462206b173830fc55c085d"
+        },
+        {
+          "bytes": 18030,
+          "path": "backend/catalog.schema.json",
+          "sha256": "792413fa564e3e902af0ceca22e80e7bb17d595351c8d6ff992d07bca3a8bb69"
+        },
+        {
+          "bytes": 217,
+          "path": "build-support/jupyter/kernels/o002-frozen/kernel.json",
+          "sha256": "22dd449c058e89bba9c4c368632b028870d7b5effec300374b1555b3914ae654"
+        },
+        {
+          "bytes": 516,
+          "path": "CITATION.cff",
+          "sha256": "fc58549b8ffee109817dd8f188a35a2a48ab1099bb21b19794ed363a1670889b"
+        },
+        {
+          "bytes": 1846,
+          "path": "environment/python-lock.txt",
+          "sha256": "28d1f9a5d2b341628fbc5e182ca523da1cfa33473e5714493f8ca18893c31d9a"
+        },
+        {
+          "bytes": 17231,
+          "path": "environment/PYTHON_ENVIRONMENT_RECEIPT.json",
+          "sha256": "6cff49e768dcb06752191d821e2577c45856313245af6f701f4ab05e2bc56918"
+        },
+        {
+          "bytes": 34181,
+          "path": "environment/sage-ubuntu22.04-dpkg-lock.txt",
+          "sha256": "bbd7f235834660681327b975a816b71aabd6d31946e6c875bf55d06224a5d802"
+        },
+        {
+          "bytes": 575,
+          "path": "environment/SAGE_ENVIRONMENT_RECEIPT.json",
+          "sha256": "5fe62bee0260a17d7f44e488cd58312a7c4b3894ac93a09af837b18273194451"
+        },
+        {
+          "bytes": 6364,
+          "path": "index.qmd",
+          "sha256": "6a5fc98c4ce81d03d56b89d8cf4031b35b979e7f6ee3bacddca6c8bd8a5b410d"
+        },
+        {
+          "bytes": 1083,
+          "path": "LICENSE-CODE.md",
+          "sha256": "7a3860578c00e71c20019ef26ab76e28be25393a194a28f6c0a4edef59074b57"
+        },
+        {
+          "bytes": 10142,
+          "path": "LICENSE-RUNTIME-APACHE-2.0.txt",
+          "sha256": "bea1b4266f1499fa4bbb16d6e7577e6b5b53d1ef010835a9d460876022cc8722"
+        },
+        {
+          "bytes": 624,
+          "path": "LICENSE-TEXT.md",
+          "sha256": "afa51324d3c7c936969b2721bbe1b7103ab3db62d38069b5742fd35f675d50a0"
+        },
+        {
+          "bytes": 2910,
+          "path": "README.md",
+          "sha256": "75e987988c5d5761e7605227e7ad669f2aa5fba5cc6d7a51bf95699225d032ba"
+        },
+        {
+          "bytes": 223,
+          "path": "requirements-build.txt",
+          "sha256": "0df875f011f6101b403738298aa22e5927014eb873b02777e7f340b18b0b669b"
+        },
+        {
+          "bytes": 3425,
+          "path": "RUNTIME-LICENSES.md",
+          "sha256": "980c602f8f427ba13547259edcc8d2dccb607be8ce87aa7ceb72fd3f1ef88f30"
+        },
+        {
+          "bytes": 21888,
+          "path": "scripts/backend_truth_qa.py",
+          "sha256": "7d803007dc2b770bd0b280135982fa5edd5a833fd77849b36544b3a198143bdc"
+        },
+        {
+          "bytes": 13771,
+          "path": "scripts/build.ps1",
+          "sha256": "a26eb36cc0654b909dc9458cc61bc4034ace30afdc4551070555ef5c83366349"
+        },
+        {
+          "bytes": 6454,
+          "path": "scripts/compare_build_manifests.py",
+          "sha256": "93da7f4581b92cb487922ad00ff44af8d0244ce0e7aa968efc0077bdb785e657"
+        },
+        {
+          "bytes": 20147,
+          "path": "scripts/epub_qa.py",
+          "sha256": "320d666f157708ae851eb88109a2feda2d02f012d3b74f4beef483f1c51f4add"
+        },
+        {
+          "bytes": 12298,
+          "path": "scripts/html_static_qa.py",
+          "sha256": "af72af66723aa3b2b13664947d41c2386a76c24e51c8a136506992dda34aecc7"
+        },
+        {
+          "bytes": 8636,
+          "path": "scripts/make_manifests.py",
+          "sha256": "00d412bec5f3d58753ec623634007c3138188f8e39d545124119a6f8fbf68d6f"
+        },
+        {
+          "bytes": 5585,
+          "path": "scripts/make_notebook_supplement.py",
+          "sha256": "e56a56d9f24bca3c0f6e42d8aeccd49ebf2f09139aa278014475659fa08750ba"
+        },
+        {
+          "bytes": 13193,
+          "path": "scripts/make_release_bundles.py",
+          "sha256": "1b381c7b8db8c6eadb2fe0f949cfddfb0eadab2e3d760181fe41841afc92ba33"
+        },
+        {
+          "bytes": 7871,
+          "path": "scripts/pdf_visual_receipt.py",
+          "sha256": "d852148c4ba9783c36dbe8503a9e036a9e774058e7168f88e06025e451e6e455"
+        },
+        {
+          "bytes": 7579,
+          "path": "scripts/python_environment.py",
+          "sha256": "2c8ea297d93a41a2a20a32bb7e65fba0b92b8be355834df4dd189eb9e5eaa449"
+        },
+        {
+          "bytes": 19833,
+          "path": "scripts/qa.py",
+          "sha256": "7c476652fd1715baef2039663b0dc79c8ff1919000621febabfb5642696543c6"
+        },
+        {
+          "bytes": 1640,
+          "path": "scripts/run_tests.py",
+          "sha256": "330e2d277d3083efb6feee7b6fb6292814efac339d4cf38a76734aaa38af9515"
+        },
+        {
+          "bytes": 6089,
+          "path": "scripts/sage_environment.py",
+          "sha256": "4881cc8ec26af5aa30bc825a542a18a235f521c59415c7e6e741406d8f4d7181"
+        },
+        {
+          "bytes": 4627,
+          "path": "scripts/sage_lab_qa.py",
+          "sha256": "f1c4936b056d40d25d3188b35c63dadd063c5432b86011845df611fbf3f4bdf7"
+        },
+        {
+          "bytes": 17075,
+          "path": "scripts/source_qa.py",
+          "sha256": "10563d047de4487893eb346fd3f7c66ac6f57ce312378c709493ce8fa8b9da69"
+        },
+        {
+          "bytes": 2398,
+          "path": "scripts/toolchain_receipt.py",
+          "sha256": "078e653237a9be0c7b8a13df807f69ca24f1873fe476cf8aec623cee283967c4"
+        },
+        {
+          "bytes": 62093,
+          "path": "scripts/update_backend.py",
+          "sha256": "8a67b1eb3eb9a171ce0d6df823f8e59f1be9e649053203a4605d1e2ae0a4eac0"
+        },
+        {
+          "bytes": 3761,
+          "path": "source/code/primer01_execution.py",
+          "sha256": "4d65d066eb7a1c42d73a7eed4840b8f22c573020a6cc9a3af7b67eca7c00d86f"
+        },
+        {
+          "bytes": 7424,
+          "path": "source/code/primer02_control_files.py",
+          "sha256": "2cd8ff0ab491450579ae62f6921c5200deb4afa7c41882bd464667049c3b30dc"
+        },
+        {
+          "bytes": 3311,
+          "path": "source/code/unit01_experiment.py",
+          "sha256": "b8556f4c92cc04b85bea7813a6f1fde2896be36886d0189ce0316521fac4ca36"
+        },
+        {
+          "bytes": 2033,
+          "path": "source/code/unit02_objects.py",
+          "sha256": "19d6322921d3851e0e23361bf89064f5c87721442b6302444b6f39e681dc43a2"
+        },
+        {
+          "bytes": 5830,
+          "path": "source/code/unit03_arrays.py",
+          "sha256": "3d18533c916aec86dac54f74b4882d33fb68d1b8df01efb0a0f1d9ac9775fc18"
+        },
+        {
+          "bytes": 11403,
+          "path": "source/code/unit04_visualization.py",
+          "sha256": "db2792f47ed0019ead110c289b195d83ae2450e2d5a39e300ec0613c93f0111f"
+        },
+        {
+          "bytes": 5701,
+          "path": "source/code/unit05_sage_lab.py",
+          "sha256": "a3c57376f7a4d237a3b38e0afbd8251a448bcf1ad4c765d8b7216586a0a0a0d2"
+        },
+        {
+          "bytes": 6925,
+          "path": "source/code/unit05_symbolic.py",
+          "sha256": "3eaaf9cd1f3a1a540218efa0b0e88f30e3f5b16ac0a4ddf7c4d27d69982ad3b3"
+        },
+        {
+          "bytes": 16679,
+          "path": "source/code/unit06_floating.py",
+          "sha256": "6cf3bca3a347964a0f947c7135711ee9bba2d4860f299527b6a8b5fd9e15e9c0"
+        },
+        {
+          "bytes": 12663,
+          "path": "source/code/unit07_experiment_design.py",
+          "sha256": "717a85e31d4cdb08b6adaa3b2e1b2ad466ef25b880293478cb48a199b0371ad0"
+        },
+        {
+          "bytes": 7923,
+          "path": "source/code/unit08_validation.py",
+          "sha256": "1998189fcd03d58a1d44d58657eab335b40757d4c8a968059745be89c82197f4"
+        },
+        {
+          "bytes": 16458,
+          "path": "source/code/unit09_provenance.py",
+          "sha256": "5b26d8ed8fd42c7d088d45e5c638ba7d8b15270c59a43b3de47038b9bf3b55fa"
+        },
+        {
+          "bytes": 7436,
+          "path": "source/code/unit10_pipeline.py",
+          "sha256": "e3add61e2aba6c664b096f820c9d033832323230ef4702ba8750bf6a78ff2ab2"
+        },
+        {
+          "bytes": 14724,
+          "path": "source/code/unit11_numerical.py",
+          "sha256": "16b24face1d2be801e3ac0d752fc09a49a7949be638740f0e7512e1d1c281a65"
+        },
+        {
+          "bytes": 11724,
+          "path": "source/code/unit12_capstone.py",
+          "sha256": "ab200353d68a0ca382a42555437128f69c60c86569da96d606ee8563b2f564e9"
+        },
+        {
+          "bytes": 38,
+          "path": "source/data/unit12-demo/environment/python.txt",
+          "sha256": "fc01e3cd24ece4194a504abe98dac5fbafb04ed3d16b8846abf86e9d404d84ca"
+        },
+        {
+          "bytes": 3,
+          "path": "source/data/unit12-demo/inputs/value.txt",
+          "sha256": "084c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0"
+        },
+        {
+          "bytes": 104,
+          "path": "source/data/unit12-demo/LICENSES/README.md",
+          "sha256": "353007f50957aaf411a048e50d841826e42b0f13969d8d6d52d98c8822a8ed60"
+        },
+        {
+          "bytes": 3,
+          "path": "source/data/unit12-demo/outputs/result.txt",
+          "sha256": "084c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0"
+        },
+        {
+          "bytes": 149,
+          "path": "source/data/unit12-demo/README.md",
+          "sha256": "01797accd5d1e159562b899c6511b5f0e22271f1bcb056c3021226c4c37d8fe2"
+        },
+        {
+          "bytes": 1940,
+          "path": "source/data/unit12-demo/RUN_MANIFEST.json",
+          "sha256": "4050499b79bdca90af96a53bd64741bae4c97bc9bdb00cc2988aa7eb58d1c331"
+        },
+        {
+          "bytes": 284,
+          "path": "source/data/unit12-demo/source/run.py",
+          "sha256": "99f820dba0a6c54eaa346f14490a93fd6c4389bb3ce159bdb224e4cdebbb69a7"
+        },
+        {
+          "bytes": 333,
+          "path": "source/data/unit12-demo/tests/test_run.py",
+          "sha256": "a94a1c9a800846fc173e8dffcce9d7a5596d9fac4c8cdabb277854a7efb6780f"
+        },
+        {
+          "bytes": 4014,
+          "path": "source/notebooks/o002-p01-clean-kernel.ipynb",
+          "sha256": "aaed184f0a5601a7567a66e5a0ac0ef55d80a665fcb522405962e174419f21c2"
+        },
+        {
+          "bytes": 9025,
+          "path": "source/units/01-komputasi-bukti.qmd",
+          "sha256": "351e0e4252df113192d9999af467a6c7e8d27e96f6c532419db4f27310381b6e"
+        },
+        {
+          "bytes": 9038,
+          "path": "source/units/02-objek-fungsi.qmd",
+          "sha256": "0a3fcc84e2b1c430685b6b88ae39e071e3db32cb0de19c6e066b52193c0b99f5"
+        },
+        {
+          "bytes": 11311,
+          "path": "source/units/03-array-vektorisasi.qmd",
+          "sha256": "cd6ee1f6d826f141dc7fb5008c300adfd068815d87617236b526be537668b2f3"
+        },
+        {
+          "bytes": 20401,
+          "path": "source/units/04-visualisasi-integritas.qmd",
+          "sha256": "807f3162cd9e0eddba84b2a02e3d738c66ebb9b3cedb23d4fee891099f6a8ef9"
+        },
+        {
+          "bytes": 20563,
+          "path": "source/units/05-eksak-simbolik-sage.qmd",
+          "sha256": "208f9a5658bf7ac97040e10fa313eb4206c30ad3fda31dcdd2dcf6047f662650"
+        },
+        {
+          "bytes": 20876,
+          "path": "source/units/06-titik-mengambang-stabilitas.qmd",
+          "sha256": "a25fd6ee65179411e47206cbb0eb0e746f082bb3b4ac02c6fa3afdf9886e3413"
+        },
+        {
+          "bytes": 14625,
+          "path": "source/units/07-rancangan-eksperimen.qmd",
+          "sha256": "2ae8fb3a3224c8a53f3dc43c90fa78696a02637a058c52c76879d2a4b599cdf9"
+        },
+        {
+          "bytes": 13716,
+          "path": "source/units/08-pengujian-validasi.qmd",
+          "sha256": "1b77c2c5c5e728314bff37eb1baee51fb21e0fc052426df7e6b1db3191a3b905"
+        },
+        {
+          "bytes": 15119,
+          "path": "source/units/09-data-konfigurasi-provenans.qmd",
+          "sha256": "a715952b568f5943062f24629509210597c64a95c61acdd9801180fd9676bff9"
+        },
+        {
+          "bytes": 8854,
+          "path": "source/units/10-otomasi-pipa.qmd",
+          "sha256": "5966c3c19b7ddcf34d8451a34cfe59b78f73681688b82f1dfa976d3530278acb"
+        },
+        {
+          "bytes": 14862,
+          "path": "source/units/11-eksperimen-numerik.qmd",
+          "sha256": "fd75e5b1f363beea59f284c47cca4734001e102f15ce5b3bbdf582b00a006449"
+        },
+        {
+          "bytes": 9910,
+          "path": "source/units/12-proyek-akhir.qmd",
+          "sha256": "545157aedcb00cac424aa8b0ef1d0c3bc4c490e5b99bb9ded1f514bb87b51537"
+        },
+        {
+          "bytes": 19586,
+          "path": "source/units/p01-menjalankan-eksperimen-python.qmd",
+          "sha256": "fd40c528f3897a0eae3c17befb4ce7127e90314fc6f4c42178dc0a5c70d71ff6"
+        },
+        {
+          "bytes": 24911,
+          "path": "source/units/p02-kontrol-koleksi-fungsi-modul-berkas.qmd",
+          "sha256": "15699a03c1dc9d618650a969fdbc1a58a272a2eeb2c0b83d2304b3b9ac580df7"
+        },
+        {
+          "bytes": 939,
+          "path": "styles.css",
+          "sha256": "5026261e74e139ac200e6f0135671697742499572dee4491d9a4e97c68eaf4ce"
+        },
+        {
+          "bytes": 5277,
+          "path": "tests/test_notebook_supplement.py",
+          "sha256": "ac8b083430f086aa0fc3333e0630c0c452a392a69809dd8df3e015d321a7164e"
+        },
+        {
+          "bytes": 7631,
+          "path": "tests/test_primer01.py",
+          "sha256": "4adee55a7201d04169b7818762691e9376afe06096b79e43fc963bf36a1ddd02"
+        },
+        {
+          "bytes": 24738,
+          "path": "tests/test_primer02.py",
+          "sha256": "314f864a2194d790e453d070314737a4460ca17d527c098441bea9dd1bcfce0c"
+        },
+        {
+          "bytes": 19202,
+          "path": "tests/test_release_tooling.py",
+          "sha256": "f01ff8a18d005ecb7ca25ed7a4471b25be60b1e915d91eaeb0482f1fa367377c"
+        },
+        {
+          "bytes": 10196,
+          "path": "tests/test_source_qa.py",
+          "sha256": "6c57cc8aada602024041b3a19589c4299000340de95f3d68e026c7ca7861bfb6"
+        },
+        {
+          "bytes": 2545,
+          "path": "tests/test_unit01.py",
+          "sha256": "27c2341ac4021ea825d474e55cb4570585e98744cb05c1610ac5c180b8af0b10"
+        },
+        {
+          "bytes": 2002,
+          "path": "tests/test_unit02.py",
+          "sha256": "f57643597a271f285f7bb14ccef93632a662422f21423b59e2831c4d68764f11"
+        },
+        {
+          "bytes": 3524,
+          "path": "tests/test_unit03.py",
+          "sha256": "c0bf818c785e5acb810830d4f09097a0d87b4169cc67c55a1b7c4f67cc0f9eef"
+        },
+        {
+          "bytes": 6885,
+          "path": "tests/test_unit04.py",
+          "sha256": "0eda7afa4f485ab77fd7830cff5febfcb8b4a2d973e4e780fa87a8ac5b4fcd05"
+        },
+        {
+          "bytes": 4375,
+          "path": "tests/test_unit05.py",
+          "sha256": "627725664a36383269cdecb2908ba383345a02b448a32dcb979db04c179f384c"
+        },
+        {
+          "bytes": 6183,
+          "path": "tests/test_unit05_sage.py",
+          "sha256": "ee77ad56ea9fbd84f16d3e15ecfe1e937db8e3c0e74d298213d4d016c8d55d88"
+        },
+        {
+          "bytes": 7928,
+          "path": "tests/test_unit06.py",
+          "sha256": "5754097ae98c3fb1cd8d2d70346e92b44aaacad16b7b10f6c563b55b681a4392"
+        },
+        {
+          "bytes": 6330,
+          "path": "tests/test_unit07.py",
+          "sha256": "9892e8e80a862d07899eadad604b4593526403e8178b6df71fe081ccb5783476"
+        },
+        {
+          "bytes": 3999,
+          "path": "tests/test_unit08.py",
+          "sha256": "196eadcc1e663010a1df28c1d217891763c79f0131eebb5af63b324ff906a733"
+        },
+        {
+          "bytes": 8718,
+          "path": "tests/test_unit09.py",
+          "sha256": "46323018df23986c0d43f0a00ddf24690f15a2cdd7698545ad65d8147bdf8cde"
+        },
+        {
+          "bytes": 8491,
+          "path": "tests/test_unit10.py",
+          "sha256": "aa38cfcd3b3b235c6f5a7d30beaf1c37437af850dd4375852fbe7ef00c317825"
+        },
+        {
+          "bytes": 8529,
+          "path": "tests/test_unit11.py",
+          "sha256": "70464687785fea1f26caa73ae7c1351327b10031ca33824d8bb3af1afa9c473f"
+        },
+        {
+          "bytes": 10827,
+          "path": "tests/test_unit12.py",
+          "sha256": "aa4d49db5105d14a7573f6c40c02c2c1ba39c74d324d7310f352a9af01e8d982"
+        },
+        {
+          "bytes": 1683,
+          "path": "THIRD_PARTY.md",
+          "sha256": "776ea5d26a89aa159d7fb88db9127b59fd8ff12237481288bc401d48202c0f61"
+        }
+      ],
+      "entry_count": 100,
+      "path": "release/O002_B80_ID_EDITABLE_SOURCE_2026-08-22-1.zip",
+      "sha256": "a9dcdc18481b3dc88beee3006d46f1b8187815623534df523bbc70e3e011b9f9",
+      "verified_readback": {
+        "bytes": true,
+        "crc": true,
+        "embedded_manifest": true,
+        "inventory": true,
+        "sha256": true
+      }
+    },
+    {
+      "bundle_kind": "offline_reader",
+      "bytes": 1613660,
+      "content_bytes": 4046272,
+      "content_entry_count": 84,
+      "embedded_manifest": {
+        "bytes": 14139,
+        "path": "BUNDLE_MANIFEST.json",
+        "sha256": "3840894602942a1e5def9b46548d633d469131c5475e12c3c2770e2f829ae999"
+      },
+      "entries": [
+        {
+          "bytes": 14139,
+          "path": "BUNDLE_MANIFEST.json",
+          "sha256": "3840894602942a1e5def9b46548d633d469131c5475e12c3c2770e2f829ae999"
+        },
+        {
+          "bytes": 1160,
+          "path": "00_control/SAGE_LAB_QA.json",
+          "sha256": "fde7f99fc34fb988d75fea143411a89dda298801a445eed20d1100a9f183f37b"
+        },
+        {
+          "bytes": 2219,
+          "path": "00_control/SAGE_LAB_RESULT.json",
+          "sha256": "3b1a401d81985124804e6fb536020fb542acdfea6a635e500f0f3bbe72593b78"
+        },
+        {
+          "bytes": 8144,
+          "path": "00_control/SOURCE_SELECTION.md",
+          "sha256": "9c44d8b8a08fb5f695ff7313dd37755dd9bf55cdd01859b44680b110c347ffce"
+        },
+        {
+          "bytes": 110511,
+          "path": "backend/catalog.json",
+          "sha256": "447a7ae670a8232a08b24db4ab6288df6f0c3b4d46462206b173830fc55c085d"
+        },
+        {
+          "bytes": 51187,
+          "path": "BUILD_QA.json",
+          "sha256": "d5be269c4f8eab3a966d98316b0f0520a942d603e0f06ea62fbf3f6d25068b02"
+        },
+        {
+          "bytes": 1846,
+          "path": "environment/python-lock.txt",
+          "sha256": "28d1f9a5d2b341628fbc5e182ca523da1cfa33473e5714493f8ca18893c31d9a"
+        },
+        {
+          "bytes": 17231,
+          "path": "environment/PYTHON_ENVIRONMENT_RECEIPT.json",
+          "sha256": "6cff49e768dcb06752191d821e2577c45856313245af6f701f4ab05e2bc56918"
+        },
+        {
+          "bytes": 34181,
+          "path": "environment/sage-ubuntu22.04-dpkg-lock.txt",
+          "sha256": "bbd7f235834660681327b975a816b71aabd6d31946e6c875bf55d06224a5d802"
+        },
+        {
+          "bytes": 575,
+          "path": "environment/SAGE_ENVIRONMENT_RECEIPT.json",
+          "sha256": "5fe62bee0260a17d7f44e488cd58312a7c4b3894ac93a09af837b18273194451"
+        },
+        {
+          "bytes": 1316,
+          "path": "EPUB_QA.json",
+          "sha256": "d49073419637cc6ae99778c08220fa7987bbf432d4c43d458cc7d046c3317864"
+        },
+        {
+          "bytes": 2886,
+          "path": "HTML_BROWSER_QA.json",
+          "sha256": "015e2ecdd9ddec77b3cc7a4af6f992fe60175425520ba830b1d711483cc7efee"
+        },
+        {
+          "bytes": 6755,
+          "path": "HTML_STATIC_QA.json",
+          "sha256": "f5639c1e151b2a338bde8a9d468f22378acef6b1cd4a70ede7d3402f4d1be03a"
+        },
+        {
+          "bytes": 37570,
+          "path": "index.html",
+          "sha256": "5fb26b6316c5fd807760ca4f6c4e060f8d4ef95779eb04e3029c84c82e92c85a"
+        },
+        {
+          "bytes": 291212,
+          "path": "Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+          "sha256": "8e9e35dd54be8524a8b7752df0a7285749db4c80fc5a10271eb841c01c0c748d"
+        },
+        {
+          "bytes": 754845,
+          "path": "Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+          "sha256": "f9d3df201c03107be3a3e6f61dd6798485cf20bc35ae14f2911ab212789b5038"
+        },
+        {
+          "bytes": 1083,
+          "path": "LICENSE-CODE.md",
+          "sha256": "7a3860578c00e71c20019ef26ab76e28be25393a194a28f6c0a4edef59074b57"
+        },
+        {
+          "bytes": 10142,
+          "path": "LICENSE-RUNTIME-APACHE-2.0.txt",
+          "sha256": "bea1b4266f1499fa4bbb16d6e7577e6b5b53d1ef010835a9d460876022cc8722"
+        },
+        {
+          "bytes": 624,
+          "path": "LICENSE-TEXT.md",
+          "sha256": "afa51324d3c7c936969b2721bbe1b7103ab3db62d38069b5742fd35f675d50a0"
+        },
+        {
+          "bytes": 727,
+          "path": "p01-results.json",
+          "sha256": "4079404b5b0c36f8fdd242ab344d850bf1e077e4fbe3332c588490f6422ac454"
+        },
+        {
+          "bytes": 728,
+          "path": "PDF_VISUAL_QA.json",
+          "sha256": "4599c9b7c41ef614646d13d5fe7af4310518e4eb07f0c5211312e5aaceedadb2"
+        },
+        {
+          "bytes": 589,
+          "path": "primer02-demo/manifest.json",
+          "sha256": "5396ea1f60aa8399db69df9433dbd93f30c14de857d0e9b55e66124217cc52cb"
+        },
+        {
+          "bytes": 41,
+          "path": "primer02-demo/measurements.csv",
+          "sha256": "9e4dcaafbfbf1f7a46a53436f05b22c5aefbdf4388b99b28e819c82b05482539"
+        },
+        {
+          "bytes": 194,
+          "path": "primer02-demo/summary.json",
+          "sha256": "acfe48e0e449cdb8a4fc49d208cbf435df1769b7f7c5c7cfa62ed97faedbcb88"
+        },
+        {
+          "bytes": 9,
+          "path": "primer02-demo/values.txt",
+          "sha256": "d217f4d7cdcbf548d4364953082cf8ddc2248b653329bebc150d7f6a5aaabcf1"
+        },
+        {
+          "bytes": 17231,
+          "path": "PYTHON_ENVIRONMENT_QA.json",
+          "sha256": "6cff49e768dcb06752191d821e2577c45856313245af6f701f4ab05e2bc56918"
+        },
+        {
+          "bytes": 223,
+          "path": "requirements-build.txt",
+          "sha256": "0df875f011f6101b403738298aa22e5927014eb873b02777e7f340b18b0b669b"
+        },
+        {
+          "bytes": 3425,
+          "path": "RUNTIME-LICENSES.md",
+          "sha256": "980c602f8f427ba13547259edcc8d2dccb607be8ce87aa7ceb72fd3f1ef88f30"
+        },
+        {
+          "bytes": 575,
+          "path": "SAGE_ENVIRONMENT_QA.json",
+          "sha256": "5fe62bee0260a17d7f44e488cd58312a7c4b3894ac93a09af837b18273194451"
+        },
+        {
+          "bytes": 1160,
+          "path": "SAGE_LAB_QA.json",
+          "sha256": "2d168627740290447b416c45a6e50e8d24099fa7ddc5a20ac416bbdb41ea7c23"
+        },
+        {
+          "bytes": 283695,
+          "path": "search.json",
+          "sha256": "7dcae6099e8b1f45da090dbbdc8e31d052b69fc5bbbf627de2edafe35946dcb9"
+        },
+        {
+          "bytes": 508361,
+          "path": "site_libs/bootstrap/bootstrap-fd460e4b8aec9c2402a9e5dfeb0c5f8c.min.css",
+          "sha256": "e760513c2ef1e44efe8978394d9255ccb962d3198c3766b1a8aed98202987bb0"
+        },
+        {
+          "bytes": 99464,
+          "path": "site_libs/bootstrap/bootstrap-icons.css",
+          "sha256": "01253947f506e030589e4f33fc7ec7ccdfb9505e2e596dedf16445f12e243c0a"
+        },
+        {
+          "bytes": 180288,
+          "path": "site_libs/bootstrap/bootstrap-icons.woff",
+          "sha256": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15"
+        },
+        {
+          "bytes": 80668,
+          "path": "site_libs/bootstrap/bootstrap.min.js",
+          "sha256": "d2ea6c1e0cabca20d18e924b25a1cd0187c38ba7c33f60ab06e1b0402b9bcdb5"
+        },
+        {
+          "bytes": 9160,
+          "path": "site_libs/clipboard/clipboard.min.js",
+          "sha256": "e17a1d816e13c0826e0ed7febfabc3277f45571234bde0bf9120829a7169edc9"
+        },
+        {
+          "bytes": 5888,
+          "path": "site_libs/quarto-html/anchor.min.js",
+          "sha256": "69098e105d990f834cff1b7886d873444228ff63c590e5ff834d568f1115ed8b"
+        },
+        {
+          "bytes": 20084,
+          "path": "site_libs/quarto-html/popper.min.js",
+          "sha256": "4d50586b184724d39ddfe0f6582861664eddd5e806e5a79e0dbaa832361414d0"
+        },
+        {
+          "bytes": 3678,
+          "path": "site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css",
+          "sha256": "96d688dbd4c2de66404fd9b0e75d5b62573cbece9ee7011ca24d8bce1bbe044c"
+        },
+        {
+          "bytes": 26830,
+          "path": "site_libs/quarto-html/quarto.js",
+          "sha256": "4ecb60f215d96b2af0fe9d985c71e32863b1c993a64725a416ac18b5991c59c6"
+        },
+        {
+          "bytes": 2882,
+          "path": "site_libs/quarto-html/tabsets/tabsets.js",
+          "sha256": "a9c226bf70e82eaf5476f619cecfb70b4446b87ce4d1634d6404b0b2ba006d15"
+        },
+        {
+          "bytes": 1409,
+          "path": "site_libs/quarto-html/tippy.css",
+          "sha256": "5969f497d9158d7682f8219c6f13fa67269cdf5bf50a3931d95327151dee5678"
+        },
+        {
+          "bytes": 24033,
+          "path": "site_libs/quarto-html/tippy.umd.min.js",
+          "sha256": "41181eeec6d7ba64cb9165f0e95563e34e026bde79e7c13aeec83270429b6fae"
+        },
+        {
+          "bytes": 4570,
+          "path": "site_libs/quarto-nav/headroom.min.js",
+          "sha256": "5b80cc4165a661a3f2060d6bdb5ccff591f04c4f8e39a06c12d3c2544587cb17"
+        },
+        {
+          "bytes": 9636,
+          "path": "site_libs/quarto-nav/quarto-nav.js",
+          "sha256": "a3e9c8c52dd54d783a6d9294357ef104d17d03faf0a404b592216c0d71a9f717"
+        },
+        {
+          "bytes": 96397,
+          "path": "site_libs/quarto-search/autocomplete.umd.js",
+          "sha256": "cd9db3b7d812139a4679a2566ea8f01b2a80159490a60b9e9e813e81b5e00a05"
+        },
+        {
+          "bytes": 23539,
+          "path": "site_libs/quarto-search/fuse.min.js",
+          "sha256": "c57339c3fa16b1d69d9a6b46749a8139ef8d4fc9bbfe48144ff897aa7d4222ec"
+        },
+        {
+          "bytes": 43121,
+          "path": "site_libs/quarto-search/quarto-search.js",
+          "sha256": "1a23221f499b3993dc66ca5c8913e4e6602dfa4652337e9fbf75139ded5ece68"
+        },
+        {
+          "bytes": 4014,
+          "path": "source/notebooks/o002-p01-clean-kernel.ipynb",
+          "sha256": "aaed184f0a5601a7567a66e5a0ac0ef55d80a665fcb522405962e174419f21c2"
+        },
+        {
+          "bytes": 59017,
+          "path": "source/units/01-komputasi-bukti.html",
+          "sha256": "b52bde4b1c448ef744c210f4155eb76e2417eca0bc68073177c4fbad56402bbc"
+        },
+        {
+          "bytes": 61703,
+          "path": "source/units/02-objek-fungsi.html",
+          "sha256": "837baf0e6782b3867b7c2c0023872bea25fd24e544f425a2d209b4604691b399"
+        },
+        {
+          "bytes": 70847,
+          "path": "source/units/03-array-vektorisasi.html",
+          "sha256": "5c674025ea0b1d66473f06d244e00324b682c45e014b8493e9b4a6cd444bc4e9"
+        },
+        {
+          "bytes": 98491,
+          "path": "source/units/04-visualisasi-integritas.html",
+          "sha256": "15375e543cf39f56fb879235cef6c1468ab6d8ed3ad4018cffac97bd91f95a1a"
+        },
+        {
+          "bytes": 66746,
+          "path": "source/units/04-visualisasi-integritas_files/figure-html/fig-o002-u04-progressive-output-1.png",
+          "sha256": "c1c315a903ab55c9837adb5fdc656f8e145529b07d9c2cdf47f9b3aba041ecef"
+        },
+        {
+          "bytes": 113350,
+          "path": "source/units/05-eksak-simbolik-sage.html",
+          "sha256": "1a4238b38c0bf77d90de2485fa32b971e820504ce392b42f8cffe2a0afecd156"
+        },
+        {
+          "bytes": 112454,
+          "path": "source/units/06-titik-mengambang-stabilitas.html",
+          "sha256": "fd5bb9e43e01fcfcb8e46a3500f554f2e9ed45935cc286d0d3a5f3315a5a6472"
+        },
+        {
+          "bytes": 62429,
+          "path": "source/units/07-rancangan-eksperimen.html",
+          "sha256": "6cf1a48c0a716aed78f0d083ec09aa0ea08181c05a521bcc0b29de3c07cca711"
+        },
+        {
+          "bytes": 76860,
+          "path": "source/units/08-pengujian-validasi.html",
+          "sha256": "6d559ee77449f7cd9869a3dd186b9a4bc8c0d5f72d16b299ead7377ff7b71862"
+        },
+        {
+          "bytes": 64285,
+          "path": "source/units/09-data-konfigurasi-provenans.html",
+          "sha256": "1386019766d7a82f570f39114b52aed301e623c4e3155aba4165faf11342ddb6"
+        },
+        {
+          "bytes": 52393,
+          "path": "source/units/10-otomasi-pipa.html",
+          "sha256": "13438fc5c39e9f8839e5e15fb1a7150f3299fc15d63c7dccce664f1f25eb45af"
+        },
+        {
+          "bytes": 86864,
+          "path": "source/units/11-eksperimen-numerik.html",
+          "sha256": "e0e8785deab7472ceb789ac478461d3e2d5767b35357e1e91f615c94bd1b4821"
+        },
+        {
+          "bytes": 52844,
+          "path": "source/units/12-proyek-akhir.html",
+          "sha256": "9f1979acee1d0841b7516a6242f2761019dd137fea9a2db7079a1165c7b5c943"
+        },
+        {
+          "bytes": 92953,
+          "path": "source/units/p01-menjalankan-eksperimen-python.html",
+          "sha256": "25ea249f2db6fb3415f8c529597bf0845a4e9f781d452d71f3e96dee51a4454e"
+        },
+        {
+          "bytes": 123218,
+          "path": "source/units/p02-kontrol-koleksi-fungsi-modul-berkas.html",
+          "sha256": "a841cfda9dd6274005e700355aa93a319860d1074b9f8582cef31ba3568b986a"
+        },
+        {
+          "bytes": 96,
+          "path": "SOURCE_QA.json",
+          "sha256": "21aa8027ac6bf524c1dbabc89183dfbb36fbb7dbfa7194cd14d7c7e3c34bb3b9"
+        },
+        {
+          "bytes": 939,
+          "path": "styles.css",
+          "sha256": "5026261e74e139ac200e6f0135671697742499572dee4491d9a4e97c68eaf4ce"
+        },
+        {
+          "bytes": 290,
+          "path": "TEST_QA.json",
+          "sha256": "b638859fc58dfc021b5ee547fa947ac60c0a5bf137f90153e562a41dea1922d4"
+        },
+        {
+          "bytes": 1683,
+          "path": "THIRD_PARTY.md",
+          "sha256": "776ea5d26a89aa159d7fb88db9127b59fd8ff12237481288bc401d48202c0f61"
+        },
+        {
+          "bytes": 407,
+          "path": "TOOLCHAIN_QA.json",
+          "sha256": "772cfad4316293b69981a24c154054b3824cbe2c1d5aa8e61e2f4d8d93fab393"
+        },
+        {
+          "bytes": 771,
+          "path": "unit01-results.json",
+          "sha256": "343fdc4f3fe8e45807b9f2a8eaedb1e3820749b26fbe78861c6fb183a3580a6d"
+        },
+        {
+          "bytes": 339,
+          "path": "unit02-results.json",
+          "sha256": "05d2ad13548932aacb18ba5b52545e431a65a9723e9458d9f51155863c21e18a"
+        },
+        {
+          "bytes": 1635,
+          "path": "unit03-results.json",
+          "sha256": "dbc8673b8cdc94fcab512f64c8856168593c84c293ee57cdb2b6d7c86c3b29d4"
+        },
+        {
+          "bytes": 479,
+          "path": "unit04/unit04-alt.txt",
+          "sha256": "c68df3a88d557ec461d6b38240f7c177e95b41c7489c67b8b58a92095ec48e52"
+        },
+        {
+          "bytes": 160,
+          "path": "unit04/unit04-data.csv",
+          "sha256": "f510ee30b5adc1cf470f75c2552ea8254a4513a107e3506dc4ad8c033c6f03be"
+        },
+        {
+          "bytes": 18947,
+          "path": "unit04/unit04-figure.svg",
+          "sha256": "fd4cfa793ece466a52201efbd9b1c6c5413f24d0c3602adc6a7b8698ef28c81b"
+        },
+        {
+          "bytes": 1729,
+          "path": "unit04/unit04-manifest.json",
+          "sha256": "addf0fc5d8eb05f30dd2efa553278f84e472024097514bd4f92ce591824a51d9"
+        },
+        {
+          "bytes": 2138,
+          "path": "unit05-results.json",
+          "sha256": "cd771d15c170fca705eb1e187cb4e57785e0cfdc7616a2ad9106eeca2bcdabc3"
+        },
+        {
+          "bytes": 2219,
+          "path": "unit05-sage-results.json",
+          "sha256": "3b1a401d81985124804e6fb536020fb542acdfea6a635e500f0f3bbe72593b78"
+        },
+        {
+          "bytes": 5763,
+          "path": "unit06-results.json",
+          "sha256": "52b8670158d3eef649802e4652e6be6bd6ab1a0e21e72d62eb07c5b6127fa051"
+        },
+        {
+          "bytes": 11641,
+          "path": "unit07-results.json",
+          "sha256": "bea53712e4feeea054080c041f603f4095f2ece746e9068b2d7b21f3a5c369ef"
+        },
+        {
+          "bytes": 1895,
+          "path": "unit08-results.json",
+          "sha256": "bff1ac901d5e970df75e9963e291afa257d89595b93f1ae48b17006428bacca3"
+        },
+        {
+          "bytes": 7110,
+          "path": "unit09-results.json",
+          "sha256": "9ba59ea2333f57a9f19fb9aff0cc00deb2b74972151bc8efbed1de5fd170c54f"
+        },
+        {
+          "bytes": 1261,
+          "path": "unit10-results.json",
+          "sha256": "6ddb011417bc5f1a6f9e5b60590822d38b57522be77a921022aca327c6b5c3aa"
+        },
+        {
+          "bytes": 4404,
+          "path": "unit11-results.json",
+          "sha256": "3f95a579c20e8543b37cc7e8ccc530f5586eac16d3253a6ea4bd7ad1252f17bc"
+        },
+        {
+          "bytes": 1806,
+          "path": "unit12-results.json",
+          "sha256": "9234f0e1def6bc5780f04023b3ab2061708237ad1711045ca27f4fc92eb2dd0d"
+        }
+      ],
+      "entry_count": 85,
+      "path": "release/O002_B80_ID_OFFLINE_READER_2026-08-22-1.zip",
+      "sha256": "c3b97c057ed6751ddb2067d4be8ef96a7256e1c9bd25075601f46071eb2dfff9",
+      "verified_readback": {
+        "bytes": true,
+        "crc": true,
+        "embedded_manifest": true,
+        "inventory": true,
+        "sha256": true
+      }
+    }
+  ],
+  "deterministic_zip_timestamp": "2026-08-22T00:00:00",
+  "reader_artifacts": [
+    {
+      "bytes": 37570,
+      "path": "output/index.html",
+      "sha256": "5fb26b6316c5fd807760ca4f6c4e060f8d4ef95779eb04e3029c84c82e92c85a"
+    },
+    {
+      "bytes": 754845,
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+      "sha256": "f9d3df201c03107be3a3e6f61dd6798485cf20bc35ae14f2911ab212789b5038"
+    },
+    {
+      "bytes": 291212,
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.epub",
+      "sha256": "8e9e35dd54be8524a8b7752df0a7285749db4c80fc5a10271eb841c01c0c748d"
+    }
+  ],
+  "schema": "o002.bundle-receipt.v1",
+  "self_reference_policy": {
+    "embedded_manifest_excludes_its_own_digest": true,
+    "receipt_excluded_from_archives": true,
+    "release_directory_excluded_from_offline_archive": true
+  },
+  "successful": true,
+  "tag": "v2026.08.22.1",
+  "version": "2026.08.22.1"
+}

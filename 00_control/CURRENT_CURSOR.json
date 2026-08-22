@@ -1,5 +1,14 @@
 {
   "schema": "o002.cursor.v2",
+  "pursuit_status": "active_publication",
+  "blocked_audit": {
+    "condition": "GitHub account suspension prevents the required existing-lineage repository, release, tag, and Pages transaction",
+    "consecutive_goal_turns": 0,
+    "same_condition_confirmed": false,
+    "all_safe_local_work_exhausted": true,
+    "resume_condition": "satisfied on 2026-08-22 by Floris's direct restoration notice",
+    "no_retry_while_suspended": false
+  },
   "language": "id-ID",
   "course_id": "B80",
   "project_id": "O002",
@@ -11,31 +20,63 @@
     "standalone_edition_complete": true,
     "public_byte_readback": "pass"
   },
+  "current_release": {
+    "version": "2026.08.22.1",
+    "tag": "v2026.08.22.1",
+    "record_id": 22053905,
+    "doi": "10.5281/zenodo.22053905",
+    "concept_doi": "10.5281/zenodo.22052052",
+    "zenodo_status": "published_and_anonymously_verified",
+    "github_status": "restored_release_transaction_in_progress",
+    "figshare_item_id": 33314742,
+    "figshare_doi": "10.6084/m9.figshare.33314742.v1",
+    "figshare_collection_doi": "10.6084/m9.figshare.c.8668413.v6",
+    "figshare_v2_status": "in_place_reader_first_draft_upload_in_progress"
+  },
   "selected_unit_count": 14,
-  "admitted_unit_count": 12,
+  "admitted_unit_count": 14,
   "last_admitted_unit": "o002.u12",
-  "active_block": ["o002.p01"],
-  "next_after_active_block": "o002.p02",
-  "b80_curriculum_complete": false,
+  "exercise_count": 75,
+  "test_count": 177,
+  "pdf_page_count": 159,
+  "b80_curriculum_complete": true,
+  "active_block": [
+    "publish-v2026.08.22.1-to-existing-github-lineage",
+    "anonymous-github-release-and-pages-readback",
+    "finish-publish-and-read-back-existing-figshare-item-v2"
+  ],
   "open_gates": [
-    "o002.p01",
-    "o002.p02",
-    "Unit 4 progressive plotting and mastery",
-    "Unit 5 local Sage execution and mastery",
-    "Unit 6 and Unit 11 SciPy execution and mastery",
-    "Unit 11 B30/B40/B70 prerequisite deferral",
-    "resolved Python environment lock",
-    "separate Sage environment lock and receipt",
-    "HTML PDF EPUB notebook and offline bundle",
-    "two clean identical final builds",
-    "full PDF and HTML accessibility review",
-    "expanded GitHub and Zenodo publication readback"
+    "GitHub repository release and Pages anonymous readback",
+    "Figshare reader-first version 2 publication and anonymous byte readback"
   ],
   "backend_truth": {
     "status": "pass",
     "schema": "o002.backend.v2",
-    "catalog_bytes": 22863,
-    "catalog_sha256": "92cdbd1864a79be524018eb6fcdbf2a46b76f0b3b32373fb7a855f5f5357fc17"
+    "catalog_bytes": 110511,
+    "catalog_sha256": "447a7ae670a8232a08b24db4ab6288df6f0c3b4d46462206b173830fc55c085d"
   },
-  "next_action": "admit o002.p01 source, code, tests, five mastery sets, result artifact, and backend records"
+  "zenodo_receipt": {
+    "path": "00_control/PUBLICATION_RECEIPT_FINAL.json",
+    "bytes": 2747,
+    "sha256": "9dadaec2091ef382b1d55dbd98a848ec06b641b347efc683fbad9724e4c793cf",
+    "anonymous_readback": "pass"
+  },
+  "figshare_receipt": {
+    "path": "00_control/FIGSHARE_PUBLICATION_RECEIPT.json",
+    "bytes": 2967,
+    "sha256": "e2938f9a83e50d7e647b870a9d106c7116f906040d4169e8684ee0cec856b5e7",
+    "anonymous_readback": "pass",
+    "file_policy": "CC0 metadata/link only; exact CC BY-SA 4.0 unavailable"
+  },
+  "github_deferred_plan": {
+    "path": "00_control/GITHUB_DEFERRED_RELEASE_PLAN.json",
+    "bytes": 5765,
+    "sha256": "8bb69f8d9ddd9e627d1c06c4bac390c363ac5d1ecfe09f5dc1e736f29f3f1506",
+    "tracked_pages_file_count": 85,
+    "tracked_pages_tree_sha256": "52b7e40cbd7c4c107d7e41d5cc279ab1726f15435ef3fd9940b639096707a388",
+    "release_asset_count": 5,
+    "release_asset_bytes": 3014210,
+    "local_staging": "complete_and_verified"
+  },
+  "next_action": "Publish the exact v2026.08.22.1 bytes to the restored existing GitHub repository/release/Pages lineage and anonymously verify them; then resume and publish the sole existing Figshare item as reader-first v2, anonymously verify all files, update cross-lineage receipts, and complete the pursuit goal."
 }

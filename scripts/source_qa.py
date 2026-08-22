@@ -10,7 +10,65 @@ from typing import Iterable, Sequence
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_UNITS = tuple(range(1, 13))
+UNIT_SPECS = (
+    {
+        "token": "p01",
+        "identifier": "o002.p01",
+        "qmd": "p01-menjalankan-eksperimen-python.qmd",
+        "code": "primer01_execution.py",
+        "test": "test_primer01.py",
+        "exercise_count": 5,
+        "check_count": 5,
+    },
+    {
+        "token": "p02",
+        "identifier": "o002.p02",
+        "qmd": "p02-kontrol-koleksi-fungsi-modul-berkas.qmd",
+        "code": "primer02_control_files.py",
+        "test": "test_primer02.py",
+        "exercise_count": 5,
+        "check_count": 5,
+    },
+    *(
+        {
+            "token": f"u{number:02d}",
+            "identifier": f"o002.u{number:02d}",
+            "qmd": filename,
+            "code": code,
+            "test": f"test_unit{number:02d}.py",
+            "exercise_count": 5,
+            "extra_exercises": (
+                ("ex-o002-u04-m01",)
+                if number == 4
+                else (
+                    "ex-o002-u05-sage-01",
+                    "ex-o002-u05-sage-02",
+                )
+                if number == 5
+                else ("ex-o002-u06-scipy-01",)
+                if number == 6
+                else ("ex-o002-u11-s01",)
+                if number == 11
+                else ()
+            ),
+            "check_count": 2 if number == 5 else 1 if number in {4, 6, 11} else 0,
+        }
+        for number, filename, code in (
+            (1, "01-komputasi-bukti.qmd", "unit01_experiment.py"),
+            (2, "02-objek-fungsi.qmd", "unit02_objects.py"),
+            (3, "03-array-vektorisasi.qmd", "unit03_arrays.py"),
+            (4, "04-visualisasi-integritas.qmd", "unit04_visualization.py"),
+            (5, "05-eksak-simbolik-sage.qmd", "unit05_symbolic.py"),
+            (6, "06-titik-mengambang-stabilitas.qmd", "unit06_floating.py"),
+            (7, "07-rancangan-eksperimen.qmd", "unit07_experiment_design.py"),
+            (8, "08-pengujian-validasi.qmd", "unit08_validation.py"),
+            (9, "09-data-konfigurasi-provenans.qmd", "unit09_provenance.py"),
+            (10, "10-otomasi-pipa.qmd", "unit10_pipeline.py"),
+            (11, "11-eksperimen-numerik.qmd", "unit11_numerical.py"),
+            (12, "12-proyek-akhir.qmd", "unit12_capstone.py"),
+        )
+    ),
+)
 
 ID_RE = re.compile(r"\{#((?:sec|ex)-[-A-Za-z0-9_.:]+)(?=[\s}])")
 YAML_IDENTIFIER_RE = re.compile(r"^\s*identifier\s*:\s*(.*?)\s*$")
@@ -197,11 +255,16 @@ def _check_authored_text(path: Path, text: str, root: Path) -> list[str]:
     return errors
 
 
-def _check_qmd(path: Path, text: str, unit: int, root: Path) -> list[str]:
+def _check_qmd(
+    path: Path,
+    text: str,
+    spec: dict[str, object],
+    root: Path,
+) -> list[str]:
     errors: list[str] = []
     label = _relative(path, root)
-    unit_token = f"{unit:02d}"
-    expected_identifier = f"o002.u{unit_token}"
+    unit_token = str(spec["token"])
+    expected_identifier = str(spec["identifier"])
     actual_identifier = _yaml_identifier(text)
     if actual_identifier != expected_identifier:
         errors.append(
@@ -223,7 +286,12 @@ def _check_qmd(path: Path, text: str, unit: int, root: Path) -> list[str]:
         for identifier, _ in _id_occurrences(structural_text)
         if identifier.startswith("ex-")
     ]
-    expected_exercises = [f"ex-o002-u{unit_token}-{index:02d}" for index in range(1, 6)]
+    exercise_count = int(spec["exercise_count"])
+    expected_exercises = [
+        f"ex-o002-{unit_token}-{index:02d}"
+        for index in range(1, exercise_count + 1)
+    ]
+    expected_exercises.extend(str(item) for item in spec.get("extra_exercises", ()))
     if Counter(actual_exercises) != Counter(expected_exercises):
         actual_counts = Counter(actual_exercises)
         expected_counts = Counter(expected_exercises)
@@ -237,10 +305,26 @@ def _check_qmd(path: Path, text: str, unit: int, root: Path) -> list[str]:
     titles = _callout_titles(structural_text)
     hint_count = titles.count("Petunjuk")
     solution_count = titles.count("Jawaban dan solusi")
-    if hint_count != 5:
-        errors.append(f"{label} has {hint_count} hint callout(s); expected 5")
-    if solution_count != 5:
-        errors.append(f"{label} has {solution_count} full-solution callout(s); expected 5")
+    check_count = sum(
+        titles.count(title)
+        for title in ("Pemeriksaan mandiri", "Cek yang dapat dijalankan")
+    )
+    total_exercises = len(expected_exercises)
+    if hint_count != total_exercises:
+        errors.append(
+            f"{label} has {hint_count} hint callout(s); expected {total_exercises}"
+        )
+    if solution_count != total_exercises:
+        errors.append(
+            f"{label} has {solution_count} full-solution callout(s); "
+            f"expected {total_exercises}"
+        )
+    expected_check_count = int(spec["check_count"])
+    if check_count != expected_check_count:
+        errors.append(
+            f"{label} has {check_count} executable-check callout(s); "
+            f"expected {expected_check_count}"
+        )
 
     errors.extend(_delimiter_errors(text, label))
     if (
@@ -268,51 +352,56 @@ def inspect_lane(root: Path) -> list[str]:
         (path for path in units_directory.glob("*.qmd") if path.is_file()),
         key=lambda path: path.name.casefold(),
     )
-    code_files = sorted(
-        (path for path in code_directory.glob("unit[0-9][0-9]_*.py") if path.is_file()),
-        key=lambda path: path.name.casefold(),
-    )
-    test_files = sorted(
-        (path for path in tests_directory.glob("test_unit[0-9][0-9]*.py") if path.is_file()),
-        key=lambda path: path.name.casefold(),
-    )
+    code_files = sorted(code_directory.glob("*.py"), key=lambda path: path.name.casefold())
+    test_files = sorted(tests_directory.glob("test_*.py"), key=lambda path: path.name.casefold())
 
-    if len(qmd_files) != len(EXPECTED_UNITS):
+    expected_qmd_names = {str(spec["qmd"]) for spec in UNIT_SPECS}
+    expected_code_names = {
+        "unit05_sage_lab.py",
+        *(str(spec["code"]) for spec in UNIT_SPECS),
+    }
+    expected_test_names = {
+        "test_notebook_supplement.py",
+        "test_release_tooling.py",
+        "test_source_qa.py",
+        "test_unit05_sage.py",
+        *(str(spec["test"]) for spec in UNIT_SPECS),
+    }
+    actual_qmd_names = {path.name for path in qmd_files}
+    actual_code_names = {path.name for path in code_files}
+    actual_test_names = {path.name for path in test_files}
+
+    if actual_qmd_names != expected_qmd_names:
         errors.append(
-            f"source/units must contain exactly 12 QMD files; found {len(qmd_files)}"
+            "source/units closure mismatch; "
+            f"missing={sorted(expected_qmd_names - actual_qmd_names)}, "
+            f"unexpected={sorted(actual_qmd_names - expected_qmd_names)}"
+        )
+    if actual_code_names != expected_code_names:
+        errors.append(
+            "source/code closure mismatch; "
+            f"missing={sorted(expected_code_names - actual_code_names)}, "
+            f"unexpected={sorted(actual_code_names - expected_code_names)}"
+        )
+    if actual_test_names != expected_test_names:
+        errors.append(
+            "tests closure mismatch; "
+            f"missing={sorted(expected_test_names - actual_test_names)}, "
+            f"unexpected={sorted(actual_test_names - expected_test_names)}"
         )
 
-    qmd_by_unit: dict[int, Path] = {}
-    for unit in EXPECTED_UNITS:
-        token = f"{unit:02d}"
-        qmd_matches = [
-            path for path in qmd_files if re.fullmatch(rf"{token}-.+\.qmd", path.name)
-        ]
-        code_matches = [path for path in code_files if path.name.startswith(f"unit{token}_")]
-        expected_test_name = f"test_unit{token}.py"
-        test_matches = [
-            path for path in test_files if path.name.startswith(f"test_unit{token}")
-        ]
-        if len(qmd_matches) != 1:
-            errors.append(
-                f"unit {token} requires exactly one source/units/{token}-*.qmd; "
-                f"found {[path.name for path in qmd_matches]}"
-            )
-        else:
-            qmd_by_unit[unit] = qmd_matches[0]
-        if len(code_matches) != 1:
-            errors.append(
-                f"unit {token} requires exactly one source/code/unit{token}_*.py; "
-                f"found {[path.name for path in code_matches]}"
-            )
-        if [path.name for path in test_matches] != [expected_test_name]:
-            errors.append(
-                f"unit {token} requires only tests/{expected_test_name}; "
-                f"found {[path.name for path in test_matches]}"
-            )
+    qmd_by_token = {
+        str(spec["token"]): units_directory / str(spec["qmd"])
+        for spec in UNIT_SPECS
+    }
 
+    authored_test_files = [
+        path
+        for path in test_files
+        if path.name != "test_source_qa.py"
+    ]
     authored_files = sorted(
-        {*qmd_files, *code_files, *test_files},
+        {*qmd_files, *code_files, *authored_test_files},
         key=lambda path: _relative(path, root).casefold(),
     )
     texts: dict[Path, str] = {}
@@ -337,17 +426,18 @@ def inspect_lane(root: Path) -> list[str]:
             )
             errors.append(f"duplicate global ID {identifier!r}: {rendered}")
 
-    for unit, path in sorted(qmd_by_unit.items()):
+    for spec in UNIT_SPECS:
+        path = qmd_by_token[str(spec["token"])]
         text = texts.get(path)
         if text is not None:
-            errors.extend(_check_qmd(path, text, unit, root))
+            errors.extend(_check_qmd(path, text, spec, root))
 
     return sorted(errors, key=str.casefold)
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Validate the closed 12-unit O002 authored-source structure."
+        description="Validate the selected 14-unit O002 authored-source structure."
     )
     parser.add_argument(
         "--root",
@@ -372,9 +462,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.receipt.write_text(
             json.dumps(
                 {
-                    "schema": "o002.source-qa.v1",
+                    "schema": "o002.source-qa.v2",
                     "successful": True,
-                    "unit_triplets": len(EXPECTED_UNITS),
+                    "unit_triplets": len(UNIT_SPECS),
                     "errors": 0,
                 },
                 ensure_ascii=False,
@@ -385,7 +475,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             encoding="utf-8",
             newline="\n",
         )
-    print("source QA passed: 12 unit triplets and authored-source invariants are valid")
+    print("source QA passed: 14 unit triplets and authored-source invariants are valid")
     return 0
 
 

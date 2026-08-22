@@ -1,0 +1,81 @@
+{
+  "builds": [
+    {
+      "ordinal": 1,
+      "output_manifest": {
+        "bytes": 9187,
+        "path": "00_control/OUTPUT_FILE_MANIFEST_FINAL_A.csv",
+        "sha256": "bf6299dcc2e2fa3d10173cb54f43e075546a84e539a2c31d7b1c070bfeef8613"
+      },
+      "source_manifest": {
+        "bytes": 9903,
+        "path": "00_control/SOURCE_FILE_MANIFEST_FINAL_A.csv",
+        "sha256": "9f5a3a2403db914cac9ab59baf9c6f6b0a3513c951aa91fdad8b4db40fba2785"
+      }
+    },
+    {
+      "ordinal": 2,
+      "output_manifest": {
+        "bytes": 9187,
+        "path": "00_control/OUTPUT_FILE_MANIFEST_FINAL_B.csv",
+        "sha256": "bf6299dcc2e2fa3d10173cb54f43e075546a84e539a2c31d7b1c070bfeef8613"
+      },
+      "source_manifest": {
+        "bytes": 9903,
+        "path": "00_control/SOURCE_FILE_MANIFEST_FINAL_B.csv",
+        "sha256": "9f5a3a2403db914cac9ab59baf9c6f6b0a3513c951aa91fdad8b4db40fba2785"
+      }
+    }
+  ],
+  "checks": {
+    "csv_schema_and_rows_valid": true,
+    "four_distinct_witness_paths": true,
+    "output_manifests_byte_identical": true,
+    "source_manifests_byte_identical": true
+  },
+  "clean_build_count": 2,
+  "comparisons": [
+    {
+      "byte_identical": true,
+      "first": {
+        "bytes": 9903,
+        "path": "00_control/SOURCE_FILE_MANIFEST_FINAL_A.csv",
+        "row_count": 99,
+        "sha256": "9f5a3a2403db914cac9ab59baf9c6f6b0a3513c951aa91fdad8b4db40fba2785",
+        "total_bytes": 1048451
+      },
+      "kind": "source",
+      "row_count_identical": true,
+      "second": {
+        "bytes": 9903,
+        "path": "00_control/SOURCE_FILE_MANIFEST_FINAL_B.csv",
+        "row_count": 99,
+        "sha256": "9f5a3a2403db914cac9ab59baf9c6f6b0a3513c951aa91fdad8b4db40fba2785",
+        "total_bytes": 1048451
+      },
+      "total_bytes_identical": true
+    },
+    {
+      "byte_identical": true,
+      "first": {
+        "bytes": 9187,
+        "path": "00_control/OUTPUT_FILE_MANIFEST_FINAL_A.csv",
+        "row_count": 84,
+        "sha256": "bf6299dcc2e2fa3d10173cb54f43e075546a84e539a2c31d7b1c070bfeef8613",
+        "total_bytes": 4046272
+      },
+      "kind": "output",
+      "row_count_identical": true,
+      "second": {
+        "bytes": 9187,
+        "path": "00_control/OUTPUT_FILE_MANIFEST_FINAL_B.csv",
+        "row_count": 84,
+        "sha256": "bf6299dcc2e2fa3d10173cb54f43e075546a84e539a2c31d7b1c070bfeef8613",
+        "total_bytes": 4046272
+      },
+      "total_bytes_identical": true
+    }
+  ],
+  "schema": "o002.build-determinism.v1",
+  "successful": true
+}

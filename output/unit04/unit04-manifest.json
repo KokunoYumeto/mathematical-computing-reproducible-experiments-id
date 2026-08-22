@@ -1,15 +1,31 @@
 {
+  "accessibility": {
+    "data_table": "unit04-data.csv",
+    "description": "Grafik garis dan titik untuk tujuh pengamatan pada waktu 0 sampai 6 detik. Sumbu mendatar menyatakan waktu dalam detik dan sumbu tegak menyatakan jarak dalam meter, keduanya dimulai dari nol. Titik lingkaran menunjukkan jarak terukur 1,0; 3,1; 4,8; 7,2; 9,0; 10,9; dan 13,1 meter, masing-masing dengan batang ketidakpastian plus-minus 0,4 meter. Garis putus-putus menunjukkan model d sama dengan 2t plus 1; seluruh nilai model berada di dalam interval ketidakpastian pengamatan.",
+    "description_file": "unit04-alt.txt",
+    "svg_metadata": true
+  },
   "all_model_values_within_uncertainty": true,
   "artifacts": {
     "unit04-alt.txt": "c68df3a88d557ec461d6b38240f7c177e95b41c7489c67b8b58a92095ec48e52",
     "unit04-data.csv": "f510ee30b5adc1cf470f75c2552ea8254a4513a107e3506dc4ad8c033c6f03be",
-    "unit04-figure.svg": "5b7d7be5000706220b3f7ab7ce394018246d8c2b7ed01c630a7672bd24c8c5a0"
+    "unit04-figure.svg": "fd4cfa793ece466a52201efbd9b1c6c5413f24d0c3602adc6a7b8698ef28c81b"
   },
   "axis_policy": {
     "x_starts_at_zero": true,
     "y_starts_at_zero": true
   },
   "claim_limit": "Grafik menunjukkan konsistensi pada tujuh pengamatan; grafik tidak membuktikan model untuk semua waktu.",
+  "construction": [
+    "figure_axes",
+    "plot_model",
+    "scatter_measurements",
+    "errorbar_uncertainty",
+    "labels_with_units",
+    "legend",
+    "accessible_description",
+    "deterministic_save"
+  ],
   "encoding": {
     "measurement": "titik lingkaran",
     "model": "garis putus-putus",

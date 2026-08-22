@@ -38,7 +38,7 @@
     "requested_perturbation": "1e-12",
     "x": "0.99999999"
   },
-  "core_sha256": "b7ec28842af106a79f77d4be1b77a8ee2d5269c2856e9b9c32866f4ee47cf89e",
+  "core_sha256": "60261cba7eff40f614f907d05e109c80433f60a4099042f637dc42a1017dd35f",
   "error_budget": {
     "absolute_budget": "1e-10",
     "allowed_absolute_error": "6e-10",
@@ -64,6 +64,7 @@
     "experiments_executed": [
       "binary64_spacing_and_range",
       "cancellation",
+      "scipy_special_exprel",
       "sqrt_forward_backward_error",
       "conditioning",
       "summation",
@@ -74,9 +75,66 @@
   "runtime": {
     "float_format": "IEEE 754 binary64 pada build CPython yang diuji",
     "implementation": "CPython",
-    "python": "3.13.1"
+    "python": "3.13.1",
+    "scipy": "1.15.2"
   },
-  "schema": "o002.unit06.floating.v1",
+  "schema": "o002.unit06.floating.v2",
+  "scipy_special_exprel": {
+    "backward_error": {
+      "is_exact_inverse_solution": false,
+      "method": "aproksimasi orde pertama abs(delta_x) ~= abs(delta_y)/abs(E'(x))",
+      "naive_absolute_estimate": "2.21549418274780203244E-8",
+      "naive_relative_estimate": "2.21549418274780198609E+0",
+      "scipy_absolute_estimate": "9.41080427077268199700E-17",
+      "scipy_relative_estimate": "9.41080427077268180010E-9"
+    },
+    "conditioning": {
+      "classification": "berkondisi baik dekat nol",
+      "formula": "abs(x*E'(x)/E(x))",
+      "reason": "nilai kondisi mendekati |x|/2 ketika x mendekati nol",
+      "relative_condition_number": "5.00000000833333343795E-9"
+    },
+    "decimal_oracle": {
+      "guard_digits_beyond_x": 50,
+      "lower_absolute_bound": "5e-324",
+      "method": "deret pangkat bebas pembatalan untuk E dan E'",
+      "minimum_precision_digits": 80,
+      "precision_digits": 80,
+      "scope": "Presisi bertambah bersama kecilnya x agar koreksi berorde x tetap terurai sampai masukan subnormal binary64 terkecil.",
+      "upper_absolute_bound": "0.0001"
+    },
+    "evidence_boundary": {
+      "claim": "Pelaksanaan ini menunjukkan pembatalan dan perbaikan pada nilai yang dicatat; klaim umum memerlukan analisis algoritme dan model pembulatan.",
+      "executed_case_only": true,
+      "proves_stability_for_all_real_inputs": false
+    },
+    "extreme_cancellation": {
+      "math_exp_x_equals_one": true,
+      "naive": "0.0",
+      "scipy_special_exprel": "1.0",
+      "x": "1e-16"
+    },
+    "forward_error": {
+      "naive_absolute": "1.10774709875888165308E-8",
+      "naive_relative": "1.10774709322014616851E-8",
+      "scipy_absolute": "4.70540216675568868538E-17",
+      "scipy_is_more_accurate": true,
+      "scipy_relative": "4.70540214322867789081E-17"
+    },
+    "function": "E(x)=(exp(x)-1)/x, dengan ekstensi kontinu E(0)=1",
+    "laboratory_domain": "0 < |x| <= 1e-4 untuk masukan binary64",
+    "mathematical_domain": "semua x real",
+    "scipy": {
+      "function": "scipy.special.exprel",
+      "version": "1.15.2"
+    },
+    "tested_x": "1e-08",
+    "values": {
+      "high_precision_reference": "1.00000000500000001667E+0",
+      "naive": "0.999999993922529",
+      "scipy_special_exprel": "1.000000005"
+    }
+  },
   "summation": {
     "builtin_sum_for_recorded_runtime": "1.0",
     "fsum_matches_mathematical_sum": true,

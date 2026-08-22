@@ -21,7 +21,10 @@ import matplotlib
 matplotlib.use("Agg")
 from matplotlib import pyplot as plt  # noqa: E402
 from matplotlib.axes import Axes  # noqa: E402
+from matplotlib.collections import PathCollection  # noqa: E402
+from matplotlib.container import ErrorbarContainer  # noqa: E402
 from matplotlib.figure import Figure  # noqa: E402
+from matplotlib.lines import Line2D  # noqa: E402
 
 
 SCHEMA = "o002.unit04.visualization.v1"
@@ -135,30 +138,22 @@ def canonical_json_bytes(payload: object) -> bytes:
     ).encode("utf-8")
 
 
-def create_figure(
+def start_figure() -> tuple[Figure, Axes]:
+    """Mulai konstruksi eksplisit dengan pasangan ``figure`` dan ``axes``."""
+
+    return plt.subplots(figsize=(8.0, 4.8))
+
+
+def add_model_line(
+    axes: Axes,
     observations: Sequence[Observation] = OBSERVATIONS,
-) -> tuple[Figure, Axes]:
-    """Buat grafik dengan satuan, skala jujur, dan pengodean redundan."""
+) -> Line2D:
+    """Tambahkan seri model sebagai garis putus-putus berlabel."""
 
     validate_observations(observations)
     times = [observation.time_s for observation in observations]
-    measured = [observation.measured_distance_m for observation in observations]
-    uncertainty = [observation.uncertainty_m for observation in observations]
     model = [observation.model_distance_m for observation in observations]
-
-    figure, axes = plt.subplots(figsize=(8.0, 4.8))
-    axes.errorbar(
-        times,
-        measured,
-        yerr=uncertainty,
-        fmt="o",
-        markersize=6,
-        capsize=4,
-        color="#0072B2",
-        ecolor="#4D4D4D",
-        label="Pengukuran (±0,4 m)",
-    )
-    axes.plot(
+    (line,) = axes.plot(
         times,
         model,
         color="#D55E00",
@@ -166,6 +161,59 @@ def create_figure(
         linewidth=2,
         label="Model d = 2t + 1",
     )
+    return line
+
+
+def add_measurement_points(
+    axes: Axes,
+    observations: Sequence[Observation] = OBSERVATIONS,
+) -> PathCollection:
+    """Tambahkan pengukuran sebagai titik yang tidak bergantung pada warna."""
+
+    validate_observations(observations)
+    times = [observation.time_s for observation in observations]
+    measured = [observation.measured_distance_m for observation in observations]
+    return axes.scatter(
+        times,
+        measured,
+        marker="o",
+        s=36,
+        color="#0072B2",
+        label="Pengukuran",
+        zorder=3,
+    )
+
+
+def add_uncertainty_bars(
+    axes: Axes,
+    observations: Sequence[Observation] = OBSERVATIONS,
+) -> ErrorbarContainer:
+    """Tambahkan ketidakpastian vertikal tanpa menggandakan tanda titik."""
+
+    validate_observations(observations)
+    times = [observation.time_s for observation in observations]
+    measured = [observation.measured_distance_m for observation in observations]
+    uncertainty = [observation.uncertainty_m for observation in observations]
+    return axes.errorbar(
+        times,
+        measured,
+        yerr=uncertainty,
+        fmt="none",
+        capsize=4,
+        ecolor="#4D4D4D",
+        label="Ketidakpastian (±0,4 m)",
+        zorder=2,
+    )
+
+
+def label_and_finish_axes(
+    axes: Axes,
+    observations: Sequence[Observation] = OBSERVATIONS,
+) -> None:
+    """Tambahkan judul, satuan, skala, kisi, dan legenda secara eksplisit."""
+
+    validate_observations(observations)
+    times = [observation.time_s for observation in observations]
     axes.set_title(FIGURE_TITLE)
     axes.set_xlabel("Waktu, t (s)")
     axes.set_ylabel("Jarak, d (m)")
@@ -176,6 +224,19 @@ def create_figure(
     axes.grid(True, color="#D9D9D9", linewidth=0.8)
     axes.set_axisbelow(True)
     axes.legend(loc="upper left", frameon=True)
+
+
+def create_figure(
+    observations: Sequence[Observation] = OBSERVATIONS,
+) -> tuple[Figure, Axes]:
+    """Buat grafik dengan satuan, skala jujur, dan pengodean redundan."""
+
+    validate_observations(observations)
+    figure, axes = start_figure()
+    add_model_line(axes, observations)
+    add_measurement_points(axes, observations)
+    add_uncertainty_bars(axes, observations)
+    label_and_finish_axes(axes, observations)
     figure.subplots_adjust(left=0.11, right=0.97, bottom=0.15, top=0.87)
     return figure, axes
 
@@ -240,6 +301,22 @@ def write_artifacts(output_dir: Path) -> dict[str, Path]:
             "measurement": "titik lingkaran",
             "model": "garis putus-putus",
             "uncertainty": "batang galat vertikal",
+        },
+        "construction": [
+            "figure_axes",
+            "plot_model",
+            "scatter_measurements",
+            "errorbar_uncertainty",
+            "labels_with_units",
+            "legend",
+            "accessible_description",
+            "deterministic_save",
+        ],
+        "accessibility": {
+            "description": ALT_TEXT,
+            "description_file": paths["alt_text"].name,
+            "data_table": paths["data"].name,
+            "svg_metadata": True,
         },
         "axis_policy": {"x_starts_at_zero": True, "y_starts_at_zero": True},
         "all_model_values_within_uncertainty": all(

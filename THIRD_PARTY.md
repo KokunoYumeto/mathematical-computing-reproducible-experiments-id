@@ -1,20 +1,19 @@
 # Batas materi pihak ketiga
 
-## Unit 1-12
+## Primer P01/P02 dan Unit 1-12
 
-Seluruh dua belas unit pada batas sumber sekarang ditulis secara mandiri dari
-fakta matematika, dokumentasi perilaku perangkat lunak, dan rancangan
-pedagogis baru. Tidak ada prosa, gambar, latihan, data, maupun kode donor yang
-disalin atau diadaptasi ke dalam unit-unit tersebut.
+Seluruh empat belas unit pada batas sumber sekarang - dua primer wajib P01/P02
+dan dua belas unit utama - ditulis secara mandiri dari fakta matematika,
+dokumentasi perilaku perangkat lunak, dan rancangan pedagogis baru. Tidak ada
+prosa, gambar, latihan, data, maupun kode donor yang disalin atau diadaptasi ke
+dalam unit-unit tersebut.
 
-Patrick Walls, *Mathematical Python*, dan Irving dkk., *Research Software
-Engineering with Python*, dipakai sebagai sumber pembanding cakupan dan
-rujukan produksi. Keduanya tetap berada dalam arsip otoritas terpisah dan
-mempertahankan lisensi masing-masing.
-
-Scientific Python Lectures juga dipakai dalam perbandingan sumber, tetapi
-arsipnya belum diakui sebagai komponen edisi. Pemilihan dan batas yang
-direncanakan dicatat di
+Lima karya dipakai sebagai pembanding cakupan atau semantik: Patrick Walls,
+*Mathematical Python*; Irving dkk., *Research Software Engineering with
+Python*; *Scientific Python Lectures*; Hans Fangohr, *Introduction to Python
+for Computational Science and Engineering*; dan *Official Sage Tutorial
+10.9*. Kelimanya mempertahankan lisensi masing-masing dan tidak diakui sebagai
+komponen edisi. Pemilihan serta batas perbandingan dicatat di
 [00_control/SOURCE_SELECTION.md](00_control/SOURCE_SELECTION.md).
 
 Setiap pemakaian materi donor pada revisi mendatang harus lebih dahulu mendapat

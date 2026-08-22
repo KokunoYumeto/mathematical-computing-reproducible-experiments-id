@@ -10,11 +10,12 @@ sole B80 narrative spine under the exact 14-unit architecture recorded in
 second overlapping computing book is required. The selection rests on a
 separate source/coverage audit, not on sunk work or the prior release.
 
-The preserved 12-unit release and live reader are wholly original. They contain
-no adapted donor prose, exercises, figures, data, or code. Text is CC BY-SA 4.0
-and code is MIT. P01/P02 and the selected in-place repairs are also original.
-Completion does not convert a comparator into a component; future donor bytes
-must be declared, licensed, attributed, and reviewed before admission.
+The preserved 12-unit release and the live 14-unit source are wholly original.
+They contain no adapted donor prose, exercises, figures, data, or code. Text is
+CC BY-SA 4.0 and code is MIT. P01/P02 and the selected in-place repairs are also
+original. Completion does not convert a comparator into a component; future
+donor bytes must be declared, licensed, attributed, and reviewed before
+admission.
 
 ## Frozen primary authorities
 
@@ -80,15 +81,42 @@ are excluded.
 - Source/build surface: editable Markdown/Jupyter Book, notebooks, exercises,
   solutions, data, tests, Make targets, and CI.
 - Curricular disposition: strongest A30-facing comparison donor, but not a
-  complete B80 spine. No SPL bytes enter the completed current edition. Its
+  complete B80 spine. No SPL bytes enter the live 14-unit source. Its
   exact archive and component manifest would have to be frozen before any
   adaptation in a later revision.
 
 Potential later-revision boundary: introductory Python language, NumPy arrays,
 Matplotlib, and bounded SciPy/SymPy material. Advanced application-package
-chapters remain out of scope. The current edition instead supplies original
+chapters remain out of scope. The live source instead supplies original
 Python/NumPy/plotting treatment and does not reproduce overlapping treatment
 from Mathematical Python.
+
+### Introduction to Python for Computational Science and Engineering
+
+- Official author page and repository: Hans Fangohr,
+  `fangohr/introduction-to-python-for-computational-science-and-engineering`.
+- Citable edition DOI: `10.5281/zenodo.1411868`; official reader identifies the
+  work as a beginner-facing Python 3 book for computational science and
+  engineering.
+- Rights: CC BY-NC 4.0.
+- Source surface: editable Jupyter notebooks with official HTML and PDF
+  renders; later chapters cover NumPy, SciPy, SymPy, plotting, data, and
+  environments.
+- Curricular disposition: comparison-only primer authority. It is strong for
+  learners without prior programming, but does not provide the complete
+  testing, provenance, experiment-design, proof/evidence, SageMath, or
+  solution spine required by B80. No Fangohr bytes enter this edition.
+
+### Official Sage Tutorial 10.9
+
+- Official repository authority: SageMath source commit
+  `686dc1a8d420c2e0aabadd4f602d9a0aa4690c50`, selected path
+  `src/doc/en/tutorial/`.
+- Surface: 23 RST documents and 1.075 `sage:` doctest prompts.
+- Rights: CC BY-SA 3.0 for the selected tutorial documentation.
+- Curricular disposition: authoritative semantic comparator for the bounded
+  executed Sage lab. Its prose and doctests are not copied or adapted, and its
+  breadth is not substituted for the two B80 mastery exercises.
 
 ## Rejected wholesale alternatives
 
@@ -96,20 +124,18 @@ from Mathematical Python.
   beginner-friendly under CC BY 4.0, but its repository lacks a root component
   manifest, names missing build scripts, has unpinned dependencies and dynamic
   dates, and generated notebooks acknowledge ordering inconsistencies.
-- Fangohr, *Introduction to Python for Computational Science and Engineering*:
-  valuable beginner numerical donor, but CC BY-NC 4.0 and still missing the
-  full provenance, experiment-design, and proof/evidence progression.
 - Berkeley *Python Numerical Methods*: software is MIT, but the textbook prose
   is not an open translation source.
 
-## Original connective material delivered
+## Original connective material in the selected architecture
 
-The completed edition supplies the coherent progression absent from every candidate: exact
-versus floating arithmetic; object/representation/output distinctions;
+The selected 14-unit architecture supplies the coherent progression absent
+from every candidate: exact versus floating arithmetic;
+object/representation/output distinctions;
 experiment questions and controls; random seeds; tolerances and error budgets;
 invariants and falsification; visualization integrity; canonical artifacts and
 hashes; testing and validation; environments, configuration, provenance, and
-automation; a small Sage-compatible exact-computation bridge; and the boundary
+automation; a compulsory locally executed SageMath core; and the boundary
 between computational evidence, counterexample, and proof.
 
 ## Self-study closure and remaining limits
@@ -118,9 +144,11 @@ Scientific Python Lectures distributes exercises across tutorials; Mathematical
 Python has no solutions and unfinished exercise sections; RSE has strong
 solutions but teaches software practice rather than mathematical computation.
 O002 therefore supplies its own continuous stable-ID assessment spine: five
-exercises, five hints, and five full solutions in every unit, plus executable
-checks and a verifiable capstone. The reader packages local web runtime assets,
+exercises, five hints, and five full solutions in every unit. The fifteen new
+mastery exercises also have executable checks, and the capstone is verifiable.
+The reader packages local web runtime assets,
 accessible descriptions, a frozen build environment, provenance receipts, and
 capstone review criteria. Installation of the declared open-source numerical
-stack remains a local prerequisite; Sage is an optional bridge rather than a
-required runtime.
+stack remains a local prerequisite. SageMath is a compulsory course surface
+with its own frozen local environment and executable receipt; it is not a
+remote-service or optional-runtime substitute.

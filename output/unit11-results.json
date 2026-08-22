@@ -21,6 +21,70 @@
     "width": 9.094947017729282e-13,
     "width_tolerance": 1e-12
   },
+  "bisection_scipy_comparison": {
+    "endpoint_values": [
+      -1.0,
+      2.0
+    ],
+    "initial_bracket": [
+      1.0,
+      2.0
+    ],
+    "max_iterations": 10000,
+    "method": "bisect",
+    "original": {
+      "iterations": 40,
+      "left": 1.4142135623724243,
+      "midpoint": 1.414213562372879,
+      "right": 1.4142135623733338,
+      "width": 9.094947017729282e-13
+    },
+    "proof_boundary": "Kesepakatan dua implementasi pada selang ini adalah bukti kerja. Kekontinuan dan jaminan adanya akar berasal dari asumsi dan teorema, bukan dari SciPy atau digit hasil.",
+    "scipy": {
+      "converged": true,
+      "flag": "converged",
+      "function_calls": 42,
+      "iterations": 40,
+      "root": 1.4142135623724243
+    },
+    "scipy_version": "1.15.2",
+    "tolerances": {
+      "original_width_tolerance": 1e-12,
+      "scipy_rtol": 8.881784197001252e-16,
+      "scipy_xtol": 1e-12,
+      "semantics": {
+        "original": "batas lebar selang akhir",
+        "scipy": "kriteria kedekatan akar absolut dan relatif"
+      }
+    },
+    "verification": {
+      "absolute_root_difference": 4.547473508864641e-13,
+      "agreement_tolerance": 1.5012560739669465e-12,
+      "original_absolute_residual": 6.108447081487611e-13,
+      "roots_agree": true,
+      "roots_inside_initial_bracket": true,
+      "scipy_absolute_residual": 1.8969270598745425e-12,
+      "strict_sign_change": true
+    }
+  },
+  "curriculum_routes": {
+    "b80_a30_core": [
+      "bisection",
+      "bisection_scipy_comparison",
+      "error_sources"
+    ],
+    "deferred_extensions_not_b80_core": {
+      "B30": [
+        "quadrature_x_squared"
+      ],
+      "B40": [
+        "linear_system"
+      ],
+      "B70": [
+        "euler_y_prime_y"
+      ]
+    }
+  },
   "euler_parameters": {
     "derivative": {
       "expression": "y",

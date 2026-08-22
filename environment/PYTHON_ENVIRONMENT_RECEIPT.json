@@ -1,0 +1,1034 @@
+{
+  "closure_complete": true,
+  "dependency_edges": [
+    {
+      "from": "anyio",
+      "to": "idna"
+    },
+    {
+      "from": "anyio",
+      "to": "sniffio"
+    },
+    {
+      "from": "argon2-cffi",
+      "to": "argon2-cffi-bindings"
+    },
+    {
+      "from": "argon2-cffi-bindings",
+      "to": "cffi"
+    },
+    {
+      "from": "beautifulsoup4",
+      "to": "soupsieve"
+    },
+    {
+      "from": "beautifulsoup4",
+      "to": "typing-extensions"
+    },
+    {
+      "from": "bleach",
+      "to": "webencodings"
+    },
+    {
+      "from": "cffi",
+      "to": "pycparser"
+    },
+    {
+      "from": "comm",
+      "to": "traitlets"
+    },
+    {
+      "from": "contourpy",
+      "to": "numpy"
+    },
+    {
+      "from": "httpcore",
+      "to": "certifi"
+    },
+    {
+      "from": "httpcore",
+      "to": "h11"
+    },
+    {
+      "from": "httpx",
+      "to": "anyio"
+    },
+    {
+      "from": "httpx",
+      "to": "certifi"
+    },
+    {
+      "from": "httpx",
+      "to": "httpcore"
+    },
+    {
+      "from": "httpx",
+      "to": "idna"
+    },
+    {
+      "from": "ipykernel",
+      "to": "comm"
+    },
+    {
+      "from": "ipykernel",
+      "to": "debugpy"
+    },
+    {
+      "from": "ipykernel",
+      "to": "ipython"
+    },
+    {
+      "from": "ipykernel",
+      "to": "jupyter-client"
+    },
+    {
+      "from": "ipykernel",
+      "to": "jupyter-core"
+    },
+    {
+      "from": "ipykernel",
+      "to": "matplotlib-inline"
+    },
+    {
+      "from": "ipykernel",
+      "to": "nest-asyncio"
+    },
+    {
+      "from": "ipykernel",
+      "to": "packaging"
+    },
+    {
+      "from": "ipykernel",
+      "to": "psutil"
+    },
+    {
+      "from": "ipykernel",
+      "to": "pyzmq"
+    },
+    {
+      "from": "ipykernel",
+      "to": "tornado"
+    },
+    {
+      "from": "ipykernel",
+      "to": "traitlets"
+    },
+    {
+      "from": "ipython",
+      "to": "colorama"
+    },
+    {
+      "from": "ipython",
+      "to": "decorator"
+    },
+    {
+      "from": "ipython",
+      "to": "jedi"
+    },
+    {
+      "from": "ipython",
+      "to": "matplotlib-inline"
+    },
+    {
+      "from": "ipython",
+      "to": "prompt-toolkit"
+    },
+    {
+      "from": "ipython",
+      "to": "pygments"
+    },
+    {
+      "from": "ipython",
+      "to": "stack-data"
+    },
+    {
+      "from": "ipython",
+      "to": "traitlets"
+    },
+    {
+      "from": "jedi",
+      "to": "parso"
+    },
+    {
+      "from": "jinja2",
+      "to": "markupsafe"
+    },
+    {
+      "from": "jsonschema",
+      "to": "attrs"
+    },
+    {
+      "from": "jsonschema",
+      "to": "jsonschema-specifications"
+    },
+    {
+      "from": "jsonschema",
+      "to": "referencing"
+    },
+    {
+      "from": "jsonschema",
+      "to": "rpds-py"
+    },
+    {
+      "from": "jsonschema-specifications",
+      "to": "referencing"
+    },
+    {
+      "from": "jupyter-client",
+      "to": "jupyter-core"
+    },
+    {
+      "from": "jupyter-client",
+      "to": "python-dateutil"
+    },
+    {
+      "from": "jupyter-client",
+      "to": "pyzmq"
+    },
+    {
+      "from": "jupyter-client",
+      "to": "tornado"
+    },
+    {
+      "from": "jupyter-client",
+      "to": "traitlets"
+    },
+    {
+      "from": "jupyter-core",
+      "to": "platformdirs"
+    },
+    {
+      "from": "jupyter-core",
+      "to": "pywin32"
+    },
+    {
+      "from": "jupyter-core",
+      "to": "traitlets"
+    },
+    {
+      "from": "jupyter-events",
+      "to": "jsonschema"
+    },
+    {
+      "from": "jupyter-events",
+      "to": "packaging"
+    },
+    {
+      "from": "jupyter-events",
+      "to": "python-json-logger"
+    },
+    {
+      "from": "jupyter-events",
+      "to": "pyyaml"
+    },
+    {
+      "from": "jupyter-events",
+      "to": "referencing"
+    },
+    {
+      "from": "jupyter-events",
+      "to": "rfc3339-validator"
+    },
+    {
+      "from": "jupyter-events",
+      "to": "rfc3986-validator"
+    },
+    {
+      "from": "jupyter-events",
+      "to": "traitlets"
+    },
+    {
+      "from": "jupyter-lsp",
+      "to": "jupyter-server"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "anyio"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "argon2-cffi"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "jinja2"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "jupyter-client"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "jupyter-core"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "jupyter-events"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "jupyter-server-terminals"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "nbconvert"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "nbformat"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "overrides"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "packaging"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "prometheus-client"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "pywinpty"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "pyzmq"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "send2trash"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "terminado"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "tornado"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "traitlets"
+    },
+    {
+      "from": "jupyter-server",
+      "to": "websocket-client"
+    },
+    {
+      "from": "jupyter-server-terminals",
+      "to": "pywinpty"
+    },
+    {
+      "from": "jupyter-server-terminals",
+      "to": "terminado"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "async-lru"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "httpx"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "ipykernel"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "jinja2"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "jupyter-core"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "jupyter-lsp"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "jupyter-server"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "jupyterlab-server"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "notebook-shim"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "packaging"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "setuptools"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "tornado"
+    },
+    {
+      "from": "jupyterlab",
+      "to": "traitlets"
+    },
+    {
+      "from": "jupyterlab-server",
+      "to": "babel"
+    },
+    {
+      "from": "jupyterlab-server",
+      "to": "jinja2"
+    },
+    {
+      "from": "jupyterlab-server",
+      "to": "json5"
+    },
+    {
+      "from": "jupyterlab-server",
+      "to": "jsonschema"
+    },
+    {
+      "from": "jupyterlab-server",
+      "to": "jupyter-server"
+    },
+    {
+      "from": "jupyterlab-server",
+      "to": "packaging"
+    },
+    {
+      "from": "jupyterlab-server",
+      "to": "requests"
+    },
+    {
+      "from": "matplotlib",
+      "to": "contourpy"
+    },
+    {
+      "from": "matplotlib",
+      "to": "cycler"
+    },
+    {
+      "from": "matplotlib",
+      "to": "fonttools"
+    },
+    {
+      "from": "matplotlib",
+      "to": "kiwisolver"
+    },
+    {
+      "from": "matplotlib",
+      "to": "numpy"
+    },
+    {
+      "from": "matplotlib",
+      "to": "packaging"
+    },
+    {
+      "from": "matplotlib",
+      "to": "pillow"
+    },
+    {
+      "from": "matplotlib",
+      "to": "pyparsing"
+    },
+    {
+      "from": "matplotlib",
+      "to": "python-dateutil"
+    },
+    {
+      "from": "matplotlib-inline",
+      "to": "traitlets"
+    },
+    {
+      "from": "nbclient",
+      "to": "jupyter-client"
+    },
+    {
+      "from": "nbclient",
+      "to": "jupyter-core"
+    },
+    {
+      "from": "nbclient",
+      "to": "nbformat"
+    },
+    {
+      "from": "nbclient",
+      "to": "traitlets"
+    },
+    {
+      "from": "nbconvert",
+      "to": "beautifulsoup4"
+    },
+    {
+      "from": "nbconvert",
+      "to": "bleach"
+    },
+    {
+      "from": "nbconvert",
+      "to": "defusedxml"
+    },
+    {
+      "from": "nbconvert",
+      "to": "jinja2"
+    },
+    {
+      "from": "nbconvert",
+      "to": "jupyter-core"
+    },
+    {
+      "from": "nbconvert",
+      "to": "jupyterlab-pygments"
+    },
+    {
+      "from": "nbconvert",
+      "to": "markupsafe"
+    },
+    {
+      "from": "nbconvert",
+      "to": "mistune"
+    },
+    {
+      "from": "nbconvert",
+      "to": "nbclient"
+    },
+    {
+      "from": "nbconvert",
+      "to": "nbformat"
+    },
+    {
+      "from": "nbconvert",
+      "to": "packaging"
+    },
+    {
+      "from": "nbconvert",
+      "to": "pandocfilters"
+    },
+    {
+      "from": "nbconvert",
+      "to": "pygments"
+    },
+    {
+      "from": "nbconvert",
+      "to": "traitlets"
+    },
+    {
+      "from": "nbformat",
+      "to": "fastjsonschema"
+    },
+    {
+      "from": "nbformat",
+      "to": "jsonschema"
+    },
+    {
+      "from": "nbformat",
+      "to": "jupyter-core"
+    },
+    {
+      "from": "nbformat",
+      "to": "traitlets"
+    },
+    {
+      "from": "notebook",
+      "to": "jupyter-server"
+    },
+    {
+      "from": "notebook",
+      "to": "jupyterlab"
+    },
+    {
+      "from": "notebook",
+      "to": "jupyterlab-server"
+    },
+    {
+      "from": "notebook",
+      "to": "notebook-shim"
+    },
+    {
+      "from": "notebook",
+      "to": "tornado"
+    },
+    {
+      "from": "notebook-shim",
+      "to": "jupyter-server"
+    },
+    {
+      "from": "prompt-toolkit",
+      "to": "wcwidth"
+    },
+    {
+      "from": "python-dateutil",
+      "to": "six"
+    },
+    {
+      "from": "referencing",
+      "to": "attrs"
+    },
+    {
+      "from": "referencing",
+      "to": "rpds-py"
+    },
+    {
+      "from": "requests",
+      "to": "certifi"
+    },
+    {
+      "from": "requests",
+      "to": "charset-normalizer"
+    },
+    {
+      "from": "requests",
+      "to": "idna"
+    },
+    {
+      "from": "requests",
+      "to": "urllib3"
+    },
+    {
+      "from": "rfc3339-validator",
+      "to": "six"
+    },
+    {
+      "from": "scipy",
+      "to": "numpy"
+    },
+    {
+      "from": "stack-data",
+      "to": "asttokens"
+    },
+    {
+      "from": "stack-data",
+      "to": "executing"
+    },
+    {
+      "from": "stack-data",
+      "to": "pure-eval"
+    },
+    {
+      "from": "sympy",
+      "to": "mpmath"
+    },
+    {
+      "from": "terminado",
+      "to": "pywinpty"
+    },
+    {
+      "from": "terminado",
+      "to": "tornado"
+    }
+  ],
+  "direct_roots": [
+    "ipykernel",
+    "ipython",
+    "jsonschema",
+    "jupyter-client",
+    "jupyter-core",
+    "jupyterlab",
+    "matplotlib",
+    "nbclient",
+    "nbformat",
+    "numpy",
+    "notebook",
+    "scipy",
+    "sympy"
+  ],
+  "lock": {
+    "bytes": 1846,
+    "path": "environment/python-lock.txt",
+    "sha256": "28d1f9a5d2b341628fbc5e182ca523da1cfa33473e5714493f8ca18893c31d9a"
+  },
+  "matches_runtime": true,
+  "package_count": 95,
+  "packages": [
+    {
+      "name": "anyio",
+      "version": "4.7.0"
+    },
+    {
+      "name": "argon2-cffi",
+      "version": "23.1.0"
+    },
+    {
+      "name": "argon2-cffi-bindings",
+      "version": "21.2.0"
+    },
+    {
+      "name": "asttokens",
+      "version": "3.0.0"
+    },
+    {
+      "name": "async-lru",
+      "version": "2.0.4"
+    },
+    {
+      "name": "attrs",
+      "version": "24.3.0"
+    },
+    {
+      "name": "babel",
+      "version": "2.17.0"
+    },
+    {
+      "name": "beautifulsoup4",
+      "version": "4.13.3"
+    },
+    {
+      "name": "bleach",
+      "version": "6.2.0"
+    },
+    {
+      "name": "certifi",
+      "version": "2024.12.14"
+    },
+    {
+      "name": "cffi",
+      "version": "1.17.1"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.4.0"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6"
+    },
+    {
+      "name": "comm",
+      "version": "0.2.2"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.1"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1"
+    },
+    {
+      "name": "debugpy",
+      "version": "1.8.12"
+    },
+    {
+      "name": "decorator",
+      "version": "5.2.1"
+    },
+    {
+      "name": "defusedxml",
+      "version": "0.7.1"
+    },
+    {
+      "name": "executing",
+      "version": "2.2.0"
+    },
+    {
+      "name": "fastjsonschema",
+      "version": "2.21.1"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.56.0"
+    },
+    {
+      "name": "h11",
+      "version": "0.14.0"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.7"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1"
+    },
+    {
+      "name": "idna",
+      "version": "3.10"
+    },
+    {
+      "name": "ipykernel",
+      "version": "6.29.5"
+    },
+    {
+      "name": "ipython",
+      "version": "8.32.0"
+    },
+    {
+      "name": "jedi",
+      "version": "0.19.2"
+    },
+    {
+      "name": "jinja2",
+      "version": "3.1.5"
+    },
+    {
+      "name": "json5",
+      "version": "0.10.0"
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.23.0"
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2024.10.1"
+    },
+    {
+      "name": "jupyter-client",
+      "version": "8.6.3"
+    },
+    {
+      "name": "jupyter-core",
+      "version": "5.7.2"
+    },
+    {
+      "name": "jupyter-events",
+      "version": "0.12.0"
+    },
+    {
+      "name": "jupyter-lsp",
+      "version": "2.2.5"
+    },
+    {
+      "name": "jupyter-server",
+      "version": "2.15.0"
+    },
+    {
+      "name": "jupyter-server-terminals",
+      "version": "0.5.3"
+    },
+    {
+      "name": "jupyterlab",
+      "version": "4.3.5"
+    },
+    {
+      "name": "jupyterlab-pygments",
+      "version": "0.3.0"
+    },
+    {
+      "name": "jupyterlab-server",
+      "version": "2.27.3"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.4.8"
+    },
+    {
+      "name": "markupsafe",
+      "version": "3.0.2"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.10.1"
+    },
+    {
+      "name": "matplotlib-inline",
+      "version": "0.1.7"
+    },
+    {
+      "name": "mistune",
+      "version": "3.1.2"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0"
+    },
+    {
+      "name": "nbclient",
+      "version": "0.10.2"
+    },
+    {
+      "name": "nbconvert",
+      "version": "7.16.6"
+    },
+    {
+      "name": "nbformat",
+      "version": "5.10.4"
+    },
+    {
+      "name": "nest-asyncio",
+      "version": "1.6.0"
+    },
+    {
+      "name": "notebook",
+      "version": "7.3.2"
+    },
+    {
+      "name": "notebook-shim",
+      "version": "0.2.4"
+    },
+    {
+      "name": "numpy",
+      "version": "2.1.3"
+    },
+    {
+      "name": "overrides",
+      "version": "7.7.0"
+    },
+    {
+      "name": "packaging",
+      "version": "24.2"
+    },
+    {
+      "name": "pandocfilters",
+      "version": "1.5.1"
+    },
+    {
+      "name": "parso",
+      "version": "0.8.4"
+    },
+    {
+      "name": "pillow",
+      "version": "11.1.0"
+    },
+    {
+      "name": "platformdirs",
+      "version": "4.3.6"
+    },
+    {
+      "name": "prometheus-client",
+      "version": "0.21.1"
+    },
+    {
+      "name": "prompt-toolkit",
+      "version": "3.0.50"
+    },
+    {
+      "name": "psutil",
+      "version": "7.0.0"
+    },
+    {
+      "name": "pure-eval",
+      "version": "0.2.3"
+    },
+    {
+      "name": "pycparser",
+      "version": "2.22"
+    },
+    {
+      "name": "pygments",
+      "version": "2.19.1"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.2.1"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0"
+    },
+    {
+      "name": "python-json-logger",
+      "version": "3.2.1"
+    },
+    {
+      "name": "pywin32",
+      "version": "308"
+    },
+    {
+      "name": "pywinpty",
+      "version": "2.0.15"
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.2"
+    },
+    {
+      "name": "pyzmq",
+      "version": "26.2.1"
+    },
+    {
+      "name": "referencing",
+      "version": "0.36.2"
+    },
+    {
+      "name": "requests",
+      "version": "2.32.3"
+    },
+    {
+      "name": "rfc3339-validator",
+      "version": "0.1.4"
+    },
+    {
+      "name": "rfc3986-validator",
+      "version": "0.1.1"
+    },
+    {
+      "name": "rpds-py",
+      "version": "0.23.1"
+    },
+    {
+      "name": "scipy",
+      "version": "1.15.2"
+    },
+    {
+      "name": "send2trash",
+      "version": "1.8.3"
+    },
+    {
+      "name": "setuptools",
+      "version": "75.8.2"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.1"
+    },
+    {
+      "name": "soupsieve",
+      "version": "2.6"
+    },
+    {
+      "name": "stack-data",
+      "version": "0.6.3"
+    },
+    {
+      "name": "sympy",
+      "version": "1.13.3"
+    },
+    {
+      "name": "terminado",
+      "version": "0.18.1"
+    },
+    {
+      "name": "tornado",
+      "version": "6.4.2"
+    },
+    {
+      "name": "traitlets",
+      "version": "5.14.3"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.12.2"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.2.3"
+    },
+    {
+      "name": "wcwidth",
+      "version": "0.2.13"
+    },
+    {
+      "name": "webencodings",
+      "version": "0.5.1"
+    },
+    {
+      "name": "websocket-client",
+      "version": "1.8.0"
+    }
+  ],
+  "python": {
+    "implementation": "CPython",
+    "version": "3.13.1"
+  },
+  "schema": "o002.python-environment.v1"
+}

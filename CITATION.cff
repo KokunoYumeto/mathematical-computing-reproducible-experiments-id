@@ -4,9 +4,9 @@ title: "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi — Bahasa In
 type: book
 authors:
   - name: "Floris"
-version: "2026.08.22"
+version: "2026.08.22.1"
 date-released: 2026-08-22
 license: CC-BY-SA-4.0
-doi: 10.5281/zenodo.22052053
+doi: 10.5281/zenodo.22053905
 repository-code: "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id"
 url: "https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/"
