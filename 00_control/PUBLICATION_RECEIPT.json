@@ -1,0 +1,72 @@
+{
+  "schema": "o002.publication-receipt.v1",
+  "publication_date": "2026-08-22",
+  "version": "2026.08.22",
+  "accepted_output_manifest_sha256": "e2108333ac3121137b28646d19f087b07b96178eab34c24a504e1dcdeb7d78f5",
+  "github": {
+    "repository": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id",
+    "release": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22",
+    "tag": "v2026.08.22",
+    "tag_commit": "c7cd59c6887d22c587ff9c807826c582f8191400",
+    "asset_count": 10,
+    "asset_bytes": 1354447,
+    "anonymous_asset_readback": "pass"
+  },
+  "pages": {
+    "url": "https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/",
+    "accepted_reader_commit": "c7cd59c6887d22c587ff9c807826c582f8191400",
+    "build_status": "built",
+    "anonymous_byte_readback": "pass",
+    "verified_files": [
+      {
+        "path": "index.html",
+        "bytes": 30374,
+        "sha256": "c44e5f71a7066ae780e7f59c95eebc69645dea03051f71280ff546b90d5a58a1"
+      },
+      {
+        "path": "Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+        "bytes": 502373,
+        "sha256": "289e744aeef09eb6e546c002e0782a346519a39c5265ae4ef5c9d1e3ce095376"
+      },
+      {
+        "path": "backend/catalog.json",
+        "bytes": 20695,
+        "sha256": "7d8eb9a3f9fc398e5abea77e517046f5feb37eb3e1197048555d3b9646aa21bf"
+      },
+      {
+        "path": "LICENSE-RUNTIME-APACHE-2.0.txt",
+        "bytes": 10142,
+        "sha256": "bea1b4266f1499fa4bbb16d6e7577e6b5b53d1ef010835a9d460876022cc8722"
+      }
+    ]
+  },
+  "zenodo": {
+    "record_id": 22052053,
+    "doi": "10.5281/zenodo.22052053",
+    "record": "https://zenodo.org/records/22052053",
+    "state": "done",
+    "submitted": true,
+    "file_count": 10,
+    "file_bytes": 1354447,
+    "creator": "Floris",
+    "named_nonorganization_contributors": ["OpenAI Codex"],
+    "organization_entry_count": 1,
+    "anonymous_metadata_readback": "pass",
+    "anonymous_file_readback": "pass"
+  },
+  "release_files": [
+    {"name": "00_KOMPUTASI_MATEMATIS_DAN_EKSPERIMEN_DAPAT_DIREPRODUKSI_ID.pdf", "bytes": 502373, "sha256": "289e744aeef09eb6e546c002e0782a346519a39c5265ae4ef5c9d1e3ce095376"},
+    {"name": "LICENSE-CODE.md", "bytes": 1083, "sha256": "7a3860578c00e71c20019ef26ab76e28be25393a194a28f6c0a4edef59074b57"},
+    {"name": "LICENSE-TEXT.md", "bytes": 624, "sha256": "afa51324d3c7c936969b2721bbe1b7103ab3db62d38069b5742fd35f675d50a0"},
+    {"name": "O002_B80_ID_EDITABLE_SOURCE_2026.08.22.zip", "bytes": 209522, "sha256": "86d07f884147e4a391518271729d2e51fa757ad7d70fb546f66be7afbbb4a8eb"},
+    {"name": "O002_B80_ID_HTML_2026.08.22.zip", "bytes": 631415, "sha256": "f6503d488697d1efc65daa9b1d2756cf9dfca65a9123985eb4c3a249a76dc718"},
+    {"name": "README_RELEASE.md", "bytes": 1491, "sha256": "26083fd0a6ceebfe2dc523da208942bf966e3987c72da90e4336bc9f5cb9efb5"},
+    {"name": "release-manifest.json", "bytes": 2076, "sha256": "c48a6b5fb289935e50578a4cd75e566daa05e7e3f5204d0f0b03e1c5c0502ac7"},
+    {"name": "RUNTIME-LICENSES.md", "bytes": 3425, "sha256": "980c602f8f427ba13547259edcc8d2dccb607be8ce87aa7ceb72fd3f1ef88f30"},
+    {"name": "SHA256SUMS.txt", "bytes": 840, "sha256": "59304cea41ee2f237b750f7a05c7c3e5f42517adeb3aa2861bbd8ddbf026a664"},
+    {"name": "THIRD_PARTY.md", "bytes": 1598, "sha256": "5fb147c587a21dc7555f0956b456ca4450b85579e87fdf535818878fa83a4fe4"}
+  ],
+  "credential_material_recorded": false,
+  "upstream_contacted": false,
+  "curriculum_admission_implied": false
+}

@@ -31,6 +31,14 @@
     "output_rows": 60,
     "manifest_sha256": "e2108333ac3121137b28646d19f087b07b96178eab34c24a504e1dcdeb7d78f5"
   },
-  "curriculum_admission_decision": "separate and not implied by edition completion",
-  "published": false
+  "curriculum_admission_decision": "separate and not implied by edition completion or publication",
+  "published": true,
+  "publication": {
+    "version": "2026.08.22",
+    "repository": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id",
+    "reader": "https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/",
+    "github_release": "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22",
+    "doi": "10.5281/zenodo.22052053",
+    "public_byte_readback": "pass"
+  }
 }

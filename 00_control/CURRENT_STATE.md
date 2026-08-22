@@ -40,7 +40,18 @@ No build lock or in-progress marker remains.
 
 Original text is CC BY-SA 4.0 and original code is MIT. Comparison works retain
 their own rights and remain outside the edition. The reader is verified but
-unpublished; no Git operation, upstream contact, remote mutation, or publication
-occurred in this lane. Edition completion does not decide admission to the
-40-course curriculum and must not be used as evidence of curricular superiority.
-There is no remaining local production action for this edition boundary.
+is now published through one non-duplicative lineage:
+
+- repository: <https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id>
+- HTML reader: <https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/>
+- GitHub release: <https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22>
+- DOI record: <https://doi.org/10.5281/zenodo.22052053>
+
+The ten GitHub release assets and the ten Zenodo files were anonymously read
+back and matched to local byte counts and SHA-256 values. Selected Pages files,
+including the PDF, HTML index, backend catalog, and Apache license, also match
+the accepted output exactly. `PUBLICATION_RECEIPT.json` records the sanitized
+transaction evidence. No upstream author was contacted. Edition completion or
+publication does not decide admission to the 40-course curriculum and must not
+be used as evidence of curricular superiority. There is no remaining production
+or publication action for this edition boundary.

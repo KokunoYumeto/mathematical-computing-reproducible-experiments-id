@@ -2,7 +2,7 @@
 
 Status date: 2026-08-22
 
-Boundary: complete, locally verified, unpublished 12-unit Indonesian edition.
+Boundary: complete, locally verified, and published 12-unit Indonesian edition.
 Curriculum admission remains a separate evidence-based decision.
 
 ## Frozen toolchain
@@ -103,6 +103,8 @@ Receipts:
 
 Current Units 1-12 contain no donor bytes. Original text is CC BY-SA 4.0;
 original code is MIT; bundled runtime components retain their upstream terms.
-No Git operation, upstream contact, remote mutation, or publication occurred.
-This baseline proves edition completion only and does not admit the work to the
-40-course curriculum.
+The accepted bytes are published at GitHub release `v2026.08.22`, GitHub Pages,
+and DOI `10.5281/zenodo.22052053`; public-byte readback passed. The sanitized
+details are in `00_control/PUBLICATION_RECEIPT.json`. No upstream author was
+contacted. This baseline proves edition completion and publication only and does
+not admit the work to the 40-course curriculum.

@@ -63,3 +63,12 @@ output manifests. The final pair has 60 identical rows and manifest SHA-256
 The final 98-page PDF is bound to its all-page review receipt. An interrupted
 build removes the output manifest and leaves `BUILD_IN_PROGRESS`, so transient
 bytes cannot be mistaken for an accepted reader.
+
+## O002-D010 - One public release lineage
+
+The complete boundary is published once as repository
+`KokunoYumeto/mathematical-computing-reproducible-experiments-id`, GitHub Pages,
+GitHub release `v2026.08.22`, and Zenodo DOI `10.5281/zenodo.22052053`. GitHub
+and Zenodo each expose the same ten checksummed release artifacts; anonymous
+readback matches every local byte. Publication remains separate from curriculum
+admission and did not trigger any upstream contact.
