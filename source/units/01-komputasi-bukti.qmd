@@ -1,0 +1,250 @@
+---
+title: "Komputasi, Representasi, dan Bukti"
+identifier: o002.u01
+---
+
+::: {#sec-o002-u01}
+:::
+
+## Tujuan belajar {#sec-o002-u01-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- membedakan objek matematika, representasi di komputer, dan keluaran program;
+- menjelaskan perbedaan aritmetika eksak dan aritmetika titik-mengambang;
+- membandingkan bilangan titik-mengambang dengan toleransi yang dinyatakan;
+- menyusun rekaman eksperimen yang dapat dijalankan ulang;
+- menulis pengujian kecil untuk perilaku program; dan
+- membedakan contoh, contoh penyangkal, bukti komputasional terbatas, dan bukti
+  matematis umum.
+
+Prasyarat lokal: operasi bilangan rasional, fungsi, persamaan sederhana, dan
+penalaran “untuk setiap” versus “ada”. Tidak diperlukan kalkulus atau aljabar
+linear.
+
+## Tiga lapisan yang tidak boleh dicampur {#sec-o002-u01-layers}
+
+Pertimbangkan bilangan rasional
+
+$$
+\frac{1}{10}+\frac{2}{10}=\frac{3}{10}.
+$$
+
+Ada tiga lapisan berbeda:
+
+1. **Objek matematika.** Bilangan rasional dan operasi penjumlahan ditentukan
+   secara matematis. Kesamaan di atas eksak.
+2. **Representasi.** Komputer harus menyimpan objek melalui pola bit atau
+   struktur data tertentu. Tidak semua bilangan rasional mempunyai representasi
+   biner titik-mengambang yang berhingga.
+3. **Keluaran program.** Keluaran bergantung pada representasi, algoritme,
+   lingkungan, dan kode yang benar-benar dijalankan.
+
+Kesalahan umum adalah menganggap keluaran sebagai objek itu sendiri. Program
+yang mencetak `0.30000000000000004` tidak membantah kesamaan rasional tadi. Ia
+menunjukkan sifat representasi titik-mengambang yang dipakai program.
+
+## Eksak dan titik-mengambang {#sec-o002-u01-exact-float}
+
+Python menyediakan bilangan titik-mengambang untuk perhitungan numerik dan
+`Fraction` untuk bilangan rasional eksak.
+
+```{python}
+#| label: lst-o002-u01-float
+0.1 + 0.2
+```
+
+```{python}
+#| label: lst-o002-u01-fraction
+from fractions import Fraction
+
+Fraction(1, 10) + Fraction(2, 10)
+```
+
+Representasi yang berbeda menjawab kebutuhan berbeda. Aritmetika eksak
+mempertahankan kesamaan aljabar, tetapi ukuran pembilang dan penyebut dapat
+bertambah. Titik-mengambang cepat dan menjadi dasar banyak pustaka numerik,
+tetapi membawa galat pembulatan.
+
+Karena itu, perbandingan numerik harus menyatakan toleransi dan skala:
+
+```{python}
+#| label: lst-o002-u01-isclose
+from math import isclose
+
+x = 0.1 + 0.2
+isclose(x, 0.3, rel_tol=1e-12, abs_tol=1e-15)
+```
+
+Toleransi bukan mantra. Toleransi adalah bagian dari spesifikasi eksperimen.
+Kita harus dapat menjelaskan mengapa besarannya memadai bagi pertanyaan yang
+diajukan.
+
+## Kontrak eksperimen yang dapat direproduksi {#sec-o002-u01-contract}
+
+Eksperimen komputasional minimal memuat tujuh unsur berikut.
+
+| Unsur | Pertanyaan yang harus dijawab |
+|---|---|
+| Pertanyaan | Klaim atau gejala apa yang sedang diselidiki? |
+| Lingkungan | Versi bahasa dan perangkat lunak apa yang dipakai? |
+| Masukan | Data, parameter, dan satuannya apa? |
+| Metode | Algoritme dan representasi apa yang dipakai? |
+| Pemeriksaan | Tes apa yang dapat mendeteksi kesalahan implementasi? |
+| Keluaran | Data mentah dan ringkasan apa yang disimpan? |
+| Kesimpulan | Apa yang didukung hasil, dan apa yang belum dibuktikan? |
+
+Jalankan eksperimen Unit 1 dari akar proyek:
+
+```text
+python source/code/unit01_experiment.py
+```
+
+Berkas JSON yang dihasilkan mencatat versi Python, parameter, hasil eksak,
+hasil titik-mengambang, dan pemeriksaan dua dugaan. Menjalankan perintah yang
+sama pada lingkungan yang sama harus menghasilkan byte yang sama.
+
+## Bukti, bukti kerja, dan contoh penyangkal {#sec-o002-u01-proof-evidence}
+
+Eksperimen dapat memeriksa bahwa
+
+$$
+n^2+n
+$$
+
+genap untuk seribu bilangan bulat pertama. Pemeriksaan itu merupakan bukti
+kerja yang berguna: ia dapat menemukan kekeliruan kode atau contoh penyangkal.
+Namun, seribu kasus tidak membuktikan klaim untuk semua bilangan bulat.
+
+Bukti umum singkatnya adalah
+
+$$
+n^2+n=n(n+1).
+$$
+
+Dua bilangan bulat berurutan selalu memuat satu bilangan genap, sehingga
+hasil kalinya genap. Argumen ini berlaku untuk setiap bilangan bulat, bukan
+hanya masukan yang sempat dijalankan.
+
+Sebaliknya, satu contoh penyangkal memang cukup untuk meruntuhkan klaim
+universal. Polinom
+
+$$
+p(n)=n^2+n+41
+$$
+
+menghasilkan bilangan prima bagi banyak nilai kecil, tetapi
+`p(40)=41^2`. Komputer dapat menemukan contoh ini; faktorisasi tersebut
+menjelaskan secara matematis mengapa klaim “prima untuk setiap bilangan bulat
+taknegatif” salah.
+
+## Pengujian sebagai klaim terbatas {#sec-o002-u01-tests}
+
+Tes program adalah klaim terbatas dan dapat diperiksa, misalnya:
+
+- penjumlahan rasional eksak menghasilkan `3/10`;
+- hasil titik-mengambang dekat dengan `0.3` pada toleransi yang ditetapkan;
+- pemeriksa paritas tidak menemukan pelanggaran pada rentang uji;
+- eksperimen menampilkan contoh penyangkal `n=40`; dan
+- dua penulisan JSON pada lingkungan dan parameter yang sama identik.
+
+Tes meningkatkan kepercayaan terhadap implementasi. Tes tidak dengan
+sendirinya membuktikan teorema yang sedang diimplementasikan.
+
+## Latihan {#sec-o002-u01-exercises}
+
+### Latihan 1 - representasi {#ex-o002-u01-01}
+
+Jelaskan dengan kata-kata sendiri mengapa keluaran
+`0.30000000000000004` tidak membuat persamaan
+$1/10+2/10=3/10$ menjadi salah.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Pisahkan objek matematika dari cara komputer menyimpannya.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Kesamaan itu adalah kesamaan eksak dalam bilangan rasional. Bilangan `0.1` dan
+`0.2` tidak tersimpan secara eksak dalam representasi biner titik-mengambang
+yang dipakai Python. Galat kecil pada keluaran berasal dari pendekatan
+representasi, bukan dari perubahan aturan penjumlahan rasional.
+:::
+
+### Latihan 2 - spesifikasi toleransi {#ex-o002-u01-02}
+
+Tuliskan satu situasi yang wajar memakai `abs_tol` dan satu situasi yang lebih
+wajar memakai `rel_tol`. Nyatakan alasan, bukan hanya angkanya.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Bandingkan besaran yang dekat nol dengan besaran yang mempunyai skala alami
+besar.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Untuk residual persamaan yang secara teori nol, toleransi absolut sesuai karena
+galat dibandingkan langsung dengan nol. Untuk membandingkan dua jarak sekitar
+satu juta meter, toleransi relatif lebih informatif karena galat yang dapat
+diterima mengikuti skala jarak. Dalam pekerjaan nyata, keduanya sering dipakai
+bersama dan harus diturunkan dari kebutuhan masalah.
+:::
+
+### Latihan 3 - batas eksperimen {#ex-o002-u01-03}
+
+Ubah batas pemeriksaan paritas dari 1.000 menjadi 100.000. Kesimpulan baru apa
+yang sah, dan kesimpulan apa yang tetap tidak sah?
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Lebih banyak kasus memperbesar wilayah yang telah diperiksa, bukan mengubahnya
+menjadi himpunan semua bilangan bulat.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Sah: tidak ada contoh penyangkal yang ditemukan dalam rentang 0 sampai 99.999,
+dengan asumsi pemeriksa diimplementasikan benar. Tidak sah: klaim telah
+dibuktikan untuk semua bilangan bulat. Bukti umum masih memerlukan argumen
+seperti faktorisasi `n(n+1)`.
+:::
+
+### Latihan 4 - contoh penyangkal {#ex-o002-u01-04}
+
+Gunakan program untuk mencari nilai bulat taknegatif terkecil yang membuat
+$n^2+n+41$ komposit. Lalu jelaskan hasilnya tanpa bergantung pada program.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Periksa nilai 40 dan faktorkan hasilnya.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Nilai terkecilnya adalah `n=40`. Secara eksak,
+$40^2+40+41=1681=41^2$, sehingga nilainya komposit. Perhitungan eksak ini
+menjadi penjelasan matematis yang dapat diperiksa terpisah dari program.
+:::
+
+### Latihan 5 - rekaman eksperimen {#ex-o002-u01-05}
+
+Baca `output/unit01-results.json`. Sebutkan dua medan yang diperlukan untuk
+menjalankan ulang eksperimen dan satu informasi yang masih perlu ditambahkan
+jika eksperimen memakai pustaka eksternal.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Perhatikan parameter dan lingkungan.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Contoh jawaban: `limit` dan versi Python diperlukan. Jika eksperimen memakai
+pustaka eksternal, rekaman juga perlu menyimpan nama dan versi pustaka tersebut,
+serta idealnya berkas lingkungan atau kunci dependensi yang dapat dipasang
+ulang.
+:::
+
+## Ringkasan {#sec-o002-u01-summary}
+
+- Objek matematika tidak identik dengan representasinya di komputer.
+- Aritmetika eksak dan titik-mengambang melayani tujuan berbeda.
+- Toleransi merupakan bagian dari spesifikasi, bukan perbaikan setelah hasil
+  terlihat buruk.
+- Eksperimen yang dapat direproduksi menyimpan pertanyaan, lingkungan, masukan,
+  metode, pemeriksaan, keluaran, dan batas kesimpulan.
+- Banyak contoh dapat mendukung dugaan; satu contoh penyangkal dapat
+  meruntuhkan klaim universal; bukti umum memerlukan argumen yang berlaku bagi
+  seluruh domain.

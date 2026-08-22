@@ -1,0 +1,50 @@
+{
+  "expected_outputs": {
+    "fit.csv": {
+      "bytes": 20,
+      "sha256": "013a397de1e358564974971526b8e925809117b569617054f472a38c5509096b"
+    }
+  },
+  "fingerprint_preimage": {
+    "code_sha256": "95cd1014617cd942454c24f82f18cc51fbcd07987e2e97a1406d3e8a2108dab8",
+    "environment": {
+      "byteorder": "little",
+      "machine": "AMD64",
+      "operating_system": "Windows",
+      "python_cache_tag": "cpython-313",
+      "python_implementation": "CPython",
+      "python_version": "3.13.1"
+    },
+    "inputs": {
+      "inputs/data.csv": "ccfc7573af3e0991f8f018375b45340c9b34daf66e44df95e54835e237ca2fa6"
+    },
+    "parameters": {
+      "intercept": true,
+      "model": "linear"
+    }
+  },
+  "fresh_replay": true,
+  "graph": {
+    "data": [],
+    "fit": [
+      "data"
+    ],
+    "plot": [
+      "data",
+      "fit"
+    ],
+    "report": [
+      "plot"
+    ]
+  },
+  "order": [
+    "data",
+    "fit",
+    "plot",
+    "report"
+  ],
+  "output_sha256": "013a397de1e358564974971526b8e925809117b569617054f472a38c5509096b",
+  "proof_boundary": "alur kerja hijau membuktikan pemeriksaan terprogram lulus, bukan teorema lengkap",
+  "schema": "o002.unit10-results.v1",
+  "task_fingerprint": "3e2a72478aa66f4f27f75386cdbf942744c034cfac3b19e9cc786307e0ec6249"
+}

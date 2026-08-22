@@ -1,0 +1,406 @@
+---
+title: "Titik-Mengambang, Galat, dan Stabilitas"
+identifier: o002.u06
+---
+
+::: {#sec-o002-u06}
+:::
+
+## Tujuan belajar {#sec-o002-u06-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- menjelaskan model dasar bilangan titik-mengambang biner;
+- membaca `ulp`, epsilon mesin, serta batas luapan dan aliran-bawah;
+- mengenali pembatalan yang menghilangkan angka signifikan;
+- membedakan galat maju dari galat mundur;
+- membedakan pengondisian masalah dari stabilitas algoritme;
+- memilih reformulasi dan metode penjumlahan yang lebih stabil;
+- menetapkan toleransi sebagai anggaran galat sebelum hasil diperiksa; dan
+- membatasi bukti eksperimen terhadap kasus serta lingkungan yang dijalankan.
+
+Prasyarat lokal: Unit 1, Unit 2, dan Unit 3; pangkat bilangan bulat, akar
+kuadrat, nilai mutlak, fungsi rasional, dan galat relatif pada tingkat A30.
+Tidak diperlukan kalkulus.
+
+## Model biner yang berhingga {#sec-o002-u06-binary-model}
+
+Pada lingkungan proyek ini, `float` memakai format biner 64-bit. Secara
+sederhana, bilangan berhingga normal disimpan dalam bentuk
+
+$$
+(-1)^s\,(1.b_1b_2\ldots b_{52})_2\,2^e.
+$$
+
+Ada satu bit tanda, eksponen berhingga, dan 53 bit ketelitian signifikan jika
+angka satu di depan titik ikut dihitung. Karena hanya ada sejumlah pola bit,
+hanya sejumlah bilangan real yang dapat disimpan. Hasil operasi biasanya
+dibulatkan ke bilangan representabel terdekat.
+
+Metode `hex()` memperlihatkan nilai biner sebuah `float` tanpa kehilangan
+informasi:
+
+```{python}
+#| label: lst-o002-u06-hex
+x = 0.1
+(x, x.hex(), x.as_integer_ratio())
+```
+
+Pecahan dari `as_integer_ratio()` adalah nilai rasional **yang benar-benar
+tersimpan**. Nilai itu dekat dengan $1/10$, tetapi bukan $1/10$.
+
+## `ulp`, epsilon, dan jarak yang berubah {#sec-o002-u06-ulp-epsilon}
+
+Satu *unit in the last place* (`ulp`) adalah jarak lokal antara bilangan
+representabel yang berdekatan. Jarak ini berubah mengikuti besar bilangan.
+
+```{python}
+#| label: lst-o002-u06-ulp
+import math
+import sys
+
+(
+    sys.float_info.epsilon,
+    math.ulp(1.0),
+    math.ulp(float(2**53)),
+)
+```
+
+Di sekitar 1, `ulp(1.0)` sama dengan `sys.float_info.epsilon`, yaitu selisih
+antara 1 dan bilangan `float` berikutnya. Beberapa buku memakai istilah
+“epsilon mesin” untuk angka ini. Buku lain memakai *unit roundoff*
+$u=\varepsilon/2$ dalam model pembulatan-ke-terdekat. Karena istilahnya tidak
+seragam, nyatakan definisi yang dipakai.
+
+Di sekitar $2^{53}$, satu `ulp` bernilai 2. Akibatnya:
+
+```{python}
+#| label: lst-o002-u06-lost-increment
+besar = float(2**53)
+(besar + 1.0 == besar, besar + 2.0 == besar + 2)
+```
+
+Ini bukan kesalahan Python dalam menjumlahkan bilangan bulat. Masalahnya adalah
+hasil sedang dipaksa kembali ke kisi `float64` yang pada skala itu berjarak 2.
+
+## Luapan, subnormal, dan aliran-bawah {#sec-o002-u06-range}
+
+Ketelitian dan rentang adalah dua batas berbeda. `sys.float_info.max` adalah
+bilangan `float` berhingga terbesar. Mengalikannya dengan 2 menghasilkan
+takhingga positif pada lingkungan yang diuji. Di ujung kecil,
+`sys.float_info.min` adalah bilangan positif **normal** terkecil, bukan bilangan
+positif terkecil.
+
+Bilangan subnormal mengisi sebagian celah menuju nol dengan ketelitian yang
+berkurang. `math.ulp(0.0)` memberi subnormal positif terkecil. Membaginya dua
+memberi nol karena tidak ada bilangan positif representabel yang lebih kecil.
+
+```{python}
+#| label: lst-o002-u06-range
+terbesar = sys.float_info.max
+subnormal_terkecil = math.ulp(0.0)
+(
+    terbesar * 2.0,
+    sys.float_info.min,
+    subnormal_terkecil,
+    subnormal_terkecil / 2.0,
+)
+```
+
+Periksa nilai dengan `math.isfinite` sebelum hasil takhingga atau nol akibat
+aliran-bawah diteruskan ke tahap berikutnya. Namun, pemeriksaan setelah kejadian
+tidak mengganti analisis skala sebelum komputasi.
+
+## Pembatalan dan reformulasi stabil {#sec-o002-u06-cancellation}
+
+Pengurangan dua bilangan hampir sama dapat menghapus sebagian besar angka
+signifikan. Untuk $x$ besar, pertimbangkan
+
+$$
+d(x)=\sqrt{x+1}-\sqrt{x}.
+$$
+
+Pada $x=10^{16}$, penjumlahan `x + 1.0` sudah membulat kembali ke `x`.
+Pengurangan langsung lalu menghasilkan nol. Sebelum menghitung, rasionalkan
+secara aljabar:
+
+$$
+d(x)
+=\frac{(x+1)-x}{\sqrt{x+1}+\sqrt{x}}
+=\frac{1}{\sqrt{x+1}+\sqrt{x}}.
+$$
+
+```{python}
+#| label: lst-o002-u06-cancellation
+x = 1e16
+langsung = math.sqrt(x + 1.0) - math.sqrt(x)
+stabil = 1.0 / (math.sqrt(x + 1.0) + math.sqrt(x))
+(x + 1.0 == x, langsung, stabil)
+```
+
+Bentuk kedua menghindari pengurangan dua akar yang hampir sama. Reformulasi
+ini berasal dari identitas aljabar pada bilangan real; program Unit 6
+membandingkan kedua implementasi dengan referensi `Decimal` berketelitian
+tinggi. Referensi berketelitian tinggi tetap merupakan alat pemeriksaan, bukan
+definisi bukti yang berdiri sendiri.
+
+## Galat maju dan galat mundur {#sec-o002-u06-forward-backward}
+
+Misalkan masalah meminta $y=f(x)$ dan program menghasilkan $\widehat y$.
+
+- **Galat maju** mengukur jarak dari jawaban yang diinginkan:
+  $|\widehat y-f(x)|$.
+- **Galat mundur** bertanya seberapa jauh masukan harus diubah agar keluaran
+  menjadi jawaban tepat: cari $\Delta x$ sehingga
+  $\widehat y=f(x+\Delta x)$.
+
+Untuk masalah $y=\sqrt a$, kuadrat keluaran memberi masukan yang akan membuat
+keluaran itu eksak. Karena itu, ukuran mundur relatif yang mudah diperiksa
+adalah
+
+$$
+\frac{|\widehat y^2-a|}{|a|}.
+$$
+
+```{python}
+#| label: lst-o002-u06-forward-backward
+y_hat = math.sqrt(2.0)
+residual = y_hat * y_hat - 2.0
+(y_hat, residual)
+```
+
+Galat mundur kecil berarti hasil merupakan solusi tepat bagi masalah yang
+sedikit terganggu. Apakah galat majunya juga kecil bergantung pada
+pengondisian masalah.
+
+## Pengondisian bukan stabilitas {#sec-o002-u06-conditioning-stability}
+
+**Pengondisian** adalah sifat pertanyaan matematika: seberapa besar keluaran
+berubah ketika masukan sedikit berubah? **Stabilitas algoritmik** adalah sifat
+cara menghitung: apakah pembulatan internal menambah galat jauh melampaui
+kepekaan masalah?
+
+Untuk
+
+$$
+f(x)=\frac{1}{1-x},
+$$
+
+masukan dekat 1 sangat peka. Pada $x=0{,}99999999$, gangguan sekitar
+$10^{-12}$ dapat diperbesar kira-kira $10^8$ kali dalam galat relatif keluaran.
+Ini adalah masalah berkondisi buruk di dekat titik singular $x=1$. Mengganti
+bahasa pemrograman tidak dapat menghapus kepekaan matematis tersebut.
+
+Sebaliknya, masalah $d(x)=\sqrt{x+1}-\sqrt{x}$ untuk $x$ besar tidak
+memerlukan jawaban nol. Bentuk pengurangan langsung kehilangan informasi,
+sedangkan bentuk rasional mempertahankannya. Di sini perbedaan utamanya adalah
+stabilitas cara evaluasi.
+
+Empat kemungkinan harus dibedakan:
+
+| Masalah | Algoritme | Makna praktis |
+|---|---|---|
+| berkondisi baik | stabil | galat kecil biasanya diharapkan |
+| berkondisi baik | tidak stabil | algoritme menyia-nyiakan informasi |
+| berkondisi buruk | stabil | hasil tetap dapat peka terhadap data |
+| berkondisi buruk | tidak stabil | kepekaan masalah dan algoritme menumpuk |
+
+## Penjumlahan dan urutan operasi {#sec-o002-u06-summation}
+
+Penjumlahan titik-mengambang tidak asosiatif. Secara real,
+
+$$
+10^{16}+1-10^{16}=1.
+$$
+
+Namun, algoritme naif yang menjumlahkan dari kiri kehilangan angka 1 sebelum
+pengurangan terakhir.
+
+```{python}
+#| label: lst-o002-u06-summation
+nilai = [1e16, 1.0, -1e16]
+
+def jumlah_naif(data):
+    total = 0.0
+    for angka in data:
+        total += angka
+    return total
+
+(
+    jumlah_naif(nilai),
+    jumlah_naif([1e16, -1e16, 1.0]),
+    math.fsum(nilai),
+)
+```
+
+`math.fsum` melacak bagian kecil yang hilang dengan lebih cermat dan memberi
+1 untuk contoh ini. `sum` bawaan dapat memakai strategi yang lebih baik pada
+versi Python tertentu; karena itu, skrip juga merekam hasilnya tetapi tidak
+menjadikannya definisi algoritme naif. `math.fsum` umumnya lebih akurat bagi
+data bercampur skala, tetapi bukan janji bahwa setiap masalah penjumlahan bebas
+galat. Rekam metode, versi, urutan data, dan skala nilainya.
+
+## Toleransi sebagai anggaran galat {#sec-o002-u06-tolerances}
+
+Tes kedekatan yang digunakan unit ini berbentuk
+
+$$
+|\widehat y-y_{ref}|\le A+R|y_{ref}|,
+$$
+
+dengan $A$ anggaran absolut dan $R$ anggaran relatif. Bagian absolut penting
+di dekat nol; bagian relatif mengikuti skala referensi.
+
+Anggaran harus berasal dari masalah sebelum hasil dilihat. Sumbernya dapat
+mencakup ketelitian pengukuran, pendekatan model, diskretisasi, penghentian
+iterasi, dan pembulatan. Penjumlahan batas tiap komponen memberi batas
+konservatif bila tidak ada analisis yang lebih tajam.
+
+`isclose` atau fungsi sejenis hanya memeriksa aturan yang diberikan. Ia tidak
+memilih toleransi, tidak memperbaiki algoritme, dan tidak membuktikan bahwa
+referensi benar. Simpan nilai $A$, $R$, galat teramati, dan alasan pemilihannya.
+
+## Rekaman deterministik dan batas bukti {#sec-o002-u06-experiment-proof}
+
+Jalankan dari akar proyek:
+
+```text
+python source/code/unit06_floating.py --output output/unit06-results.json
+```
+
+Skrip mencatat versi Python, profil binary64, pembatalan, galat maju/mundur,
+pengondisian, penjumlahan, dan keputusan anggaran galat. Bilangan yang perlu
+dibedakan bit demi bit disimpan dengan `repr`, `hex`, atau teks `Decimal`.
+JSON memakai UTF-8, kunci terurut, inden tetap, dan akhir baris LF. Medan
+`core_sha256` mengikat rekaman sebelum hash ditambahkan.
+
+Eksperimen tersebut membuktikan perilaku kasus yang benar-benar dijalankan
+pada lingkungan yang dicatat. Ia dapat menunjukkan contoh penyangkal terhadap
+klaim seperti “urutan penjumlahan tidak pernah berpengaruh”. Ia tidak
+membuktikan teorema tentang semua operasi binary64.
+
+Pernyataan umum memerlukan model, misalnya: setiap operasi normal dibulatkan
+ke nilai representabel terdekat dengan galat relatif paling besar sekitar
+$u$, selama tidak terjadi luapan atau aliran-bawah. Dari model itu, batas galat
+dapat diturunkan langkah demi langkah. Tes lalu memeriksa apakah implementasi
+dan lingkungan mengikuti asumsi yang dicatat.
+
+## Latihan {#sec-o002-u06-exercises}
+
+### Latihan 1 - `ulp` dan kenaikan yang hilang {#ex-o002-u06-01}
+
+Di sekitar $2^{53}$, `ulp` bernilai 2. Jelaskan mengapa
+`float(2**53) + 1.0 == float(2**53)`, tetapi penambahan 2 dapat menghasilkan
+bilangan berikutnya.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Bayangkan kisi bilangan representabel yang titik-titiknya berjarak 2.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Pada skala itu, bilangan `float` berhingga yang berdekatan adalah
+$2^{53}, 2^{53}+2, 2^{53}+4,\ldots$. Nilai real $2^{53}+1$ berada tepat di
+antara dua titik kisi dan dibulatkan menurut aturan ikatan ke nilai dengan bit
+terakhir genap, yaitu $2^{53}$. Nilai $2^{53}+2$ sendiri representabel, sehingga
+kenaikan 2 tidak hilang.
+:::
+
+### Latihan 2 - membuang pembatalan {#ex-o002-u06-02}
+
+Turunkan bentuk stabil untuk $\sqrt{x+4}-\sqrt{x}$ dan jelaskan mengapa bentuk
+itu lebih baik untuk $x$ besar.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Kalikan pembilang dan penyebut dengan jumlah kedua akar.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+
+$$
+\sqrt{x+4}-\sqrt{x}
+=\frac{(x+4)-x}{\sqrt{x+4}+\sqrt{x}}
+=\frac{4}{\sqrt{x+4}+\sqrt{x}}.
+$$
+
+Bentuk langsung mengurangkan dua bilangan besar yang hampir sama sehingga
+angka signifikan dapat hilang. Bentuk rasional membagi 4 dengan jumlah positif
+dan menghindari pengurangan tersebut. Domain real yang dibahas ialah $x\ge0$.
+:::
+
+### Latihan 3 - galat maju dan mundur {#ex-o002-u06-03}
+
+Untuk pendekatan $\widehat y=1{,}414$ terhadap $\sqrt2$, hitung pendekatan
+galat maju absolut dan galat mundur relatif berdasarkan persamaan
+$y^2=2$.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan $\sqrt2\approx1{,}41421356$ dan hitung $1{,}414^2$.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Galat maju absolut kira-kira
+$|1{,}414-1{,}41421356|=0{,}00021356$. Karena
+$1{,}414^2=1{,}999396$, galat mundur relatif terhadap masukan 2 ialah
+
+$$
+\frac{|1{,}999396-2|}{2}=0{,}000302.
+$$
+
+Angka pertama membandingkan keluaran dengan akar yang diinginkan; angka kedua
+menanyakan perubahan relatif pada masukan agar keluaran menjadi akar eksak.
+:::
+
+### Latihan 4 - kondisi atau algoritme? {#ex-o002-u06-04}
+
+Klasifikasikan dua gejala berikut: (a) nilai $1/(1-x)$ berubah besar ketika
+$x$ dekat 1 diganggu sedikit; (b) pengurangan dua akar yang hampir sama
+memberi nol, tetapi bentuk rasional memberi nilai bukan nol yang akurat.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Tanyakan apakah kepekaan sudah ada pada fungsi matematika atau muncul dari
+urutan operasi.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Gejala (a) terutama merupakan pengondisian buruk: fungsi mempunyai titik
+singular pada 1 dan memang peka di dekatnya. Algoritme stabil pun tidak dapat
+menghilangkan kepekaan data itu. Gejala (b) terutama merupakan ketidakstabilan
+evaluasi langsung: masalah yang sama dapat dihitung jauh lebih akurat setelah
+reformulasi aljabar. Dalam pekerjaan nyata, keduanya dapat terjadi bersamaan.
+:::
+
+### Latihan 5 - jumlah, toleransi, dan batas klaim {#ex-o002-u06-05}
+
+Untuk data `[1e16, 1.0, -1e16]`, target matematisnya 1. Bandingkan hasil
+`jumlah_naif` di atas dan `math.fsum`. Dengan anggaran absolut 0,5 dan
+anggaran relatif $10^{-12}$, tentukan mana yang lolos. Apakah satu keberhasilan
+membuktikan `math.fsum` selalu eksak?
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan batas $A+R|y_{ref}|$ dengan $y_{ref}=1$.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+`jumlah_naif` memberi 0 karena angka 1 hilang ketika ditambahkan ke
+$10^{16}$. `math.fsum` memberi 1 pada kasus ini. Batas yang diizinkan adalah
+$0{,}5+10^{-12}$; galat algoritme naif adalah 1 sehingga gagal, sedangkan
+galat `math.fsum` adalah 0 sehingga lolos. Keberhasilan ini hanya membuktikan
+hasil kasus tersebut pada lingkungan yang diuji; ia tidak membuktikan bahwa
+`math.fsum` selalu eksak untuk setiap daftar.
+:::
+
+## Ringkasan {#sec-o002-u06-summary}
+
+- Bilangan `float` membentuk kisi biner berhingga; `ulp` berubah mengikuti
+  skala.
+- Epsilon, *unit roundoff*, rentang normal, dan rentang subnormal menjawab
+  pertanyaan yang berbeda.
+- Pembatalan dapat dihindari melalui reformulasi aljabar sebelum evaluasi.
+- Galat maju mengukur jawaban; galat mundur mengukur perubahan masalah yang
+  membuat jawaban itu eksak.
+- Pengondisian milik masalah, sedangkan stabilitas milik algoritme.
+- Metode penjumlahan dan urutan operasi memengaruhi galat.
+- Toleransi merupakan anggaran yang dijelaskan sebelumnya, bukan angka yang
+  disetel agar tes lulus.
+- Eksperimen memberi bukti kerja terbatas; klaim umum memerlukan model
+  pembulatan dan argumen matematis.

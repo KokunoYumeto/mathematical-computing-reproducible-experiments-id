@@ -1,0 +1,12 @@
+{
+  "command": "python -B scripts/run_tests.py --receipt tmp/build-receipts/TEST_QA.json",
+  "errors": 0,
+  "expected_failures": 0,
+  "failures": 0,
+  "python": "3.13.1",
+  "schema": "o002.test-qa.v1",
+  "skipped": 0,
+  "successful": true,
+  "tests_run": 115,
+  "unexpected_successes": 0
+}

@@ -1,0 +1,315 @@
+---
+title: "Komputasi Eksak dan Simbolik"
+identifier: o002.u05
+---
+
+::: {#sec-o002-u05}
+:::
+
+## Tujuan belajar {#sec-o002-u05-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- membedakan ekspresi simbolik dari nilai hasil substitusi;
+- memakai `Fraction` dan SymPy untuk mempertahankan hasil eksak;
+- menyatakan asumsi dan domain sebelum menyederhanakan ekspresi;
+- memeriksa ekuivalensi aljabar tanpa menghapus pembatasan domain;
+- memfaktorkan dan menyelesaikan persamaan sederhana secara eksak;
+- menjelaskan batas antara hasil sistem aljabar komputer dan bukti matematis;
+- menghasilkan rekaman simbolik kanonis yang dapat dibandingkan byte demi
+  byte; dan
+- mengenali jembatan kecil menuju SageMath tanpa menjadikan SageMath
+  dependensi jalur dasar.
+
+Prasyarat lokal: Unit 1 dan Unit 2, operasi polinomial, persamaan kuadrat, dan
+pengertian domain fungsi. Jalur dasar unit memakai pustaka standar Python dan
+SymPy. Tidak diperlukan kalkulus, aljabar linear, atau SageMath.
+
+## Ekspresi bukan nilai {#sec-o002-u05-expression-value}
+
+Ekspresi
+
+$$
+p(x)=x^2-1
+$$
+
+memuat simbol bebas $x$. Ia belum mempunyai satu nilai numerik. Substitusi
+$x=3$ menghasilkan nilai eksak $8$, tetapi tidak mengubah ekspresi asal
+menjadi bilangan.
+
+```{python}
+#| label: lst-o002-u05-expression-value
+import sympy as sp
+
+x = sp.Symbol("x")
+p = x**2 - 1
+(p, p.free_symbols, p.subs(x, 3))
+```
+
+Perbedaan ini penting bagi notebook yang dijalankan tidak berurutan. Nama `x`
+dalam kode dapat menunjuk objek Python, sedangkan simbol SymPy bernama `x`
+merupakan bagian dari pohon ekspresi. Tampilkan dan simpan pohon yang
+sebenarnya dipakai, bukan hanya hasil terakhir di layar.
+
+Untuk bilangan rasional kecil, pustaka standar sudah cukup:
+
+```{python}
+#| label: lst-o002-u05-fraction
+from fractions import Fraction
+
+Fraction(1, 10) + Fraction(2, 10)
+```
+
+`Fraction(3, 10)` dan `sp.Rational(3, 10)` sama-sama mempertahankan nilai
+rasional eksak. Pilih batas antarpustaka secara eksplisit; jangan mengubahnya
+menjadi `float` hanya untuk memperoleh keluaran yang tampak lebih pendek.
+
+## Asumsi dan domain adalah bagian dari soal {#sec-o002-u05-assumptions}
+
+Tanpa keterangan tanda, rumus $\sqrt{x^2}=x$ tidak benar untuk setiap
+bilangan real. Jika $x$ real, hasil yang benar ialah $|x|$. Jika $x>0$,
+barulah hasilnya $x$.
+
+```{python}
+#| label: lst-o002-u05-assumptions
+x_real = sp.Symbol("x", real=True)
+x_positive = sp.Symbol("x", positive=True)
+
+(
+    sp.simplify(sp.sqrt(x_real**2)),
+    sp.simplify(sp.sqrt(x_positive**2)),
+)
+```
+
+Nama cetak kedua simbol sama, tetapi asumsi internalnya berbeda. Oleh sebab
+itu, sebuah rekaman komputasi simbolik harus menyimpan definisi simbol atau
+pernyataan domain yang menyertainya.
+
+Domain juga harus dipertahankan ketika faktor dibatalkan. Untuk
+
+$$
+r(x)=\frac{x^2-1}{x-1},
+$$
+
+SymPy memperoleh $x+1$ setelah pembatalan. Kedua rumus memberi nilai sama
+pada domain bersama, yaitu $x\ne1$. Namun, keduanya bukan fungsi yang sama
+jika domain asal ikut menjadi bagian definisi: rumus asal tidak terdefinisi
+pada $x=1$, sedangkan $x+1$ bernilai $2$ di sana.
+
+## Kesamaan struktur dan ekuivalensi {#sec-o002-u05-equivalence}
+
+Operator `==` pada dua ekspresi SymPy terutama membandingkan struktur
+kanonisnya. Ia bukan pertanyaan universal “apakah kedua rumus ini mempunyai
+nilai sama bagi semua masukan yang sah?”. Contohnya, ekspresi
+$(x+1)^2$ dan $x^2+2x+1$ mempunyai struktur berbeda tetapi merupakan
+polinom yang sama.
+
+```{python}
+#| label: lst-o002-u05-equivalence
+left = (x + 1) ** 2
+right = x**2 + 2*x + 1
+
+structurally_equal = left == right
+polynomial_identity = sp.expand(left - right) == 0
+(structurally_equal, polynomial_identity)
+```
+
+Prosedur pemeriksaan harus sesuai dengan kelas ekspresi. Ekspansi selisih
+cocok untuk identitas polinomial. `simplify(left-right) == 0` berguna sebagai
+pemeriksaan lain, tetapi bukan pengganti pencatatan domain, cabang akar,
+asumsi, atau titik singular.
+
+## Faktorisasi dan penyelesaian eksak {#sec-o002-u05-factor-solve}
+
+Komputasi simbolik mempertahankan akar dan faktor tanpa pendekatan desimal.
+
+```{python}
+#| label: lst-o002-u05-factor
+x = sp.Symbol("x")
+polynomial = x**4 - 1
+factored = sp.factor(polynomial)
+(factored, sp.expand(factored) == polynomial)
+```
+
+Faktorisasi yang diharapkan ialah
+
+$$
+(x-1)(x+1)(x^2+1).
+$$
+
+Pemeriksaan dengan `expand` menguji bahwa hasil tersebut kembali menjadi
+polinom masukan. Untuk persamaan $x^2=2$, domain solusi harus dinyatakan:
+
+```{python}
+#| label: lst-o002-u05-solve
+x = sp.Symbol("x", real=True)
+solutions = sp.solveset(sp.Eq(x**2, 2), x, domain=sp.S.Reals)
+solutions
+```
+
+Hasil real eksaknya adalah $\{-\sqrt{2},\sqrt{2}\}$. Substitusi setiap
+kandidat ke $x^2-2$ harus memberikan residual eksak nol. Jika domain diubah, bentuk
+atau jumlah solusi dapat berubah; karena itu, jangan menyimpan daftar akar
+tanpa persamaan dan domainnya.
+
+## Hasil simbolik dan bukti {#sec-o002-u05-result-proof}
+
+Keluaran sistem aljabar komputer mempunyai beberapa peran yang berbeda:
+
+- **kandidat:** `solve` mengusulkan nilai yang kemudian dapat diperiksa;
+- **sertifikat lokal:** ekspansi kembali atau substitusi residual memeriksa
+  hubungan tertentu;
+- **eksperimen:** banyak contoh dapat menguji sebuah dugaan; dan
+- **bukti:** argumen menjelaskan mengapa klaim berlaku pada seluruh domain.
+
+Faktorisasi $x^4-1$ dapat diperiksa langsung dengan distributivitas. Namun,
+keberhasilan satu perintah tidak membuktikan bahwa setiap keluaran algoritme
+untuk setiap masukan pasti benar. Klaim lebih luas juga bergantung pada
+spesifikasi algoritme dan kebenaran implementasinya. Dalam tulisan matematis,
+nyatakan tepatnya hubungan mana yang diperiksa komputer dan langkah umum mana
+yang dibuktikan secara matematis.
+
+## Keluaran kanonis {#sec-o002-u05-canonical-output}
+
+Tampilan dua dimensi yang nyaman dibaca dapat berubah karena lebar terminal,
+pengaturan printer, atau versi pustaka. Unit ini memakai `sympy.srepr` untuk
+merekam pohon ekspresi dan JSON dengan kunci terurut, inden tetap, UTF-8, serta
+akhir baris LF. Versi SymPy ikut disimpan karena bentuk kanonis pustaka dapat
+berubah antarrilis.
+
+Jalankan skrip dari akar proyek:
+
+```text
+python source/code/unit05_symbolic.py --output output/unit05-results.json
+```
+
+Medan `core_sha256` mengikat rekaman inti sebelum medan hash ditambahkan.
+Menjalankan perintah yang sama pada lingkungan yang sama harus menghasilkan
+byte identik. Hash bukan bukti kebenaran matematika; ia membuktikan bahwa dua
+urutan byte sama.
+
+## Jembatan SageMath yang opsional {#sec-o002-u05-sage-bridge}
+
+SageMath bermanfaat ketika satu lingkungan terpadu dibutuhkan untuk aljabar,
+teori bilangan, graf, atau objek eksak yang lebih luas. Ia **bukan** dependensi
+jalur dasar unit ini. Potongan berikut memakai sintaks Python yang dapat
+dijalankan di lingkungan Python milik SageMath:
+
+```python
+from sage.all import PolynomialRing, QQ, SR, solve
+
+R = PolynomialRing(QQ, "x")
+x = R.gen()
+print((x**4 - 1).factor())
+
+y = SR.var("y")
+print(solve(y**2 == 2, y))
+```
+
+Jalankan potongan itu hanya pada instalasi SageMath yang versinya dicatat.
+Hasil baseline tetap diperoleh dan diuji dengan `Fraction` serta SymPy. Jangan
+mengubah keluaran SageMath dan keluaran SymPy menjadi string lalu menyatakan
+keduanya setara; bandingkan objek matematis, domain, dan residualnya.
+
+## Latihan {#sec-o002-u05-exercises}
+
+### Latihan 1 - ekspresi dan nilai {#ex-o002-u05-01}
+
+Bentuk ekspresi $q(t)=t^3-2t$ di SymPy. Sebutkan simbol bebasnya, lalu
+evaluasi pada $t=1/2$ secara eksak.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan `Symbol`, `Rational`, atribut `free_symbols`, dan `subs`.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Kode `t=sp.Symbol("t"); q=t**3-2*t` menghasilkan simbol bebas `{t}`.
+Substitusi `q.subs(t, sp.Rational(1,2))` memberi
+$1/8-1=-7/8$. Ekspresi `q` tetap memuat `t`; `-7/8` adalah nilai pada satu
+masukan, bukan pengganti ekspresi asal.
+:::
+
+### Latihan 2 - asumsi yang hilang {#ex-o002-u05-02}
+
+Seorang pembaca menyederhanakan $\sqrt{z^2}$ menjadi $z$ untuk semua
+bilangan real. Berikan contoh penyangkal dan tuliskan hasil umum yang benar.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Coba satu bilangan real negatif.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Ambil $z=-3$. Maka $\sqrt{z^2}=\sqrt{9}=3$, sedangkan $z=-3$, sehingga
+penyederhanaan itu gagal. Untuk $z$ real, bentuk umum yang benar ialah
+$\sqrt{z^2}=|z|$. Bentuk $z$ sah jika ditambahkan asumsi $z\ge0$, dan
+khusus simbol SymPy positif dapat dideklarasikan dengan `positive=True`.
+:::
+
+### Latihan 3 - ekuivalensi dan domain {#ex-o002-u05-03}
+
+Bandingkan $(u^2-4)/(u-2)$ dengan $u+2$. Nyatakan pada himpunan mana
+nilainya sama dan jelaskan mengapa domain kedua fungsi tidak otomatis sama.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Faktorkan pembilang dan periksa penyebut sebelum membatalkan faktor.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Karena $u^2-4=(u-2)(u+2)$, kedua rumus memberi nilai sama untuk setiap
+$u\ne2$. Rumus pecahan tidak terdefinisi pada $u=2$, sementara $u+2$
+bernilai $4$. Jadi keduanya setara pada domain bersama, tetapi bukan fungsi
+dengan domain yang sama kecuali pembatasan $u\ne2$ dipertahankan.
+:::
+
+### Latihan 4 - faktor, akar, dan pemeriksaan {#ex-o002-u05-04}
+
+Faktorkan $v^3-v$, cari semua akar realnya secara eksak, lalu tuliskan dua
+pemeriksaan yang dapat dilakukan tanpa mempercayai tampilan keluaran.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Keluarkan faktor `v`, kemudian faktorkan selisih kuadrat.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+$v^3-v=v(v^2-1)=v(v-1)(v+1)$, sehingga akar realnya ialah
+$(-1,0,1)$. Pemeriksaan pertama: ekspansi `v*(v-1)*(v+1)` harus kembali ke
+`v**3-v`. Pemeriksaan kedua: substitusi setiap akar ke polinom harus memberi
+residual eksak nol. Kedua pemeriksaan ini mengikat klaim lokal yang jelas.
+:::
+
+### Latihan 5 - artefak simbolik yang stabil {#ex-o002-u05-05}
+
+Mengapa menyimpan hanya tangkapan layar keluaran `pretty print` tidak cukup
+untuk eksperimen simbolik yang dapat direproduksi? Sebutkan sedikitnya empat
+unsur rekaman yang lebih baik.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Pikirkan pohon ekspresi, asumsi, domain, versi, dan byte keluaran.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Tangkapan layar dapat kehilangan struktur, mudah berubah karena tata letak,
+dan tidak dapat dievaluasi ulang. Rekaman yang lebih baik memuat (1) pohon
+ekspresi kanonis, (2) asumsi simbol, (3) domain masalah, (4) versi SymPy atau
+SageMath, (5) masukan dan metode, serta (6) JSON atau format teks dengan aturan
+urutan dan akhir baris yang tetap. Hash kemudian dapat membandingkan byte,
+sedangkan residual atau ekspansi memeriksa klaim matematis tertentu.
+:::
+
+## Ringkasan {#sec-o002-u05-summary}
+
+- Ekspresi simbolik menyatakan struktur; substitusi menghasilkan nilai pada
+  masukan tertentu.
+- Aritmetika eksak mempertahankan hubungan rasional dan aljabar tanpa
+  pembulatan desimal.
+- Asumsi serta domain menentukan penyederhanaan mana yang sah.
+- Kesamaan struktur, ekuivalensi pada domain bersama, dan kesamaan fungsi
+  merupakan tiga pertanyaan berbeda.
+- Faktorisasi, ekspansi kembali, penyelesaian eksak, dan residual saling
+  melengkapi sebagai pemeriksaan lokal.
+- Keluaran sistem aljabar komputer adalah bukti kerja yang harus dibatasi
+  klaimnya, bukan pengganti otomatis bagi bukti umum.
+- Representasi kanonis, versi pustaka, dan hash membuat artefak dapat
+  dibandingkan.
+- SageMath tersedia sebagai jembatan opsional; baseline Unit 5 tetap memakai
+  Python, `Fraction`, dan SymPy.

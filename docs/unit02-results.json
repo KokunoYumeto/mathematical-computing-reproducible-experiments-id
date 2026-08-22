@@ -1,0 +1,20 @@
+{
+  "mean": "5/12",
+  "payload_sha256": "d0055de131b29576a1c5147212f83a92f94721ed82abd2bf0b3d90084795b5e7",
+  "residue": 3,
+  "scale": {
+    "input": [
+      2,
+      -1,
+      4
+    ],
+    "input_unchanged": true,
+    "length_preserved": true,
+    "output": [
+      6,
+      -3,
+      12
+    ]
+  },
+  "schema": "o002.unit02-results.v1"
+}

@@ -1,0 +1,94 @@
+{
+  "binary64": {
+    "epsilon": "2.220446049250313e-16",
+    "epsilon_hex": "0x1.0000000000000p-52",
+    "gap_after_one": "2.220446049250313e-16",
+    "half_smallest_subnormal_is_zero": true,
+    "largest_finite": "1.7976931348623157e+308",
+    "next_after_one_hex": "0x1.0000000000001p+0",
+    "one_hex": "0x1.0000000000000p+0",
+    "overflow_result": "inf",
+    "smallest_positive_normal": "2.2250738585072014e-308",
+    "smallest_positive_subnormal": "5e-324",
+    "two_to_53_plus_one_is_unchanged": true,
+    "ulp_at_one": "2.220446049250313e-16",
+    "ulp_at_two_to_53": "2.0",
+    "unit_roundoff_for_round_to_nearest": "1.1102230246251565e-16"
+  },
+  "cancellation": {
+    "direct": "0.0",
+    "direct_relative_forward_error": "1.00000000000000000000E+0",
+    "high_precision_reference": "4.99999999999999987500E-9",
+    "rationalized": "5e-09",
+    "rationalized_is_more_accurate": true,
+    "rationalized_relative_forward_error": "4.59225608301284725734E-17",
+    "x": "10000000000000000",
+    "x_plus_one_rounds_to_x": true
+  },
+  "conditioning": {
+    "actual_perturbation": "9.999778782798785e-13",
+    "function": "1/(1-x)",
+    "ill_conditioning_is_a_problem_property": true,
+    "local_condition_estimate": "99999998.49752407",
+    "observed_amplification": "100009999.27616705",
+    "output": "99999999.49752407",
+    "perturbed_output": "100010000.27626212",
+    "relative_input_change": "9.999778882796574e-13",
+    "relative_output_change": "0.0001000077878830316",
+    "requested_perturbation": "1e-12",
+    "x": "0.99999999"
+  },
+  "core_sha256": "b7ec28842af106a79f77d4be1b77a8ee2d5269c2856e9b9c32866f4ee47cf89e",
+  "error_budget": {
+    "absolute_budget": "1e-10",
+    "allowed_absolute_error": "6e-10",
+    "computed": "1.0000000004",
+    "observed_absolute_error": "4.000000330961484e-10",
+    "passes": true,
+    "policy": "Anggaran ditetapkan dari kebutuhan masalah sebelum hasil dilihat.",
+    "reference": "1.0",
+    "relative_budget": "5e-10",
+    "rule": "absolute_error <= absolute_budget + relative_budget*abs(reference)"
+  },
+  "forward_backward_error": {
+    "backward_interpretation": "Perubahan relatif pada masukan agar kuadrat hasil menjadi masukan tepat.",
+    "computed": "1.4142135623730951",
+    "computed_hex": "0x1.6a09e667f3bcdp+0",
+    "high_precision_reference": "1.41421356237309504880E+0",
+    "problem": "sqrt(2)",
+    "relative_backward_error": "1.36716173153238464034E-16",
+    "relative_forward_error": "6.83580865766192296808E-17"
+  },
+  "proof_boundary": {
+    "claim": "Hasil merekam perilaku kasus tertentu pada lingkungan tercatat; batas umum memerlukan model pembulatan dan analisis matematika.",
+    "experiments_executed": [
+      "binary64_spacing_and_range",
+      "cancellation",
+      "sqrt_forward_backward_error",
+      "conditioning",
+      "summation",
+      "error_budget"
+    ],
+    "proves_every_binary64_operation_correct": false
+  },
+  "runtime": {
+    "float_format": "IEEE 754 binary64 pada build CPython yang diuji",
+    "implementation": "CPython",
+    "python": "3.13.1"
+  },
+  "schema": "o002.unit06.floating.v1",
+  "summation": {
+    "builtin_sum_for_recorded_runtime": "1.0",
+    "fsum_matches_mathematical_sum": true,
+    "math_fsum": "1.0",
+    "mathematical_sum": "1",
+    "naive_is_order_sensitive": true,
+    "naive_left_to_right": "0.0",
+    "reordered_naive_sum": "1.0",
+    "values": [
+      "1e+16",
+      "1.0",
+      "-1e+16"
+    ]
+  }
+}

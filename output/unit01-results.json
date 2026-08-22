@@ -1,0 +1,34 @@
+{
+  "counterexample": {
+    "claim": "n^2+n+41 prima untuk setiap n bulat taknegatif",
+    "factor": 41,
+    "n": 40,
+    "value": 1681
+  },
+  "exact_arithmetic": {
+    "expression": "1/10 + 2/10",
+    "result": "3/10"
+  },
+  "finite_check": {
+    "claim": "n^2+n genap",
+    "domain_checked": "0 <= n < 1000",
+    "proves_universal_claim": false,
+    "violations": []
+  },
+  "floating_arithmetic": {
+    "absolute_tolerance": 1e-15,
+    "difference_from_0.3": "5.551115123125783e-17",
+    "expression": "0.1 + 0.2",
+    "isclose": true,
+    "relative_tolerance": 1e-12,
+    "result": "0.30000000000000004"
+  },
+  "parameters": {
+    "limit": 1000
+  },
+  "runtime": {
+    "implementation": "CPython",
+    "python": "3.13.1"
+  },
+  "schema": "o002.unit01.experiment.v1"
+}

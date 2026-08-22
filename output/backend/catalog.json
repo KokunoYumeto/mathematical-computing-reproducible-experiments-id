@@ -1,0 +1,794 @@
+{
+  "components": [
+    {
+      "id": "cmp-o002-u01-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/01-komputasi-bukti.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u01-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit01_experiment.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u02-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/02-objek-fungsi.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u02-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit02_objects.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u03-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/03-array-vektorisasi.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u03-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit03_arrays.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u04-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/04-visualisasi-integritas.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u04-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit04_visualization.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u05-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/05-eksak-simbolik-sage.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u05-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit05_symbolic.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u06-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/06-titik-mengambang-stabilitas.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u06-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit06_floating.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u07-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/07-rancangan-eksperimen.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u07-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit07_experiment_design.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u08-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/08-pengujian-validasi.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u08-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit08_validation.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u09-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/09-data-konfigurasi-provenans.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u09-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit09_provenance.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u10-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/10-otomasi-pipa.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u10-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit10_pipeline.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u11-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/11-eksperimen-numerik.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u11-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit11_numerical.py",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u12-text",
+      "kind": "reader_text",
+      "license": "CC BY-SA 4.0",
+      "path": "source/units/12-proyek-akhir.qmd",
+      "source": "src-o002-original"
+    },
+    {
+      "id": "cmp-o002-u12-code",
+      "kind": "software",
+      "license": "MIT",
+      "path": "source/code/unit12_capstone.py",
+      "source": "src-o002-original"
+    }
+  ],
+  "course": {
+    "id": "B80",
+    "prerequisite": "A30",
+    "project_id": "O002",
+    "title": "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi"
+  },
+  "cursor": {
+    "boundary": "complete 12-unit id-ID edition",
+    "edition_complete": true,
+    "last_complete_unit": "o002.u12",
+    "next_unit": null
+  },
+  "language": "id-ID",
+  "qa": [
+    {
+      "evidence": "12 units; stable IDs; five hint-and-solution exercises per unit",
+      "id": "qa-o002-source-structure",
+      "status": "pass"
+    },
+    {
+      "evidence": "complete standard-library/scientific-Python test suite at final boundary",
+      "id": "qa-o002-tests",
+      "status": "pass"
+    },
+    {
+      "evidence": "Quarto HTML and LuaLaTeX PDF build at final boundary",
+      "id": "qa-o002-reader-build",
+      "status": "pass"
+    },
+    {
+      "evidence": "all final PDF pages rendered and inspected",
+      "id": "qa-o002-pdf-visual",
+      "status": "pass"
+    },
+    {
+      "evidence": "no audio or interactive widget surface in this edition",
+      "id": "qa-o002-audio",
+      "status": "not_applicable"
+    }
+  ],
+  "relations": [
+    {
+      "from": "o002.u01",
+      "to": "o002.u02",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.u02",
+      "to": "o002.u03",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.u03",
+      "to": "o002.u04",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.u04",
+      "to": "o002.u05",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.u05",
+      "to": "o002.u06",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.u06",
+      "to": "o002.u07",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.u07",
+      "to": "o002.u08",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.u08",
+      "to": "o002.u09",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.u09",
+      "to": "o002.u10",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.u10",
+      "to": "o002.u11",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.u11",
+      "to": "o002.u12",
+      "type": "precedes"
+    },
+    {
+      "from": "o002.u01",
+      "to": "cmp-o002-u01-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u01",
+      "to": "cmp-o002-u01-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u02",
+      "to": "cmp-o002-u02-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u02",
+      "to": "cmp-o002-u02-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u03",
+      "to": "cmp-o002-u03-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u03",
+      "to": "cmp-o002-u03-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u04",
+      "to": "cmp-o002-u04-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u04",
+      "to": "cmp-o002-u04-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u05",
+      "to": "cmp-o002-u05-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u05",
+      "to": "cmp-o002-u05-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u06",
+      "to": "cmp-o002-u06-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u06",
+      "to": "cmp-o002-u06-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u07",
+      "to": "cmp-o002-u07-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u07",
+      "to": "cmp-o002-u07-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u08",
+      "to": "cmp-o002-u08-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u08",
+      "to": "cmp-o002-u08-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u09",
+      "to": "cmp-o002-u09-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u09",
+      "to": "cmp-o002-u09-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u10",
+      "to": "cmp-o002-u10-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u10",
+      "to": "cmp-o002-u10-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u11",
+      "to": "cmp-o002-u11-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u11",
+      "to": "cmp-o002-u11-code",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u12",
+      "to": "cmp-o002-u12-text",
+      "type": "uses_component"
+    },
+    {
+      "from": "o002.u12",
+      "to": "cmp-o002-u12-code",
+      "type": "uses_component"
+    }
+  ],
+  "schema_version": "o002.backend.v1",
+  "sources": [
+    {
+      "id": "src-o002-original",
+      "identity": "local independently authored source",
+      "license": "CC BY-SA 4.0 text; MIT code",
+      "role": "original",
+      "title": "O002 original Indonesian coursebook",
+      "used_in_current_units": true
+    },
+    {
+      "id": "src-o002-walls",
+      "identity": "commit 0687916182ab3ddc9e922d4a6eb603609ba91c36; tree b66a9c79aa7144a75d3f83ba53bba4ff8961f91b",
+      "license": "CC BY-NC-SA 4.0; separate/unclear component rights retained",
+      "role": "bounded_donor",
+      "title": "Mathematical Python",
+      "used_in_current_units": false
+    },
+    {
+      "id": "src-o002-rse",
+      "identity": "commit 62217e6606842ab9752fcf8e73954d1eb4a3cf07; tree f570f30bb8ace202550c474e81eb3414e8976be5",
+      "license": "CC BY 4.0 text; MIT code; excluded components remain separate",
+      "role": "bounded_donor",
+      "title": "Research Software Engineering with Python",
+      "used_in_current_units": false
+    },
+    {
+      "id": "src-o002-spl",
+      "identity": "comparison freeze 817a97d8d9a26eeb4e735a402420cd34dd7e89fc; archive not yet admitted",
+      "license": "CC BY 4.0",
+      "role": "comparison_only",
+      "title": "Scientific Python Lectures",
+      "used_in_current_units": false
+    }
+  ],
+  "units": [
+    {
+      "components": [
+        "cmp-o002-u01-text",
+        "cmp-o002-u01-code"
+      ],
+      "exercises": [
+        "ex-o002-u01-01",
+        "ex-o002-u01-02",
+        "ex-o002-u01-03",
+        "ex-o002-u01-04",
+        "ex-o002-u01-05"
+      ],
+      "id": "o002.u01",
+      "reader_path": "source/units/01-komputasi-bukti.qmd",
+      "sections": [
+        "sec-o002-u01",
+        "sec-o002-u01-objectives",
+        "sec-o002-u01-layers",
+        "sec-o002-u01-exact-float",
+        "sec-o002-u01-contract",
+        "sec-o002-u01-proof-evidence",
+        "sec-o002-u01-tests",
+        "sec-o002-u01-exercises",
+        "sec-o002-u01-summary"
+      ],
+      "status": "complete",
+      "title": "Komputasi, Representasi, dan Bukti"
+    },
+    {
+      "components": [
+        "cmp-o002-u02-text",
+        "cmp-o002-u02-code"
+      ],
+      "exercises": [
+        "ex-o002-u02-01",
+        "ex-o002-u02-02",
+        "ex-o002-u02-03",
+        "ex-o002-u02-04",
+        "ex-o002-u02-05"
+      ],
+      "id": "o002.u02",
+      "reader_path": "source/units/02-objek-fungsi.qmd",
+      "sections": [
+        "sec-o002-u02",
+        "sec-o002-u02-objectives",
+        "sec-o002-u02-types",
+        "sec-o002-u02-aliasing",
+        "sec-o002-u02-contracts",
+        "sec-o002-u02-purity",
+        "sec-o002-u02-invariants",
+        "sec-o002-u02-canonical-output",
+        "sec-o002-u02-exercises",
+        "sec-o002-u02-summary"
+      ],
+      "status": "complete",
+      "title": "Objek, Nilai, dan Fungsi"
+    },
+    {
+      "components": [
+        "cmp-o002-u03-text",
+        "cmp-o002-u03-code"
+      ],
+      "exercises": [
+        "ex-o002-u03-01",
+        "ex-o002-u03-02",
+        "ex-o002-u03-03",
+        "ex-o002-u03-04",
+        "ex-o002-u03-05"
+      ],
+      "id": "o002.u03",
+      "reader_path": "source/units/03-array-vektorisasi.qmd",
+      "sections": [
+        "sec-o002-u03",
+        "sec-o002-u03-objectives",
+        "sec-o002-u03-array-contract",
+        "sec-o002-u03-dtype",
+        "sec-o002-u03-vectorization",
+        "sec-o002-u03-broadcasting",
+        "sec-o002-u03-copy-view",
+        "sec-o002-u03-experiment",
+        "sec-o002-u03-proof-boundary",
+        "sec-o002-u03-exercises",
+        "sec-o002-u03-summary"
+      ],
+      "status": "complete",
+      "title": "Array, Bentuk, dan Vektorisasi"
+    },
+    {
+      "components": [
+        "cmp-o002-u04-text",
+        "cmp-o002-u04-code"
+      ],
+      "exercises": [
+        "ex-o002-u04-01",
+        "ex-o002-u04-02",
+        "ex-o002-u04-03",
+        "ex-o002-u04-04",
+        "ex-o002-u04-05"
+      ],
+      "id": "o002.u04",
+      "reader_path": "source/units/04-visualisasi-integritas.qmd",
+      "sections": [
+        "sec-o002-u04",
+        "sec-o002-u04-objectives",
+        "sec-o002-u04-purpose",
+        "sec-o002-u04-encoding",
+        "sec-o002-u04-axes",
+        "sec-o002-u04-aspect",
+        "sec-o002-u04-uncertainty",
+        "sec-o002-u04-accessibility",
+        "sec-o002-u04-artifacts",
+        "sec-o002-u04-proof",
+        "sec-o002-u04-exercises",
+        "sec-o002-u04-summary"
+      ],
+      "status": "complete",
+      "title": "Visualisasi dengan Integritas"
+    },
+    {
+      "components": [
+        "cmp-o002-u05-text",
+        "cmp-o002-u05-code"
+      ],
+      "exercises": [
+        "ex-o002-u05-01",
+        "ex-o002-u05-02",
+        "ex-o002-u05-03",
+        "ex-o002-u05-04",
+        "ex-o002-u05-05"
+      ],
+      "id": "o002.u05",
+      "reader_path": "source/units/05-eksak-simbolik-sage.qmd",
+      "sections": [
+        "sec-o002-u05",
+        "sec-o002-u05-objectives",
+        "sec-o002-u05-expression-value",
+        "sec-o002-u05-assumptions",
+        "sec-o002-u05-equivalence",
+        "sec-o002-u05-factor-solve",
+        "sec-o002-u05-result-proof",
+        "sec-o002-u05-canonical-output",
+        "sec-o002-u05-sage-bridge",
+        "sec-o002-u05-exercises",
+        "sec-o002-u05-summary"
+      ],
+      "status": "complete",
+      "title": "Komputasi Eksak dan Simbolik"
+    },
+    {
+      "components": [
+        "cmp-o002-u06-text",
+        "cmp-o002-u06-code"
+      ],
+      "exercises": [
+        "ex-o002-u06-01",
+        "ex-o002-u06-02",
+        "ex-o002-u06-03",
+        "ex-o002-u06-04",
+        "ex-o002-u06-05"
+      ],
+      "id": "o002.u06",
+      "reader_path": "source/units/06-titik-mengambang-stabilitas.qmd",
+      "sections": [
+        "sec-o002-u06",
+        "sec-o002-u06-objectives",
+        "sec-o002-u06-binary-model",
+        "sec-o002-u06-ulp-epsilon",
+        "sec-o002-u06-range",
+        "sec-o002-u06-cancellation",
+        "sec-o002-u06-forward-backward",
+        "sec-o002-u06-conditioning-stability",
+        "sec-o002-u06-summation",
+        "sec-o002-u06-tolerances",
+        "sec-o002-u06-experiment-proof",
+        "sec-o002-u06-exercises",
+        "sec-o002-u06-summary"
+      ],
+      "status": "complete",
+      "title": "Titik-Mengambang, Galat, dan Stabilitas"
+    },
+    {
+      "components": [
+        "cmp-o002-u07-text",
+        "cmp-o002-u07-code"
+      ],
+      "exercises": [
+        "ex-o002-u07-01",
+        "ex-o002-u07-02",
+        "ex-o002-u07-03",
+        "ex-o002-u07-04",
+        "ex-o002-u07-05"
+      ],
+      "id": "o002.u07",
+      "reader_path": "source/units/07-rancangan-eksperimen.qmd",
+      "sections": [
+        "sec-o002-u07",
+        "sec-o002-u07-objectives",
+        "sec-o002-u07-question",
+        "sec-o002-u07-variables",
+        "sec-o002-u07-grid",
+        "sec-o002-u07-randomness",
+        "sec-o002-u07-replication",
+        "sec-o002-u07-holdout",
+        "sec-o002-u07-effect",
+        "sec-o002-u07-negative-results",
+        "sec-o002-u07-artifact",
+        "sec-o002-u07-proof",
+        "sec-o002-u07-exercises",
+        "sec-o002-u07-summary"
+      ],
+      "status": "complete",
+      "title": "Rancangan Eksperimen yang Dapat Diperiksa"
+    },
+    {
+      "components": [
+        "cmp-o002-u08-text",
+        "cmp-o002-u08-code"
+      ],
+      "exercises": [
+        "ex-o002-u08-01",
+        "ex-o002-u08-02",
+        "ex-o002-u08-03",
+        "ex-o002-u08-04",
+        "ex-o002-u08-05"
+      ],
+      "id": "o002.u08",
+      "reader_path": "source/units/08-pengujian-validasi.qmd",
+      "sections": [
+        "sec-o002-u08",
+        "sec-o002-u08-objectives",
+        "sec-o002-u08-assertions",
+        "sec-o002-u08-examples-properties",
+        "sec-o002-u08-test-levels",
+        "sec-o002-u08-oracles",
+        "sec-o002-u08-exact-tolerant",
+        "sec-o002-u08-edge-domain",
+        "sec-o002-u08-metamorphic",
+        "sec-o002-u08-independent-validation",
+        "sec-o002-u08-artifact",
+        "sec-o002-u08-coverage-proof",
+        "sec-o002-u08-exercises",
+        "sec-o002-u08-summary"
+      ],
+      "status": "complete",
+      "title": "Pengujian dan Validasi Komputasi"
+    },
+    {
+      "components": [
+        "cmp-o002-u09-text",
+        "cmp-o002-u09-code"
+      ],
+      "exercises": [
+        "ex-o002-u09-01",
+        "ex-o002-u09-02",
+        "ex-o002-u09-03",
+        "ex-o002-u09-04",
+        "ex-o002-u09-05"
+      ],
+      "id": "o002.u09",
+      "reader_path": "source/units/09-data-konfigurasi-provenans.qmd",
+      "sections": [
+        "sec-o002-u09",
+        "sec-o002-u09-objectives",
+        "sec-o002-u09-data-layers",
+        "sec-o002-u09-schema-units",
+        "sec-o002-u09-configuration",
+        "sec-o002-u09-environment",
+        "sec-o002-u09-paths",
+        "sec-o002-u09-rights",
+        "sec-o002-u09-hashes",
+        "sec-o002-u09-privacy",
+        "sec-o002-u09-manifest",
+        "sec-o002-u09-reproducibility",
+        "sec-o002-u09-exercises",
+        "sec-o002-u09-summary"
+      ],
+      "status": "complete",
+      "title": "Data, Konfigurasi, dan Provenans"
+    },
+    {
+      "components": [
+        "cmp-o002-u10-text",
+        "cmp-o002-u10-code"
+      ],
+      "exercises": [
+        "ex-o002-u10-01",
+        "ex-o002-u10-02",
+        "ex-o002-u10-03",
+        "ex-o002-u10-04",
+        "ex-o002-u10-05"
+      ],
+      "id": "o002.u10",
+      "reader_path": "source/units/10-otomasi-pipa.qmd",
+      "sections": [
+        "sec-o002-u10",
+        "sec-o002-u10-objectives",
+        "sec-o002-u10-graph",
+        "sec-o002-u10-artifact-classes",
+        "sec-o002-u10-freshness",
+        "sec-o002-u10-atomic",
+        "sec-o002-u10-targets",
+        "sec-o002-u10-example",
+        "sec-o002-u10-proof-boundary",
+        "sec-o002-u10-exercises",
+        "sec-o002-u10-summary"
+      ],
+      "status": "complete",
+      "title": "Otomasi dan Alur Kerja yang Dapat Direproduksi"
+    },
+    {
+      "components": [
+        "cmp-o002-u11-text",
+        "cmp-o002-u11-code"
+      ],
+      "exercises": [
+        "ex-o002-u11-01",
+        "ex-o002-u11-02",
+        "ex-o002-u11-03",
+        "ex-o002-u11-04",
+        "ex-o002-u11-05"
+      ],
+      "id": "o002.u11",
+      "reader_path": "source/units/11-eksperimen-numerik.qmd",
+      "sections": [
+        "sec-o002-u11",
+        "sec-o002-u11-objectives",
+        "sec-o002-u11-method-theorem",
+        "sec-o002-u11-bisection",
+        "sec-o002-u11-quadrature",
+        "sec-o002-u11-linear",
+        "sec-o002-u11-euler",
+        "sec-o002-u11-error-sources",
+        "sec-o002-u11-artifacts",
+        "sec-o002-u11-exercises",
+        "sec-o002-u11-summary"
+      ],
+      "status": "complete",
+      "title": "Eksperimen Numerik Berprasyarat"
+    },
+    {
+      "components": [
+        "cmp-o002-u12-text",
+        "cmp-o002-u12-code"
+      ],
+      "exercises": [
+        "ex-o002-u12-01",
+        "ex-o002-u12-02",
+        "ex-o002-u12-03",
+        "ex-o002-u12-04",
+        "ex-o002-u12-05"
+      ],
+      "id": "o002.u12",
+      "reader_path": "source/units/12-proyek-akhir.qmd",
+      "sections": [
+        "sec-o002-u12",
+        "sec-o002-u12-objectives",
+        "sec-o002-u12-question",
+        "sec-o002-u12-claims",
+        "sec-o002-u12-package",
+        "sec-o002-u12-blind-replay",
+        "sec-o002-u12-review",
+        "sec-o002-u12-rubric",
+        "sec-o002-u12-exercises",
+        "sec-o002-u12-summary"
+      ],
+      "status": "complete",
+      "title": "Proyek Akhir yang Dapat Diperiksa"
+    }
+  ]
+}

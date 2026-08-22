@@ -1,0 +1,366 @@
+---
+title: "Pengujian dan Validasi Komputasi"
+identifier: o002.u08
+---
+
+::: {#sec-o002-u08}
+:::
+
+## Tujuan belajar {#sec-o002-u08-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- memakai *assertion* untuk menyatakan hasil atau invarian yang dapat
+  diperiksa;
+- membedakan pengujian berbasis contoh dari pengujian berbasis sifat;
+- membedakan tes unit, integrasi, dan regresi;
+- memilih oracle tanpa menyalin algoritme yang sedang diuji;
+- memakai kesamaan eksak dan toleransi numerik pada tempat yang tepat;
+- menguji nilai batas, prasyarat, dan perilaku galat;
+- merumuskan hubungan metamorfik dan invarian;
+- memvalidasi implementasi terhadap hasil yang diturunkan secara independen;
+  dan
+- membatasi bukti pengujian agar tidak disalahartikan sebagai bukti matematis
+  umum.
+
+Prasyarat lokal: Unit 1-5, fungsi, jumlah berhingga, persamaan kuadrat, dan
+pengertian domain. Unit ini hanya memerlukan pustaka standar Python.
+
+## *Assertion* dan kontrak {#sec-o002-u08-assertions}
+
+*Assertion* menyatakan kondisi yang diharapkan benar pada satu titik
+pelaksanaan. Dalam tes `unittest`, bentuk seperti
+`self.assertEqual(actual, expected)` mencatat kegagalan sebagai hasil tes.
+Pernyataan `assert` bawaan Python lebih cocok untuk invarian internal yang
+jika gagal menandakan kesalahan pemrograman.
+
+```{python}
+#| label: lst-o002-u08-assertions
+def triangular_iterative(n):
+    if isinstance(n, bool) or not isinstance(n, int):
+        raise TypeError("n harus berupa bilangan bulat")
+    if n < 0:
+        raise ValueError("n harus taknegatif")
+
+    total = 0
+    for k in range(1, n + 1):
+        previous = total
+        total += k
+        assert total >= previous
+    return total
+```
+
+Jangan memakai `assert n >= 0` sebagai satu-satunya validasi masukan publik.
+Python dapat menghapus pernyataan `assert` ketika dijalankan dengan optimasi.
+Prasyarat pengguna harus diperiksa secara eksplisit dan menghasilkan jenis
+galat yang terdokumentasi.
+
+## Contoh dan sifat {#sec-o002-u08-examples-properties}
+
+Tes contoh memasangkan masukan tertentu dengan keluaran yang diketahui:
+
+| $n$ | $1+2+\cdots+n$ |
+|---:|---:|
+| 0 | 0 |
+| 1 | 1 |
+| 2 | 3 |
+| 10 | 55 |
+| 100 | 5.050 |
+
+Contoh mudah dibaca dan sangat baik bagi kasus penting atau kesalahan yang
+pernah ditemukan. Namun, beberapa contoh tidak menjelaskan struktur seluruh
+domain.
+
+Tes sifat memeriksa hubungan yang harus tetap benar pada banyak masukan. Jika
+$T(n)=1+2+\cdots+n$, maka
+
+$$
+T(n+1)-T(n)=n+1
+$$
+
+dan
+
+$$
+T(2n)=2T(n)+n^2.
+$$
+
+Hubungan kedua tidak menentukan satu keluaran dari nol; ia menghubungkan
+beberapa pemanggilan fungsi. Hubungan semacam ini disebut **metamorfik** dan
+berguna ketika keluaran benar bagi setiap masukan sulit dihitung langsung.
+
+Tes sifat pada seribu nilai tetap masih merupakan pemeriksaan berhingga. Ia
+lebih luas daripada lima contoh, tetapi bukan bukti universal.
+
+## Tes unit, integrasi, dan regresi {#sec-o002-u08-test-levels}
+
+Ketiga label ini menjawab pertanyaan berbeda.
+
+| Tingkat | Fokus | Contoh Unit 8 |
+|---|---|---|
+| unit | satu fungsi atau kontrak kecil | `triangular_iterative(10) == 55` |
+| integrasi | beberapa bagian bekerja bersama | oracle, sifat, dan penulis JSON menghasilkan laporan sah |
+| regresi | kesalahan tertentu tidak kembali | nilai batas `n=0` tetap menghasilkan 0 |
+
+Tes regresi biasanya ditambahkan setelah sebuah kesalahan ditemukan dan
+diperbaiki. Ia harus menyimpan masukan minimum yang memicu kesalahan serta
+hasil yang benar. Menamai setiap tes besar sebagai “regresi” mengaburkan
+riwayat kegagalan yang sebenarnya hendak dijaga.
+
+## Oracle dan nilai referensi {#sec-o002-u08-oracles}
+
+Oracle adalah sumber keputusan tentang keluaran yang benar. Pilihannya dapat
+berupa:
+
+- nilai kecil yang dihitung dan ditinjau sebelumnya;
+- definisi atau identitas matematis;
+- implementasi referensi yang lebih sederhana;
+- data acuan dengan asal-usul yang jelas; atau
+- invarian dan hubungan metamorfik.
+
+Oracle yang mengulang baris kode produksi dengan nama berbeda tidak mandiri.
+Kesalahan yang sama dapat hidup di kedua tempat dan semua tes tetap lulus.
+
+Implementasi yang diuji pada unit ini menjumlahkan `1` sampai `n` dengan
+perulangan. Oracle utamanya diturunkan melalui pasangan. Tulis jumlah maju dan
+mundur:
+
+$$
+T(n)=1+2+\cdots+n,
+$$
+
+$$
+T(n)=n+(n-1)+\cdots+1.
+$$
+
+Menjumlahkan kedua baris memberi $n$ pasangan, masing-masing bernilai
+$n+1$. Jadi
+
+$$
+2T(n)=n(n+1), \qquad T(n)=\frac{n(n+1)}{2}.
+$$
+
+Fungsi referensi memakai rumus ini, bukan perulangan kedua. Dengan demikian,
+kesepakatan keduanya lebih informatif daripada membandingkan dua salinan loop.
+
+## Eksak dan bertoleransi {#sec-o002-u08-exact-tolerant}
+
+Jika hasilnya bilangan bulat atau rasional eksak, gunakan kesamaan eksak.
+`triangular_iterative(10)` harus sama dengan `55`, bukan sekadar dekat.
+Toleransi pada tes semacam itu dapat menyembunyikan kesalahan satu satuan.
+
+Untuk pendekatan titik-mengambang, tentukan besaran yang diperiksa dan alasan
+toleransinya. Iterasi Newton untuk $x^2=2$ menghasilkan pendekatan akar dua.
+Tes Unit 8 memeriksa residual
+
+$$
+|x^2-2|\le 10^{-12}
+$$
+
+setelah lima iterasi dari $x_0=1$.
+
+```{python}
+#| label: lst-o002-u08-tolerance
+from math import isclose
+
+x = 1.0
+for _ in range(5):
+    x = 0.5 * (x + 2.0 / x)
+
+isclose(x*x, 2.0, rel_tol=0.0, abs_tol=1e-12)
+```
+
+Toleransi diterapkan pada residual yang mempunyai makna jelas. Jangan memilih
+toleransi setelah melihat kegagalan hanya agar tes berubah menjadi hijau.
+
+## Nilai batas dan domain {#sec-o002-u08-edge-domain}
+
+Domain fungsi jumlah pada unit ini adalah bilangan bulat taknegatif. Tes harus
+memeriksa sekurangnya:
+
+- batas `n=0`;
+- nilai pertama `n=1`;
+- nilai biasa seperti `n=10`;
+- nilai negatif yang harus ditolak;
+- bilangan bukan bulat yang harus ditolak; dan
+- `True`, karena `bool` merupakan subkelas `int` di Python tetapi bukan
+  masukan yang dimaksud kontrak matematika ini.
+
+Tes galat perlu memeriksa jenis kegagalan, bukan hanya bahwa “sesuatu gagal”.
+`ValueError` bagi bilangan bulat negatif dan `TypeError` bagi `2.5` menyatakan
+dua pelanggaran kontrak yang berbeda.
+
+## Invarian dan pengujian metamorfik {#sec-o002-u08-metamorphic}
+
+Invarian loop sederhana adalah jumlah tidak berkurang setelah bilangan positif
+berikutnya ditambahkan. Hubungan metamorfik membandingkan pemanggilan berbeda:
+
+```{python}
+#| label: lst-o002-u08-metamorphic
+for n in range(201):
+    value = triangular_iterative(n)
+    assert triangular_iterative(n + 1) - value == n + 1
+    assert triangular_iterative(2*n) == 2*value + n*n
+```
+
+Hubungan metamorfik tidak memerlukan tabel 201 jawaban, tetapi tetap memerlukan
+derivasi. Untuk hubungan penggandaan,
+
+$$
+T(2n)-2T(n)
+=n(2n+1)-n(n+1)
+=n^2.
+$$
+
+Jika hubungan salah dirumuskan, tes dapat menolak implementasi benar. Kode tes
+harus ditinjau seperti kode produksi.
+
+## Validasi independen {#sec-o002-u08-independent-validation}
+
+Validasi bertanya apakah program menjawab persoalan yang dimaksud, bukan hanya
+apakah ia konsisten dengan dirinya sendiri. Pada unit ini:
+
+1. spesifikasi mendefinisikan $T(n)$ sebagai jumlah bilangan 1 sampai $n$;
+2. implementasi memakai penjumlahan berulang;
+3. oracle memakai rumus pasangan yang diturunkan terpisah;
+4. tabel nilai kecil memberi jangkar yang mudah diperiksa; dan
+5. sifat inkremen serta penggandaan memberi pemeriksaan silang tambahan.
+
+Lapisan yang berbeda mengurangi risiko satu kesalahan tunggal lolos tanpa
+terlihat. Mereka tidak membuat validasi sempurna: spesifikasi dapat salah,
+oracle dapat salah diturunkan, atau domain uji dapat melewatkan cacat.
+
+## Laporan deterministik {#sec-o002-u08-artifact}
+
+Jalankan dari akar proyek:
+
+```text
+python source/code/unit08_validation.py
+```
+
+Laporan memuat nilai referensi, perbandingan dengan rumus pasangan,
+pelanggaran sifat, pemeriksaan batas dan domain, residual numerik, tingkat tes,
+serta batas kesimpulan. JSON memakai UTF-8, kunci terurut, inden tetap, dan
+akhir baris LF. `core_sha256` mengikat isi inti sebelum medan hash ditambahkan.
+Tidak ada waktu saat ini, jaringan, atau bilangan acak dalam jalur ini.
+
+Dua keluaran byte-identik menunjukkan bahwa dua pelaksanaan merekam hasil yang
+sama pada kondisi yang sama. Hal itu tidak menunjukkan bahwa oracle atau
+spesifikasi pasti benar.
+
+## Cakupan, bukti kerja, dan bukti {#sec-o002-u08-coverage-proof}
+
+Cakupan mempunyai beberapa arti. Cakupan baris mengatakan bagian kode mana
+yang sempat dijalankan. Cakupan cabang mengatakan pilihan kendali mana yang
+diambil. Cakupan domain mengatakan masukan matematika mana yang diperiksa.
+Cakupan 100% pada baris tidak berarti semua nilai atau semua sifat telah diuji.
+
+Jika program cocok dengan rumus pasangan untuk `0 <= n <= 1000`, kesimpulan
+yang sah ialah tidak ditemukan ketidakcocokan pada domain berhingga itu dalam
+lingkungan yang dijalankan. Bukti rumus pasangan berlaku untuk seluruh
+bilangan bulat taknegatif karena memilih $n$ secara umum dan memasangkan
+suku. Bukti bahwa loop mengimplementasikan jumlah dapat memakai invarian loop.
+Tes mendukung bahwa implementasi konkret sesuai dengan argumen pada kasus yang
+diperiksa; tes sendiri tidak menggantikan kedua bukti tersebut.
+
+## Latihan {#sec-o002-u08-exercises}
+
+### Latihan 1 - memilih assertion {#ex-o002-u08-01}
+
+Untuk setiap klaim berikut, pilih kesamaan eksak atau perbandingan
+bertoleransi dan jelaskan: (a) jumlah `1+...+100`, (b) pendekatan numerik
+$\sqrt{2}$, dan (c) panjang daftar keluaran.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Tanyakan apakah representasi dan hasil yang ditetapkan bersifat eksak.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Gunakan kesamaan eksak untuk (a), yaitu `5050`, karena operasi bilangan bulat
+Python pada rentang ini eksak. Gunakan perbandingan bertoleransi untuk (b),
+dengan toleransi yang diturunkan dari residual atau kebutuhan masalah. Gunakan
+kesamaan eksak untuk (c), karena panjang daftar adalah bilangan bulat. Memakai
+toleransi untuk panjang dapat menerima daftar dengan jumlah unsur salah.
+:::
+
+### Latihan 2 - membangun oracle {#ex-o002-u08-02}
+
+Anda menguji fungsi yang menghitung $1+3+5+\cdots+(2n-1)$ dengan loop.
+Turunkan oracle yang tidak memakai loop yang sama dan sebutkan domainnya.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gambar persegi yang bertambah satu bingkai berbentuk L pada setiap langkah.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Jumlah $n$ bilangan ganjil pertama adalah $n^2$. Persegi berukuran
+$(n-1)\times(n-1)$ memperoleh $2n-1$ titik baru untuk menjadi persegi
+$n\times n$. Jadi oracle dapat menghitung `n*n` untuk bilangan bulat
+taknegatif `n`. Implementasi loop kemudian dibandingkan dengan rumus tersebut,
+bukan dengan loop salinan.
+:::
+
+### Latihan 3 - hubungan metamorfik {#ex-o002-u08-03}
+
+Untuk fungsi $S(n)=n^2$, tuliskan dua hubungan metamorfik yang dapat diuji
+tanpa tabel nilai lengkap. Jelaskan mengapa hubungan itu sah.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Bandingkan $S(n+1)$ dengan $S(n)$, lalu coba masukan $-n$.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Dua hubungan ialah $S(n+1)-S(n)=2n+1$ dan $S(-n)=S(n)$. Yang pertama
+mengikuti $(n+1)^2-n^2=2n+1$; yang kedua mengikuti
+$(-n)^2=n^2$. Keduanya dapat menemukan kelas kesalahan berbeda, tetapi tetap
+perlu contoh batas dan pemeriksaan langsung terhadap beberapa nilai acuan.
+:::
+
+### Latihan 4 - tes regresi batas {#ex-o002-u08-04}
+
+Sebuah fungsi rata-rata pernah membagi dengan nol ketika menerima daftar
+kosong, padahal kontraknya harus menolak masukan itu dengan `ValueError`.
+Tuliskan inti tes regresinya dan jelaskan mengapa tes tersebut harus tetap ada.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan `with self.assertRaises(ValueError):`.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Intinya ialah `with self.assertRaises(ValueError): mean([])`. Tes harus tetap
+ada karena menyimpan masukan minimum yang pernah menembus kontrak dan perilaku
+yang sekarang diwajibkan. Jika refaktor kemudian mengembalikan `NaN` atau
+membocorkan `ZeroDivisionError`, tes menunjukkan bahwa perilaku publik berubah.
+:::
+
+### Latihan 5 - batas bukti pengujian {#ex-o002-u08-05}
+
+Semua tes lulus, semua baris kode tercakup, dan sejuta masukan acak tidak
+menemukan kegagalan. Nyatakan kesimpulan terkuat yang sah dan dua alasan mengapa
+hal itu belum menjadi bukti umum.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Bedakan cakupan pelaksanaan dari cakupan domain dan periksa oracle.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Kesimpulan terkuat ialah implementasi melewati rangkaian tes, cabang, dan
+sampel yang dinyatakan pada lingkungan tersebut. Itu belum menjadi bukti umum
+karena domain tak hingga tidak habis oleh sejuta sampel dan oracle atau
+spesifikasi dapat memuat kesalahan bersama. Bukti umum membutuhkan argumen
+yang mencakup seluruh domain; validasi tambahan membutuhkan oracle yang
+mandiri, kasus batas, sifat, serta rekaman lingkungan.
+:::
+
+## Ringkasan {#sec-o002-u08-summary}
+
+- *Assertion* yang tepat menyatakan kontrak lokal yang dapat diperiksa.
+- Contoh mengikat kasus penting; sifat dan hubungan metamorfik memperluas
+  pemeriksaan tanpa menyediakan bukti universal secara otomatis.
+- Tes unit, integrasi, dan regresi melindungi lapisan risiko yang berbeda.
+- Oracle harus berasal dari nilai, derivasi, data, atau implementasi yang cukup
+  mandiri dari kode yang diuji.
+- Kesamaan eksak sesuai bagi hasil eksak; toleransi harus mengikuti makna
+  numerik dan skala.
+- Nilai batas, domain salah, dan jenis galat merupakan bagian kontrak.
+- Validasi silang dan laporan kanonis memperkuat bukti kerja.
+- Cakupan serta tes yang lulus bukan pengganti bukti matematis umum.

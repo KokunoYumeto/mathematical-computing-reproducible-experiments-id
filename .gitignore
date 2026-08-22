@@ -1,0 +1,9 @@
+/.quarto/
+**/*.quarto_ipynb
+/tmp/
+/authority/
+/release/
+__pycache__/
+*.py[cod]
+/.o002-build.lock
+/00_control/BUILD_IN_PROGRESS

@@ -1,0 +1,36 @@
+{
+  "schema": "o002.cursor.v1",
+  "language": "id-ID",
+  "course_id": "B80",
+  "project_id": "O002",
+  "last_admitted_unit": "o002.u12",
+  "active_block": [],
+  "next_after_active_block": null,
+  "admission_gate": [
+    "reader source complete",
+    "stable IDs and backend references exact",
+    "all executable tests pass",
+    "HTML and PDF build pass",
+    "all PDF pages visually inspected",
+    "component rights explicit",
+    "canonical manifests and hashes recorded"
+  ],
+  "admission_gate_status": "pass",
+  "edition_complete": true,
+  "source_qa": "pass",
+  "tests": {
+    "status": "pass",
+    "run": 115,
+    "failures": 0,
+    "errors": 0
+  },
+  "reader_build": "pass",
+  "pdf_visual_qa": "pass",
+  "determinism": {
+    "status": "pass",
+    "output_rows": 60,
+    "manifest_sha256": "e2108333ac3121137b28646d19f087b07b96178eab34c24a504e1dcdeb7d78f5"
+  },
+  "curriculum_admission_decision": "separate and not implied by edition completion",
+  "published": false
+}

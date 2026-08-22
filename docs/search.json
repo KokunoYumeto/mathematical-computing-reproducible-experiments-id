@@ -1,0 +1,1432 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi",
+    "section": "",
+    "text": "0.1 Cara menggunakan buku ini\nBuku ini mempelajari komputasi sebagai bagian dari kegiatan matematika: merumuskan pertanyaan, merepresentasikan objek, menjalankan eksperimen, memeriksa program, menyimpan bukti kerja, dan menjelaskan apa yang benar-benar ditunjukkan oleh hasilnya.\nPrasyarat formalnya hanya kompetensi A30: aljabar, fungsi, dan trigonometri pada tingkat prakalulus. Python diperkenalkan dari awal. Topik kalkulus, aljabar linear, peluang, dan persamaan diferensial akan dipakai setelah pembaca mencapai mata kuliah terkait; topik itu tidak diselundupkan sebagai prasyarat Unit 1.\nSetiap eksperimen dalam buku ini harus dapat dijalankan secara lokal dengan perangkat lunak terbuka. Sebuah hasil komputasi belum menjadi bukti hanya karena keluar dari komputer. Sebaliknya, komputasi dapat menemukan contoh penyangkal, menguji implementasi, menuntun dugaan, dan menghasilkan bukti kerja yang dapat diperiksa orang lain.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Pengantar</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#sec-o002-unit-contract",
+    "href": "index.html#sec-o002-unit-contract",
+    "title": "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi",
+    "section": "0.2 Kontrak setiap unit",
+    "text": "0.2 Kontrak setiap unit\nSetiap unit memuat:\n\ntujuan belajar dan prasyarat lokal;\nteks pembaca dengan identitas stabil;\nkode yang dapat dijalankan tanpa layanan berbayar;\npengujian otomatis untuk klaim tentang program;\nlatihan, petunjuk, jawaban, dan solusi terpilih;\ncatatan tentang batas antara eksperimen, bukti, dan kesimpulan; serta\nrekaman versi, lingkungan, dan hash artefak pada batas produksi.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Pengantar</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#sec-o002-license",
+    "href": "index.html#sec-o002-license",
+    "title": "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi",
+    "section": "0.3 Lisensi, atribusi, dan batas sumber",
+    "text": "0.3 Lisensi, atribusi, dan batas sumber\nKedua belas unit dalam edisi ini ditulis secara mandiri. Patrick Walls, Mathematical Python; Irving dan rekan-rekan, Research Software Engineering with Python; serta Scientific Python Lectures dipakai untuk membandingkan cakupan dan praktik produksi, bukan sebagai sumber prosa, latihan, gambar, data, atau kode yang disalin maupun diadaptasi ke edisi ini. Penyebutan mereka tidak menyiratkan dukungan atau pengesahan.\nTeks asli edisi ini berlisensi CC BY-SA 4.0; kode asli berlisensi MIT. Pemakaian ulang harus mempertahankan atribusi, pemberitahuan lisensi, dan catatan perubahan yang diwajibkan. Berkas lengkap tersedia sebagai lisensi teks, lisensi kode, batas materi pihak ketiga, dan lisensi runtime web. Materi donor yang mungkin dipakai pada revisi mendatang tetap mengikuti lisensi komponennya sendiri dan tidak otomatis tercakup oleh lisensi edisi ini.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Pengantar</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/01-komputasi-bukti.html",
+    "href": "source/units/01-komputasi-bukti.html",
+    "title": "2  Komputasi, Representasi, dan Bukti",
+    "section": "",
+    "text": "2.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nPrasyarat lokal: operasi bilangan rasional, fungsi, persamaan sederhana, dan penalaran “untuk setiap” versus “ada”. Tidak diperlukan kalkulus atau aljabar linear.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Komputasi, Representasi, dan Bukti</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/01-komputasi-bukti.html#sec-o002-u01-objectives",
+    "href": "source/units/01-komputasi-bukti.html#sec-o002-u01-objectives",
+    "title": "2  Komputasi, Representasi, dan Bukti",
+    "section": "",
+    "text": "membedakan objek matematika, representasi di komputer, dan keluaran program;\nmenjelaskan perbedaan aritmetika eksak dan aritmetika titik-mengambang;\nmembandingkan bilangan titik-mengambang dengan toleransi yang dinyatakan;\nmenyusun rekaman eksperimen yang dapat dijalankan ulang;\nmenulis pengujian kecil untuk perilaku program; dan\nmembedakan contoh, contoh penyangkal, bukti komputasional terbatas, dan bukti matematis umum.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Komputasi, Representasi, dan Bukti</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/01-komputasi-bukti.html#sec-o002-u01-layers",
+    "href": "source/units/01-komputasi-bukti.html#sec-o002-u01-layers",
+    "title": "2  Komputasi, Representasi, dan Bukti",
+    "section": "2.2 Tiga lapisan yang tidak boleh dicampur",
+    "text": "2.2 Tiga lapisan yang tidak boleh dicampur\nPertimbangkan bilangan rasional\n110+210=310.\n\\frac{1}{10}+\\frac{2}{10}=\\frac{3}{10}.\n\nAda tiga lapisan berbeda:\n\nObjek matematika. Bilangan rasional dan operasi penjumlahan ditentukan secara matematis. Kesamaan di atas eksak.\nRepresentasi. Komputer harus menyimpan objek melalui pola bit atau struktur data tertentu. Tidak semua bilangan rasional mempunyai representasi biner titik-mengambang yang berhingga.\nKeluaran program. Keluaran bergantung pada representasi, algoritme, lingkungan, dan kode yang benar-benar dijalankan.\n\nKesalahan umum adalah menganggap keluaran sebagai objek itu sendiri. Program yang mencetak 0.30000000000000004 tidak membantah kesamaan rasional tadi. Ia menunjukkan sifat representasi titik-mengambang yang dipakai program.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Komputasi, Representasi, dan Bukti</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/01-komputasi-bukti.html#sec-o002-u01-exact-float",
+    "href": "source/units/01-komputasi-bukti.html#sec-o002-u01-exact-float",
+    "title": "2  Komputasi, Representasi, dan Bukti",
+    "section": "2.3 Eksak dan titik-mengambang",
+    "text": "2.3 Eksak dan titik-mengambang\nPython menyediakan bilangan titik-mengambang untuk perhitungan numerik dan Fraction untuk bilangan rasional eksak.\n\n0.1 + 0.2\n\n\n\nDaftar 2.1\n\n\n0.30000000000000004\n\n\n\n\n\nfrom fractions import Fraction\n\nFraction(1, 10) + Fraction(2, 10)\n\n\n\nDaftar 2.2\n\n\nFraction(3, 10)\n\n\n\n\nRepresentasi yang berbeda menjawab kebutuhan berbeda. Aritmetika eksak mempertahankan kesamaan aljabar, tetapi ukuran pembilang dan penyebut dapat bertambah. Titik-mengambang cepat dan menjadi dasar banyak pustaka numerik, tetapi membawa galat pembulatan.\nKarena itu, perbandingan numerik harus menyatakan toleransi dan skala:\n\nfrom math import isclose\n\nx = 0.1 + 0.2\nisclose(x, 0.3, rel_tol=1e-12, abs_tol=1e-15)\n\n\n\nDaftar 2.3\n\n\nTrue\n\n\n\n\nToleransi bukan mantra. Toleransi adalah bagian dari spesifikasi eksperimen. Kita harus dapat menjelaskan mengapa besarannya memadai bagi pertanyaan yang diajukan.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Komputasi, Representasi, dan Bukti</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/01-komputasi-bukti.html#sec-o002-u01-contract",
+    "href": "source/units/01-komputasi-bukti.html#sec-o002-u01-contract",
+    "title": "2  Komputasi, Representasi, dan Bukti",
+    "section": "2.4 Kontrak eksperimen yang dapat direproduksi",
+    "text": "2.4 Kontrak eksperimen yang dapat direproduksi\nEksperimen komputasional minimal memuat tujuh unsur berikut.\n\n\n\nUnsur\nPertanyaan yang harus dijawab\n\n\n\n\nPertanyaan\nKlaim atau gejala apa yang sedang diselidiki?\n\n\nLingkungan\nVersi bahasa dan perangkat lunak apa yang dipakai?\n\n\nMasukan\nData, parameter, dan satuannya apa?\n\n\nMetode\nAlgoritme dan representasi apa yang dipakai?\n\n\nPemeriksaan\nTes apa yang dapat mendeteksi kesalahan implementasi?\n\n\nKeluaran\nData mentah dan ringkasan apa yang disimpan?\n\n\nKesimpulan\nApa yang didukung hasil, dan apa yang belum dibuktikan?\n\n\n\nJalankan eksperimen Unit 1 dari akar proyek:\npython source/code/unit01_experiment.py\nBerkas JSON yang dihasilkan mencatat versi Python, parameter, hasil eksak, hasil titik-mengambang, dan pemeriksaan dua dugaan. Menjalankan perintah yang sama pada lingkungan yang sama harus menghasilkan byte yang sama.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Komputasi, Representasi, dan Bukti</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/01-komputasi-bukti.html#sec-o002-u01-proof-evidence",
+    "href": "source/units/01-komputasi-bukti.html#sec-o002-u01-proof-evidence",
+    "title": "2  Komputasi, Representasi, dan Bukti",
+    "section": "2.5 Bukti, bukti kerja, dan contoh penyangkal",
+    "text": "2.5 Bukti, bukti kerja, dan contoh penyangkal\nEksperimen dapat memeriksa bahwa\nn2+n\nn^2+n\n\ngenap untuk seribu bilangan bulat pertama. Pemeriksaan itu merupakan bukti kerja yang berguna: ia dapat menemukan kekeliruan kode atau contoh penyangkal. Namun, seribu kasus tidak membuktikan klaim untuk semua bilangan bulat.\nBukti umum singkatnya adalah\nn2+n=n(n+1).\nn^2+n=n(n+1).\n\nDua bilangan bulat berurutan selalu memuat satu bilangan genap, sehingga hasil kalinya genap. Argumen ini berlaku untuk setiap bilangan bulat, bukan hanya masukan yang sempat dijalankan.\nSebaliknya, satu contoh penyangkal memang cukup untuk meruntuhkan klaim universal. Polinom\np(n)=n2+n+41\np(n)=n^2+n+41\n\nmenghasilkan bilangan prima bagi banyak nilai kecil, tetapi p(40)=41^2. Komputer dapat menemukan contoh ini; faktorisasi tersebut menjelaskan secara matematis mengapa klaim “prima untuk setiap bilangan bulat taknegatif” salah.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Komputasi, Representasi, dan Bukti</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/01-komputasi-bukti.html#sec-o002-u01-tests",
+    "href": "source/units/01-komputasi-bukti.html#sec-o002-u01-tests",
+    "title": "2  Komputasi, Representasi, dan Bukti",
+    "section": "2.6 Pengujian sebagai klaim terbatas",
+    "text": "2.6 Pengujian sebagai klaim terbatas\nTes program adalah klaim terbatas dan dapat diperiksa, misalnya:\n\npenjumlahan rasional eksak menghasilkan 3/10;\nhasil titik-mengambang dekat dengan 0.3 pada toleransi yang ditetapkan;\npemeriksa paritas tidak menemukan pelanggaran pada rentang uji;\neksperimen menampilkan contoh penyangkal n=40; dan\ndua penulisan JSON pada lingkungan dan parameter yang sama identik.\n\nTes meningkatkan kepercayaan terhadap implementasi. Tes tidak dengan sendirinya membuktikan teorema yang sedang diimplementasikan.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Komputasi, Representasi, dan Bukti</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/01-komputasi-bukti.html#sec-o002-u01-exercises",
+    "href": "source/units/01-komputasi-bukti.html#sec-o002-u01-exercises",
+    "title": "2  Komputasi, Representasi, dan Bukti",
+    "section": "2.7 Latihan",
+    "text": "2.7 Latihan\n\n2.7.1 Latihan 1 - representasi\nJelaskan dengan kata-kata sendiri mengapa keluaran 0.30000000000000004 tidak membuat persamaan 1/10+2/10=3/101/10+2/10=3/10 menjadi salah.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPisahkan objek matematika dari cara komputer menyimpannya.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nKesamaan itu adalah kesamaan eksak dalam bilangan rasional. Bilangan 0.1 dan 0.2 tidak tersimpan secara eksak dalam representasi biner titik-mengambang yang dipakai Python. Galat kecil pada keluaran berasal dari pendekatan representasi, bukan dari perubahan aturan penjumlahan rasional.\n\n\n\n\n\n2.7.2 Latihan 2 - spesifikasi toleransi\nTuliskan satu situasi yang wajar memakai abs_tol dan satu situasi yang lebih wajar memakai rel_tol. Nyatakan alasan, bukan hanya angkanya.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nBandingkan besaran yang dekat nol dengan besaran yang mempunyai skala alami besar.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nUntuk residual persamaan yang secara teori nol, toleransi absolut sesuai karena galat dibandingkan langsung dengan nol. Untuk membandingkan dua jarak sekitar satu juta meter, toleransi relatif lebih informatif karena galat yang dapat diterima mengikuti skala jarak. Dalam pekerjaan nyata, keduanya sering dipakai bersama dan harus diturunkan dari kebutuhan masalah.\n\n\n\n\n\n2.7.3 Latihan 3 - batas eksperimen\nUbah batas pemeriksaan paritas dari 1.000 menjadi 100.000. Kesimpulan baru apa yang sah, dan kesimpulan apa yang tetap tidak sah?\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nLebih banyak kasus memperbesar wilayah yang telah diperiksa, bukan mengubahnya menjadi himpunan semua bilangan bulat.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nSah: tidak ada contoh penyangkal yang ditemukan dalam rentang 0 sampai 99.999, dengan asumsi pemeriksa diimplementasikan benar. Tidak sah: klaim telah dibuktikan untuk semua bilangan bulat. Bukti umum masih memerlukan argumen seperti faktorisasi n(n+1).\n\n\n\n\n\n2.7.4 Latihan 4 - contoh penyangkal\nGunakan program untuk mencari nilai bulat taknegatif terkecil yang membuat n2+n+41n^2+n+41 komposit. Lalu jelaskan hasilnya tanpa bergantung pada program.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPeriksa nilai 40 dan faktorkan hasilnya.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nNilai terkecilnya adalah n=40. Secara eksak, 402+40+41=1681=41240^2+40+41=1681=41^2, sehingga nilainya komposit. Perhitungan eksak ini menjadi penjelasan matematis yang dapat diperiksa terpisah dari program.\n\n\n\n\n\n2.7.5 Latihan 5 - rekaman eksperimen\nBaca output/unit01-results.json. Sebutkan dua medan yang diperlukan untuk menjalankan ulang eksperimen dan satu informasi yang masih perlu ditambahkan jika eksperimen memakai pustaka eksternal.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPerhatikan parameter dan lingkungan.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nContoh jawaban: limit dan versi Python diperlukan. Jika eksperimen memakai pustaka eksternal, rekaman juga perlu menyimpan nama dan versi pustaka tersebut, serta idealnya berkas lingkungan atau kunci dependensi yang dapat dipasang ulang.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Komputasi, Representasi, dan Bukti</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/01-komputasi-bukti.html#sec-o002-u01-summary",
+    "href": "source/units/01-komputasi-bukti.html#sec-o002-u01-summary",
+    "title": "2  Komputasi, Representasi, dan Bukti",
+    "section": "2.8 Ringkasan",
+    "text": "2.8 Ringkasan\n\nObjek matematika tidak identik dengan representasinya di komputer.\nAritmetika eksak dan titik-mengambang melayani tujuan berbeda.\nToleransi merupakan bagian dari spesifikasi, bukan perbaikan setelah hasil terlihat buruk.\nEksperimen yang dapat direproduksi menyimpan pertanyaan, lingkungan, masukan, metode, pemeriksaan, keluaran, dan batas kesimpulan.\nBanyak contoh dapat mendukung dugaan; satu contoh penyangkal dapat meruntuhkan klaim universal; bukti umum memerlukan argumen yang berlaku bagi seluruh domain.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Komputasi, Representasi, dan Bukti</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/02-objek-fungsi.html",
+    "href": "source/units/02-objek-fungsi.html",
+    "title": "3  Objek, Nilai, dan Fungsi",
+    "section": "",
+    "text": "3.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nPrasyarat lokal: Unit 1, himpunan dan fungsi pada tingkat A30, serta operasi dasar pada vektor berhingga. Unit ini belum memerlukan NumPy.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Objek, Nilai, dan Fungsi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/02-objek-fungsi.html#sec-o002-u02-objectives",
+    "href": "source/units/02-objek-fungsi.html#sec-o002-u02-objectives",
+    "title": "3  Objek, Nilai, dan Fungsi",
+    "section": "",
+    "text": "memilih representasi Python yang sesuai untuk bilangan bulat, rasional, dan barisan berhingga;\nmembedakan kesamaan nilai dari kesamaan identitas objek;\nmenulis fungsi dengan prasyarat, hasil, dan perilaku galat yang dinyatakan;\nmenghindari perubahan tak disengaja melalui nilai masukan yang dapat diubah;\nmerumuskan invarian yang dapat diperiksa oleh tes; dan\nmenghasilkan keluaran terstruktur yang tidak bergantung pada urutan kebetulan.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Objek, Nilai, dan Fungsi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/02-objek-fungsi.html#sec-o002-u02-types",
+    "href": "source/units/02-objek-fungsi.html#sec-o002-u02-types",
+    "title": "3  Objek, Nilai, dan Fungsi",
+    "section": "3.2 Jenis matematika dan tipe program",
+    "text": "3.2 Jenis matematika dan tipe program\nPernyataan matematika menentukan himpunan objek dan operasi yang sah. Program membutuhkan tipe data konkret. Keduanya berkaitan, tetapi tidak identik.\n\n\n\n\n\n\n\n\nMaksud matematika\nRepresentasi awal\nBatas penting\n\n\n\n\nbilangan bulat\nint\nukuran praktis dibatasi memori\n\n\nbilangan rasional\nFraction\npembilang dan penyebut dapat membesar\n\n\npendekatan bilangan real\nfloat\npembulatan dan rentang berhingga\n\n\nvektor berhingga yang tetap\ntuple\npanjang dan jenis komponen harus diperiksa\n\n\nkoleksi yang sengaja diubah\nlist\nalias dapat melihat perubahan yang sama\n\n\n\n\nfrom fractions import Fraction\n\nvalues = (7, Fraction(7, 3), 7 / 3)\n[(type(value).__name__, value) for value in values]\n\n\n\nDaftar 3.1\n\n\n[('int', 7), ('Fraction', Fraction(7, 3)), ('float', 2.3333333333333335)]\n\n\n\n\nNama tipe tidak membuktikan bahwa nilai memenuhi maksud matematika. Sebuah tuple berpanjang tiga dapat mewakili vektor di ruang tiga dimensi, koordinat warna, atau tiga data yang tidak berhubungan. Kontrak programlah yang memberi makna tambahan itu.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Objek, Nilai, dan Fungsi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/02-objek-fungsi.html#sec-o002-u02-aliasing",
+    "href": "source/units/02-objek-fungsi.html#sec-o002-u02-aliasing",
+    "title": "3  Objek, Nilai, dan Fungsi",
+    "section": "3.3 Nilai, identitas, dan alias",
+    "text": "3.3 Nilai, identitas, dan alias\nOperator == membandingkan nilai menurut aturan tipe. Operator is memeriksa apakah dua nama menunjuk objek Python yang sama. Untuk alasan reproduksibilitas, jangan mengganti pertanyaan tentang nilai dengan pertanyaan tentang identitas objek.\n\na = [1, 2, 3]\nb = a\nc = list(a)\n\n(a == c, a is c, a is b)\n\n\n\nDaftar 3.2\n\n\n(True, False, True)\n\n\n\n\nKarena b adalah alias bagi a, perubahan melalui salah satu nama tampak melalui nama lainnya. Sebaliknya, c mula-mula mempunyai nilai sama, tetapi merupakan daftar lain. Efek semacam ini dapat membuat eksperimen bergantung pada urutan eksekusi sel.\nJika suatu vektor dimaksudkan sebagai nilai yang tidak berubah, tuple memberi kontrak yang lebih jujur daripada list. Ini bukan larangan memakai daftar; pilih perubahan hanya ketika perubahan tersebut bagian dari metode.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Objek, Nilai, dan Fungsi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/02-objek-fungsi.html#sec-o002-u02-contracts",
+    "href": "source/units/02-objek-fungsi.html#sec-o002-u02-contracts",
+    "title": "3  Objek, Nilai, dan Fungsi",
+    "section": "3.4 Fungsi sebagai kontrak",
+    "text": "3.4 Fungsi sebagai kontrak\nFungsi komputasional yang baik menyatakan tiga hal:\n\nPrasyarat: masukan apa yang diterima?\nHasil: nilai apa yang dikembalikan jika prasyarat dipenuhi?\nKegagalan: apa yang terjadi jika prasyarat dilanggar?\n\nContoh berikut menghitung rata-rata rasional secara eksak.\n\nfrom fractions import Fraction\n\ndef mean_fraction(values):\n    \"\"\"Kembalikan rata-rata eksak dari barisan rasional yang tidak kosong.\"\"\"\n    values = tuple(Fraction(value) for value in values)\n    if not values:\n        raise ValueError(\"values tidak boleh kosong\")\n    return sum(values, start=Fraction(0)) / len(values)\n\nmean_fraction([Fraction(1, 3), Fraction(1, 2)])\n\n\n\nDaftar 3.3\n\n\nFraction(5, 12)\n\n\n\n\nKonversi ke tuple membekukan masukan yang benar-benar dipakai fungsi. Jika pemanggil mengubah daftar asal setelah pemanggilan dimulai, perhitungan lokal tidak ikut berubah.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Objek, Nilai, dan Fungsi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/02-objek-fungsi.html#sec-o002-u02-purity",
+    "href": "source/units/02-objek-fungsi.html#sec-o002-u02-purity",
+    "title": "3  Objek, Nilai, dan Fungsi",
+    "section": "3.5 Fungsi murni dan perubahan keadaan",
+    "text": "3.5 Fungsi murni dan perubahan keadaan\nFungsi berikut mengalikan vektor dengan skalar tanpa mengubah argumennya.\n\ndef scale_vector(scalar, vector):\n    return tuple(scalar * component for component in vector)\n\nv = (2, -1, 4)\n(scale_vector(3, v), v)\n\n\n\nDaftar 3.4\n\n\n((6, -3, 12), (2, -1, 4))\n\n\n\n\nUntuk masukan yang sama, fungsi murni menghasilkan keluaran yang sama dan tidak mengubah keadaan di luar fungsi. Sifat ini memudahkan pengujian dan pelacakan asal hasil. Program nyata tetap perlu membaca berkas atau menulis keluaran; tempatkan efek tersebut di batas program, bukan tersebar di setiap fungsi matematika.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Objek, Nilai, dan Fungsi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/02-objek-fungsi.html#sec-o002-u02-invariants",
+    "href": "source/units/02-objek-fungsi.html#sec-o002-u02-invariants",
+    "title": "3  Objek, Nilai, dan Fungsi",
+    "section": "3.6 Invarian dan pengujian",
+    "text": "3.6 Invarian dan pengujian\nInvarian adalah sifat yang harus tetap benar selama operasi tertentu. Untuk perkalian skalar pada vektor, beberapa invarian yang dapat diuji ialah:\n\npanjang vektor tidak berubah;\nmengalikan dengan 1 mempertahankan nilai;\nmengalikan dengan 0 menghasilkan vektor nol; dan\nscale_vector(a*b, v) sama dengan scale_vector(a, scale_vector(b, v)).\n\nTes terhadap banyak contoh dapat mendeteksi pelanggaran implementasi. Bukti aljabar tetap diperlukan untuk menyatakan sifat bagi semua skalar dan semua vektor pada domain yang dimaksud.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Objek, Nilai, dan Fungsi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/02-objek-fungsi.html#sec-o002-u02-canonical-output",
+    "href": "source/units/02-objek-fungsi.html#sec-o002-u02-canonical-output",
+    "title": "3  Objek, Nilai, dan Fungsi",
+    "section": "3.7 Keluaran kanonis",
+    "text": "3.7 Keluaran kanonis\nDua eksperimen dapat menghasilkan informasi sama tetapi byte berbeda karena urutan medan, spasi, atau akhir baris. Bila keluaran dipakai sebagai bukti kerja, tentukan bentuk kanonis. Skrip Unit 2:\npython source/code/unit02_objects.py --output output/unit02-results.json\nmenulis JSON UTF-8 dengan nama medan terurut, inden tetap, dan akhir baris LF. Hash berkas lalu mengikat satu urutan byte yang dapat dibandingkan.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Objek, Nilai, dan Fungsi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/02-objek-fungsi.html#sec-o002-u02-exercises",
+    "href": "source/units/02-objek-fungsi.html#sec-o002-u02-exercises",
+    "title": "3  Objek, Nilai, dan Fungsi",
+    "section": "3.8 Latihan",
+    "text": "3.8 Latihan\n\n3.8.1 Latihan 1 - memilih representasi\nPilih representasi awal untuk setiap objek berikut dan jelaskan batasnya: 2/72/7, pendekatan numerik bagi 2\\sqrt{2}, dan vektor tetap (1,0,−1)(1,0,-1).\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nBedakan nilai eksak dari pendekatan dan nilai tetap dari koleksi yang diubah.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nGunakan Fraction(2, 7) bagi bilangan rasional eksak, float bagi pendekatan numerik terhadap akar dua dengan toleransi yang dinyatakan, dan tuple bagi vektor tetap. float tidak menyimpan akar dua secara eksak, sedangkan tuple tidak dengan sendirinya menjamin bahwa semua komponennya numerik.\n\n\n\n\n\n3.8.2 Latihan 2 - nilai dan identitas\nBuat dua daftar berbeda dengan nilai [1, 2]. Tunjukkan satu perbandingan yang benar dan satu perbandingan yang salah. Jelaskan hasilnya.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nGunakan == dan is.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nJika a=[1,2] dan b=[1,2], maka a == b benar karena nilainya sama, sedangkan a is b salah karena keduanya objek berbeda. Pertanyaan matematika tentang kesamaan daftar unsur biasanya memakai ==.\n\n\n\n\n\n3.8.3 Latihan 3 - kontrak fungsi\nTuliskan prasyarat, hasil, dan kegagalan untuk fungsi yang mengembalikan sisa terkecil taknegatif dari pembagian aa dengan modulus mm.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nModulus harus positif.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nPrasyarat: a dan m bilangan bulat serta m &gt; 0. Hasil: bilangan bulat r dengan 0 &lt;= r &lt; m dan a-r habis dibagi m. Jika m &lt;= 0, fungsi harus menolak masukan, misalnya dengan ValueError.\n\n\n\n\n\n3.8.4 Latihan 4 - alias yang berbahaya\nJelaskan mengapa fungsi yang menambahkan elemen ke daftar masukan dapat membuat hasil eksperimen bergantung pada urutan sel notebook. Berikan satu perbaikan.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nNama lain mungkin menunjuk daftar yang sama.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nPemanggilan pertama mengubah daftar yang kemudian dipakai pemanggilan kedua. Menjalankan sel dalam urutan lain memberi keadaan awal berbeda. Perbaikannya dapat berupa mengembalikan daftar baru, memakai tuple bagi nilai tetap, atau membuat perubahan eksplisit serta mengatur ulang keadaan sebelum eksperimen.\n\n\n\n\n\n3.8.5 Latihan 5 - tes dan bukti\nApakah menguji empat invarian scale_vector untuk sejuta vektor membuktikan bahwa implementasinya benar bagi semua masukan? Berikan jawaban yang tepat.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPisahkan domain yang diuji dari domain universal.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nTidak. Tes tersebut memberi bukti kerja kuat pada sampel dan dapat menemukan contoh penyangkal, tetapi tidak mencakup semua masukan. Kebenaran umum fungsi diperoleh dengan memeriksa definisi implementasi terhadap hukum distributif dan asosiatif pada domain skalar serta komponen yang dinyatakan.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Objek, Nilai, dan Fungsi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/02-objek-fungsi.html#sec-o002-u02-summary",
+    "href": "source/units/02-objek-fungsi.html#sec-o002-u02-summary",
+    "title": "3  Objek, Nilai, dan Fungsi",
+    "section": "3.9 Ringkasan",
+    "text": "3.9 Ringkasan\n\nTipe program mewakili objek matematika, tetapi tidak menentukan seluruh maknanya.\n== membandingkan nilai; is membandingkan identitas objek.\nFungsi harus menyatakan prasyarat, hasil, dan kegagalan.\nFungsi murni dan nilai tak berubah memudahkan reproduksi serta pengujian.\nInvarian menghubungkan kontrak matematika dengan tes program.\nKeluaran kanonis membuat hash artefak bermakna.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Objek, Nilai, dan Fungsi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/03-array-vektorisasi.html",
+    "href": "source/units/03-array-vektorisasi.html",
+    "title": "4  Array, Bentuk, dan Vektorisasi",
+    "section": "",
+    "text": "4.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nPrasyarat lokal: Unit 1-2, fungsi linear sederhana, daftar dan tuple, serta koordinat pada bidang. Unit ini tidak mengandaikan kalkulus atau aljabar linear formal.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Array, Bentuk, dan Vektorisasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/03-array-vektorisasi.html#sec-o002-u03-objectives",
+    "href": "source/units/03-array-vektorisasi.html#sec-o002-u03-objectives",
+    "title": "4  Array, Bentuk, dan Vektorisasi",
+    "section": "",
+    "text": "membuat array NumPy dengan bentuk dan dtype yang dinyatakan;\nmembaca hubungan antara indeks, sumbu, dan bentuk array;\nmengganti perulangan komponen yang sederhana dengan operasi vektorisasi;\nmemakai broadcasting hanya setelah memeriksa kecocokan bentuk;\nmembedakan view yang berbagi memori dari salinan yang terpisah;\nmerumuskan invarian bentuk, nilai, dan keadaan masukan; dan\nmembatasi kesimpulan eksperimen agar tidak disalahartikan sebagai bukti umum.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Array, Bentuk, dan Vektorisasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/03-array-vektorisasi.html#sec-o002-u03-array-contract",
+    "href": "source/units/03-array-vektorisasi.html#sec-o002-u03-array-contract",
+    "title": "4  Array, Bentuk, dan Vektorisasi",
+    "section": "4.2 Array sebagai data beserta kontraknya",
+    "text": "4.2 Array sebagai data beserta kontraknya\nArray bukan sekadar kumpulan angka. Kontrak minimalnya memuat:\n\nbentuk (shape), yaitu banyaknya posisi pada setiap sumbu;\njumlah dimensi (ndim);\njenis representasi (dtype); dan\nmakna setiap sumbu, yang harus kita dokumentasikan sendiri.\n\n\nimport numpy as np\n\ntemperatur = np.array(\n    [[28.0, 29.5, 30.0], [27.5, 29.0, 31.0]],\n    dtype=np.float64,\n)\n(temperatur.shape, temperatur.ndim, temperatur.dtype)\n\n\n\nDaftar 4.1\n\n\n((2, 3), 2, dtype('float64'))\n\n\n\n\nBentuk (2, 3) hanya mengatakan bahwa ada dua baris dan tiga kolom. Bentuk itu belum mengatakan apakah baris menyatakan kota, hari, atau pengulangan percobaan. Makna tersebut merupakan bagian dari spesifikasi data.\nArray satu dimensi dengan bentuk (3,) berbeda dari tabel satu baris berbentuk (1, 3) dan tabel satu kolom berbentuk (3, 1). Ketiganya memuat tiga angka, tetapi operasi terhadap sumbunya dapat berbeda.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Array, Bentuk, dan Vektorisasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/03-array-vektorisasi.html#sec-o002-u03-dtype",
+    "href": "source/units/03-array-vektorisasi.html#sec-o002-u03-dtype",
+    "title": "4  Array, Bentuk, dan Vektorisasi",
+    "section": "4.3 dtype adalah representasi, bukan himpunan matematika",
+    "text": "4.3 dtype adalah representasi, bukan himpunan matematika\nNumPy menyimpan elemen array biasa dalam satu dtype. Pilihan eksplisit membuat kontrak lebih mudah diperiksa:\n\nbilangan_bulat = np.array([1, 2, 3], dtype=np.int64)\npendekatan = np.array([0.1, 0.2, 0.3], dtype=np.float64)\n(bilangan_bulat.dtype, pendekatan.dtype, pendekatan.sum())\n\n\n\nDaftar 4.2\n\n\n(dtype('int64'), dtype('float64'), np.float64(0.6000000000000001))\n\n\n\n\nint64 menyimpan bilangan bulat dalam rentang berhingga. Operasi yang keluar dari rentang itu dapat meluap; ia tidak sama dengan himpunan seluruh bilangan bulat matematika. float64 menyimpan pendekatan biner dengan ketelitian berhingga; ia tidak sama dengan bilangan real.\nNumPy dapat memakai dtype=object untuk objek Python seperti bilangan bulat tak berbatas praktis atau Fraction, tetapi banyak keuntungan komputasi array numerik hilang. Jika pertanyaan menuntut aritmetika eksak, pilih alat eksak secara sadar (misalnya Fraction, SymPy, atau Sage), alih-alih menyebut hasil float64 eksak.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Array, Bentuk, dan Vektorisasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/03-array-vektorisasi.html#sec-o002-u03-vectorization",
+    "href": "source/units/03-array-vektorisasi.html#sec-o002-u03-vectorization",
+    "title": "4  Array, Bentuk, dan Vektorisasi",
+    "section": "4.4 Vektorisasi dan referensi skalar",
+    "text": "4.4 Vektorisasi dan referensi skalar\nMisalkan setiap data xix_i diubah oleh fungsi\nyi=3xi−2.\ny_i=3x_i-2.\n\nPerulangan skalar yang jelas dapat menjadi referensi:\n\nx = np.array([1, 2, 3, 4], dtype=np.int64)\ny_referensi = np.array([3 * int(nilai) - 2 for nilai in x])\ny_referensi\n\n\n\nDaftar 4.3\n\n\narray([ 1,  4,  7, 10])\n\n\n\n\nNumPy memungkinkan aturan yang sama ditulis untuk seluruh array:\n\ny = 3 * x - 2\ny\n\n\n\nDaftar 4.4\n\n\narray([ 1,  4,  7, 10])\n\n\n\n\nVektorisasi menyatakan operasi pada array tanpa perulangan Python yang kita tulis sendiri. Ia sering lebih ringkas dan dapat lebih cepat, tetapi keringkasan bukan bukti kebenaran. Bandingkan hasilnya dengan referensi sederhana dan periksa invarian yang berasal dari rumus:\n\ny.shape == x.shape;\nx tidak berubah; dan\n∑iyi=3∑ixi−2n\\sum_i y_i=3\\sum_i x_i-2n, dengan nn banyaknya elemen.\n\nReferensi skalar juga harus diperiksa. Dua implementasi yang menyalin kesalahan konseptual sama dapat sepakat dan tetap salah.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Array, Bentuk, dan Vektorisasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/03-array-vektorisasi.html#sec-o002-u03-broadcasting",
+    "href": "source/units/03-array-vektorisasi.html#sec-o002-u03-broadcasting",
+    "title": "4  Array, Bentuk, dan Vektorisasi",
+    "section": "4.5 Broadcasting dengan pemeriksaan bentuk",
+    "text": "4.5 Broadcasting dengan pemeriksaan bentuk\nBroadcasting memperluas operasi antararray tanpa membuat salinan ubin secara manual. Misalkan setiap kolom tabel menerima offset berbeda:\n\ntabel = np.array([[10, 20, 30], [40, 50, 60]], dtype=np.int64)\noffset = np.array([1, -2, 3], dtype=np.int64)\ntabel + offset\n\n\n\nDaftar 4.5\n\n\narray([[11, 18, 33],\n       [41, 48, 63]])\n\n\n\n\nBentuk (2, 3) dan (3,) cocok karena sumbu terakhir sama-sama berukuran tiga. Offset diterapkan pada setiap baris. Jangan mengandalkan keberhasilan operasi sebagai satu-satunya pemeriksaan: bentuk yang tidak dimaksudkan kadang tetap dapat di-broadcast dan menghasilkan jawaban yang tampak masuk akal.\nFungsi add_column_offsets dalam kode Unit 3 menyatakan kontrak lebih ketat: tabel harus dua dimensi, offset harus satu dimensi, dan jumlah offset harus sama dengan jumlah kolom.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Array, Bentuk, dan Vektorisasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/03-array-vektorisasi.html#sec-o002-u03-copy-view",
+    "href": "source/units/03-array-vektorisasi.html#sec-o002-u03-copy-view",
+    "title": "4  Array, Bentuk, dan Vektorisasi",
+    "section": "4.6 Salinan dan view",
+    "text": "4.6 Salinan dan view\nIrisan array NumPy biasanya merupakan view: objek baru yang melihat memori array asal. Mengubah view dapat mengubah data asal.\n\nasal = np.arange(6)\njendela = asal[1:4]\njendela[0] = -10\nasal\n\n\n\nDaftar 4.6\n\n\narray([  0, -10,   2,   3,   4,   5])\n\n\n\n\nGunakan .copy() bila eksperimen membutuhkan nilai terpisah:\n\nasal = np.arange(6)\nterpisah = asal[1:4].copy()\nterpisah[0] = -10\nasal\n\n\n\nDaftar 4.7\n\n\narray([0, 1, 2, 3, 4, 5])\n\n\n\n\nPilihan ini harus disengaja. View berguna untuk menghindari salinan besar; salinan berguna untuk mencegah perubahan tak terduga. np.shares_memory(a, b) dapat membantu memeriksa hubungan itu pada tes.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Array, Bentuk, dan Vektorisasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/03-array-vektorisasi.html#sec-o002-u03-experiment",
+    "href": "source/units/03-array-vektorisasi.html#sec-o002-u03-experiment",
+    "title": "4  Array, Bentuk, dan Vektorisasi",
+    "section": "4.7 Eksperimen Unit 3",
+    "text": "4.7 Eksperimen Unit 3\nJalankan dari akar proyek:\npython source/code/unit03_arrays.py --output output/unit03-results.json\nSkrip mencatat versi NumPy, bentuk, dtype, hasil vektorisasi, hasil broadcasting, jejak view dan salinan, batas titik-mengambang, serta batas epistemik kesimpulan. JSON ditulis sebagai UTF-8 dengan kunci terurut, inden tetap, dan akhir baris LF. Pada lingkungan yang sama, pemanggilan yang sama menghasilkan byte yang sama.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Array, Bentuk, dan Vektorisasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/03-array-vektorisasi.html#sec-o002-u03-proof-boundary",
+    "href": "source/units/03-array-vektorisasi.html#sec-o002-u03-proof-boundary",
+    "title": "4  Array, Bentuk, dan Vektorisasi",
+    "section": "4.8 Komputasi dan bukti",
+    "text": "4.8 Komputasi dan bukti\nUntuk array [1, 2, 3, 4], program memeriksa bahwa operasi vektorisasi sama dengan referensi skalar. Hasil itu mendukung klaim terbatas tentang kasus dan implementasi yang dijalankan. Ia tidak membuktikan kesamaan bagi setiap array, setiap dtype, atau setiap ukuran.\nUntuk aritmetika tanpa luapan, argumen umum berjalan per komponen. Pada indeks ii, kedua implementasi menghitung ekspresi yang sama, yaitu 3xi−23x_i-2. Karena indeks ii dipilih sembarang, kesamaan berlaku pada setiap komponen; bentuk juga tetap karena tepat satu keluaran dibuat untuk setiap masukan.\nArgumen itu harus dibatasi oleh domain representasi. Pada int64, luapan dapat mengubah hubungan dengan bilangan bulat matematika. Pada float64, pembulatan dapat membuat dua susunan operasi yang ekuivalen secara aljabar menghasilkan bit berbeda. Tes membantu menemukan gejala tersebut; spesifikasi dan argumen menentukan apa yang sebenarnya diklaim.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Array, Bentuk, dan Vektorisasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/03-array-vektorisasi.html#sec-o002-u03-exercises",
+    "href": "source/units/03-array-vektorisasi.html#sec-o002-u03-exercises",
+    "title": "4  Array, Bentuk, dan Vektorisasi",
+    "section": "4.9 Latihan",
+    "text": "4.9 Latihan\n\n4.9.1 Latihan 1 - bentuk dan makna sumbu\nSebuah array menyimpan pengukuran tiga sensor pada empat waktu dan mempunyai bentuk (4, 3). Jelaskan arti kedua sumbu. Apa bentuk yang dihasilkan oleh data[2, :] dan data[:, 1]?\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nIndeks tunggal menghapus sumbu yang dipilih, sedangkan : mempertahankan semua posisi pada sumbu itu.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nSumbu 0 menyatakan empat waktu dan sumbu 1 menyatakan tiga sensor. data[2, :] memilih seluruh sensor pada waktu ketiga sehingga berbentuk (3,). data[:, 1] memilih sensor kedua pada seluruh waktu sehingga berbentuk (4,). Makna ini berasal dari kontrak data, bukan dari bentuk saja.\n\n\n\n\n\n4.9.2 Latihan 2 - vektorisasi dan invarian\nVektorisasikan perulangan yang menghitung zi=5xi+1z_i=5x_i+1. Sebutkan dua invarian yang dapat diuji dan turunkan invarian jumlahnya.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nTerapkan operasi langsung pada x, lalu jumlahkan persamaan komponen.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nTuliskan z = 5*x + 1. Dua invarian yang berguna ialah z.shape == x.shape dan x tidak berubah. Jika ada nn elemen, maka\n∑izi=∑i(5xi+1)=5∑ixi+n.\n\\sum_i z_i=\\sum_i(5x_i+1)=5\\sum_i x_i+n.\n\nTes dapat membandingkan hasil vektorisasi dengan referensi skalar serta memeriksa ketiga sifat tersebut pada kasus yang dipilih.\n\n\n\n\n\n4.9.3 Latihan 3 - kontrak broadcasting\nTentukan apakah pasangan bentuk berikut cocok untuk penambahan yang dimaksudkan sebagai “satu offset per kolom”: (5, 3) dengan (3,), (5, 3) dengan (5,), dan (5, 3) dengan (1, 3). Jelaskan setiap jawaban.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nBandingkan dimensi dari kanan. Ukuran harus sama atau salah satunya satu.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\n(5, 3) dengan (3,) cocok dan menerapkan tiga offset pada setiap baris. (5, 3) dengan (5,) tidak cocok karena ukuran terakhir 3 dan 5 berbeda. (5, 3) dengan (1, 3) cocok; sumbu pertama berukuran satu diperluas menjadi lima. Meskipun dua pasangan cocok menurut NumPy, kontrak fungsi tetap perlu menyatakan bahwa data kedua benar-benar berarti offset kolom.\n\n\n\n\n\n4.9.4 Latihan 4 - melacak view\nUntuk kode berikut, tentukan nilai akhir a, b, dan c tanpa menjalankannya.\na = np.array([0, 1, 2, 3])\nb = a[1:3]\nc = a[1:3].copy()\nb[0] = 8\nc[1] = 9\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nb berbagi memori dengan a, sedangkan c tidak.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nNilai akhirnya adalah a == [0, 8, 2, 3], b == [8, 2], dan c == [1, 9]. Perubahan melalui b mengenai elemen yang sama pada a. Salinan c dibuat sebelum perubahan dan perubahan pada c tidak kembali ke a.\n\n\n\n\n\n4.9.5 Latihan 5 - eksperimen bukan bukti umum\nAnda membangkitkan satu juta array bilangan kecil dan mendapati bahwa 3*x-2 selalu sama dengan referensi perulangan. Nyatakan kesimpulan terkuat yang sah, lalu berikan kerangka bukti umum dan satu batas representasinya.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPisahkan cakupan sampel, argumen per komponen, dan perilaku dtype berhingga.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nKesimpulan empiris terkuat ialah tidak ditemukan perbedaan pada satu juta kasus dan lingkungan yang diuji. Untuk bukti umum pada domain aritmetika yang ditetapkan, pilih indeks sembarang ii: kedua cara menghitung 3xi−23x_i-2, sehingga semua komponennya sama dan bentuknya tetap. Batasnya, int64 dapat meluap dan float64 membulatkan; karena itu hubungan dengan aritmetika bilangan bulat atau real harus menyebut rentang dan model representasi.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Array, Bentuk, dan Vektorisasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/03-array-vektorisasi.html#sec-o002-u03-summary",
+    "href": "source/units/03-array-vektorisasi.html#sec-o002-u03-summary",
+    "title": "4  Array, Bentuk, dan Vektorisasi",
+    "section": "4.10 Ringkasan",
+    "text": "4.10 Ringkasan\n\nshape, ndim, dtype, dan makna sumbu bersama-sama membentuk kontrak array.\nVektorisasi mengungkap operasi per komponen, tetapi tetap perlu referensi dan invarian.\nBroadcasting aman secara pedagogis bila bentuk dan maksud sumbunya diperiksa.\nIrisan biasanya merupakan view; .copy() memutus hubungan memori.\nKeluaran kanonis merekam eksperimen yang dapat dibandingkan byte demi byte.\nPemeriksaan banyak kasus adalah bukti kerja, bukan pengganti argumen umum; batas dtype harus menjadi bagian dari klaim.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Array, Bentuk, dan Vektorisasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html",
+    "href": "source/units/04-visualisasi-integritas.html",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "",
+    "text": "5.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nPrasyarat lokal: Unit 1, koordinat Kartesius, persamaan garis lurus, rasio, dan interval pada tingkat A30. Unit ini tidak memerlukan kalkulus.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html#sec-o002-u04-objectives",
+    "href": "source/units/04-visualisasi-integritas.html#sec-o002-u04-objectives",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "",
+    "text": "memulai visualisasi dari pertanyaan yang dapat dinyatakan dengan jelas;\nmemetakan variabel ke posisi, tanda, garis, dan interval tanpa menyembunyikan satuan;\nmenjelaskan bagaimana pemotongan sumbu dan rasio aspek mengubah kesan visual;\nmenyajikan ketidakpastian tanpa memberinya makna statistik yang tidak ditetapkan;\nmenyediakan data, gambar, dan deskripsi tekstual yang dapat diperiksa ulang; dan\nmembedakan pola pada gambar dari bukti matematis umum.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html#sec-o002-u04-purpose",
+    "href": "source/units/04-visualisasi-integritas.html#sec-o002-u04-purpose",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "5.2 Gambar dimulai dari pertanyaan",
+    "text": "5.2 Gambar dimulai dari pertanyaan\nGrafik bukan hiasan yang ditambahkan setelah perhitungan selesai. Grafik adalah argumen terstruktur tentang data. Sebelum memilih warna atau jenis garis, nyatakan pertanyaannya.\nDalam unit ini pertanyaannya adalah:\n\nApakah tujuh pengukuran jarak konsisten dengan model d=2t+1d=2t+1, jika setiap pengukuran mempunyai ketidakpastian ±0,4\\pm 0{,}4 meter?\n\nData yang digunakan sengaja kecil agar setiap tanda pada grafik dapat dicocokkan dengan tabel.\n\n\n\n\n\n\n\n\n\nWaktu tt (s)\nJarak terukur dd (m)\nKetidakpastian (m)\nNilai model (m)\n\n\n\n\n0\n1,0\n0,4\n1,0\n\n\n1\n3,1\n0,4\n3,0\n\n\n2\n4,8\n0,4\n5,0\n\n\n3\n7,2\n0,4\n7,0\n\n\n4\n9,0\n0,4\n9,0\n\n\n5\n10,9\n0,4\n11,0\n\n\n6\n13,1\n0,4\n13,0\n\n\n\nKarena pertanyaannya membandingkan pengukuran dengan model, grafik harus menampilkan keduanya. Menampilkan hanya garis model akan menghapus bukti pengukuran; menampilkan hanya titik akan menyembunyikan objek pembanding.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html#sec-o002-u04-encoding",
+    "href": "source/units/04-visualisasi-integritas.html#sec-o002-u04-encoding",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "5.3 Pengodean: apa berarti apa?",
+    "text": "5.3 Pengodean: apa berarti apa?\nSetiap unsur visual harus mempunyai arti yang dapat dituliskan tanpa melihat gambar.\n\n\n\nUnsur visual\nMakna\n\n\n\n\nposisi mendatar\nwaktu tt, dalam detik\n\n\nposisi tegak\njarak dd, dalam meter\n\n\ntitik lingkaran\nnilai pengukuran\n\n\nbatang vertikal\ninterval pengukuran d±0,4d\\pm0{,}4 meter\n\n\ngaris putus-putus\nnilai model d=2t+1d=2t+1\n\n\n\nWarna membantu membedakan unsur, tetapi tidak boleh menjadi satu-satunya pengodean. Titik berbentuk lingkaran dan garis putus-putus tetap dapat dibedakan pada cetakan abu-abu atau oleh pembaca yang tidak membedakan warna tertentu.\nPilih pengodean yang sesuai dengan pertanyaan. Posisi pada sumbu berskala berguna untuk membandingkan besaran. Diagram lingkaran tidak sesuai di sini: jarak pada waktu berbeda bukan bagian-bagian dari satu keseluruhan.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html#sec-o002-u04-axes",
+    "href": "source/units/04-visualisasi-integritas.html#sec-o002-u04-axes",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "5.4 Sumbu, skala, dan satuan",
+    "text": "5.4 Sumbu, skala, dan satuan\nLabel Waktu, t (s) menyatakan nama variabel, lambang, dan satuan. Label Jarak, d (m) melakukan hal yang sama. Angka tanpa satuan tidak cukup ketika besaran fisis sedang dibandingkan.\nSumbu tegak pada gambar Unit 4 dimulai dari nol. Keputusan ini membuat tinggi visual sebanding dengan jarak yang dinyatakan. Memulai dari nol bukan aturan mutlak untuk semua grafik garis, tetapi pemotongan harus terlihat jelas dan tidak boleh dipakai untuk membesar-besarkan selisih.\nMisalkan dua batang menyatakan 98 dan 100. Dengan garis dasar nol, rasio tingginya adalah\n100−098−0=10098≈1,02.\n\\frac{100-0}{98-0}=\\frac{100}{98}\\approx 1{,}02.\n\nJika garis dasar disembunyikan pada 97, rasionya menjadi\n100−9798−97=3.\n\\frac{100-97}{98-97}=3.\n\nSelisih datanya tetap 2, tetapi batang kedua tampak tiga kali setinggi batang pertama. Pemotongan tersebut dapat berguna untuk melihat perubahan kecil, namun garis dasar dan nilai sebenarnya harus dinyatakan dengan terang.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html#sec-o002-u04-aspect",
+    "href": "source/units/04-visualisasi-integritas.html#sec-o002-u04-aspect",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "5.5 Rasio aspek dan kemiringan",
+    "text": "5.5 Rasio aspek dan kemiringan\nRasio aspek adalah perbandingan lebar dan tinggi daerah gambar. Grafik yang sangat sempit dapat membuat garis yang sama tampak curam; grafik yang sangat lebar dapat membuatnya tampak datar. Kemiringan matematis model tetap\nm=ΔdΔt=2m/s,\nm=\\frac{\\Delta d}{\\Delta t}=2\\ \\text{m/s},\n\napa pun ukuran gambar di layar. Karena itu, baca nilai sumbu dan satuannya, bukan sudut piksel semata. Skrip unit menetapkan ukuran gambar dan batas sumbu secara eksplisit agar hasil tidak berubah mengikuti ukuran jendela.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html#sec-o002-u04-uncertainty",
+    "href": "source/units/04-visualisasi-integritas.html#sec-o002-u04-uncertainty",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "5.6 Ketidakpastian bukan dekorasi",
+    "text": "5.6 Ketidakpastian bukan dekorasi\nPada contoh ini, batang galat berarti interval toleransi pengukuran [d−0,4,d+0,4][d-0{,}4,d+0{,}4] meter. Batang itu bukan otomatis simpangan baku, interval kepercayaan, atau rentang semua nilai yang mungkin. Makna tersebut baru sah jika prosedur pengukuran atau model statistik menetapkannya.\nSemua nilai model berada di dalam interval pengukuran. Pernyataan yang sah adalah “data ini konsisten dengan model pada tujuh waktu yang diperiksa.” Pernyataan yang terlalu kuat adalah “data membuktikan bahwa model selalu benar.” Model lain juga mungkin cocok dengan tujuh interval yang sama.\nKetika membandingkan dua seri, gunakan definisi ketidakpastian yang sama atau jelaskan perbedaannya. Batang dengan makna berbeda tidak boleh dibandingkan seolah-olah identik.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html#sec-o002-u04-accessibility",
+    "href": "source/units/04-visualisasi-integritas.html#sec-o002-u04-accessibility",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "5.7 Deskripsi tekstual dan aksesibilitas",
+    "text": "5.7 Deskripsi tekstual dan aksesibilitas\nTeks alternatif yang berguna tidak sekadar berkata “grafik garis”. Ia memuat:\n\ntujuan grafik;\nvariabel dan satuannya;\npengodean tanda dan garis;\npola utama serta penyimpangan penting; dan\nbatas kesimpulan jika gambar mudah disalahartikan.\n\nSkrip Unit 4 menanamkan judul dan deskripsi ke metadata SVG serta menulis deskripsi yang sama sebagai unit04-alt.txt. Data tetap tersedia sebagai CSV, sehingga pembaca tidak dipaksa memperoleh nilai dari posisi visual saja.\nLegenda, bentuk, dan jenis garis juga mengulang informasi warna. Pengulangan semacam ini bukan pemborosan: ia membuat informasi dapat diakses melalui lebih dari satu petunjuk.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html#sec-o002-u04-artifacts",
+    "href": "source/units/04-visualisasi-integritas.html#sec-o002-u04-artifacts",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "5.8 Artefak deterministik",
+    "text": "5.8 Artefak deterministik\nJalankan dari akar proyek:\npython source/code/unit04_visualization.py --output-dir output/unit04\nPerintah itu menghasilkan empat berkas:\n\nunit04-data.csv: data bertabel dengan satuan pada nama kolom;\nunit04-figure.svg: gambar vektor dengan skala dan metadata tetap;\nunit04-alt.txt: deskripsi visual dalam teks biasa; dan\nunit04-manifest.json: pertanyaan, kebijakan sumbu, makna pengodean, batas klaim, serta SHA-256 ketiga artefak lainnya.\n\nSkrip tidak memakai jaringan, waktu saat ini, atau bilangan acak. Urutan data, format angka, jenis huruf, ukuran gambar, garam pengenal SVG, dan metadata ditetapkan. Pada lingkungan perangkat lunak yang sama, dua eksekusi harus menghasilkan byte yang sama.\nDeterministik tidak berarti benar. Kesalahan yang ditulis secara deterministik tetap merupakan kesalahan. Hash membantu memastikan bahwa dua orang memeriksa byte yang sama; tes dan penalaran memeriksa apakah byte itu mewakili maksud yang benar.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html#sec-o002-u04-proof",
+    "href": "source/units/04-visualisasi-integritas.html#sec-o002-u04-proof",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "5.9 Bukti visual dan bukti matematis",
+    "text": "5.9 Bukti visual dan bukti matematis\nGambar dapat menunjukkan pola, anomali, dan calon contoh penyangkal. Ia sangat berguna untuk mengajukan pertanyaan berikutnya. Akan tetapi, tujuh titik tidak membuktikan persamaan bagi semua waktu.\nJika gerak didefinisikan mempunyai posisi awal 1 meter dan kecepatan tetap 2 meter per detik, maka persamaan\nd(t)=1+2t\nd(t)=1+2t\n\nmengikuti definisi gerak berkecepatan tetap. Itu adalah argumen model. Grafik kemudian memeriksa apakah pengukuran terbatas konsisten dengan konsekuensi model tersebut.\nSebaliknya, satu pengamatan yang intervalnya tidak memuat nilai model dapat menjadi bukti bahwa model, ketidakpastian, data, atau implementasi perlu diperiksa. Ia tidak secara otomatis mengatakan bagian mana yang salah.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html#sec-o002-u04-exercises",
+    "href": "source/units/04-visualisasi-integritas.html#sec-o002-u04-exercises",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "5.10 Latihan",
+    "text": "5.10 Latihan\n\n5.10.1 Latihan 1 - pertanyaan dan pengodean\nSeorang teman membuat grafik tujuh pengukuran tetapi tidak menampilkan garis model. Sebutkan informasi yang hilang dan satu perbaikan yang tidak hanya mengandalkan warna.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nKembali ke pertanyaan utama: dua objek apa yang sedang dibandingkan?\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nGrafik kehilangan nilai pembanding d=2t+1d=2t+1, sehingga pembaca tidak dapat menilai konsistensi pengukuran terhadap model secara langsung. Tambahkan garis model putus-putus dengan label pada legenda atau label langsung. Jenis garis yang berbeda membuatnya tetap dapat dibedakan tanpa bergantung pada warna.\n\n\n\n\n\n5.10.2 Latihan 2 - sumbu terpotong\nDua nilai adalah 98 dan 100. Hitung rasio tinggi tampaknya untuk garis dasar 0 dan 97. Jelaskan mengapa judul “nilai kedua tiga kali lebih besar” tidak sah.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nTinggi tampak adalah nilai dikurangi garis dasar; besar data tetap nilai asli.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nDengan garis dasar 0, rasionya 100/98≈1,02100/98\\approx1{,}02. Dengan garis dasar 97, rasio tinggi tampak adalah (100−97)/(98−97)=3(100-97)/(98-97)=3. Akan tetapi, nilai kedua hanya 100/98100/98 kali nilai pertama, bukan tiga kali. Angka 3 menggambarkan geometri gambar yang dipotong, bukan rasio data.\n\n\n\n\n\n5.10.3 Latihan 3 - makna batang galat\nApakah batang ±0,4\\pm0{,}4 meter pada unit ini merupakan interval kepercayaan 95%? Tuliskan pernyataan yang sah tentang batang tersebut.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nGunakan hanya definisi ketidakpastian yang benar-benar diberikan.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nTidak ada dasar untuk menyebutnya interval kepercayaan 95%. Unit hanya mendefinisikannya sebagai toleransi pengukuran dari d−0,4d-0{,}4 sampai d+0,4d+0{,}4 meter. Pernyataan yang sah: pada ketujuh waktu, nilai model berada di dalam interval toleransi yang dinyatakan.\n\n\n\n\n\n5.10.4 Latihan 4 - deskripsi aksesibel\nTuliskan teks alternatif dua atau tiga kalimat untuk grafik Unit 4. Jangan sekadar mengulang judul.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nSebutkan sumbu, pengodean, pola, ketidakpastian, dan batas klaim.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nContoh: “Grafik membandingkan jarak terukur dalam meter terhadap waktu 0–6 detik dengan model d=2t+1d=2t+1. Titik lingkaran dan batang ±0,4\\pm0{,}4 meter mewakili pengukuran, sedangkan garis putus-putus mewakili model; semua nilai model berada di dalam interval pengukuran. Kecocokan tujuh titik mendukung konsistensi pada data ini, bukan bukti bahwa model berlaku untuk semua waktu.”\n\n\n\n\n\n5.10.5 Latihan 5 - gambar dan bukti\nGrafik menunjukkan 1.000 titik tepat pada kurva y=x2y=x^2. Apakah hal itu membuktikan bahwa program selalu menghitung kuadrat dengan benar? Berikan satu langkah komputasional dan satu langkah matematis yang memperkuat pemeriksaan.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nGambar hanya memuat masukan berhingga dan resolusi visual terbatas.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nTidak. Seribu titik hanya memeriksa masukan yang dipilih, dan perbedaan kecil dapat tersembunyi oleh resolusi gambar. Langkah komputasional: uji nilai batas, nilai negatif, dan masukan acak deterministik dengan membandingkan keluaran numerik terhadap hasil eksak. Langkah matematis: periksa definisi algoritme dan tunjukkan bahwa operasi yang diterapkan pada setiap masukan memang menghasilkan x⋅xx\\cdot x pada domain yang dinyatakan.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/04-visualisasi-integritas.html#sec-o002-u04-summary",
+    "href": "source/units/04-visualisasi-integritas.html#sec-o002-u04-summary",
+    "title": "5  Visualisasi dengan Integritas",
+    "section": "5.11 Ringkasan",
+    "text": "5.11 Ringkasan\n\nVisualisasi dimulai dari pertanyaan, bukan pilihan warna.\nPosisi, tanda, garis, sumbu, skala, dan satuan harus mempunyai arti eksplisit.\nSumbu terpotong dan rasio aspek dapat mengubah kesan tanpa mengubah data.\nMakna ketidakpastian harus dinyatakan; batang galat tidak membawa makna statistik secara otomatis.\nData bertabel, teks alternatif, gambar, dan manifes hash membuat artefak dapat diperiksa melalui lebih dari satu jalur.\nGrafik memberi bukti visual terbatas dan dapat menemukan kejanggalan; bukti umum tetap memerlukan argumen yang mencakup seluruh domain.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Visualisasi dengan Integritas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/05-eksak-simbolik-sage.html",
+    "href": "source/units/05-eksak-simbolik-sage.html",
+    "title": "6  Komputasi Eksak dan Simbolik",
+    "section": "",
+    "text": "6.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nPrasyarat lokal: Unit 1 dan Unit 2, operasi polinomial, persamaan kuadrat, dan pengertian domain fungsi. Jalur dasar unit memakai pustaka standar Python dan SymPy. Tidak diperlukan kalkulus, aljabar linear, atau SageMath.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Komputasi Eksak dan Simbolik</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-objectives",
+    "href": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-objectives",
+    "title": "6  Komputasi Eksak dan Simbolik",
+    "section": "",
+    "text": "membedakan ekspresi simbolik dari nilai hasil substitusi;\nmemakai Fraction dan SymPy untuk mempertahankan hasil eksak;\nmenyatakan asumsi dan domain sebelum menyederhanakan ekspresi;\nmemeriksa ekuivalensi aljabar tanpa menghapus pembatasan domain;\nmemfaktorkan dan menyelesaikan persamaan sederhana secara eksak;\nmenjelaskan batas antara hasil sistem aljabar komputer dan bukti matematis;\nmenghasilkan rekaman simbolik kanonis yang dapat dibandingkan byte demi byte; dan\nmengenali jembatan kecil menuju SageMath tanpa menjadikan SageMath dependensi jalur dasar.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Komputasi Eksak dan Simbolik</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-expression-value",
+    "href": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-expression-value",
+    "title": "6  Komputasi Eksak dan Simbolik",
+    "section": "6.2 Ekspresi bukan nilai",
+    "text": "6.2 Ekspresi bukan nilai\nEkspresi\np(x)=x2−1\np(x)=x^2-1\n\nmemuat simbol bebas xx. Ia belum mempunyai satu nilai numerik. Substitusi x=3x=3 menghasilkan nilai eksak 88, tetapi tidak mengubah ekspresi asal menjadi bilangan.\n\nimport sympy as sp\n\nx = sp.Symbol(\"x\")\np = x**2 - 1\n(p, p.free_symbols, p.subs(x, 3))\n\n\n\nDaftar 6.1\n\n\n(x**2 - 1, {x}, 8)\n\n\n\n\nPerbedaan ini penting bagi notebook yang dijalankan tidak berurutan. Nama x dalam kode dapat menunjuk objek Python, sedangkan simbol SymPy bernama x merupakan bagian dari pohon ekspresi. Tampilkan dan simpan pohon yang sebenarnya dipakai, bukan hanya hasil terakhir di layar.\nUntuk bilangan rasional kecil, pustaka standar sudah cukup:\n\nfrom fractions import Fraction\n\nFraction(1, 10) + Fraction(2, 10)\n\n\n\nDaftar 6.2\n\n\nFraction(3, 10)\n\n\n\n\nFraction(3, 10) dan sp.Rational(3, 10) sama-sama mempertahankan nilai rasional eksak. Pilih batas antarpustaka secara eksplisit; jangan mengubahnya menjadi float hanya untuk memperoleh keluaran yang tampak lebih pendek.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Komputasi Eksak dan Simbolik</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-assumptions",
+    "href": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-assumptions",
+    "title": "6  Komputasi Eksak dan Simbolik",
+    "section": "6.3 Asumsi dan domain adalah bagian dari soal",
+    "text": "6.3 Asumsi dan domain adalah bagian dari soal\nTanpa keterangan tanda, rumus x2=x\\sqrt{x^2}=x tidak benar untuk setiap bilangan real. Jika xx real, hasil yang benar ialah |x||x|. Jika x&gt;0x&gt;0, barulah hasilnya xx.\n\nx_real = sp.Symbol(\"x\", real=True)\nx_positive = sp.Symbol(\"x\", positive=True)\n\n(\n    sp.simplify(sp.sqrt(x_real**2)),\n    sp.simplify(sp.sqrt(x_positive**2)),\n)\n\n\n\nDaftar 6.3\n\n\n(Abs(x), x)\n\n\n\n\nNama cetak kedua simbol sama, tetapi asumsi internalnya berbeda. Oleh sebab itu, sebuah rekaman komputasi simbolik harus menyimpan definisi simbol atau pernyataan domain yang menyertainya.\nDomain juga harus dipertahankan ketika faktor dibatalkan. Untuk\nr(x)=x2−1x−1,\nr(x)=\\frac{x^2-1}{x-1},\n\nSymPy memperoleh x+1x+1 setelah pembatalan. Kedua rumus memberi nilai sama pada domain bersama, yaitu x≠1x\\ne1. Namun, keduanya bukan fungsi yang sama jika domain asal ikut menjadi bagian definisi: rumus asal tidak terdefinisi pada x=1x=1, sedangkan x+1x+1 bernilai 22 di sana.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Komputasi Eksak dan Simbolik</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-equivalence",
+    "href": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-equivalence",
+    "title": "6  Komputasi Eksak dan Simbolik",
+    "section": "6.4 Kesamaan struktur dan ekuivalensi",
+    "text": "6.4 Kesamaan struktur dan ekuivalensi\nOperator == pada dua ekspresi SymPy terutama membandingkan struktur kanonisnya. Ia bukan pertanyaan universal “apakah kedua rumus ini mempunyai nilai sama bagi semua masukan yang sah?”. Contohnya, ekspresi (x+1)2(x+1)^2 dan x2+2x+1x^2+2x+1 mempunyai struktur berbeda tetapi merupakan polinom yang sama.\n\nleft = (x + 1) ** 2\nright = x**2 + 2*x + 1\n\nstructurally_equal = left == right\npolynomial_identity = sp.expand(left - right) == 0\n(structurally_equal, polynomial_identity)\n\n\n\nDaftar 6.4\n\n\n(False, True)\n\n\n\n\nProsedur pemeriksaan harus sesuai dengan kelas ekspresi. Ekspansi selisih cocok untuk identitas polinomial. simplify(left-right) == 0 berguna sebagai pemeriksaan lain, tetapi bukan pengganti pencatatan domain, cabang akar, asumsi, atau titik singular.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Komputasi Eksak dan Simbolik</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-factor-solve",
+    "href": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-factor-solve",
+    "title": "6  Komputasi Eksak dan Simbolik",
+    "section": "6.5 Faktorisasi dan penyelesaian eksak",
+    "text": "6.5 Faktorisasi dan penyelesaian eksak\nKomputasi simbolik mempertahankan akar dan faktor tanpa pendekatan desimal.\n\nx = sp.Symbol(\"x\")\npolynomial = x**4 - 1\nfactored = sp.factor(polynomial)\n(factored, sp.expand(factored) == polynomial)\n\n\n\nDaftar 6.5\n\n\n((x - 1)*(x + 1)*(x**2 + 1), True)\n\n\n\n\nFaktorisasi yang diharapkan ialah\n(x−1)(x+1)(x2+1).\n(x-1)(x+1)(x^2+1).\n\nPemeriksaan dengan expand menguji bahwa hasil tersebut kembali menjadi polinom masukan. Untuk persamaan x2=2x^2=2, domain solusi harus dinyatakan:\n\nx = sp.Symbol(\"x\", real=True)\nsolutions = sp.solveset(sp.Eq(x**2, 2), x, domain=sp.S.Reals)\nsolutions\n\n\n\nDaftar 6.6\n\n\n{−2,2}\\displaystyle \\left\\{- \\sqrt{2}, \\sqrt{2}\\right\\}\n\n\n\n\nHasil real eksaknya adalah {−2,2}\\{-\\sqrt{2},\\sqrt{2}\\}. Substitusi setiap kandidat ke x2−2x^2-2 harus memberikan residual eksak nol. Jika domain diubah, bentuk atau jumlah solusi dapat berubah; karena itu, jangan menyimpan daftar akar tanpa persamaan dan domainnya.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Komputasi Eksak dan Simbolik</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-result-proof",
+    "href": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-result-proof",
+    "title": "6  Komputasi Eksak dan Simbolik",
+    "section": "6.6 Hasil simbolik dan bukti",
+    "text": "6.6 Hasil simbolik dan bukti\nKeluaran sistem aljabar komputer mempunyai beberapa peran yang berbeda:\n\nkandidat: solve mengusulkan nilai yang kemudian dapat diperiksa;\nsertifikat lokal: ekspansi kembali atau substitusi residual memeriksa hubungan tertentu;\neksperimen: banyak contoh dapat menguji sebuah dugaan; dan\nbukti: argumen menjelaskan mengapa klaim berlaku pada seluruh domain.\n\nFaktorisasi x4−1x^4-1 dapat diperiksa langsung dengan distributivitas. Namun, keberhasilan satu perintah tidak membuktikan bahwa setiap keluaran algoritme untuk setiap masukan pasti benar. Klaim lebih luas juga bergantung pada spesifikasi algoritme dan kebenaran implementasinya. Dalam tulisan matematis, nyatakan tepatnya hubungan mana yang diperiksa komputer dan langkah umum mana yang dibuktikan secara matematis.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Komputasi Eksak dan Simbolik</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-canonical-output",
+    "href": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-canonical-output",
+    "title": "6  Komputasi Eksak dan Simbolik",
+    "section": "6.7 Keluaran kanonis",
+    "text": "6.7 Keluaran kanonis\nTampilan dua dimensi yang nyaman dibaca dapat berubah karena lebar terminal, pengaturan printer, atau versi pustaka. Unit ini memakai sympy.srepr untuk merekam pohon ekspresi dan JSON dengan kunci terurut, inden tetap, UTF-8, serta akhir baris LF. Versi SymPy ikut disimpan karena bentuk kanonis pustaka dapat berubah antarrilis.\nJalankan skrip dari akar proyek:\npython source/code/unit05_symbolic.py --output output/unit05-results.json\nMedan core_sha256 mengikat rekaman inti sebelum medan hash ditambahkan. Menjalankan perintah yang sama pada lingkungan yang sama harus menghasilkan byte identik. Hash bukan bukti kebenaran matematika; ia membuktikan bahwa dua urutan byte sama.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Komputasi Eksak dan Simbolik</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-sage-bridge",
+    "href": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-sage-bridge",
+    "title": "6  Komputasi Eksak dan Simbolik",
+    "section": "6.8 Jembatan SageMath yang opsional",
+    "text": "6.8 Jembatan SageMath yang opsional\nSageMath bermanfaat ketika satu lingkungan terpadu dibutuhkan untuk aljabar, teori bilangan, graf, atau objek eksak yang lebih luas. Ia bukan dependensi jalur dasar unit ini. Potongan berikut memakai sintaks Python yang dapat dijalankan di lingkungan Python milik SageMath:\nfrom sage.all import PolynomialRing, QQ, SR, solve\n\nR = PolynomialRing(QQ, \"x\")\nx = R.gen()\nprint((x**4 - 1).factor())\n\ny = SR.var(\"y\")\nprint(solve(y**2 == 2, y))\nJalankan potongan itu hanya pada instalasi SageMath yang versinya dicatat. Hasil baseline tetap diperoleh dan diuji dengan Fraction serta SymPy. Jangan mengubah keluaran SageMath dan keluaran SymPy menjadi string lalu menyatakan keduanya setara; bandingkan objek matematis, domain, dan residualnya.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Komputasi Eksak dan Simbolik</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-exercises",
+    "href": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-exercises",
+    "title": "6  Komputasi Eksak dan Simbolik",
+    "section": "6.9 Latihan",
+    "text": "6.9 Latihan\n\n6.9.1 Latihan 1 - ekspresi dan nilai\nBentuk ekspresi q(t)=t3−2tq(t)=t^3-2t di SymPy. Sebutkan simbol bebasnya, lalu evaluasi pada t=1/2t=1/2 secara eksak.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nGunakan Symbol, Rational, atribut free_symbols, dan subs.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nKode t=sp.Symbol(\"t\"); q=t**3-2*t menghasilkan simbol bebas {t}. Substitusi q.subs(t, sp.Rational(1,2)) memberi 1/8−1=−7/81/8-1=-7/8. Ekspresi q tetap memuat t; -7/8 adalah nilai pada satu masukan, bukan pengganti ekspresi asal.\n\n\n\n\n\n6.9.2 Latihan 2 - asumsi yang hilang\nSeorang pembaca menyederhanakan z2\\sqrt{z^2} menjadi zz untuk semua bilangan real. Berikan contoh penyangkal dan tuliskan hasil umum yang benar.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nCoba satu bilangan real negatif.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nAmbil z=−3z=-3. Maka z2=9=3\\sqrt{z^2}=\\sqrt{9}=3, sedangkan z=−3z=-3, sehingga penyederhanaan itu gagal. Untuk zz real, bentuk umum yang benar ialah z2=|z|\\sqrt{z^2}=|z|. Bentuk zz sah jika ditambahkan asumsi z≥0z\\ge0, dan khusus simbol SymPy positif dapat dideklarasikan dengan positive=True.\n\n\n\n\n\n6.9.3 Latihan 3 - ekuivalensi dan domain\nBandingkan (u2−4)/(u−2)(u^2-4)/(u-2) dengan u+2u+2. Nyatakan pada himpunan mana nilainya sama dan jelaskan mengapa domain kedua fungsi tidak otomatis sama.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nFaktorkan pembilang dan periksa penyebut sebelum membatalkan faktor.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nKarena u2−4=(u−2)(u+2)u^2-4=(u-2)(u+2), kedua rumus memberi nilai sama untuk setiap u≠2u\\ne2. Rumus pecahan tidak terdefinisi pada u=2u=2, sementara u+2u+2 bernilai 44. Jadi keduanya setara pada domain bersama, tetapi bukan fungsi dengan domain yang sama kecuali pembatasan u≠2u\\ne2 dipertahankan.\n\n\n\n\n\n6.9.4 Latihan 4 - faktor, akar, dan pemeriksaan\nFaktorkan v3−vv^3-v, cari semua akar realnya secara eksak, lalu tuliskan dua pemeriksaan yang dapat dilakukan tanpa mempercayai tampilan keluaran.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nKeluarkan faktor v, kemudian faktorkan selisih kuadrat.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nv3−v=v(v2−1)=v(v−1)(v+1)v^3-v=v(v^2-1)=v(v-1)(v+1), sehingga akar realnya ialah (−1,0,1)(-1,0,1). Pemeriksaan pertama: ekspansi v*(v-1)*(v+1) harus kembali ke v**3-v. Pemeriksaan kedua: substitusi setiap akar ke polinom harus memberi residual eksak nol. Kedua pemeriksaan ini mengikat klaim lokal yang jelas.\n\n\n\n\n\n6.9.5 Latihan 5 - artefak simbolik yang stabil\nMengapa menyimpan hanya tangkapan layar keluaran pretty print tidak cukup untuk eksperimen simbolik yang dapat direproduksi? Sebutkan sedikitnya empat unsur rekaman yang lebih baik.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPikirkan pohon ekspresi, asumsi, domain, versi, dan byte keluaran.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nTangkapan layar dapat kehilangan struktur, mudah berubah karena tata letak, dan tidak dapat dievaluasi ulang. Rekaman yang lebih baik memuat (1) pohon ekspresi kanonis, (2) asumsi simbol, (3) domain masalah, (4) versi SymPy atau SageMath, (5) masukan dan metode, serta (6) JSON atau format teks dengan aturan urutan dan akhir baris yang tetap. Hash kemudian dapat membandingkan byte, sedangkan residual atau ekspansi memeriksa klaim matematis tertentu.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Komputasi Eksak dan Simbolik</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-summary",
+    "href": "source/units/05-eksak-simbolik-sage.html#sec-o002-u05-summary",
+    "title": "6  Komputasi Eksak dan Simbolik",
+    "section": "6.10 Ringkasan",
+    "text": "6.10 Ringkasan\n\nEkspresi simbolik menyatakan struktur; substitusi menghasilkan nilai pada masukan tertentu.\nAritmetika eksak mempertahankan hubungan rasional dan aljabar tanpa pembulatan desimal.\nAsumsi serta domain menentukan penyederhanaan mana yang sah.\nKesamaan struktur, ekuivalensi pada domain bersama, dan kesamaan fungsi merupakan tiga pertanyaan berbeda.\nFaktorisasi, ekspansi kembali, penyelesaian eksak, dan residual saling melengkapi sebagai pemeriksaan lokal.\nKeluaran sistem aljabar komputer adalah bukti kerja yang harus dibatasi klaimnya, bukan pengganti otomatis bagi bukti umum.\nRepresentasi kanonis, versi pustaka, dan hash membuat artefak dapat dibandingkan.\nSageMath tersedia sebagai jembatan opsional; baseline Unit 5 tetap memakai Python, Fraction, dan SymPy.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Komputasi Eksak dan Simbolik</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html",
+    "href": "source/units/06-titik-mengambang-stabilitas.html",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "",
+    "text": "7.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nPrasyarat lokal: Unit 1, Unit 2, dan Unit 3; pangkat bilangan bulat, akar kuadrat, nilai mutlak, fungsi rasional, dan galat relatif pada tingkat A30. Tidak diperlukan kalkulus.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-objectives",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-objectives",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "",
+    "text": "menjelaskan model dasar bilangan titik-mengambang biner;\nmembaca ulp, epsilon mesin, serta batas luapan dan aliran-bawah;\nmengenali pembatalan yang menghilangkan angka signifikan;\nmembedakan galat maju dari galat mundur;\nmembedakan pengondisian masalah dari stabilitas algoritme;\nmemilih reformulasi dan metode penjumlahan yang lebih stabil;\nmenetapkan toleransi sebagai anggaran galat sebelum hasil diperiksa; dan\nmembatasi bukti eksperimen terhadap kasus serta lingkungan yang dijalankan.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-binary-model",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-binary-model",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "7.2 Model biner yang berhingga",
+    "text": "7.2 Model biner yang berhingga\nPada lingkungan proyek ini, float memakai format biner 64-bit. Secara sederhana, bilangan berhingga normal disimpan dalam bentuk\n(−1)s(1.b1b2…b52)22e.\n(-1)^s\\,(1.b_1b_2\\ldots b_{52})_2\\,2^e.\n\nAda satu bit tanda, eksponen berhingga, dan 53 bit ketelitian signifikan jika angka satu di depan titik ikut dihitung. Karena hanya ada sejumlah pola bit, hanya sejumlah bilangan real yang dapat disimpan. Hasil operasi biasanya dibulatkan ke bilangan representabel terdekat.\nMetode hex() memperlihatkan nilai biner sebuah float tanpa kehilangan informasi:\n\nx = 0.1\n(x, x.hex(), x.as_integer_ratio())\n\n\n\nDaftar 7.1\n\n\n(0.1, '0x1.999999999999ap-4', (3602879701896397, 36028797018963968))\n\n\n\n\nPecahan dari as_integer_ratio() adalah nilai rasional yang benar-benar tersimpan. Nilai itu dekat dengan 1/101/10, tetapi bukan 1/101/10.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-ulp-epsilon",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-ulp-epsilon",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "7.3 ulp, epsilon, dan jarak yang berubah",
+    "text": "7.3 ulp, epsilon, dan jarak yang berubah\nSatu unit in the last place (ulp) adalah jarak lokal antara bilangan representabel yang berdekatan. Jarak ini berubah mengikuti besar bilangan.\n\nimport math\nimport sys\n\n(\n    sys.float_info.epsilon,\n    math.ulp(1.0),\n    math.ulp(float(2**53)),\n)\n\n\n\nDaftar 7.2\n\n\n(2.220446049250313e-16, 2.220446049250313e-16, 2.0)\n\n\n\n\nDi sekitar 1, ulp(1.0) sama dengan sys.float_info.epsilon, yaitu selisih antara 1 dan bilangan float berikutnya. Beberapa buku memakai istilah “epsilon mesin” untuk angka ini. Buku lain memakai unit roundoff u=ε/2u=\\varepsilon/2 dalam model pembulatan-ke-terdekat. Karena istilahnya tidak seragam, nyatakan definisi yang dipakai.\nDi sekitar 2532^{53}, satu ulp bernilai 2. Akibatnya:\n\nbesar = float(2**53)\n(besar + 1.0 == besar, besar + 2.0 == besar + 2)\n\n\n\nDaftar 7.3\n\n\n(True, True)\n\n\n\n\nIni bukan kesalahan Python dalam menjumlahkan bilangan bulat. Masalahnya adalah hasil sedang dipaksa kembali ke kisi float64 yang pada skala itu berjarak 2.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-range",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-range",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "7.4 Luapan, subnormal, dan aliran-bawah",
+    "text": "7.4 Luapan, subnormal, dan aliran-bawah\nKetelitian dan rentang adalah dua batas berbeda. sys.float_info.max adalah bilangan float berhingga terbesar. Mengalikannya dengan 2 menghasilkan takhingga positif pada lingkungan yang diuji. Di ujung kecil, sys.float_info.min adalah bilangan positif normal terkecil, bukan bilangan positif terkecil.\nBilangan subnormal mengisi sebagian celah menuju nol dengan ketelitian yang berkurang. math.ulp(0.0) memberi subnormal positif terkecil. Membaginya dua memberi nol karena tidak ada bilangan positif representabel yang lebih kecil.\n\nterbesar = sys.float_info.max\nsubnormal_terkecil = math.ulp(0.0)\n(\n    terbesar * 2.0,\n    sys.float_info.min,\n    subnormal_terkecil,\n    subnormal_terkecil / 2.0,\n)\n\n\n\nDaftar 7.4\n\n\n(inf, 2.2250738585072014e-308, 5e-324, 0.0)\n\n\n\n\nPeriksa nilai dengan math.isfinite sebelum hasil takhingga atau nol akibat aliran-bawah diteruskan ke tahap berikutnya. Namun, pemeriksaan setelah kejadian tidak mengganti analisis skala sebelum komputasi.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-cancellation",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-cancellation",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "7.5 Pembatalan dan reformulasi stabil",
+    "text": "7.5 Pembatalan dan reformulasi stabil\nPengurangan dua bilangan hampir sama dapat menghapus sebagian besar angka signifikan. Untuk xx besar, pertimbangkan\nd(x)=x+1−x.\nd(x)=\\sqrt{x+1}-\\sqrt{x}.\n\nPada x=1016x=10^{16}, penjumlahan x + 1.0 sudah membulat kembali ke x. Pengurangan langsung lalu menghasilkan nol. Sebelum menghitung, rasionalkan secara aljabar:\nd(x)=(x+1)−xx+1+x=1x+1+x.\nd(x)\n=\\frac{(x+1)-x}{\\sqrt{x+1}+\\sqrt{x}}\n=\\frac{1}{\\sqrt{x+1}+\\sqrt{x}}.\n\n\nx = 1e16\nlangsung = math.sqrt(x + 1.0) - math.sqrt(x)\nstabil = 1.0 / (math.sqrt(x + 1.0) + math.sqrt(x))\n(x + 1.0 == x, langsung, stabil)\n\n\n\nDaftar 7.5\n\n\n(True, 0.0, 5e-09)\n\n\n\n\nBentuk kedua menghindari pengurangan dua akar yang hampir sama. Reformulasi ini berasal dari identitas aljabar pada bilangan real; program Unit 6 membandingkan kedua implementasi dengan referensi Decimal berketelitian tinggi. Referensi berketelitian tinggi tetap merupakan alat pemeriksaan, bukan definisi bukti yang berdiri sendiri.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-forward-backward",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-forward-backward",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "7.6 Galat maju dan galat mundur",
+    "text": "7.6 Galat maju dan galat mundur\nMisalkan masalah meminta y=f(x)y=f(x) dan program menghasilkan ŷ\\widehat y.\n\nGalat maju mengukur jarak dari jawaban yang diinginkan: |ŷ−f(x)||\\widehat y-f(x)|.\nGalat mundur bertanya seberapa jauh masukan harus diubah agar keluaran menjadi jawaban tepat: cari Δx\\Delta x sehingga ŷ=f(x+Δx)\\widehat y=f(x+\\Delta x).\n\nUntuk masalah y=ay=\\sqrt a, kuadrat keluaran memberi masukan yang akan membuat keluaran itu eksak. Karena itu, ukuran mundur relatif yang mudah diperiksa adalah\n|ŷ2−a||a|.\n\\frac{|\\widehat y^2-a|}{|a|}.\n\n\ny_hat = math.sqrt(2.0)\nresidual = y_hat * y_hat - 2.0\n(y_hat, residual)\n\n\n\nDaftar 7.6\n\n\n(1.4142135623730951, 4.440892098500626e-16)\n\n\n\n\nGalat mundur kecil berarti hasil merupakan solusi tepat bagi masalah yang sedikit terganggu. Apakah galat majunya juga kecil bergantung pada pengondisian masalah.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-conditioning-stability",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-conditioning-stability",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "7.7 Pengondisian bukan stabilitas",
+    "text": "7.7 Pengondisian bukan stabilitas\nPengondisian adalah sifat pertanyaan matematika: seberapa besar keluaran berubah ketika masukan sedikit berubah? Stabilitas algoritmik adalah sifat cara menghitung: apakah pembulatan internal menambah galat jauh melampaui kepekaan masalah?\nUntuk\nf(x)=11−x,\nf(x)=\\frac{1}{1-x},\n\nmasukan dekat 1 sangat peka. Pada x=0,99999999x=0{,}99999999, gangguan sekitar 10−1210^{-12} dapat diperbesar kira-kira 10810^8 kali dalam galat relatif keluaran. Ini adalah masalah berkondisi buruk di dekat titik singular x=1x=1. Mengganti bahasa pemrograman tidak dapat menghapus kepekaan matematis tersebut.\nSebaliknya, masalah d(x)=x+1−xd(x)=\\sqrt{x+1}-\\sqrt{x} untuk xx besar tidak memerlukan jawaban nol. Bentuk pengurangan langsung kehilangan informasi, sedangkan bentuk rasional mempertahankannya. Di sini perbedaan utamanya adalah stabilitas cara evaluasi.\nEmpat kemungkinan harus dibedakan:\n\n\n\n\n\n\n\n\nMasalah\nAlgoritme\nMakna praktis\n\n\n\n\nberkondisi baik\nstabil\ngalat kecil biasanya diharapkan\n\n\nberkondisi baik\ntidak stabil\nalgoritme menyia-nyiakan informasi\n\n\nberkondisi buruk\nstabil\nhasil tetap dapat peka terhadap data\n\n\nberkondisi buruk\ntidak stabil\nkepekaan masalah dan algoritme menumpuk",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-summation",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-summation",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "7.8 Penjumlahan dan urutan operasi",
+    "text": "7.8 Penjumlahan dan urutan operasi\nPenjumlahan titik-mengambang tidak asosiatif. Secara real,\n1016+1−1016=1.\n10^{16}+1-10^{16}=1.\n\nNamun, algoritme naif yang menjumlahkan dari kiri kehilangan angka 1 sebelum pengurangan terakhir.\n\nnilai = [1e16, 1.0, -1e16]\n\ndef jumlah_naif(data):\n    total = 0.0\n    for angka in data:\n        total += angka\n    return total\n\n(\n    jumlah_naif(nilai),\n    jumlah_naif([1e16, -1e16, 1.0]),\n    math.fsum(nilai),\n)\n\n\n\nDaftar 7.7\n\n\n(0.0, 1.0, 1.0)\n\n\n\n\nmath.fsum melacak bagian kecil yang hilang dengan lebih cermat dan memberi 1 untuk contoh ini. sum bawaan dapat memakai strategi yang lebih baik pada versi Python tertentu; karena itu, skrip juga merekam hasilnya tetapi tidak menjadikannya definisi algoritme naif. math.fsum umumnya lebih akurat bagi data bercampur skala, tetapi bukan janji bahwa setiap masalah penjumlahan bebas galat. Rekam metode, versi, urutan data, dan skala nilainya.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-tolerances",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-tolerances",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "7.9 Toleransi sebagai anggaran galat",
+    "text": "7.9 Toleransi sebagai anggaran galat\nTes kedekatan yang digunakan unit ini berbentuk\n|ŷ−yref|≤A+R|yref|,\n|\\widehat y-y_{ref}|\\le A+R|y_{ref}|,\n\ndengan AA anggaran absolut dan RR anggaran relatif. Bagian absolut penting di dekat nol; bagian relatif mengikuti skala referensi.\nAnggaran harus berasal dari masalah sebelum hasil dilihat. Sumbernya dapat mencakup ketelitian pengukuran, pendekatan model, diskretisasi, penghentian iterasi, dan pembulatan. Penjumlahan batas tiap komponen memberi batas konservatif bila tidak ada analisis yang lebih tajam.\nisclose atau fungsi sejenis hanya memeriksa aturan yang diberikan. Ia tidak memilih toleransi, tidak memperbaiki algoritme, dan tidak membuktikan bahwa referensi benar. Simpan nilai AA, RR, galat teramati, dan alasan pemilihannya.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-experiment-proof",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-experiment-proof",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "7.10 Rekaman deterministik dan batas bukti",
+    "text": "7.10 Rekaman deterministik dan batas bukti\nJalankan dari akar proyek:\npython source/code/unit06_floating.py --output output/unit06-results.json\nSkrip mencatat versi Python, profil binary64, pembatalan, galat maju/mundur, pengondisian, penjumlahan, dan keputusan anggaran galat. Bilangan yang perlu dibedakan bit demi bit disimpan dengan repr, hex, atau teks Decimal. JSON memakai UTF-8, kunci terurut, inden tetap, dan akhir baris LF. Medan core_sha256 mengikat rekaman sebelum hash ditambahkan.\nEksperimen tersebut membuktikan perilaku kasus yang benar-benar dijalankan pada lingkungan yang dicatat. Ia dapat menunjukkan contoh penyangkal terhadap klaim seperti “urutan penjumlahan tidak pernah berpengaruh”. Ia tidak membuktikan teorema tentang semua operasi binary64.\nPernyataan umum memerlukan model, misalnya: setiap operasi normal dibulatkan ke nilai representabel terdekat dengan galat relatif paling besar sekitar uu, selama tidak terjadi luapan atau aliran-bawah. Dari model itu, batas galat dapat diturunkan langkah demi langkah. Tes lalu memeriksa apakah implementasi dan lingkungan mengikuti asumsi yang dicatat.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-exercises",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-exercises",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "7.11 Latihan",
+    "text": "7.11 Latihan\n\n7.11.1 Latihan 1 - ulp dan kenaikan yang hilang\nDi sekitar 2532^{53}, ulp bernilai 2. Jelaskan mengapa float(2**53) + 1.0 == float(2**53), tetapi penambahan 2 dapat menghasilkan bilangan berikutnya.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nBayangkan kisi bilangan representabel yang titik-titiknya berjarak 2.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nPada skala itu, bilangan float berhingga yang berdekatan adalah 253,253+2,253+4,…2^{53}, 2^{53}+2, 2^{53}+4,\\ldots. Nilai real 253+12^{53}+1 berada tepat di antara dua titik kisi dan dibulatkan menurut aturan ikatan ke nilai dengan bit terakhir genap, yaitu 2532^{53}. Nilai 253+22^{53}+2 sendiri representabel, sehingga kenaikan 2 tidak hilang.\n\n\n\n\n\n7.11.2 Latihan 2 - membuang pembatalan\nTurunkan bentuk stabil untuk x+4−x\\sqrt{x+4}-\\sqrt{x} dan jelaskan mengapa bentuk itu lebih baik untuk xx besar.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nKalikan pembilang dan penyebut dengan jumlah kedua akar.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nx+4−x=(x+4)−xx+4+x=4x+4+x.\n\\sqrt{x+4}-\\sqrt{x}\n=\\frac{(x+4)-x}{\\sqrt{x+4}+\\sqrt{x}}\n=\\frac{4}{\\sqrt{x+4}+\\sqrt{x}}.\n\nBentuk langsung mengurangkan dua bilangan besar yang hampir sama sehingga angka signifikan dapat hilang. Bentuk rasional membagi 4 dengan jumlah positif dan menghindari pengurangan tersebut. Domain real yang dibahas ialah x≥0x\\ge0.\n\n\n\n\n\n7.11.3 Latihan 3 - galat maju dan mundur\nUntuk pendekatan ŷ=1,414\\widehat y=1{,}414 terhadap 2\\sqrt2, hitung pendekatan galat maju absolut dan galat mundur relatif berdasarkan persamaan y2=2y^2=2.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nGunakan 2≈1,41421356\\sqrt2\\approx1{,}41421356 dan hitung 1,41421{,}414^2.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nGalat maju absolut kira-kira |1,414−1,41421356|=0,00021356|1{,}414-1{,}41421356|=0{,}00021356. Karena 1,4142=1,9993961{,}414^2=1{,}999396, galat mundur relatif terhadap masukan 2 ialah\n|1,999396−2|2=0,000302.\n\\frac{|1{,}999396-2|}{2}=0{,}000302.\n\nAngka pertama membandingkan keluaran dengan akar yang diinginkan; angka kedua menanyakan perubahan relatif pada masukan agar keluaran menjadi akar eksak.\n\n\n\n\n\n7.11.4 Latihan 4 - kondisi atau algoritme?\nKlasifikasikan dua gejala berikut: (a) nilai 1/(1−x)1/(1-x) berubah besar ketika xx dekat 1 diganggu sedikit; (b) pengurangan dua akar yang hampir sama memberi nol, tetapi bentuk rasional memberi nilai bukan nol yang akurat.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nTanyakan apakah kepekaan sudah ada pada fungsi matematika atau muncul dari urutan operasi.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nGejala (a) terutama merupakan pengondisian buruk: fungsi mempunyai titik singular pada 1 dan memang peka di dekatnya. Algoritme stabil pun tidak dapat menghilangkan kepekaan data itu. Gejala (b) terutama merupakan ketidakstabilan evaluasi langsung: masalah yang sama dapat dihitung jauh lebih akurat setelah reformulasi aljabar. Dalam pekerjaan nyata, keduanya dapat terjadi bersamaan.\n\n\n\n\n\n7.11.5 Latihan 5 - jumlah, toleransi, dan batas klaim\nUntuk data [1e16, 1.0, -1e16], target matematisnya 1. Bandingkan hasil jumlah_naif di atas dan math.fsum. Dengan anggaran absolut 0,5 dan anggaran relatif 10−1210^{-12}, tentukan mana yang lolos. Apakah satu keberhasilan membuktikan math.fsum selalu eksak?\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nGunakan batas A+R|yref|A+R|y_{ref}| dengan yref=1y_{ref}=1.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\njumlah_naif memberi 0 karena angka 1 hilang ketika ditambahkan ke 101610^{16}. math.fsum memberi 1 pada kasus ini. Batas yang diizinkan adalah 0,5+10−120{,}5+10^{-12}; galat algoritme naif adalah 1 sehingga gagal, sedangkan galat math.fsum adalah 0 sehingga lolos. Keberhasilan ini hanya membuktikan hasil kasus tersebut pada lingkungan yang diuji; ia tidak membuktikan bahwa math.fsum selalu eksak untuk setiap daftar.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-summary",
+    "href": "source/units/06-titik-mengambang-stabilitas.html#sec-o002-u06-summary",
+    "title": "7  Titik-Mengambang, Galat, dan Stabilitas",
+    "section": "7.12 Ringkasan",
+    "text": "7.12 Ringkasan\n\nBilangan float membentuk kisi biner berhingga; ulp berubah mengikuti skala.\nEpsilon, unit roundoff, rentang normal, dan rentang subnormal menjawab pertanyaan yang berbeda.\nPembatalan dapat dihindari melalui reformulasi aljabar sebelum evaluasi.\nGalat maju mengukur jawaban; galat mundur mengukur perubahan masalah yang membuat jawaban itu eksak.\nPengondisian milik masalah, sedangkan stabilitas milik algoritme.\nMetode penjumlahan dan urutan operasi memengaruhi galat.\nToleransi merupakan anggaran yang dijelaskan sebelumnya, bukan angka yang disetel agar tes lulus.\nEksperimen memberi bukti kerja terbatas; klaim umum memerlukan model pembulatan dan argumen matematis.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Titik-Mengambang, Galat, dan Stabilitas</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html",
+    "href": "source/units/07-rancangan-eksperimen.html",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "",
+    "text": "8.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nPrasyarat lokal: Unit 1-4, persentase, rata-rata, perbandingan pecahan, dan fungsi bertahap sederhana pada tingkat A30. Tidak diperlukan kalkulus atau statistika inferensial.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-objectives",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-objectives",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "",
+    "text": "mengubah pertanyaan umum menjadi hipotesis dan ukuran hasil yang dapat diperiksa;\nmembedakan variabel yang diubah, hasil yang diukur, dan kondisi yang dikendalikan;\nmenetapkan kisi parameter, banyak replikasi, dan aturan berhenti sebelum melihat hasil;\nmenjelaskan apa yang dapat dan tidak dapat diulang oleh benih acak semu;\nmemisahkan data pengembangan dari data uji yang ditahan (holdout);\nmelaporkan ukuran efek dan hasil negatif tanpa mengubah sasaran sesudahnya; dan\nmembatasi hasil eksperimen agar tidak diperlakukan sebagai bukti umum.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-question",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-question",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.2 Pertanyaan dahulu, hasil kemudian",
+    "text": "8.2 Pertanyaan dahulu, hasil kemudian\nEksperimen Unit 7 mempelajari aturan keputusan sederhana. Setiap kasus mempunyai skor bulat dari 0 sampai 9. Untuk ambang kk, program memprediksi hasil positif jika\nskor≥k.\n\\text{skor}\\ge k.\n\nKita memilih satu ambang dari kisi {3,4,5,6,7}\\{3,4,5,6,7\\}. Pertanyaan yang dibekukan sebelum menjalankan eksperimen ialah:\n\nApakah ambang yang dipilih pada data pengembangan meningkatkan akurasi pada data holdout sedikitnya 0,10 dibandingkan ambang referensi 6?\n\nAngka 0,10 berarti sepuluh poin persentase, bukan “sepuluh persen dari akurasi lama”. Hipotesis awal menjawab “ya”. Eksperimen kemudian boleh mendukung atau tidak mendukung jawaban itu; hipotesis bukan janji tentang hasil.\nPertanyaan ini menyatakan tiga hal yang sering hilang:\n\naturan pembanding, yaitu ambang 6;\nukuran hasil, yaitu proporsi prediksi benar; dan\nbatas efek yang dianggap bermakna, yaitu 0,10.\n\nTanpa ketiganya, mudah memilih cerita setelah melihat angka.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-variables",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-variables",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.3 Variabel, kontrol, dan perancu",
+    "text": "8.3 Variabel, kontrol, dan perancu\nDalam eksperimen ini:\n\n\n\n\n\n\n\nPeran\nIsi\n\n\n\n\nvariabel yang diubah\nambang keputusan kk\n\n\nhasil yang diukur\nakurasi, yaitu banyak prediksi benar dibagi banyak kasus\n\n\nkondisi yang dikendalikan\npembangkit kasus, ukuran sampel, replikasi, dan jadwal benih\n\n\nfaktor acak\nskor dan hasil buatan pada setiap kasus\n\n\n\nSebuah perancu adalah faktor lain yang berubah bersama variabel utama sehingga penyebab perbedaan menjadi kabur. Jika ambang 3 diuji pada kasus yang mudah sedangkan ambang 7 diuji pada kasus yang sulit, selisih akurasi dapat berasal dari kasus, bukan ambang.\nSkrip mencegah perancu itu dengan rancangan berpasangan: dalam satu replikasi, semua ambang dinilai pada kasus yang persis sama. Hanya ambangnya yang berubah. Rancangan ini tidak menghapus semua kemungkinan kesalahan; aturan pembangkit kasus sendiri masih dapat buruk. Namun, ia mengisolasi perbandingan yang sedang dilakukan.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-grid",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-grid",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.4 Kisi parameter dan aturan pemilihan",
+    "text": "8.4 Kisi parameter dan aturan pemilihan\nKisi parameter ditentukan sebagai\nK=(3,4,5,6,7).\nK=(3,4,5,6,7).\n\nProgram tidak menambahkan ambang baru setelah melihat hasil. Setiap kandidat menyelesaikan 20 replikasi pengembangan, masing-masing berisi 200 kasus. Ambang dengan jumlah prediksi benar terbesar dipilih. Jika dua ambang seri, ambang yang lebih kecil menang. Aturan seri itu tampak sepele, tetapi tanpa aturan tetap dua pelaksana dapat memilih hasil berbeda.\nPencarian kisi hanya membandingkan lima kandidat tersebut. Jika ambang 5 menang, kesimpulan yang sah adalah “5 terbaik pada kisi dan data pengembangan ini menurut ukuran yang ditetapkan”, bukan “5 adalah ambang terbaik yang mungkin untuk setiap populasi”.\nKisi yang sangat rapat juga bukan hadiah gratis. Makin banyak pilihan yang dicoba pada data sama, makin besar peluang menemukan pilihan yang cocok dengan kebetulan khusus data pengembangan. Itulah salah satu alasan memakai holdout.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-randomness",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-randomness",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.5 Benih dan nondeterminisme",
+    "text": "8.5 Benih dan nondeterminisme\nrandom.Random(seed) menghasilkan urutan acak semu. Benih yang sama pada lingkungan yang sama menghasilkan urutan yang sama, sehingga kegagalan dapat dijalankan ulang. Unit ini memakai benih dasar 1729 untuk pengembangan dan 271828 untuk holdout. Replikasi ke-ii memakai benih_dasar + i.\nBenih tidak mengubah eksperimen menjadi bukti, dan tidak dapat menangkap semua nondeterminisme nyata. Contohnya:\n\nderau sensor fisik;\nperubahan suhu atau tegangan;\nurutan proses paralel;\npaket data yang tiba dari jaringan; dan\ntindakan manusia selama pengukuran.\n\nUntuk sumber semacam itu, catat waktu, perangkat, kalibrasi, urutan perlakuan, lingkungan, dan data mentah sejauh relevan. Replikasi independen tetap diperlukan. Menulis angka seed=42 tidak mengulang sebuah laboratorium.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-replication",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-replication",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.6 Replikasi dan aturan berhenti",
+    "text": "8.6 Replikasi dan aturan berhenti\nSatu pengulangan dapat kebetulan menguntungkan satu ambang. Replikasi menunjukkan apakah hasil bertahan pada beberapa sampel. Rencana unit menetapkan:\n\npengembangan: tepat 20×200=4.00020\\times200=4.000 kasus; dan\nholdout: tepat 12×250=3.00012\\times250=3.000 kasus.\n\nKata “tepat” adalah bagian dari metode. Program tidak berhenti ketika hasil pertama kali tampak baik. Jika kita terus melihat hasil dan berhenti pada replikasi yang menyenangkan, aturan pengumpulan data bergantung pada hasil; ringkasan akhir lalu lebih optimistis daripada rencana awal.\nAturan berhenti dapat berupa jumlah kasus tetap, batas waktu tetap, atau kriteria lain. Yang penting, aturan itu ditulis sebelum hasil diperiksa dan dilaporkan bersama penyimpangan apa pun.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-holdout",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-holdout",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.7 Pengembangan dan data holdout",
+    "text": "8.7 Pengembangan dan data holdout\nData pengembangan dipakai untuk membandingkan kisi dan memilih ambang. Data holdout dibangkitkan dengan jadwal benih terpisah, tidak ikut menentukan pilihan, dan diperiksa sekali setelah ambang dibekukan.\nAnalogi sederhananya adalah latihan dan ujian. Jika jawaban ujian dipakai untuk mengubah cara menjawab lalu nilai ujian yang sama dilaporkan sebagai penilaian akhir, ujian itu telah menjadi latihan. Demikian juga, jika hasil holdout dilihat berulang kali untuk mengubah kisi, fitur, atau aturan, ia bukan lagi penilaian yang tidak tersentuh. Kita memerlukan holdout baru atau harus jujur menyebut tahap tersebut pengembangan tambahan.\nPemisahan ini tidak membuat hasil berlaku bagi semua dunia nyata. Data holdout masih berasal dari pembangkit kasus tertentu. Ia hanya mengurangi satu jenis penyesuaian berlebihan terhadap data pengembangan.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-effect",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-effect",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.8 Ukuran efek, bukan kesan gambar",
+    "text": "8.8 Ukuran efek, bukan kesan gambar\nPada rekaman acuan, ambang 5 dipilih. Di holdout, ambang 5 benar pada 2.355 dari 3.000 kasus, sedangkan ambang referensi 6 benar pada 2.204 kasus. Ukuran efeknya ialah\n23553000−22043000=1513000≈0,0503.\n\\frac{2355}{3000}-\\frac{2204}{3000}\n=\\frac{151}{3000}\n\\approx0{,}0503.\n\nJadi peningkatannya sekitar 5,03 poin persentase. Sebuah grafik dengan sumbu terpotong dapat membuat selisih itu tampak besar, tetapi ukuran efek numeriknya tidak berubah. Karena batas yang ditetapkan adalah 10 poin persentase, hipotesis awal tidak didukung.\n“Tidak didukung” tidak sama dengan “kedua aturan pasti identik”. Hasil menunjukkan efek teramati positif tetapi lebih kecil daripada sasaran yang dibekukan. Unit ini tidak menghitung interval kepercayaan atau nilai-p; jangan menyisipkan makna statistik yang tidak dihitung.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-negative-results",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-negative-results",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.9 Hasil negatif tetap merupakan hasil",
+    "text": "8.9 Hasil negatif tetap merupakan hasil\nSetelah melihat 0,0503, kita tidak boleh menurunkan ambang efek dari 0,10 ke 0,05 lalu mengaku rencana awal berhasil. Kita juga tidak boleh menghapus ambang yang kalah atau hanya menampilkan replikasi yang menguntungkan.\nHasil negatif berguna karena:\n\nia membatasi klaim yang masuk akal;\nia mencegah orang lain mengulangi jalan buntu tanpa mengetahui hasilnya;\nia dapat mengungkap bahwa sasaran praktis terlalu besar; dan\nia membantu merancang eksperimen berikutnya tanpa mengubah sejarah eksperimen ini.\n\nEksperimen baru boleh mempunyai hipotesis baru. Yang tidak jujur adalah menulis ulang rencana lama seolah-olah sasaran baru telah ditetapkan sejak awal.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-artifact",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-artifact",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.10 Rekaman kanonis Unit 7",
+    "text": "8.10 Rekaman kanonis Unit 7\nJalankan dari akar proyek:\npython source/code/unit07_experiment_design.py --output output/unit07-results.json\nJSON menyimpan pertanyaan, hipotesis, kisi, variabel, kontrol, aturan seleksi, aturan berhenti, jadwal benih, setiap ringkasan replikasi, hasil pengembangan, hasil holdout, ukuran efek eksak, hasil negatif, dan batas bukti. Pecahan disimpan sebagai pembilang dan penyebut serta desimal empat tempat. Kunci diurutkan, inden dan akhir baris ditetapkan, lalu core_sha256 mengikat rekaman sebelum medan hash ditambahkan.\nPada lingkungan Python yang sama, perintah yang sama menghasilkan byte sama. Versi Python ikut dicatat karena rincian pembangkit acak semu merupakan bagian dari lingkungan yang perlu dibekukan.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-proof",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-proof",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.11 Eksperimen dan bukti",
+    "text": "8.11 Eksperimen dan bukti\nEksperimen ini membuktikan hal yang sangat terbatas tentang eksekusi: untuk benih dan kode yang direkam, jumlah keberhasilan dapat dihitung ulang. Ia memberi bukti empiris tentang lima ambang pada sampel buatan berhingga.\nIa tidak membuktikan bahwa ambang 5 terbaik:\n\ndi luar kisi 3 sampai 7;\nuntuk setiap urutan data;\nuntuk pembangkit kasus lain; atau\nuntuk fenomena nyata yang tidak dimodelkan oleh generator.\n\nBukti umum memerlukan klaim matematis yang tepat. Misalnya, jika distribusi skor dan peluang hasil didefinisikan secara eksak, seseorang dapat menghitung akurasi harapan setiap ambang dengan menjumlahkan peluang pada sepuluh skor. Perhitungan itu merupakan argumen tentang model yang didefinisikan, bukan jaminan bahwa model mewakili dunia nyata.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-exercises",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-exercises",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.12 Latihan",
+    "text": "8.12 Latihan\n\n8.12.1 Latihan 1 - variabel dan perancu\nSebuah eksperimen menguji ambang 4 pada 100 kasus pertama dan ambang 6 pada 100 kasus berikutnya. Sebutkan variabel utama, hasil yang diukur, dan perancu yang mungkin. Berikan satu perbaikan.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nTanyakan apakah kedua ambang menghadapi kasus yang sama sulitnya.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nVariabel utamanya adalah ambang, dan hasilnya dapat berupa proporsi prediksi benar. Kelompok kasus menjadi perancu karena urutan pertama dan kedua mungkin mempunyai tingkat kesulitan berbeda. Perbaikan paling langsung ialah menilai kedua ambang pada 200 kasus yang sama. Jika hal itu tidak mungkin, acak urutan penugasan dan lakukan replikasi dengan aturan yang dibekukan.\n\n\n\n\n\n8.12.2 Latihan 2 - benih bukan mesin waktu\nJelaskan mengapa menyimpan benih cukup untuk mengulang simulasi Unit 7 tetapi tidak cukup untuk mengulang pengukuran suhu di laboratorium.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nBedakan urutan acak semu dari gangguan fisik dan keadaan alat.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nSimulasi menghitung seluruh urutan dari algoritme dan benih, sehingga pasangan yang sama dapat membangkitkan kasus yang sama pada lingkungan yang dibekukan. Suhu laboratorium dipengaruhi sensor, kalibrasi, waktu, lokasi, dan gangguan fisik yang tidak berasal dari random.Random. Benih harus dilengkapi data mentah, keadaan alat, waktu, prosedur, dan replikasi independen.\n\n\n\n\n\n8.12.3 Latihan 3 - pemilihan dan holdout\nPada data pengembangan, ambang 4, 5, dan 6 memperoleh 760, 810, dan 790 jawaban benar dari 1.000 kasus. Ambang mana dipilih? Mengapa Anda tidak boleh mengganti pilihan setelah melihat bahwa ambang 6 sedikit lebih baik pada holdout?\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nGunakan aturan seleksi pada pengembangan, lalu pertahankan fungsi holdout sebagai penilaian yang belum disentuh.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nAmbang 5 dipilih karena 810 adalah jumlah benar terbesar. Jika pilihan diubah menjadi 6 setelah membaca holdout, data itu ikut melakukan pemilihan dan tidak lagi menjadi penilaian terpisah. Ambang 6 dapat menjadi hipotesis untuk eksperimen baru dengan holdout baru, tetapi hasil eksperimen lama harus tetap dilaporkan menurut rencana semula.\n\n\n\n\n\n8.12.4 Latihan 4 - ukuran efek dan aturan berhenti\nHitung peningkatan ambang 5 atas ambang 6 dari 2.355 dan 2.204 jawaban benar dalam 3.000 kasus. Apakah sasaran 0,10 tercapai? Bolehkah eksperimen berhenti lebih awal pada replikasi yang menunjukkan 0,11?\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nKurangi jumlah benar lalu bagi dengan jumlah kasus yang sama.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nPeningkatannya (2355−2204)/3000=151/3000≈0,0503(2355-2204)/3000=151/3000\\approx0{,}0503, yaitu sekitar 5,03 poin persentase. Sasaran 10 poin tidak tercapai. Eksperimen tidak boleh berhenti pada satu replikasi 0,11 karena aturan awal mewajibkan seluruh replikasi; berhenti berdasarkan hasil akan mengubah rancangan dan membuat ringkasan terlalu menguntungkan.\n\n\n\n\n\n8.12.5 Latihan 5 - hasil negatif dan batas bukti\nTuliskan kesimpulan jujur untuk eksperimen Unit 7 dan satu klaim yang tidak boleh dibuat. Lalu sebutkan apa yang diperlukan untuk membuktikan klaim umum tentang ambang terbaik pada model yang didefinisikan.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPisahkan efek pada holdout, sasaran 0,10, dan seluruh ruang kemungkinan.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nKesimpulan jujur: ambang 5 terpilih pada kisi, lalu mengungguli ambang 6 sekitar 5,03 poin persentase pada holdout, tetapi tidak mencapai efek minimum 10 poin yang ditetapkan. Klaim terlarang: ambang 5 telah terbukti terbaik untuk semua data atau dunia nyata. Untuk klaim umum pada model eksak, tentukan distribusi skor dan peluang hasil, hitung akurasi harapan setiap kandidat (atau seluruh domain ambang), lalu bandingkan dengan argumen yang mencakup semuanya.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-summary",
+    "href": "source/units/07-rancangan-eksperimen.html#sec-o002-u07-summary",
+    "title": "8  Rancangan Eksperimen yang Dapat Diperiksa",
+    "section": "8.13 Ringkasan",
+    "text": "8.13 Ringkasan\n\nPertanyaan, hipotesis, pembanding, ukuran hasil, dan efek minimum ditetapkan sebelum melihat hasil.\nVariabel lain dikendalikan agar perbedaan tidak tercampur dengan kesulitan sampel atau perubahan prosedur.\nKisi, aturan seri, replikasi, jadwal benih, dan aturan berhenti merupakan bagian dari rencana.\nBenih mengulang acak semu, bukan nondeterminisme fisik yang tidak direkam.\nData pengembangan memilih parameter; holdout menilai pilihan sekali.\nUkuran efek numerik lebih penting daripada kesan visual, dan hasil negatif harus tetap dilaporkan.\nEksperimen berhingga memberi bukti empiris terbatas; bukti umum memerlukan argumen yang mencakup domain klaim.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Rancangan Eksperimen yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html",
+    "href": "source/units/08-pengujian-validasi.html",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "",
+    "text": "9.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nPrasyarat lokal: Unit 1-5, fungsi, jumlah berhingga, persamaan kuadrat, dan pengertian domain. Unit ini hanya memerlukan pustaka standar Python.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-objectives",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-objectives",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "",
+    "text": "memakai assertion untuk menyatakan hasil atau invarian yang dapat diperiksa;\nmembedakan pengujian berbasis contoh dari pengujian berbasis sifat;\nmembedakan tes unit, integrasi, dan regresi;\nmemilih oracle tanpa menyalin algoritme yang sedang diuji;\nmemakai kesamaan eksak dan toleransi numerik pada tempat yang tepat;\nmenguji nilai batas, prasyarat, dan perilaku galat;\nmerumuskan hubungan metamorfik dan invarian;\nmemvalidasi implementasi terhadap hasil yang diturunkan secara independen; dan\nmembatasi bukti pengujian agar tidak disalahartikan sebagai bukti matematis umum.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-assertions",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-assertions",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.2 Assertion dan kontrak",
+    "text": "9.2 Assertion dan kontrak\nAssertion menyatakan kondisi yang diharapkan benar pada satu titik pelaksanaan. Dalam tes unittest, bentuk seperti self.assertEqual(actual, expected) mencatat kegagalan sebagai hasil tes. Pernyataan assert bawaan Python lebih cocok untuk invarian internal yang jika gagal menandakan kesalahan pemrograman.\n\n\n\nDaftar 9.1\n\n\ndef triangular_iterative(n):\n    if isinstance(n, bool) or not isinstance(n, int):\n        raise TypeError(\"n harus berupa bilangan bulat\")\n    if n &lt; 0:\n        raise ValueError(\"n harus taknegatif\")\n\n    total = 0\n    for k in range(1, n + 1):\n        previous = total\n        total += k\n        assert total &gt;= previous\n    return total\n\n\n\nJangan memakai assert n &gt;= 0 sebagai satu-satunya validasi masukan publik. Python dapat menghapus pernyataan assert ketika dijalankan dengan optimasi. Prasyarat pengguna harus diperiksa secara eksplisit dan menghasilkan jenis galat yang terdokumentasi.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-examples-properties",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-examples-properties",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.3 Contoh dan sifat",
+    "text": "9.3 Contoh dan sifat\nTes contoh memasangkan masukan tertentu dengan keluaran yang diketahui:\n\n\n\nnn\n1+2+⋯+n1+2+\\cdots+n\n\n\n\n\n0\n0\n\n\n1\n1\n\n\n2\n3\n\n\n10\n55\n\n\n100\n5.050\n\n\n\nContoh mudah dibaca dan sangat baik bagi kasus penting atau kesalahan yang pernah ditemukan. Namun, beberapa contoh tidak menjelaskan struktur seluruh domain.\nTes sifat memeriksa hubungan yang harus tetap benar pada banyak masukan. Jika T(n)=1+2+⋯+nT(n)=1+2+\\cdots+n, maka\nT(n+1)−T(n)=n+1\nT(n+1)-T(n)=n+1\n\ndan\nT(2n)=2T(n)+n2.\nT(2n)=2T(n)+n^2.\n\nHubungan kedua tidak menentukan satu keluaran dari nol; ia menghubungkan beberapa pemanggilan fungsi. Hubungan semacam ini disebut metamorfik dan berguna ketika keluaran benar bagi setiap masukan sulit dihitung langsung.\nTes sifat pada seribu nilai tetap masih merupakan pemeriksaan berhingga. Ia lebih luas daripada lima contoh, tetapi bukan bukti universal.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-test-levels",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-test-levels",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.4 Tes unit, integrasi, dan regresi",
+    "text": "9.4 Tes unit, integrasi, dan regresi\nKetiga label ini menjawab pertanyaan berbeda.\n\n\n\n\n\n\n\n\nTingkat\nFokus\nContoh Unit 8\n\n\n\n\nunit\nsatu fungsi atau kontrak kecil\ntriangular_iterative(10) == 55\n\n\nintegrasi\nbeberapa bagian bekerja bersama\noracle, sifat, dan penulis JSON menghasilkan laporan sah\n\n\nregresi\nkesalahan tertentu tidak kembali\nnilai batas n=0 tetap menghasilkan 0\n\n\n\nTes regresi biasanya ditambahkan setelah sebuah kesalahan ditemukan dan diperbaiki. Ia harus menyimpan masukan minimum yang memicu kesalahan serta hasil yang benar. Menamai setiap tes besar sebagai “regresi” mengaburkan riwayat kegagalan yang sebenarnya hendak dijaga.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-oracles",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-oracles",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.5 Oracle dan nilai referensi",
+    "text": "9.5 Oracle dan nilai referensi\nOracle adalah sumber keputusan tentang keluaran yang benar. Pilihannya dapat berupa:\n\nnilai kecil yang dihitung dan ditinjau sebelumnya;\ndefinisi atau identitas matematis;\nimplementasi referensi yang lebih sederhana;\ndata acuan dengan asal-usul yang jelas; atau\ninvarian dan hubungan metamorfik.\n\nOracle yang mengulang baris kode produksi dengan nama berbeda tidak mandiri. Kesalahan yang sama dapat hidup di kedua tempat dan semua tes tetap lulus.\nImplementasi yang diuji pada unit ini menjumlahkan 1 sampai n dengan perulangan. Oracle utamanya diturunkan melalui pasangan. Tulis jumlah maju dan mundur:\nT(n)=1+2+⋯+n,\nT(n)=1+2+\\cdots+n,\n\nT(n)=n+(n−1)+⋯+1.\nT(n)=n+(n-1)+\\cdots+1.\n\nMenjumlahkan kedua baris memberi nn pasangan, masing-masing bernilai n+1n+1. Jadi\n2T(n)=n(n+1),T(n)=n(n+1)2.\n2T(n)=n(n+1), \\qquad T(n)=\\frac{n(n+1)}{2}.\n\nFungsi referensi memakai rumus ini, bukan perulangan kedua. Dengan demikian, kesepakatan keduanya lebih informatif daripada membandingkan dua salinan loop.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-exact-tolerant",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-exact-tolerant",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.6 Eksak dan bertoleransi",
+    "text": "9.6 Eksak dan bertoleransi\nJika hasilnya bilangan bulat atau rasional eksak, gunakan kesamaan eksak. triangular_iterative(10) harus sama dengan 55, bukan sekadar dekat. Toleransi pada tes semacam itu dapat menyembunyikan kesalahan satu satuan.\nUntuk pendekatan titik-mengambang, tentukan besaran yang diperiksa dan alasan toleransinya. Iterasi Newton untuk x2=2x^2=2 menghasilkan pendekatan akar dua. Tes Unit 8 memeriksa residual\n|x2−2|≤10−12\n|x^2-2|\\le 10^{-12}\n\nsetelah lima iterasi dari x0=1x_0=1.\n\nfrom math import isclose\n\nx = 1.0\nfor _ in range(5):\n    x = 0.5 * (x + 2.0 / x)\n\nisclose(x*x, 2.0, rel_tol=0.0, abs_tol=1e-12)\n\n\n\nDaftar 9.2\n\n\nTrue\n\n\n\n\nToleransi diterapkan pada residual yang mempunyai makna jelas. Jangan memilih toleransi setelah melihat kegagalan hanya agar tes berubah menjadi hijau.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-edge-domain",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-edge-domain",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.7 Nilai batas dan domain",
+    "text": "9.7 Nilai batas dan domain\nDomain fungsi jumlah pada unit ini adalah bilangan bulat taknegatif. Tes harus memeriksa sekurangnya:\n\nbatas n=0;\nnilai pertama n=1;\nnilai biasa seperti n=10;\nnilai negatif yang harus ditolak;\nbilangan bukan bulat yang harus ditolak; dan\nTrue, karena bool merupakan subkelas int di Python tetapi bukan masukan yang dimaksud kontrak matematika ini.\n\nTes galat perlu memeriksa jenis kegagalan, bukan hanya bahwa “sesuatu gagal”. ValueError bagi bilangan bulat negatif dan TypeError bagi 2.5 menyatakan dua pelanggaran kontrak yang berbeda.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-metamorphic",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-metamorphic",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.8 Invarian dan pengujian metamorfik",
+    "text": "9.8 Invarian dan pengujian metamorfik\nInvarian loop sederhana adalah jumlah tidak berkurang setelah bilangan positif berikutnya ditambahkan. Hubungan metamorfik membandingkan pemanggilan berbeda:\n\n\n\nDaftar 9.3\n\n\nfor n in range(201):\n    value = triangular_iterative(n)\n    assert triangular_iterative(n + 1) - value == n + 1\n    assert triangular_iterative(2*n) == 2*value + n*n\n\n\n\nHubungan metamorfik tidak memerlukan tabel 201 jawaban, tetapi tetap memerlukan derivasi. Untuk hubungan penggandaan,\nT(2n)−2T(n)=n(2n+1)−n(n+1)=n2.\nT(2n)-2T(n)\n=n(2n+1)-n(n+1)\n=n^2.\n\nJika hubungan salah dirumuskan, tes dapat menolak implementasi benar. Kode tes harus ditinjau seperti kode produksi.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-independent-validation",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-independent-validation",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.9 Validasi independen",
+    "text": "9.9 Validasi independen\nValidasi bertanya apakah program menjawab persoalan yang dimaksud, bukan hanya apakah ia konsisten dengan dirinya sendiri. Pada unit ini:\n\nspesifikasi mendefinisikan T(n)T(n) sebagai jumlah bilangan 1 sampai nn;\nimplementasi memakai penjumlahan berulang;\noracle memakai rumus pasangan yang diturunkan terpisah;\ntabel nilai kecil memberi jangkar yang mudah diperiksa; dan\nsifat inkremen serta penggandaan memberi pemeriksaan silang tambahan.\n\nLapisan yang berbeda mengurangi risiko satu kesalahan tunggal lolos tanpa terlihat. Mereka tidak membuat validasi sempurna: spesifikasi dapat salah, oracle dapat salah diturunkan, atau domain uji dapat melewatkan cacat.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-artifact",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-artifact",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.10 Laporan deterministik",
+    "text": "9.10 Laporan deterministik\nJalankan dari akar proyek:\npython source/code/unit08_validation.py\nLaporan memuat nilai referensi, perbandingan dengan rumus pasangan, pelanggaran sifat, pemeriksaan batas dan domain, residual numerik, tingkat tes, serta batas kesimpulan. JSON memakai UTF-8, kunci terurut, inden tetap, dan akhir baris LF. core_sha256 mengikat isi inti sebelum medan hash ditambahkan. Tidak ada waktu saat ini, jaringan, atau bilangan acak dalam jalur ini.\nDua keluaran byte-identik menunjukkan bahwa dua pelaksanaan merekam hasil yang sama pada kondisi yang sama. Hal itu tidak menunjukkan bahwa oracle atau spesifikasi pasti benar.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-coverage-proof",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-coverage-proof",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.11 Cakupan, bukti kerja, dan bukti",
+    "text": "9.11 Cakupan, bukti kerja, dan bukti\nCakupan mempunyai beberapa arti. Cakupan baris mengatakan bagian kode mana yang sempat dijalankan. Cakupan cabang mengatakan pilihan kendali mana yang diambil. Cakupan domain mengatakan masukan matematika mana yang diperiksa. Cakupan 100% pada baris tidak berarti semua nilai atau semua sifat telah diuji.\nJika program cocok dengan rumus pasangan untuk 0 &lt;= n &lt;= 1000, kesimpulan yang sah ialah tidak ditemukan ketidakcocokan pada domain berhingga itu dalam lingkungan yang dijalankan. Bukti rumus pasangan berlaku untuk seluruh bilangan bulat taknegatif karena memilih nn secara umum dan memasangkan suku. Bukti bahwa loop mengimplementasikan jumlah dapat memakai invarian loop. Tes mendukung bahwa implementasi konkret sesuai dengan argumen pada kasus yang diperiksa; tes sendiri tidak menggantikan kedua bukti tersebut.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-exercises",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-exercises",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.12 Latihan",
+    "text": "9.12 Latihan\n\n9.12.1 Latihan 1 - memilih assertion\nUntuk setiap klaim berikut, pilih kesamaan eksak atau perbandingan bertoleransi dan jelaskan: (a) jumlah 1+...+100, (b) pendekatan numerik 2\\sqrt{2}, dan (c) panjang daftar keluaran.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nTanyakan apakah representasi dan hasil yang ditetapkan bersifat eksak.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nGunakan kesamaan eksak untuk (a), yaitu 5050, karena operasi bilangan bulat Python pada rentang ini eksak. Gunakan perbandingan bertoleransi untuk (b), dengan toleransi yang diturunkan dari residual atau kebutuhan masalah. Gunakan kesamaan eksak untuk (c), karena panjang daftar adalah bilangan bulat. Memakai toleransi untuk panjang dapat menerima daftar dengan jumlah unsur salah.\n\n\n\n\n\n9.12.2 Latihan 2 - membangun oracle\nAnda menguji fungsi yang menghitung 1+3+5+⋯+(2n−1)1+3+5+\\cdots+(2n-1) dengan loop. Turunkan oracle yang tidak memakai loop yang sama dan sebutkan domainnya.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nGambar persegi yang bertambah satu bingkai berbentuk L pada setiap langkah.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nJumlah nn bilangan ganjil pertama adalah n2n^2. Persegi berukuran (n−1)×(n−1)(n-1)\\times(n-1) memperoleh 2n−12n-1 titik baru untuk menjadi persegi n×nn\\times n. Jadi oracle dapat menghitung n*n untuk bilangan bulat taknegatif n. Implementasi loop kemudian dibandingkan dengan rumus tersebut, bukan dengan loop salinan.\n\n\n\n\n\n9.12.3 Latihan 3 - hubungan metamorfik\nUntuk fungsi S(n)=n2S(n)=n^2, tuliskan dua hubungan metamorfik yang dapat diuji tanpa tabel nilai lengkap. Jelaskan mengapa hubungan itu sah.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nBandingkan S(n+1)S(n+1) dengan S(n)S(n), lalu coba masukan −n-n.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nDua hubungan ialah S(n+1)−S(n)=2n+1S(n+1)-S(n)=2n+1 dan S(−n)=S(n)S(-n)=S(n). Yang pertama mengikuti (n+1)2−n2=2n+1(n+1)^2-n^2=2n+1; yang kedua mengikuti (−n)2=n2(-n)^2=n^2. Keduanya dapat menemukan kelas kesalahan berbeda, tetapi tetap perlu contoh batas dan pemeriksaan langsung terhadap beberapa nilai acuan.\n\n\n\n\n\n9.12.4 Latihan 4 - tes regresi batas\nSebuah fungsi rata-rata pernah membagi dengan nol ketika menerima daftar kosong, padahal kontraknya harus menolak masukan itu dengan ValueError. Tuliskan inti tes regresinya dan jelaskan mengapa tes tersebut harus tetap ada.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nGunakan with self.assertRaises(ValueError):.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nIntinya ialah with self.assertRaises(ValueError): mean([]). Tes harus tetap ada karena menyimpan masukan minimum yang pernah menembus kontrak dan perilaku yang sekarang diwajibkan. Jika refaktor kemudian mengembalikan NaN atau membocorkan ZeroDivisionError, tes menunjukkan bahwa perilaku publik berubah.\n\n\n\n\n\n9.12.5 Latihan 5 - batas bukti pengujian\nSemua tes lulus, semua baris kode tercakup, dan sejuta masukan acak tidak menemukan kegagalan. Nyatakan kesimpulan terkuat yang sah dan dua alasan mengapa hal itu belum menjadi bukti umum.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nBedakan cakupan pelaksanaan dari cakupan domain dan periksa oracle.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nKesimpulan terkuat ialah implementasi melewati rangkaian tes, cabang, dan sampel yang dinyatakan pada lingkungan tersebut. Itu belum menjadi bukti umum karena domain tak hingga tidak habis oleh sejuta sampel dan oracle atau spesifikasi dapat memuat kesalahan bersama. Bukti umum membutuhkan argumen yang mencakup seluruh domain; validasi tambahan membutuhkan oracle yang mandiri, kasus batas, sifat, serta rekaman lingkungan.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/08-pengujian-validasi.html#sec-o002-u08-summary",
+    "href": "source/units/08-pengujian-validasi.html#sec-o002-u08-summary",
+    "title": "9  Pengujian dan Validasi Komputasi",
+    "section": "9.13 Ringkasan",
+    "text": "9.13 Ringkasan\n\nAssertion yang tepat menyatakan kontrak lokal yang dapat diperiksa.\nContoh mengikat kasus penting; sifat dan hubungan metamorfik memperluas pemeriksaan tanpa menyediakan bukti universal secara otomatis.\nTes unit, integrasi, dan regresi melindungi lapisan risiko yang berbeda.\nOracle harus berasal dari nilai, derivasi, data, atau implementasi yang cukup mandiri dari kode yang diuji.\nKesamaan eksak sesuai bagi hasil eksak; toleransi harus mengikuti makna numerik dan skala.\nNilai batas, domain salah, dan jenis galat merupakan bagian kontrak.\nValidasi silang dan laporan kanonis memperkuat bukti kerja.\nCakupan serta tes yang lulus bukan pengganti bukti matematis umum.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Pengujian dan Validasi Komputasi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html",
+    "href": "source/units/09-data-konfigurasi-provenans.html",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "",
+    "text": "10.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nPrasyarat lokal: Unit 1-4 dan 7-8, tabel, rasio, satuan, berkas teks, dan fungsi sederhana. Jalur dasar hanya memakai pustaka standar Python.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-objectives",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-objectives",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "",
+    "text": "membedakan data mentah, data turunan, dan laporan run;\nmenyatakan schema, tipe, makna kolom, dan satuan;\nmemisahkan konfigurasi yang berubah dari kode transformasi;\nmencatat identitas lingkungan dan batas berkas kunci;\nmemakai jalur relatif yang tidak dapat keluar dari akar proyek;\nmerekam asal-usul serta status hak setiap komponen;\nmengikat artefak pada ukuran byte dan SHA-256 tanpa melebih-lebihkan fungsi hash;\nmengecualikan data privat dari artefak publik; dan\nmembedakan pengulangan semantik dari pengulangan byte demi byte.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-data-layers",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-data-layers",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.2 Tiga lapisan data",
+    "text": "10.2 Tiga lapisan data\nData mentah adalah rekaman yang diterima sebelum transformasi analitis unit. “Mentah” tidak berarti tanpa sejarah: sensor, formulir, atau proses ekspor mungkin sudah mengubahnya. Istilah itu hanya menyatakan titik masuk yang dibekukan bagi run ini.\nUnit 9 memakai lima rekaman sintetis:\n\n\n\nsample_id\nlength_cm\nmass_g\n\n\n\n\nS01\n10,0\n20,0\n\n\nS02\n12,0\n24,6\n\n\nS03\n8,0\n15,8\n\n\nS04\n14,0\n28,7\n\n\nS05\n11,0\n21,8\n\n\n\nData turunan dihasilkan dengan aturan\nr=massa dalam grampanjang dalam sentimeter,\nr=\\frac{\\text{massa dalam gram}}{\\text{panjang dalam sentimeter}},\n\nlalu dibulatkan ke tiga tempat desimal dengan aturan round half even. Nama kolom turunannya ialah mass_per_length_g_per_cm.\nManifest run bukan data pengukuran baru. Ia menjawab berkas apa yang dipakai, transformasi apa yang dijalankan, konfigurasi dan lingkungan apa yang berlaku, serta byte keluaran mana yang dihasilkan.\nJangan menimpa data mentah dengan hasil turunan. Jika sebuah transformasi perlu diperbaiki, data mentah yang terikat memungkinkan keluaran dibuat ulang dan dibandingkan.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-schema-units",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-schema-units",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.3 Schema dan satuan",
+    "text": "10.3 Schema dan satuan\nSchema adalah kontrak struktur. Schema mentah unit ini menetapkan:\n\n\n\n\n\n\n\n\n\nMedan\nTipe\nSatuan\nMakna\n\n\n\n\nsample_id\nteks berbentuk S + dua digit\ntidak ada\npengenal sintetis\n\n\nlength_cm\nteks desimal positif\ncm\npanjang\n\n\nmass_g\nteks desimal positif\ng\nmassa\n\n\n\nMenyimpan desimal sebagai teks menghindari perubahan awal ke titik-mengambang. Kode menolak nilai numerik yang bukan teks, lalu mengubah teks tervalidasi itu menjadi Decimal ketika menghitung. Pengenal tidak mempunyai satuan; None lebih jujur daripada satuan kosong yang dapat berarti “lupa diisi”.\nNama length tanpa satuan tidak cukup. Nilai 10 dapat berarti 10 mm, 10 cm, atau 10 m, dan ketiganya menghasilkan rasio berbeda. Satuan harus mengikuti data sampai keluaran; schema turunan menetapkan g/cm.\nValidasi memeriksa nama medan, bentuk pengenal, keunikan, bilangan berhingga, dan kepositifan. Schema yang lulus belum menjamin pengukuran benar, tetapi ia mencegah beberapa salah tafsir struktural.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-configuration",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-configuration",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.4 Konfigurasi terpisah dari kode",
+    "text": "10.4 Konfigurasi terpisah dari kode\nKode transformasi menyatakan bagaimana rasio dihitung. Konfigurasi menyatakan pilihan run yang sah berubah, misalnya:\n{\n  \"derived_path\": \"data/derived/unit09_mass-per-length.csv\",\n  \"ratio_decimal_places\": 3,\n  \"raw_path\": \"data/raw/unit09_measurements.csv\",\n  \"rounding\": \"ROUND_HALF_EVEN\",\n  \"schema\": \"o002.unit09.config.v1\"\n}\nJika jumlah tempat desimal ditanam di banyak baris kode, perubahan kecil mudah menjadi tidak konsisten. Satu konfigurasi tervalidasi membuat pilihan itu dapat ditinjau dan diikat dengan hash.\nMemisahkan konfigurasi tidak berarti menerima sembarang nilai. Unit ini hanya menerima 0 sampai 9 tempat desimal dan satu aturan pembulatan yang telah diuji. Konfigurasi adalah masukan yang mempunyai schema, bukan jalan belakang untuk menjalankan teks sebagai kode.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-environment",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-environment",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.5 Identitas dan kunci lingkungan",
+    "text": "10.5 Identitas dan kunci lingkungan\nKeluaran dapat berubah walaupun data dan kode tampak sama karena versi bahasa, pustaka, sistem operasi, atau perangkat keras berbeda. Manifest Unit 9 mencatat implementasi dan versi Python serta menyatakan bahwa jalur dasar hanya memakai pustaka standar.\nKarena tidak ada dependensi eksternal, “kunci lingkungan” unit ini kecil: identitas Python dan konteks aritmetika Decimal diserialisasikan secara kanonis lalu diikat dengan SHA-256. Konteks tersebut membekukan presisi 28 digit, pembulatan round half even, batas eksponen, serta perangkap operasi; ia tidak mewarisi presisi atau perangkap proses pemanggil. Proyek yang memakai NumPy, SymPy, SageMath, atau pustaka lain memerlukan berkas kunci yang menyebut versi tepat beserta sumber paket. Daftar nama tanpa versi bukan kunci.\nBerkas kunci juga tidak membekukan seluruh dunia. Perbedaan sistem operasi, lokal, CPU, atau pustaka sistem masih dapat relevan. Catat lapisan yang mempengaruhi pertanyaan, dan jangan menyebut lingkungan “identik” hanya karena satu nomor versi cocok.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-paths",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-paths",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.6 Jalur relatif yang aman",
+    "text": "10.6 Jalur relatif yang aman\nManifest menyimpan jalur logis seperti data/raw/unit09_measurements.csv, bukan direktori-profil/Nama/Desktop/data.csv. Jalur relatif dapat dipindahkan bersama proyek dan tidak membocorkan nama akun lokal.\nValidator unit menerima jalur POSIX relatif yang kanonis. Ia menolak:\n\n/etc/secret atau C:/secret, karena absolut;\n../secret dan data/../secret, karena dapat keluar atau menyamarkan tujuan;\ngaris miring terbalik, agar satu bentuk dipakai pada semua sistem; dan\nbentuk ganda seperti data//raw/file.csv.\n\nSetiap peran artefak juga harus mempunyai jalur unik setelah normalisasi Unicode dan pelipatan kapitalisasi. Karena itu, data/raw.csv dan DATA/RAW.CSV dianggap bertabrakan agar satu manifest tetap aman pada sistem berkas yang tidak membedakan huruf besar dan kecil.\nValidasi jalur adalah batas keamanan dan reproduksibilitas. Namun, ia bukan izin membaca setiap berkas yang kebetulan berada di dalam proyek. Daftar masukan yang diizinkan tetap harus dibatasi oleh rencana run.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-rights",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-rights",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.7 Provenans dan hak per komponen",
+    "text": "10.7 Provenans dan hak per komponen\nProvenans menjawab “dari mana komponen ini berasal dan apa yang terjadi padanya?”. Hak menjawab “atas dasar apa komponen boleh dipakai atau didistribusikan?”. Keduanya berkaitan tetapi tidak sama.\nManifest mencatat secara terpisah:\n\ndata mentah sintetis yang ditetapkan di kode;\ndata turunan beserta rumus transformasinya;\nkonfigurasi;\nidentitas lingkungan; dan\nkode Unit 9, yang menunjuk LICENSE-CODE.md dan lisensi MIT.\n\nData contoh tidak memuat bahan pihak ketiga. Rekaman itu tidak dipakai untuk membuat klaim lisensi menyeluruh atas setiap berkas proyek. Jika sebuah gambar CC BY-SA, kode MIT, dan data berizin khusus digabungkan, masing-masing tetap memerlukan pencipta/sumber, lisensi, perubahan, dan pembatasannya sendiri. Provenans tidak boleh dihapus hanya karena hasil turunannya berupa angka.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-hashes",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-hashes",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.8 SHA-256 dan ukuran byte",
+    "text": "10.8 SHA-256 dan ukuran byte\nUntuk setiap komponen, manifest menyimpan jalur logis, jenis media, peran, ukuran byte, dan SHA-256. Jika satu byte berubah, hash hampir pasti berubah. Ukuran membantu mendeteksi berkas kosong atau pemotongan yang tidak sengaja dan memberi pemeriksaan sederhana sebelum hashing.\nHash menjawab pertanyaan identitas byte. Ia tidak membuktikan bahwa:\n\nrumus transformasi benar;\nsatuan sesuai;\ndata dikumpulkan secara etis;\nlisensi yang dicatat sah; atau\nmanifest memuat semua komponen yang semestinya.\n\nSemua pertanyaan itu memerlukan pemeriksaan lain. Hash yang cocok atas berkas salah hanya memastikan bahwa dua orang memiliki berkas salah yang sama.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-privacy",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-privacy",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.9 Privasi dan pengecualian",
+    "text": "10.9 Privasi dan pengecualian\nReproduksibilitas bukan alasan untuk menerbitkan nama, surel, nomor telepon, lokasi rinci, atau teks bebas yang dapat mengidentifikasi seseorang. Dataset unit memakai S01 sampai S05 sebagai pengenal sintetis dan secara eksplisit menolak medan privat.\nPada penelitian nyata, strategi dapat meliputi:\n\nmemisahkan data terbatas dari artefak publik;\nmenerbitkan schema, kode, data sintetis, dan ringkasan aman;\nmencatat cara peneliti berwenang dapat memohon akses;\nmenghapus medan yang tidak diperlukan sebelum analisis; dan\nmemeriksa apakah gabungan beberapa medan masih dapat mengidentifikasi orang.\n\nMenulis hash data rahasia ke manifest publik juga dapat membocorkan informasi dalam keadaan tertentu, khususnya bila ruang kemungkinan kecil. Putuskan apa yang boleh dipublikasikan sebelum membuat manifes publik.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-manifest",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-manifest",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.10 Manifest run yang kanonis",
+    "text": "10.10 Manifest run yang kanonis\nJalankan dari akar proyek:\npython source/code/unit09_provenance.py --output output/unit09-manifest.json\nSkrip tidak mengakses jaringan atau waktu saat ini. Manifest memuat rekaman mentah dan turunan, schema, konfigurasi, identitas lingkungan, ikatan artefak, rantai input-kode-konfigurasi-output, kebijakan privasi, status hak per komponen, dan batas reproduksibilitas. JSON memakai UTF-8, kunci terurut, inden tetap, dan satu akhir baris LF. core_sha256 mengikat isi sebelum medan hash tersebut ditambahkan.\nCSV mentah dan turunan pada contoh ini adalah artefak logis yang byte kanonisnya dibangun di memori lalu diikat di manifest. Dengan demikian, perintah hanya menulis JSON yang diminta, tetapi pembaca dapat membangun ulang CSV persis dari rekaman dan aturan kolom yang disimpan.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-reproducibility",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-reproducibility",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.11 Semantik dan byte",
+    "text": "10.11 Semantik dan byte\nDua keluaran reproduktif secara byte jika setiap byte sama. Keduanya pasti mempunyai SHA-256 sama. Syarat ini berguna untuk memeriksa alur kerja deterministik, arsip, dan distribusi.\nDua keluaran dapat reproduktif secara semantik walaupun byte berbeda. Contohnya, JSON berikut menyimpan pemetaan sama:\n{\"a\":1,\"b\":2}\n{\n  \"b\": 2,\n  \"a\": 1\n}\nSpasi dan urutan kunci berbeda, sehingga hash berbeda, tetapi pengurai JSON menghasilkan nilai yang sama. Dalam komputasi numerik, dua algoritme juga dapat menghasilkan nilai yang setara dalam toleransi dan satuan yang ditetapkan tanpa menghasilkan byte identik.\nKarena itu, laporan harus menyatakan tingkat yang diminta. Pengulangan deterministik Unit 9 menargetkan byte identik pada lingkungan terkunci. Validasi ilmiah lebih luas juga harus membandingkan schema, satuan, rumus, dan makna hasil.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-exercises",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-exercises",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.12 Latihan",
+    "text": "10.12 Latihan\n\n10.12.1 Latihan 1 - mentah, turunan, dan garis keturunan\nJika mass_g untuk S03 berubah dari 15.8 menjadi 15.9, komponen mana yang harus berubah hash dan komponen mana yang seharusnya tetap?\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nIkuti rantai data mentah → transformasi → data turunan; kode dan konfigurasi tidak diedit.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nHash dan ukuran data mentah mungkin berubah, dan hash data turunan harus berubah karena rasio S03 dihitung dari massa baru. core_sha256 manifest juga berubah karena ikatannya berubah. Hash kode, konfigurasi, dan identitas lingkungan tetap jika byte ketiganya tidak berubah. Provenans harus mencatat bahwa keluaran baru berasal dari revisi data mentah tersebut.\n\n\n\n\n\n10.12.2 Latihan 2 - schema dan satuan\nSebuah tabel mengganti length_cm dengan kolom length tanpa memperbarui schema. Mengapa nilai 10.0 tidak cukup untuk menghitung rasio yang dapat ditafsirkan? Berikan perbaikan.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nAngka tidak membawa satuan secara otomatis.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\n10.0 dapat berarti milimeter, sentimeter, meter, atau satuan lain. Rasio dan satuannya berubah mengikuti pilihan itu. Perbaiki dengan medan yang tidak ambigu seperti length_cm, nyatakan unit: cm dalam schema, validasi data terhadap schema, dan ubah rumus keluaran jika konversi satuan diperlukan.\n\n\n\n\n\n10.12.3 Latihan 3 - konfigurasi dan jalur aman\nKonfigurasi berisi raw_path: \"../../private.csv\" dan jumlah tempat desimal ditulis langsung pada tiga fungsi berbeda. Temukan dua masalah dan berikan perbaikannya.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPeriksa pelintasan direktori dan satu sumber keputusan run.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nJalur ../../private.csv dapat keluar dari akar proyek dan harus ditolak; gunakan jalur relatif kanonis dalam daftar masukan yang diizinkan. Menanam jumlah desimal di tiga tempat membuat perubahan mudah tidak seragam. Simpan satu nilai ratio_decimal_places dalam konfigurasi berversi, validasi rentangnya, dan buat semua pemanggilan membaca nilai yang sama.\n\n\n\n\n\n10.12.4 Latihan 4 - hak dan privasi\nAnda menerima tabel pihak ketiga berisi pengukuran, nama, dan surel. Sebutkan apa yang harus dipisahkan atau dicatat sebelum membuat artefak publik.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nProvenans, izin distribusi, dan kebutuhan analitis adalah tiga pertanyaan berbeda.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nCatat sumber, pencipta, versi, lisensi atau dasar izin, serta perubahan pada komponen tabel. Pisahkan nama dan surel dari data publik kecuali ada dasar, kebutuhan, dan persetujuan yang sah; gunakan pengenal aman atau data sintetis bila sesuai. Periksa apakah pengukuran gabungan masih dapat mengidentifikasi orang. Jangan menganggap lisensi kode proyek otomatis mencakup data pihak ketiga.\n\n\n\n\n\n10.12.5 Latihan 5 - semantik, byte, dan hash\nDua berkas JSON mempunyai urutan kunci dan spasi berbeda, tetapi setelah diurai menghasilkan objek yang sama. Apa yang dapat dikatakan tentang reproduksibilitas semantik, byte, dan SHA-256 mereka?\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nBandingkan nilai hasil penguraian dengan urutan karakter asli.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nKeduanya reproduktif secara semantik untuk pemetaan JSON tersebut karena nilai hasil penguraiannya sama. Keduanya tidak reproduktif secara byte karena urutan karakternya berbeda, sehingga SHA-256 hampir pasti berbeda. Hash hanya mengikat byte masing-masing; untuk menuntut hash sama, keduanya harus diserialisasikan dengan aturan kanonis yang sama.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-summary",
+    "href": "source/units/09-data-konfigurasi-provenans.html#sec-o002-u09-summary",
+    "title": "10  Data, Konfigurasi, dan Provenans",
+    "section": "10.13 Ringkasan",
+    "text": "10.13 Ringkasan\n\nData mentah, data turunan, dan manifest run mempunyai peran berbeda dan tidak boleh saling menimpa.\nSchema memuat tipe, makna, dan satuan; validasi struktur bukan bukti mutu pengukuran.\nKonfigurasi dipisahkan dari kode, tetapi tetap mempunyai schema dan batas.\nIdentitas Python dan dependensi berversi membentuk kunci lingkungan minimum.\nJalur relatif kanonis meningkatkan portabilitas dan mencegah pelintasan direktori.\nSetiap komponen mempertahankan provenans dan status haknya sendiri.\nUkuran serta SHA-256 mengikat byte, bukan kebenaran, etika, atau lisensi.\nPrivasi dapat mewajibkan pengecualian data dari artefak publik.\nReproduksibilitas semantik tidak selalu memerlukan byte identik; manifest harus menyatakan tingkat yang ditargetkan.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Data, Konfigurasi, dan Provenans</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/10-otomasi-pipa.html",
+    "href": "source/units/10-otomasi-pipa.html",
+    "title": "11  Otomasi dan Alur Kerja yang Dapat Direproduksi",
+    "section": "",
+    "text": "11.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nPrasyarat lokal: Unit 1-2 dan Unit 8-9. Pembaca harus memahami fungsi, berkas, hash, konfigurasi, dan tes sebelum mengotomatisasikannya.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Otomasi dan Alur Kerja yang Dapat Direproduksi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/10-otomasi-pipa.html#sec-o002-u10-objectives",
+    "href": "source/units/10-otomasi-pipa.html#sec-o002-u10-objectives",
+    "title": "11  Otomasi dan Alur Kerja yang Dapat Direproduksi",
+    "section": "",
+    "text": "menggambarkan eksperimen sebagai graf tugas dan dependensi;\nmembedakan sumber, produk antara, dan artefak akhir;\nmembangun ulang hanya ketika masukan, parameter, kode, atau lingkungan yang terikat berubah;\nmendeteksi dependensi hilang dan siklus sebelum menjalankan tugas;\nmenulis artefak secara atomik agar kegagalan tidak meninggalkan hasil seolah lengkap;\nmenjelaskan mengapa cap waktu saja bukan bukti kesamaan isi; dan\nmengaudit rekaman alur kerja tanpa menganggap keberhasilan proses sebagai bukti matematika.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Otomasi dan Alur Kerja yang Dapat Direproduksi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/10-otomasi-pipa.html#sec-o002-u10-graph",
+    "href": "source/units/10-otomasi-pipa.html#sec-o002-u10-graph",
+    "title": "11  Otomasi dan Alur Kerja yang Dapat Direproduksi",
+    "section": "11.2 Dari daftar perintah ke graf",
+    "text": "11.2 Dari daftar perintah ke graf\nEksperimen kecil sering ditulis sebagai daftar perintah:\ngenerate-data\nanalyze-data\ndraw-figure\nwrite-report\nUrutan itu menyembunyikan alasan setiap langkah. Graf dependensi menyatakan bahwa analisis memerlukan data, gambar memerlukan analisis, dan laporan memerlukan analisis serta gambar. Dengan informasi itu, pengelola alur kerja dapat menentukan urutan yang sah dan pekerjaan yang perlu diulang.\nGraf harus asiklik. Jika analysis memerlukan report, sementara report memerlukan analysis, tidak ada tugas pertama yang dapat diselesaikan.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Otomasi dan Alur Kerja yang Dapat Direproduksi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/10-otomasi-pipa.html#sec-o002-u10-artifact-classes",
+    "href": "source/units/10-otomasi-pipa.html#sec-o002-u10-artifact-classes",
+    "title": "11  Otomasi dan Alur Kerja yang Dapat Direproduksi",
+    "section": "11.3 Sumber dan artefak",
+    "text": "11.3 Sumber dan artefak\n\nSumber ditulis atau diperoleh dari luar alur kerja: kode, konfigurasi, data mentah, dan lisensi.\nProduk antara dapat dibuat ulang tetapi membantu langkah berikutnya.\nArtefak akhir diserahkan kepada pembaca atau peninjau.\n\nJangan menjadikan artefak akhir sebagai satu-satunya salinan data sumber. Jika produk antara mahal dibuat, ia boleh disimpan dalam tembolok, tetapi hash dan aturan pembuatannya tetap harus diketahui.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Otomasi dan Alur Kerja yang Dapat Direproduksi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/10-otomasi-pipa.html#sec-o002-u10-freshness",
+    "href": "source/units/10-otomasi-pipa.html#sec-o002-u10-freshness",
+    "title": "11  Otomasi dan Alur Kerja yang Dapat Direproduksi",
+    "section": "11.4 Kapan tugas dianggap mutakhir",
+    "text": "11.4 Kapan tugas dianggap mutakhir\nCap waktu berguna untuk optimisasi lokal, tetapi dapat berubah ketika berkas disalin atau jam mesin tidak cocok. Rekaman yang kuat mengikat:\n\nhash byte setiap masukan;\nhash atau versi kode tugas;\nparameter terkanonisasi;\nidentitas lingkungan yang relevan; dan\nhash setiap keluaran.\n\nSkrip Unit 10 menyimpan preimage fingerprint secara lengkap dan kanonis: nama serta SHA-256 setiap masukan, SHA-256 kode tugas, parameter, dan identitas runtime yang benar-benar menjalankan contoh. Identitas runtime memuat implementasi dan versi Python, tag cache, keluarga sistem operasi, arsitektur mesin, dan urutan byte. Ia sengaja tidak memuat nama host atau jalur profil. task_fingerprint adalah SHA-256 byte JSON kanonis preimage tersebut, sehingga hash dapat dihitung ulang langsung dari rekaman.\nJika salah satu masukan berubah, tugas dan seluruh keturunannya menjadi tidak mutakhir. Jika semuanya cocok dan keluaran masih mempunyai hash yang dicatat, tugas dapat dilewati secara aman. Pemeriksa juga menerima daftar nama keluaran yang diwajibkan. Pemetaan keluaran kosong, keluaran wajib yang hilang, atau keluaran tambahan yang tidak dideklarasikan dinilai tidak mutakhir. Unit ini tidak mempunyai kontrak tugas tanpa keluaran.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Otomasi dan Alur Kerja yang Dapat Direproduksi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/10-otomasi-pipa.html#sec-o002-u10-atomic",
+    "href": "source/units/10-otomasi-pipa.html#sec-o002-u10-atomic",
+    "title": "11  Otomasi dan Alur Kerja yang Dapat Direproduksi",
+    "section": "11.5 Gagal secara atomik",
+    "text": "11.5 Gagal secara atomik\nMenulis langsung ke results.json dapat meninggalkan berkas terpotong ketika proses berhenti. Pola yang lebih aman ialah:\n\ntulis ke berkas sementara baru dalam direktori yang sama;\ntutup dan sinkronkan bila ketahanan terhadap crash diperlukan;\nverifikasi bentuk dan hash;\nganti nama sementara menjadi nama tujuan secara atomik; dan\njangan menghapus hasil lama sampai pengganti siap.\n\nNama sementara harus unik dan bukan tautan yang sudah ada. Pembersihan berkas sementara adalah penanganan kegagalan lokal, bukan pengganti manifest.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Otomasi dan Alur Kerja yang Dapat Direproduksi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/10-otomasi-pipa.html#sec-o002-u10-targets",
+    "href": "source/units/10-otomasi-pipa.html#sec-o002-u10-targets",
+    "title": "11  Otomasi dan Alur Kerja yang Dapat Direproduksi",
+    "section": "11.6 Target bernama dan pemeriksaan",
+    "text": "11.6 Target bernama dan pemeriksaan\nAlur kerja O002 sekurang-kurangnya mempunyai target:\ntest     menjalankan tes tanpa membangun pembaca\nresults  membuat artefak eksperimen\nhtml     membangun pembaca web setelah test dan results\npdf      membangun pembaca cetak setelah test dan results\nqa       memeriksa kedua pembaca serta manifest\nall      menjalankan seluruh batas penerimaan\nTarget all tidak boleh menerbitkan. Penerbitan merupakan transaksi terpisah yang hanya memakai artefak yang telah melewati qa.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Otomasi dan Alur Kerja yang Dapat Direproduksi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/10-otomasi-pipa.html#sec-o002-u10-example",
+    "href": "source/units/10-otomasi-pipa.html#sec-o002-u10-example",
+    "title": "11  Otomasi dan Alur Kerja yang Dapat Direproduksi",
+    "section": "11.7 Contoh alur kerja",
+    "text": "11.7 Contoh alur kerja\nSkrip unit ini memvalidasi graf kecil, menghitung urutan topologis, dan membuat rekaman kanonis yang memuat preimage fingerprint, runtime aktual, serta kontrak keluaran:\npython source/code/unit10_pipeline.py --output output/unit10-results.json\nContoh tidak menjalankan perintah shell. Ia memodelkan keputusan alur kerja sehingga logika urutan, siklus, dan kesegaran dapat diuji tanpa efek eksternal.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Otomasi dan Alur Kerja yang Dapat Direproduksi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/10-otomasi-pipa.html#sec-o002-u10-proof-boundary",
+    "href": "source/units/10-otomasi-pipa.html#sec-o002-u10-proof-boundary",
+    "title": "11  Otomasi dan Alur Kerja yang Dapat Direproduksi",
+    "section": "11.8 Otomasi tidak memutuskan kebenaran",
+    "text": "11.8 Otomasi tidak memutuskan kebenaran\nAlur kerja yang hijau membuktikan bahwa pemeriksaan yang diprogram lulus pada lingkungan tersebut. Ia tidak membuktikan bahwa pemeriksaan cukup, model tepat, atau teorema benar. Otomasi mengurangi kelalaian berulang; tanggung jawab matematis tetap pada perancang dan peninjau.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Otomasi dan Alur Kerja yang Dapat Direproduksi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/10-otomasi-pipa.html#sec-o002-u10-exercises",
+    "href": "source/units/10-otomasi-pipa.html#sec-o002-u10-exercises",
+    "title": "11  Otomasi dan Alur Kerja yang Dapat Direproduksi",
+    "section": "11.9 Latihan",
+    "text": "11.9 Latihan\n\n11.9.1 Latihan 1 - urutan tugas\nTugas data tidak mempunyai dependensi; fit memerlukan data; plot memerlukan data dan fit; report memerlukan plot. Berikan satu urutan yang sah.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nSetiap tugas harus muncul setelah seluruh dependensinya.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nUrutan data, fit, plot, report sah. plot tidak boleh mendahului fit, dan report tidak boleh mendahului plot. Jika ada beberapa tugas independen, lebih dari satu urutan dapat sama-sama sah.\n\n\n\n\n\n11.9.2 Latihan 2 - siklus\nJelaskan mengapa dependensi a -&gt; b, b -&gt; c, dan c -&gt; a harus ditolak sebelum satu tugas pun dijalankan.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nCari tugas yang seluruh dependensinya sudah selesai.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nTidak ada tugas awal: a menunggu b, b menunggu c, dan c menunggu a. Menjalankan sebagian alur kerja sebelum mendeteksi siklus dapat meninggalkan artefak yang tampak sah, sehingga validasi graf harus mendahului efek.\n\n\n\n\n\n11.9.3 Latihan 3 - cap waktu\nSebuah data disalin dengan isi sama tetapi cap waktu baru. Apakah analisis harus selalu diulang? Bandingkan kebijakan cap waktu dan hash.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nCap waktu mengukur peristiwa sistem berkas, bukan isi.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nKebijakan cap waktu dapat membangun ulang walaupun isi sama. Kebijakan hash dapat melewati analisis jika byte data, kode, parameter, lingkungan, dan keluaran yang dicatat semuanya tetap cocok. Pilihan hash lebih mahal dibaca, tetapi lebih langsung mengikat isi.\n\n\n\n\n\n11.9.4 Latihan 4 - kegagalan penulisan\nMengapa menulis keluaran baru langsung di atas artefak lama berbahaya? Susun urutan penulisan yang aman.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPertimbangkan proses yang berhenti setelah setengah byte ditulis.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nKegagalan dapat menghancurkan artefak lama dan meninggalkan keluaran terpotong di nama resmi. Tulis ke sementara unik pada direktori sama, tutup dan verifikasi, lalu ganti tujuan secara atomik. Jika langkah gagal, artefak lama tetap tersedia dan berkas sementara dapat didisposisikan.\n\n\n\n\n\n11.9.5 Latihan 5 - alur kerja hijau\nSemua target alur kerja lulus. Sebutkan dua alasan mengapa kesimpulan matematika masih dapat salah.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nTes dapat tidak lengkap dan model dapat tidak sesuai pertanyaan.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nTes mungkin tidak mencakup kasus yang membantah implementasi, dan model atau asumsi matematika dapat keliru walaupun kode melaksanakannya dengan tepat. Alur kerja hijau menguatkan reproduksibilitas pemeriksaan, bukan kelengkapan logika.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Otomasi dan Alur Kerja yang Dapat Direproduksi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/10-otomasi-pipa.html#sec-o002-u10-summary",
+    "href": "source/units/10-otomasi-pipa.html#sec-o002-u10-summary",
+    "title": "11  Otomasi dan Alur Kerja yang Dapat Direproduksi",
+    "section": "11.10 Ringkasan",
+    "text": "11.10 Ringkasan\n\nGraf dependensi menjelaskan urutan dan dampak perubahan.\nPreimage fingerprint yang lengkap membuat hash masukan, kode, parameter, dan runtime dapat dihitung ulang.\nHash isi dan kontrak keluaran mengikat kesegaran lebih langsung daripada cap waktu; pemetaan keluaran kosong tidak dianggap mutakhir.\nSiklus dan dependensi hilang harus ditolak sebelum efek.\nPenulisan atomik mencegah keluaran setengah jadi memakai nama resmi.\nOtomasi membuat pemeriksaan konsisten, tetapi tidak menggantikan penilaian matematika.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Otomasi dan Alur Kerja yang Dapat Direproduksi</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/11-eksperimen-numerik.html",
+    "href": "source/units/11-eksperimen-numerik.html",
+    "title": "12  Eksperimen Numerik Berprasyarat",
+    "section": "",
+    "text": "12.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nUnit ini mempunyai jalur lokal. Jalur akar memerlukan A30 dan konsep fungsi kontinu. Jalur kuadratur memerlukan B30, jalur sistem linear memerlukan B40, dan jalur persamaan diferensial memerlukan B70. Pembaca boleh menunda jalur yang prasyaratnya belum dipenuhi.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Eksperimen Numerik Berprasyarat</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/11-eksperimen-numerik.html#sec-o002-u11-objectives",
+    "href": "source/units/11-eksperimen-numerik.html#sec-o002-u11-objectives",
+    "title": "12  Eksperimen Numerik Berprasyarat",
+    "section": "",
+    "text": "memilih metode numerik yang sesuai dengan prasyarat matematikanya;\nmencatat invarian, toleransi, batas iterasi, dan kriteria berhenti;\nmembedakan galat masalah, galat diskretisasi, galat pembulatan, dan galat implementasi;\nmemeriksa hasil melalui substitusi, residual, batas, atau metode pembanding;\nmenjalankan eksperimen konvergensi tanpa mengubahnya menjadi bukti umum; dan\nmenolak penggunaan pustaka yang menyembunyikan asumsi domain.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Eksperimen Numerik Berprasyarat</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/11-eksperimen-numerik.html#sec-o002-u11-method-theorem",
+    "href": "source/units/11-eksperimen-numerik.html#sec-o002-u11-method-theorem",
+    "title": "12  Eksperimen Numerik Berprasyarat",
+    "section": "12.2 Metode datang bersama teorema",
+    "text": "12.2 Metode datang bersama teorema\nPerintah perangkat lunak tidak menjamin bahwa masalah memenuhi asumsi metode. Metode bagi-dua, misalnya, mempertahankan selang yang kedua ujungnya mempunyai tanda berbeda. Jaminan adanya akar di dalam selang memerlukan kekontinuan. Program dapat memeriksa tanda ujung; program tidak dapat menyimpulkan kekontinuan dari beberapa sampel. Implementasi unit juga menolak titik ujung, titik tengah, atau nilai fungsi yang tidak berhingga.\nSetiap eksperimen numerik menuliskan:\n\nmasalah dan domain;\nasumsi matematis;\nmetode dan representasi;\nparameter serta kriteria berhenti;\ninvarian yang diperiksa;\nukuran galat atau residual; dan\nbatas kesimpulan.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Eksperimen Numerik Berprasyarat</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/11-eksperimen-numerik.html#sec-o002-u11-bisection",
+    "href": "source/units/11-eksperimen-numerik.html#sec-o002-u11-bisection",
+    "title": "12  Eksperimen Numerik Berprasyarat",
+    "section": "12.3 Jalur A30: bagi-dua",
+    "text": "12.3 Jalur A30: bagi-dua\nUntuk mencari akar f(x)=0f(x)=0, mulai dengan [a,b][a,b] sehingga f(a)f(b)&lt;0f(a)f(b)&lt;0. Setiap langkah memilih titik tengah dan mempertahankan separuh selang yang masih mempunyai perubahan tanda.\nJika lebar awal w0=b−aw_0=b-a, setelah kk langkah lebarnya wk=w0/2kw_k=w_0/2^k. Hubungan ini memberi batas galat berdasarkan selang, bukan hanya berdasarkan nilai kecil f(x)f(x).\n\nfrom source.code.unit11_numerical import bisection\n\nresult = bisection(lambda x: x*x - 2.0, 1.0, 2.0, width_tolerance=1e-12)\n(result.midpoint, result.width, result.iterations)\n\n\n\nDaftar 12.1\n\n\n(1.414213562372879, 9.094947017729282e-13, 40)\n\n\n\n\nNilai itu adalah pendekatan. Pernyataan eksak x=2x=\\sqrt{2} berasal dari definisi akar positif persamaan x2=2x^2=2, bukan dari digit yang dicetak.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Eksperimen Numerik Berprasyarat</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/11-eksperimen-numerik.html#sec-o002-u11-quadrature",
+    "href": "source/units/11-eksperimen-numerik.html#sec-o002-u11-quadrature",
+    "title": "12  Eksperimen Numerik Berprasyarat",
+    "section": "12.4 Jalur B30: kuadratur dan pemurnian",
+    "text": "12.4 Jalur B30: kuadratur dan pemurnian\nAturan trapesium majemuk mengganti kurva pada setiap subselang dengan ruas garis. Eksperimen pemurnian memakai n,2n,4n,…n,2n,4n,\\ldots subselang dan mencatat perubahan hasil. Nilai yang tampak stabil mendukung dugaan konvergensi, tetapi tidak menggantikan analisis galat.\nUntuk fungsi linear, aturan trapesium eksak dalam aritmetika eksak. Kasus itu menjadi pemeriksaan implementasi yang lebih kuat daripada angka referensi acak.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Eksperimen Numerik Berprasyarat</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/11-eksperimen-numerik.html#sec-o002-u11-linear",
+    "href": "source/units/11-eksperimen-numerik.html#sec-o002-u11-linear",
+    "title": "12  Eksperimen Numerik Berprasyarat",
+    "section": "12.5 Jalur B40: sistem linear dan residual",
+    "text": "12.5 Jalur B40: sistem linear dan residual\nJika program mengusulkan x̂\\widehat{x} bagi Ax=bAx=b, hitung residual r=b−Ax̂r=b-A\\widehat{x}. Residual kecil berarti persamaan hampir dipenuhi pada skala yang dipakai. Residual kecil belum selalu berarti galat solusi kecil; hubungannya dipengaruhi kondisi matriks.\nUntuk sistem berukuran dua yang koefisiennya rasional, solusi eksak dengan Fraction dapat menjadi pembanding independen bagi jalur titik-mengambang.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Eksperimen Numerik Berprasyarat</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/11-eksperimen-numerik.html#sec-o002-u11-euler",
+    "href": "source/units/11-eksperimen-numerik.html#sec-o002-u11-euler",
+    "title": "12  Eksperimen Numerik Berprasyarat",
+    "section": "12.6 Jalur B70: langkah Euler",
+    "text": "12.6 Jalur B70: langkah Euler\nUntuk masalah y′=g(t,y)y'=g(t,y), langkah Euler memakai\nyk+1=yk+hg(tk,yk).\ny_{k+1}=y_k+h g(t_k,y_k).\n\nMengurangi hh dan membandingkan dengan solusi yang diketahui dapat mengungkap pola galat pada contoh. Itu menguji implementasi dan perilaku kasus, bukan membuktikan orde konvergensi bagi semua fungsi gg.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Eksperimen Numerik Berprasyarat</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/11-eksperimen-numerik.html#sec-o002-u11-error-sources",
+    "href": "source/units/11-eksperimen-numerik.html#sec-o002-u11-error-sources",
+    "title": "12  Eksperimen Numerik Berprasyarat",
+    "section": "12.7 Empat sumber ketidakcocokan",
+    "text": "12.7 Empat sumber ketidakcocokan\nKetika hasil tidak cocok dengan harapan, pisahkan:\n\ngalat masalah: model atau data tidak menggambarkan pertanyaan;\ngalat diskretisasi: metode mengganti masalah kontinu dengan masalah berhingga;\ngalat pembulatan: representasi titik-mengambang mengubah operasi; dan\ngalat implementasi: kode tidak melaksanakan metode yang dimaksud.\n\nMengubah toleransi hanya menanggapi sebagian sumber tersebut. Karena itu, laporan tidak boleh menyebut satu angka “galat numerik” tanpa definisi.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Eksperimen Numerik Berprasyarat</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/11-eksperimen-numerik.html#sec-o002-u11-artifacts",
+    "href": "source/units/11-eksperimen-numerik.html#sec-o002-u11-artifacts",
+    "title": "12  Eksperimen Numerik Berprasyarat",
+    "section": "12.8 Artefak eksperimen",
+    "text": "12.8 Artefak eksperimen\nJalankan seluruh contoh lokal yang prasyaratnya telah dipenuhi:\npython source/code/unit11_numerical.py --output output/unit11-results.json\nKeluaran mencatat selang akhir bagi-dua, tabel pemurnian kuadratur, solusi dan residual sistem, serta galat langkah Euler. Identitas fungsi, domain atau data awal, toleransi, kisi pemurnian, banyak langkah, dan nilai referensi yang dipakai pemeriksaan disimpan bersama hasil.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Eksperimen Numerik Berprasyarat</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/11-eksperimen-numerik.html#sec-o002-u11-exercises",
+    "href": "source/units/11-eksperimen-numerik.html#sec-o002-u11-exercises",
+    "title": "12  Eksperimen Numerik Berprasyarat",
+    "section": "12.9 Latihan",
+    "text": "12.9 Latihan\n\n12.9.1 Latihan 1 - invarian bagi-dua\nSebutkan dua invarian yang harus diperiksa pada setiap langkah bagi-dua dan jelaskan mengapa nilai tengah saja tidak cukup.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPerhatikan perubahan tanda dan penyusutan selang.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nUjung selang harus tetap mengurung perubahan tanda, dan lebar selang harus berkurang setengah pada setiap langkah. Nilai tengah saja tidak membuktikan bahwa akar masih terkurung atau bahwa implementasi memilih separuh yang benar.\n\n\n\n\n\n12.9.2 Latihan 2 - batas iterasi\nBerapa langkah minimum yang menjamin lebar selang paling besar 10−610^{-6} jika lebar awal 1?\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nCari kk sehingga 2−k≤10−62^{-k}\\leq 10^{-6}.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nKarena 219=524288&lt;1062^{19}=524288&lt;10^6 dan 220=1048576&gt;1062^{20}=1048576&gt;10^6, diperlukan 20 langkah. Setelah 20 langkah, lebarnya 2−20&lt;10−62^{-20}&lt;10^{-6}.\n\n\n\n\n\n12.9.3 Latihan 3 - pemeriksaan kuadratur\nGunakan aturan trapesium untuk f(x)=3x+2f(x)=3x+2 pada [0,4][0,4] dengan satu subselang. Bandingkan dengan integral eksak.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nLuas trapesium adalah lebar dikali rata-rata tinggi ujung.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nNilai ujungnya 2 dan 14, sehingga luas trapesium 4(2+14)/2=324(2+14)/2=32. Integral eksak [3x2/2+2x]04=24+8=32[3x^2/2+2x]_0^4=24+8=32. Kecocokan eksak ini diharapkan karena grafik fungsi linear sendiri merupakan ruas garis.\n\n\n\n\n\n12.9.4 Latihan 4 - residual bukan galat solusi\nJelaskan mengapa residual kecil tidak otomatis menjamin bahwa solusi hampiran dekat dengan solusi eksak.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPikirkan sistem yang sangat peka terhadap perubahan kecil pada ruas kanan.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nResidual mengukur seberapa baik x̂\\widehat{x} memenuhi persamaan yang diberikan. Pada matriks berkondisi buruk, perubahan kecil pada ruas kanan dapat berkaitan dengan perubahan besar pada solusi. Karena itu residual harus dibaca bersama skala dan informasi kondisi, bukan sebagai galat solusi langsung.\n\n\n\n\n\n12.9.5 Latihan 5 - eksperimen Euler\nUntuk y′=yy'=y, y(0)=1y(0)=1, bandingkan galat pada t=1t=1 untuk h=1/10h=1/10 dan h=1/20h=1/20. Kesimpulan apa yang boleh dibuat?\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nGunakan solusi referensi ete^t dan jangan menaikkan dua kasus menjadi teorema.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nLangkah Euler memberi (1+h)1/h(1+h)^{1/h}. Untuk h=0,1h=0{,}1 nilainya sekitar 2,5937; untuk h=0,05h=0{,}05 sekitar 2,6533; sedangkan e≈2,7183e\\approx2{,}7183. Galat berkurang pada dua kasus ini. Hasil tersebut mendukung perilaku yang diharapkan dan memeriksa implementasi, tetapi dua ukuran langkah tidak membuktikan konvergensi atau orde galat secara umum.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Eksperimen Numerik Berprasyarat</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/11-eksperimen-numerik.html#sec-o002-u11-summary",
+    "href": "source/units/11-eksperimen-numerik.html#sec-o002-u11-summary",
+    "title": "12  Eksperimen Numerik Berprasyarat",
+    "section": "12.10 Ringkasan",
+    "text": "12.10 Ringkasan\n\nMetode numerik datang bersama asumsi dan teorema.\nKriteria berhenti harus dinyatakan sebelum hasil dilihat.\nResidual, batas selang, dan kasus eksak memberi pemeriksaan yang berbeda.\nGalat masalah, diskretisasi, pembulatan, dan implementasi tidak boleh dicampur.\nEksperimen pemurnian memberi bukti kerja; bukti konvergensi memerlukan argumen matematika.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Eksperimen Numerik Berprasyarat</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/12-proyek-akhir.html",
+    "href": "source/units/12-proyek-akhir.html",
+    "title": "13  Proyek Akhir yang Dapat Diperiksa",
+    "section": "",
+    "text": "13.1 Tujuan belajar\nSetelah menyelesaikan unit ini, pembaca dapat:\nPrasyarat lokal: seluruh unit inti O002 yang relevan bagi proyek dan seluruh prasyarat matematika dari topik yang dipilih. Proyek tidak boleh memakai topik matematika lanjut hanya karena pustaka dapat menghitungnya.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Proyek Akhir yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/12-proyek-akhir.html#sec-o002-u12-objectives",
+    "href": "source/units/12-proyek-akhir.html#sec-o002-u12-objectives",
+    "title": "13  Proyek Akhir yang Dapat Diperiksa",
+    "section": "",
+    "text": "mengubah pertanyaan matematika menjadi eksperimen dengan batas klaim yang dinyatakan;\nmemisahkan klaim matematika, klaim implementasi, dan pengamatan empiris;\nmenyerahkan sumber, data, lingkungan, perintah, tes, dan artefak yang saling terikat oleh hash;\nmeminta orang lain mereproduksi hasil tanpa petunjuk lisan tambahan;\nmenanggapi tinjauan substantif dengan perubahan atau alasan yang dapat diperiksa; dan\nmenjelaskan bagian proyek yang merupakan bukti dan bagian yang hanya merupakan bukti kerja komputasional.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Proyek Akhir yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/12-proyek-akhir.html#sec-o002-u12-question",
+    "href": "source/units/12-proyek-akhir.html#sec-o002-u12-question",
+    "title": "13  Proyek Akhir yang Dapat Diperiksa",
+    "section": "13.2 Pertanyaan sebelum perangkat",
+    "text": "13.2 Pertanyaan sebelum perangkat\nProyek dimulai dari pertanyaan, bukan dari keinginan memakai suatu pustaka. Pertanyaan yang baik menentukan objek, domain, besaran yang diamati, dan bentuk jawaban yang dianggap bermakna. Contoh:\n\nBagaimana galat evaluasi suatu bentuk aljabar berubah ketika masukan mendekati titik pembatalan, dan reformulasi mana yang mempertahankan lebih banyak angka bermakna pada rentang yang ditentukan?\n\nPertanyaan itu belum menjanjikan teorema universal. Ia memberi wilayah eksperimen, perbandingan metode, dan ukuran galat yang dapat diaudit.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Proyek Akhir yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/12-proyek-akhir.html#sec-o002-u12-claims",
+    "href": "source/units/12-proyek-akhir.html#sec-o002-u12-claims",
+    "title": "13  Proyek Akhir yang Dapat Diperiksa",
+    "section": "13.3 Tiga jenis klaim",
+    "text": "13.3 Tiga jenis klaim\nSetiap kesimpulan proyek diberi jenis berikut.\n\n\n\n\n\n\n\n\nJenis\nContoh\nBukti yang diperlukan\n\n\n\n\nmatematika\ndua rumus setara pada domain tertentu\nargumen simbolik dengan domain dan pengecualian\n\n\nimplementasi\nfungsi mengembalikan residu pada batas yang ditetapkan\ninspeksi, tes, dan kasus tepi\n\n\nempiris\nmetode A lebih akurat pada kisi uji tertentu\ndata, parameter, lingkungan, ukuran galat, dan analisis\n\n\n\nKesalahan paling serius ialah menaikkan pengamatan empiris menjadi klaim matematika tanpa argumen. Kesalahan lain ialah memberi bukti matematika yang benar tetapi tidak memeriksa apakah program benar-benar mengimplementasikannya.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Proyek Akhir yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/12-proyek-akhir.html#sec-o002-u12-package",
+    "href": "source/units/12-proyek-akhir.html#sec-o002-u12-package",
+    "title": "13  Proyek Akhir yang Dapat Diperiksa",
+    "section": "13.4 Paket reproduksi minimum",
+    "text": "13.4 Paket reproduksi minimum\nPaket proyek minimum mempunyai struktur berikut.\nproject/\n  README.md\n  LICENSES/\n  environment/\n  source/\n  tests/\n  inputs/\n  outputs/\n  RUN_MANIFEST.json\nRUN_MANIFEST.json mencatat versi skema; command sebagai larik argumen; environment dengan runtime, versi runtime, dan dependensi; objek parameters; daftar inputs dan outputs; rekaman ukuran dan hash dalam artifacts; serta larik claims. Setiap jalur masukan dan keluaran harus menunjuk satu artefak terdaftar. Setiap objek klaim memuat id, kind, statement, evidence, dan limitations, dan nilai evidence harus menunjuk keluaran terdaftar. Dengan demikian, hash artefak juga mengikat bukti klaim. Manifest harus memuat sekurangnya satu artefak, satu keluaran, dan satu klaim, dan jalur tidak boleh berulang. Jalur harus berbentuk POSIX kanonis dan relatif terhadap akar paket; jalur profil mesin tidak boleh menjadi bagian publik.\nSkrip pemeriksa unit ini menerima sebuah manifest dan akar paket:\npython source/code/unit12_capstone.py verify\nPerintah ringkas itu memakai tata letak baku di atas: paket project, manifest project/RUN_MANIFEST.json, dan laporan output/unit12-results.json. Opsi --root, --manifest, dan --output tersedia jika tata letaknya berbeda.\nPemeriksa tidak menentukan apakah argumen matematika benar. Ia memastikan bahwa berkas yang disebut ada, ukurannya dan hash-nya cocok, jalurnya tidak keluar dari paket, kontrak eksekusi mempunyai bentuk minimum, klaim mempunyai medan minimum, dan setiap bukti klaim menunjuk keluaran yang benar-benar telah diperiksa. Pemeriksa tidak menjalankan command, menilai isi README dan lisensi, atau membuktikan bahwa struktur folder minimum sudah memadai; hal-hal itu tetap diperiksa melalui reproduksi buta dan rubrik.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Proyek Akhir yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/12-proyek-akhir.html#sec-o002-u12-blind-replay",
+    "href": "source/units/12-proyek-akhir.html#sec-o002-u12-blind-replay",
+    "title": "13  Proyek Akhir yang Dapat Diperiksa",
+    "section": "13.5 Reproduksi buta terbatas",
+    "text": "13.5 Reproduksi buta terbatas\nBerikan paket kepada peninjau yang tidak ikut membuatnya. Peninjau mengikuti README dan merekam:\n\nlingkungan yang benar-benar dipasang;\nperintah yang dijalankan;\nhash masukan dan keluaran;\ntes yang lulus atau gagal;\nperbedaan hasil; dan\ninstruksi yang ambigu atau tidak lengkap.\n\n“Berhasil pada komputer pembuat” bukan standar reproduksi. Sebaliknya, perbedaan antarmesin tidak selalu berarti penelitian salah. Perbedaan harus ditelusuri ke versi, platform, nondeterminisme, toleransi, atau cacat paket.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Proyek Akhir yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/12-proyek-akhir.html#sec-o002-u12-review",
+    "href": "source/units/12-proyek-akhir.html#sec-o002-u12-review",
+    "title": "13  Proyek Akhir yang Dapat Diperiksa",
+    "section": "13.6 Tinjauan dan revisi",
+    "text": "13.6 Tinjauan dan revisi\nTinjauan substantif menantang klaim, metode, domain, tes, visualisasi, atau reproduksibilitas. Tanggapan proyek memuat:\n\nringkasan masalah yang diajukan;\nkeputusan menerima, menerima sebagian, atau menolak;\nperubahan byte atau argumen yang dibuat;\nbukti baru yang ditambahkan; dan\nketerbatasan yang masih tersisa.\n\nMenolak komentar diperbolehkan, tetapi “hasil komputer saya sama” bukan alasan yang cukup ketika komentar menyangkut validitas klaim.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Proyek Akhir yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/12-proyek-akhir.html#sec-o002-u12-rubric",
+    "href": "source/units/12-proyek-akhir.html#sec-o002-u12-rubric",
+    "title": "13  Proyek Akhir yang Dapat Diperiksa",
+    "section": "13.7 Rubrik kelulusan",
+    "text": "13.7 Rubrik kelulusan\nProyek lulus hanya jika seluruh syarat berikut terpenuhi:\n\npertanyaan dan domain eksplisit;\nsumber, data, dan hak komponen jelas;\nlingkungan dan perintah dapat dipasang serta dijalankan ulang;\ntes mencakup invarian dan kasus tepi yang relevan;\nartefak dan manifest saling cocok;\nvisualisasi mempunyai label, unit, skala, dan uraian;\nklaim matematika, implementasi, dan empiris tidak dicampur;\nkesimpulan menyatakan keterbatasan;\nreproduksi buta terbatas didokumentasikan; dan\nsatu tanggapan terhadap tinjauan substantif disertakan.\n\nKegagalan satu syarat tidak selalu membatalkan seluruh penelitian, tetapi proyek belum memenuhi standar O002 sampai kekurangan itu diperbaiki atau didisposisikan secara terbuka.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Proyek Akhir yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/12-proyek-akhir.html#sec-o002-u12-exercises",
+    "href": "source/units/12-proyek-akhir.html#sec-o002-u12-exercises",
+    "title": "13  Proyek Akhir yang Dapat Diperiksa",
+    "section": "13.8 Latihan",
+    "text": "13.8 Latihan\n\n13.8.1 Latihan 1 - klasifikasi klaim\nKlasifikasikan pernyataan berikut: “Pada Python 3.13 di Windows, algoritme A memerlukan waktu lebih singkat daripada B untuk semua 100 ukuran yang diuji.” Apakah pernyataan tersebut membuktikan A selalu lebih cepat?\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPerhatikan platform, versi, dan himpunan ukuran.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nItu pengamatan empiris yang dibatasi lingkungan dan 100 ukuran uji. Pernyataan tersebut tidak membuktikan A selalu lebih cepat pada semua ukuran, data, platform, versi, atau implementasi. Kesimpulan harus mempertahankan batas itu.\n\n\n\n\n\n13.8.2 Latihan 2 - manifest yang belum lengkap\nSebuah manifest mencatat nama skrip dan gambar keluaran, tetapi tidak mencatat parameter, versi pustaka, atau hash data. Sebutkan tiga kegagalan reproduksi yang dapat timbul.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nTanyakan apakah peninjau mengetahui masukan, lingkungan, dan byte yang sama.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nPeninjau dapat memakai parameter berbeda, memperoleh perilaku berbeda karena versi pustaka, atau memakai data bernama sama tetapi berisi byte lain. Ketiga keadaan dapat menghasilkan gambar berbeda tanpa cara pasti untuk menentukan sumber perbedaannya.\n\n\n\n\n\n13.8.3 Latihan 3 - jalur berbahaya\nMengapa manifest publik tidak boleh menyebut direktori-profil/Nama/Desktop/data.csv? Berikan bentuk pengganti.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nPertimbangkan privasi dan portabilitas.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nJalur itu membocorkan struktur profil lokal dan tidak ada pada mesin peninjau. Simpan data di dalam paket, misalnya inputs/data.csv, lalu gunakan jalur relatif terhadap akar proyek dan ikat byte-nya dengan ukuran serta SHA-256.\n\n\n\n\n\n13.8.4 Latihan 4 - reproduksi tidak identik\nDua mesin menghasilkan nilai yang berbeda pada digit terakhir tetapi keduanya berada dalam toleransi yang ditetapkan sebelum eksperimen. Apakah reproduksi gagal?\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nBedakan reproduksi semantik dari identitas byte.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nBelum tentu. Jika kontrak memperbolehkan variasi titik-mengambang dan kedua nilai memenuhi toleransi yang dibenarkan, hasil semantik dapat cocok walaupun byte numeriknya berbeda. Namun manifest tetap harus merekam platform dan versi, dan artefak yang diklaim byte-identik harus diperiksa dengan hash.\n\n\n\n\n\n13.8.5 Latihan 5 - tanggapan tinjauan\nPeninjau menunjukkan bahwa grafik memotong sumbu vertikal sehingga perbedaan kecil tampak sangat besar. Tulis tanggapan yang memadai.\n\n\n\n\n\n\nCatatanPetunjuk\n\n\n\n\n\nJelaskan keputusan, perubahan, dan dampaknya pada kesimpulan.\n\n\n\n\n\n\n\n\n\nTipJawaban dan solusi\n\n\n\n\n\nAkui bahwa pilihan sumbu dapat melebihkan kesan visual. Tambahkan grafik dengan rentang penuh atau penanda pemotongan yang jelas, pertahankan grafik terpotong hanya jika membantu membaca variasi lokal, dan nyatakan ukuran efek secara numerik. Perbarui kesimpulan jika klaim sebelumnya bergantung pada kesan visual yang menyesatkan, lalu rekam hash artefak baru.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Proyek Akhir yang Dapat Diperiksa</span>"
+    ]
+  },
+  {
+    "objectID": "source/units/12-proyek-akhir.html#sec-o002-u12-summary",
+    "href": "source/units/12-proyek-akhir.html#sec-o002-u12-summary",
+    "title": "13  Proyek Akhir yang Dapat Diperiksa",
+    "section": "13.9 Ringkasan",
+    "text": "13.9 Ringkasan\n\nProyek dimulai dari pertanyaan dan domain, bukan perangkat.\nKlaim matematika, implementasi, dan empiris memerlukan bukti berbeda.\nManifest dan hash mengikat artefak, tetapi tidak membuktikan teorema.\nReproduksi buta menguji kecukupan paket dan instruksi.\nTinjauan substantif harus dijawab dengan perubahan atau alasan yang dapat diperiksa.\nKelulusan proyek memerlukan pekerjaan matematis, komputasional, dokumenter, dan sosial yang semuanya dapat ditinjau.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Proyek Akhir yang Dapat Diperiksa</span>"
+    ]
+  }
+]

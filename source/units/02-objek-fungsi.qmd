@@ -1,0 +1,240 @@
+---
+title: "Objek, Nilai, dan Fungsi"
+identifier: o002.u02
+---
+
+::: {#sec-o002-u02}
+:::
+
+## Tujuan belajar {#sec-o002-u02-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- memilih representasi Python yang sesuai untuk bilangan bulat, rasional, dan
+  barisan berhingga;
+- membedakan kesamaan nilai dari kesamaan identitas objek;
+- menulis fungsi dengan prasyarat, hasil, dan perilaku galat yang dinyatakan;
+- menghindari perubahan tak disengaja melalui nilai masukan yang dapat diubah;
+- merumuskan invarian yang dapat diperiksa oleh tes; dan
+- menghasilkan keluaran terstruktur yang tidak bergantung pada urutan
+  kebetulan.
+
+Prasyarat lokal: Unit 1, himpunan dan fungsi pada tingkat A30, serta operasi
+dasar pada vektor berhingga. Unit ini belum memerlukan NumPy.
+
+## Jenis matematika dan tipe program {#sec-o002-u02-types}
+
+Pernyataan matematika menentukan himpunan objek dan operasi yang sah. Program
+membutuhkan tipe data konkret. Keduanya berkaitan, tetapi tidak identik.
+
+| Maksud matematika | Representasi awal | Batas penting |
+|---|---|---|
+| bilangan bulat | `int` | ukuran praktis dibatasi memori |
+| bilangan rasional | `Fraction` | pembilang dan penyebut dapat membesar |
+| pendekatan bilangan real | `float` | pembulatan dan rentang berhingga |
+| vektor berhingga yang tetap | `tuple` | panjang dan jenis komponen harus diperiksa |
+| koleksi yang sengaja diubah | `list` | alias dapat melihat perubahan yang sama |
+
+```{python}
+#| label: lst-o002-u02-types
+from fractions import Fraction
+
+values = (7, Fraction(7, 3), 7 / 3)
+[(type(value).__name__, value) for value in values]
+```
+
+Nama tipe tidak membuktikan bahwa nilai memenuhi maksud matematika. Sebuah
+`tuple` berpanjang tiga dapat mewakili vektor di ruang tiga dimensi, koordinat
+warna, atau tiga data yang tidak berhubungan. Kontrak programlah yang memberi
+makna tambahan itu.
+
+## Nilai, identitas, dan alias {#sec-o002-u02-aliasing}
+
+Operator `==` membandingkan nilai menurut aturan tipe. Operator `is`
+memeriksa apakah dua nama menunjuk objek Python yang sama. Untuk alasan
+reproduksibilitas, jangan mengganti pertanyaan tentang nilai dengan pertanyaan
+tentang identitas objek.
+
+```{python}
+#| label: lst-o002-u02-alias
+a = [1, 2, 3]
+b = a
+c = list(a)
+
+(a == c, a is c, a is b)
+```
+
+Karena `b` adalah alias bagi `a`, perubahan melalui salah satu nama tampak
+melalui nama lainnya. Sebaliknya, `c` mula-mula mempunyai nilai sama, tetapi
+merupakan daftar lain. Efek semacam ini dapat membuat eksperimen bergantung
+pada urutan eksekusi sel.
+
+Jika suatu vektor dimaksudkan sebagai nilai yang tidak berubah, `tuple`
+memberi kontrak yang lebih jujur daripada `list`. Ini bukan larangan memakai
+daftar; pilih perubahan hanya ketika perubahan tersebut bagian dari metode.
+
+## Fungsi sebagai kontrak {#sec-o002-u02-contracts}
+
+Fungsi komputasional yang baik menyatakan tiga hal:
+
+1. **Prasyarat:** masukan apa yang diterima?
+2. **Hasil:** nilai apa yang dikembalikan jika prasyarat dipenuhi?
+3. **Kegagalan:** apa yang terjadi jika prasyarat dilanggar?
+
+Contoh berikut menghitung rata-rata rasional secara eksak.
+
+```{python}
+#| label: lst-o002-u02-mean
+from fractions import Fraction
+
+def mean_fraction(values):
+    """Kembalikan rata-rata eksak dari barisan rasional yang tidak kosong."""
+    values = tuple(Fraction(value) for value in values)
+    if not values:
+        raise ValueError("values tidak boleh kosong")
+    return sum(values, start=Fraction(0)) / len(values)
+
+mean_fraction([Fraction(1, 3), Fraction(1, 2)])
+```
+
+Konversi ke `tuple` membekukan masukan yang benar-benar dipakai fungsi. Jika
+pemanggil mengubah daftar asal setelah pemanggilan dimulai, perhitungan lokal
+tidak ikut berubah.
+
+## Fungsi murni dan perubahan keadaan {#sec-o002-u02-purity}
+
+Fungsi berikut mengalikan vektor dengan skalar tanpa mengubah argumennya.
+
+```{python}
+#| label: lst-o002-u02-scale
+def scale_vector(scalar, vector):
+    return tuple(scalar * component for component in vector)
+
+v = (2, -1, 4)
+(scale_vector(3, v), v)
+```
+
+Untuk masukan yang sama, fungsi murni menghasilkan keluaran yang sama dan
+tidak mengubah keadaan di luar fungsi. Sifat ini memudahkan pengujian dan
+pelacakan asal hasil. Program nyata tetap perlu membaca berkas atau menulis
+keluaran; tempatkan efek tersebut di batas program, bukan tersebar di setiap
+fungsi matematika.
+
+## Invarian dan pengujian {#sec-o002-u02-invariants}
+
+Invarian adalah sifat yang harus tetap benar selama operasi tertentu. Untuk
+perkalian skalar pada vektor, beberapa invarian yang dapat diuji ialah:
+
+- panjang vektor tidak berubah;
+- mengalikan dengan 1 mempertahankan nilai;
+- mengalikan dengan 0 menghasilkan vektor nol; dan
+- `scale_vector(a*b, v)` sama dengan
+  `scale_vector(a, scale_vector(b, v))`.
+
+Tes terhadap banyak contoh dapat mendeteksi pelanggaran implementasi. Bukti
+aljabar tetap diperlukan untuk menyatakan sifat bagi semua skalar dan semua
+vektor pada domain yang dimaksud.
+
+## Keluaran kanonis {#sec-o002-u02-canonical-output}
+
+Dua eksperimen dapat menghasilkan informasi sama tetapi byte berbeda karena
+urutan medan, spasi, atau akhir baris. Bila keluaran dipakai sebagai bukti
+kerja, tentukan bentuk kanonis. Skrip Unit 2:
+
+```text
+python source/code/unit02_objects.py --output output/unit02-results.json
+```
+
+menulis JSON UTF-8 dengan nama medan terurut, inden tetap, dan akhir baris LF.
+Hash berkas lalu mengikat satu urutan byte yang dapat dibandingkan.
+
+## Latihan {#sec-o002-u02-exercises}
+
+### Latihan 1 - memilih representasi {#ex-o002-u02-01}
+
+Pilih representasi awal untuk setiap objek berikut dan jelaskan batasnya:
+$2/7$, pendekatan numerik bagi $\sqrt{2}$, dan vektor tetap
+$(1,0,-1)$.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Bedakan nilai eksak dari pendekatan dan nilai tetap dari koleksi yang diubah.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Gunakan `Fraction(2, 7)` bagi bilangan rasional eksak, `float` bagi pendekatan
+numerik terhadap akar dua dengan toleransi yang dinyatakan, dan `tuple` bagi
+vektor tetap. `float` tidak menyimpan akar dua secara eksak, sedangkan `tuple`
+tidak dengan sendirinya menjamin bahwa semua komponennya numerik.
+:::
+
+### Latihan 2 - nilai dan identitas {#ex-o002-u02-02}
+
+Buat dua daftar berbeda dengan nilai `[1, 2]`. Tunjukkan satu perbandingan
+yang benar dan satu perbandingan yang salah. Jelaskan hasilnya.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan `==` dan `is`.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Jika `a=[1,2]` dan `b=[1,2]`, maka `a == b` benar karena nilainya sama,
+sedangkan `a is b` salah karena keduanya objek berbeda. Pertanyaan matematika
+tentang kesamaan daftar unsur biasanya memakai `==`.
+:::
+
+### Latihan 3 - kontrak fungsi {#ex-o002-u02-03}
+
+Tuliskan prasyarat, hasil, dan kegagalan untuk fungsi yang mengembalikan sisa
+terkecil taknegatif dari pembagian $a$ dengan modulus $m$.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Modulus harus positif.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Prasyarat: `a` dan `m` bilangan bulat serta `m > 0`. Hasil: bilangan bulat `r`
+dengan `0 <= r < m` dan `a-r` habis dibagi `m`. Jika `m <= 0`, fungsi harus
+menolak masukan, misalnya dengan `ValueError`.
+:::
+
+### Latihan 4 - alias yang berbahaya {#ex-o002-u02-04}
+
+Jelaskan mengapa fungsi yang menambahkan elemen ke daftar masukan dapat membuat
+hasil eksperimen bergantung pada urutan sel notebook. Berikan satu perbaikan.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Nama lain mungkin menunjuk daftar yang sama.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Pemanggilan pertama mengubah daftar yang kemudian dipakai pemanggilan kedua.
+Menjalankan sel dalam urutan lain memberi keadaan awal berbeda. Perbaikannya
+dapat berupa mengembalikan daftar baru, memakai `tuple` bagi nilai tetap, atau
+membuat perubahan eksplisit serta mengatur ulang keadaan sebelum eksperimen.
+:::
+
+### Latihan 5 - tes dan bukti {#ex-o002-u02-05}
+
+Apakah menguji empat invarian `scale_vector` untuk sejuta vektor membuktikan
+bahwa implementasinya benar bagi semua masukan? Berikan jawaban yang tepat.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Pisahkan domain yang diuji dari domain universal.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Tidak. Tes tersebut memberi bukti kerja kuat pada sampel dan dapat menemukan
+contoh penyangkal, tetapi tidak mencakup semua masukan. Kebenaran umum fungsi
+diperoleh dengan memeriksa definisi implementasi terhadap hukum distributif
+dan asosiatif pada domain skalar serta komponen yang dinyatakan.
+:::
+
+## Ringkasan {#sec-o002-u02-summary}
+
+- Tipe program mewakili objek matematika, tetapi tidak menentukan seluruh
+  maknanya.
+- `==` membandingkan nilai; `is` membandingkan identitas objek.
+- Fungsi harus menyatakan prasyarat, hasil, dan kegagalan.
+- Fungsi murni dan nilai tak berubah memudahkan reproduksi serta pengujian.
+- Invarian menghubungkan kontrak matematika dengan tes program.
+- Keluaran kanonis membuat hash artefak bermakna.

@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Objek, Nilai, dan Fungsi – Komputasi Matematis dan Eksperimen yang Dapat Direproduksi</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../source/units/03-array-vektorisasi.html" rel="next">
+<link href="../../source/units/01-komputasi-bukti.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-fd460e4b8aec9c2402a9e5dfeb0c5f8c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Tidak ada hasil",
+    "search-matching-documents-text": "dokumen cocok",
+    "search-copy-link-title": "Salin tautan untuk mencari",
+    "search-hide-matches-text": "Sembunyikan kecocokan lainnya",
+    "search-more-match-text": "kecocokan lainnya di dokumen ini",
+    "search-more-matches-text": "kecocokan lainnya di dokumen ini",
+    "search-clear-button-title": "Hapus",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Batal",
+    "search-submit-button-title": "Kirim",
+    "search-label": "Mencari"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alihkan bilah sisi" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../source/units/02-objek-fungsi.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Objek, Nilai, dan Fungsi</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alihkan bilah sisi" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Mencari" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Komputasi Matematis dan Eksperimen yang Dapat Direproduksi</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Mencari"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Pengantar</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/01-komputasi-bukti.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Komputasi, Representasi, dan Bukti</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/02-objek-fungsi.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Objek, Nilai, dan Fungsi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/03-array-vektorisasi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Array, Bentuk, dan Vektorisasi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/04-visualisasi-integritas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualisasi dengan Integritas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/05-eksak-simbolik-sage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Komputasi Eksak dan Simbolik</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/06-titik-mengambang-stabilitas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Titik-Mengambang, Galat, dan Stabilitas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/07-rancangan-eksperimen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Rancangan Eksperimen yang Dapat Diperiksa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/08-pengujian-validasi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pengujian dan Validasi Komputasi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/09-data-konfigurasi-provenans.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data, Konfigurasi, dan Provenans</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/10-otomasi-pipa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Otomasi dan Alur Kerja yang Dapat Direproduksi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/11-eksperimen-numerik.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Eksperimen Numerik Berprasyarat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/12-proyek-akhir.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Proyek Akhir yang Dapat Diperiksa</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Daftar Isi</h2>
+   
+  <ul>
+  <li><a href="#sec-o002-u02-objectives" id="toc-sec-o002-u02-objectives" class="nav-link active" data-scroll-target="#sec-o002-u02-objectives"><span class="header-section-number">3.1</span> Tujuan belajar</a></li>
+  <li><a href="#sec-o002-u02-types" id="toc-sec-o002-u02-types" class="nav-link" data-scroll-target="#sec-o002-u02-types"><span class="header-section-number">3.2</span> Jenis matematika dan tipe program</a></li>
+  <li><a href="#sec-o002-u02-aliasing" id="toc-sec-o002-u02-aliasing" class="nav-link" data-scroll-target="#sec-o002-u02-aliasing"><span class="header-section-number">3.3</span> Nilai, identitas, dan alias</a></li>
+  <li><a href="#sec-o002-u02-contracts" id="toc-sec-o002-u02-contracts" class="nav-link" data-scroll-target="#sec-o002-u02-contracts"><span class="header-section-number">3.4</span> Fungsi sebagai kontrak</a></li>
+  <li><a href="#sec-o002-u02-purity" id="toc-sec-o002-u02-purity" class="nav-link" data-scroll-target="#sec-o002-u02-purity"><span class="header-section-number">3.5</span> Fungsi murni dan perubahan keadaan</a></li>
+  <li><a href="#sec-o002-u02-invariants" id="toc-sec-o002-u02-invariants" class="nav-link" data-scroll-target="#sec-o002-u02-invariants"><span class="header-section-number">3.6</span> Invarian dan pengujian</a></li>
+  <li><a href="#sec-o002-u02-canonical-output" id="toc-sec-o002-u02-canonical-output" class="nav-link" data-scroll-target="#sec-o002-u02-canonical-output"><span class="header-section-number">3.7</span> Keluaran kanonis</a></li>
+  <li><a href="#sec-o002-u02-exercises" id="toc-sec-o002-u02-exercises" class="nav-link" data-scroll-target="#sec-o002-u02-exercises"><span class="header-section-number">3.8</span> Latihan</a>
+  <ul class="collapse">
+  <li><a href="#ex-o002-u02-01" id="toc-ex-o002-u02-01" class="nav-link" data-scroll-target="#ex-o002-u02-01"><span class="header-section-number">3.8.1</span> Latihan 1 - memilih representasi</a></li>
+  <li><a href="#ex-o002-u02-02" id="toc-ex-o002-u02-02" class="nav-link" data-scroll-target="#ex-o002-u02-02"><span class="header-section-number">3.8.2</span> Latihan 2 - nilai dan identitas</a></li>
+  <li><a href="#ex-o002-u02-03" id="toc-ex-o002-u02-03" class="nav-link" data-scroll-target="#ex-o002-u02-03"><span class="header-section-number">3.8.3</span> Latihan 3 - kontrak fungsi</a></li>
+  <li><a href="#ex-o002-u02-04" id="toc-ex-o002-u02-04" class="nav-link" data-scroll-target="#ex-o002-u02-04"><span class="header-section-number">3.8.4</span> Latihan 4 - alias yang berbahaya</a></li>
+  <li><a href="#ex-o002-u02-05" id="toc-ex-o002-u02-05" class="nav-link" data-scroll-target="#ex-o002-u02-05"><span class="header-section-number">3.8.5</span> Latihan 5 - tes dan bukti</a></li>
+  </ul></li>
+  <li><a href="#sec-o002-u02-summary" id="toc-sec-o002-u02-summary" class="nav-link" data-scroll-target="#sec-o002-u02-summary"><span class="header-section-number">3.9</span> Ringkasan</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Objek, Nilai, dan Fungsi</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="sec-o002-u02">
+
+</div>
+<section id="sec-o002-u02-objectives" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-o002-u02-objectives"><span class="header-section-number">3.1</span> Tujuan belajar</h2>
+<p>Setelah menyelesaikan unit ini, pembaca dapat:</p>
+<ul>
+<li>memilih representasi Python yang sesuai untuk bilangan bulat, rasional, dan barisan berhingga;</li>
+<li>membedakan kesamaan nilai dari kesamaan identitas objek;</li>
+<li>menulis fungsi dengan prasyarat, hasil, dan perilaku galat yang dinyatakan;</li>
+<li>menghindari perubahan tak disengaja melalui nilai masukan yang dapat diubah;</li>
+<li>merumuskan invarian yang dapat diperiksa oleh tes; dan</li>
+<li>menghasilkan keluaran terstruktur yang tidak bergantung pada urutan kebetulan.</li>
+</ul>
+<p>Prasyarat lokal: Unit 1, himpunan dan fungsi pada tingkat A30, serta operasi dasar pada vektor berhingga. Unit ini belum memerlukan NumPy.</p>
+</section>
+<section id="sec-o002-u02-types" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-o002-u02-types"><span class="header-section-number">3.2</span> Jenis matematika dan tipe program</h2>
+<p>Pernyataan matematika menentukan himpunan objek dan operasi yang sah. Program membutuhkan tipe data konkret. Keduanya berkaitan, tetapi tidak identik.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Maksud matematika</th>
+<th>Representasi awal</th>
+<th>Batas penting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>bilangan bulat</td>
+<td><code>int</code></td>
+<td>ukuran praktis dibatasi memori</td>
+</tr>
+<tr class="even">
+<td>bilangan rasional</td>
+<td><code>Fraction</code></td>
+<td>pembilang dan penyebut dapat membesar</td>
+</tr>
+<tr class="odd">
+<td>pendekatan bilangan real</td>
+<td><code>float</code></td>
+<td>pembulatan dan rentang berhingga</td>
+</tr>
+<tr class="even">
+<td>vektor berhingga yang tetap</td>
+<td><code>tuple</code></td>
+<td>panjang dan jenis komponen harus diperiksa</td>
+</tr>
+<tr class="odd">
+<td>koleksi yang sengaja diubah</td>
+<td><code>list</code></td>
+<td>alias dapat melihat perubahan yang sama</td>
+</tr>
+</tbody>
+</table>
+<div id="cell-lst-o002-u02-types" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fractions <span class="im">import</span> Fraction</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> (<span class="dv">7</span>, Fraction(<span class="dv">7</span>, <span class="dv">3</span>), <span class="dv">7</span> <span class="op">/</span> <span class="dv">3</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>[(<span class="bu">type</span>(value).<span class="va">__name__</span>, value) <span class="cf">for</span> value <span class="kw">in</span> values]</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-u02-types" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-u02-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.1
+</figcaption>
+<div aria-describedby="lst-o002-u02-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>[('int', 7), ('Fraction', Fraction(7, 3)), ('float', 2.3333333333333335)]</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Nama tipe tidak membuktikan bahwa nilai memenuhi maksud matematika. Sebuah <code>tuple</code> berpanjang tiga dapat mewakili vektor di ruang tiga dimensi, koordinat warna, atau tiga data yang tidak berhubungan. Kontrak programlah yang memberi makna tambahan itu.</p>
+</section>
+<section id="sec-o002-u02-aliasing" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-o002-u02-aliasing"><span class="header-section-number">3.3</span> Nilai, identitas, dan alias</h2>
+<p>Operator <code>==</code> membandingkan nilai menurut aturan tipe. Operator <code>is</code> memeriksa apakah dua nama menunjuk objek Python yang sama. Untuk alasan reproduksibilitas, jangan mengganti pertanyaan tentang nilai dengan pertanyaan tentang identitas objek.</p>
+<div id="cell-lst-o002-u02-alias" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="bu">list</span>(a)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>(a <span class="op">==</span> c, a <span class="kw">is</span> c, a <span class="kw">is</span> b)</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-u02-alias" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-u02-alias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.2
+</figcaption>
+<div aria-describedby="lst-o002-u02-alias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>(True, False, True)</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Karena <code>b</code> adalah alias bagi <code>a</code>, perubahan melalui salah satu nama tampak melalui nama lainnya. Sebaliknya, <code>c</code> mula-mula mempunyai nilai sama, tetapi merupakan daftar lain. Efek semacam ini dapat membuat eksperimen bergantung pada urutan eksekusi sel.</p>
+<p>Jika suatu vektor dimaksudkan sebagai nilai yang tidak berubah, <code>tuple</code> memberi kontrak yang lebih jujur daripada <code>list</code>. Ini bukan larangan memakai daftar; pilih perubahan hanya ketika perubahan tersebut bagian dari metode.</p>
+</section>
+<section id="sec-o002-u02-contracts" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-o002-u02-contracts"><span class="header-section-number">3.4</span> Fungsi sebagai kontrak</h2>
+<p>Fungsi komputasional yang baik menyatakan tiga hal:</p>
+<ol type="1">
+<li><strong>Prasyarat:</strong> masukan apa yang diterima?</li>
+<li><strong>Hasil:</strong> nilai apa yang dikembalikan jika prasyarat dipenuhi?</li>
+<li><strong>Kegagalan:</strong> apa yang terjadi jika prasyarat dilanggar?</li>
+</ol>
+<p>Contoh berikut menghitung rata-rata rasional secara eksak.</p>
+<div id="cell-lst-o002-u02-mean" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fractions <span class="im">import</span> Fraction</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mean_fraction(values):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Kembalikan rata-rata eksak dari barisan rasional yang tidak kosong."""</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> <span class="bu">tuple</span>(Fraction(value) <span class="cf">for</span> value <span class="kw">in</span> values)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> values:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"values tidak boleh kosong"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(values, start<span class="op">=</span>Fraction(<span class="dv">0</span>)) <span class="op">/</span> <span class="bu">len</span>(values)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>mean_fraction([Fraction(<span class="dv">1</span>, <span class="dv">3</span>), Fraction(<span class="dv">1</span>, <span class="dv">2</span>)])</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-u02-mean" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-u02-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.3
+</figcaption>
+<div aria-describedby="lst-o002-u02-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>Fraction(5, 12)</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Konversi ke <code>tuple</code> membekukan masukan yang benar-benar dipakai fungsi. Jika pemanggil mengubah daftar asal setelah pemanggilan dimulai, perhitungan lokal tidak ikut berubah.</p>
+</section>
+<section id="sec-o002-u02-purity" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-o002-u02-purity"><span class="header-section-number">3.5</span> Fungsi murni dan perubahan keadaan</h2>
+<p>Fungsi berikut mengalikan vektor dengan skalar tanpa mengubah argumennya.</p>
+<div id="cell-lst-o002-u02-scale" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scale_vector(scalar, vector):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">tuple</span>(scalar <span class="op">*</span> component <span class="cf">for</span> component <span class="kw">in</span> vector)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> (<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">4</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>(scale_vector(<span class="dv">3</span>, v), v)</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="lst-o002-u02-scale" class="cell-output cell-output-display listing quarto-float quarto-figure quarto-figure-left anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-o002-u02-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Daftar&nbsp;3.4
+</figcaption>
+<div aria-describedby="lst-o002-u02-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>((6, -3, 12), (2, -1, 4))</code></pre>
+</div>
+</figure>
+</div>
+</div>
+<p>Untuk masukan yang sama, fungsi murni menghasilkan keluaran yang sama dan tidak mengubah keadaan di luar fungsi. Sifat ini memudahkan pengujian dan pelacakan asal hasil. Program nyata tetap perlu membaca berkas atau menulis keluaran; tempatkan efek tersebut di batas program, bukan tersebar di setiap fungsi matematika.</p>
+</section>
+<section id="sec-o002-u02-invariants" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="sec-o002-u02-invariants"><span class="header-section-number">3.6</span> Invarian dan pengujian</h2>
+<p>Invarian adalah sifat yang harus tetap benar selama operasi tertentu. Untuk perkalian skalar pada vektor, beberapa invarian yang dapat diuji ialah:</p>
+<ul>
+<li>panjang vektor tidak berubah;</li>
+<li>mengalikan dengan 1 mempertahankan nilai;</li>
+<li>mengalikan dengan 0 menghasilkan vektor nol; dan</li>
+<li><code>scale_vector(a*b, v)</code> sama dengan <code>scale_vector(a, scale_vector(b, v))</code>.</li>
+</ul>
+<p>Tes terhadap banyak contoh dapat mendeteksi pelanggaran implementasi. Bukti aljabar tetap diperlukan untuk menyatakan sifat bagi semua skalar dan semua vektor pada domain yang dimaksud.</p>
+</section>
+<section id="sec-o002-u02-canonical-output" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-o002-u02-canonical-output"><span class="header-section-number">3.7</span> Keluaran kanonis</h2>
+<p>Dua eksperimen dapat menghasilkan informasi sama tetapi byte berbeda karena urutan medan, spasi, atau akhir baris. Bila keluaran dipakai sebagai bukti kerja, tentukan bentuk kanonis. Skrip Unit 2:</p>
+<pre class="text"><code>python source/code/unit02_objects.py --output output/unit02-results.json</code></pre>
+<p>menulis JSON UTF-8 dengan nama medan terurut, inden tetap, dan akhir baris LF. Hash berkas lalu mengikat satu urutan byte yang dapat dibandingkan.</p>
+</section>
+<section id="sec-o002-u02-exercises" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="sec-o002-u02-exercises"><span class="header-section-number">3.8</span> Latihan</h2>
+<section id="ex-o002-u02-01" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="ex-o002-u02-01"><span class="header-section-number">3.8.1</span> Latihan 1 - memilih representasi</h3>
+<p>Pilih representasi awal untuk setiap objek berikut dan jelaskan batasnya: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>/</mi><mn>7</mn></mrow><annotation encoding="application/x-tex">2/7</annotation></semantics></math>, pendekatan numerik bagi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msqrt><mn>2</mn></msqrt><annotation encoding="application/x-tex">\sqrt{2}</annotation></semantics></math>, dan vektor tetap <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mi>−</mi><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(1,0,-1)</annotation></semantics></math>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Bedakan nilai eksak dari pendekatan dan nilai tetap dari koleksi yang diubah.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Gunakan <code>Fraction(2, 7)</code> bagi bilangan rasional eksak, <code>float</code> bagi pendekatan numerik terhadap akar dua dengan toleransi yang dinyatakan, dan <code>tuple</code> bagi vektor tetap. <code>float</code> tidak menyimpan akar dua secara eksak, sedangkan <code>tuple</code> tidak dengan sendirinya menjamin bahwa semua komponennya numerik.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-u02-02" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="ex-o002-u02-02"><span class="header-section-number">3.8.2</span> Latihan 2 - nilai dan identitas</h3>
+<p>Buat dua daftar berbeda dengan nilai <code>[1, 2]</code>. Tunjukkan satu perbandingan yang benar dan satu perbandingan yang salah. Jelaskan hasilnya.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Gunakan <code>==</code> dan <code>is</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Jika <code>a=[1,2]</code> dan <code>b=[1,2]</code>, maka <code>a == b</code> benar karena nilainya sama, sedangkan <code>a is b</code> salah karena keduanya objek berbeda. Pertanyaan matematika tentang kesamaan daftar unsur biasanya memakai <code>==</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-u02-03" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="ex-o002-u02-03"><span class="header-section-number">3.8.3</span> Latihan 3 - kontrak fungsi</h3>
+<p>Tuliskan prasyarat, hasil, dan kegagalan untuk fungsi yang mengembalikan sisa terkecil taknegatif dari pembagian <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math> dengan modulus <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Modulus harus positif.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Prasyarat: <code>a</code> dan <code>m</code> bilangan bulat serta <code>m &gt; 0</code>. Hasil: bilangan bulat <code>r</code> dengan <code>0 &lt;= r &lt; m</code> dan <code>a-r</code> habis dibagi <code>m</code>. Jika <code>m &lt;= 0</code>, fungsi harus menolak masukan, misalnya dengan <code>ValueError</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-u02-04" class="level3" data-number="3.8.4">
+<h3 data-number="3.8.4" class="anchored" data-anchor-id="ex-o002-u02-04"><span class="header-section-number">3.8.4</span> Latihan 4 - alias yang berbahaya</h3>
+<p>Jelaskan mengapa fungsi yang menambahkan elemen ke daftar masukan dapat membuat hasil eksperimen bergantung pada urutan sel notebook. Berikan satu perbaikan.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Nama lain mungkin menunjuk daftar yang sama.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Pemanggilan pertama mengubah daftar yang kemudian dipakai pemanggilan kedua. Menjalankan sel dalam urutan lain memberi keadaan awal berbeda. Perbaikannya dapat berupa mengembalikan daftar baru, memakai <code>tuple</code> bagi nilai tetap, atau membuat perubahan eksplisit serta mengatur ulang keadaan sebelum eksperimen.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-u02-05" class="level3" data-number="3.8.5">
+<h3 data-number="3.8.5" class="anchored" data-anchor-id="ex-o002-u02-05"><span class="header-section-number">3.8.5</span> Latihan 5 - tes dan bukti</h3>
+<p>Apakah menguji empat invarian <code>scale_vector</code> untuk sejuta vektor membuktikan bahwa implementasinya benar bagi semua masukan? Berikan jawaban yang tepat.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Pisahkan domain yang diuji dari domain universal.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tidak. Tes tersebut memberi bukti kerja kuat pada sampel dan dapat menemukan contoh penyangkal, tetapi tidak mencakup semua masukan. Kebenaran umum fungsi diperoleh dengan memeriksa definisi implementasi terhadap hukum distributif dan asosiatif pada domain skalar serta komponen yang dinyatakan.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-o002-u02-summary" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="sec-o002-u02-summary"><span class="header-section-number">3.9</span> Ringkasan</h2>
+<ul>
+<li>Tipe program mewakili objek matematika, tetapi tidak menentukan seluruh maknanya.</li>
+<li><code>==</code> membandingkan nilai; <code>is</code> membandingkan identitas objek.</li>
+<li>Fungsi harus menyatakan prasyarat, hasil, dan kegagalan.</li>
+<li>Fungsi murni dan nilai tak berubah memudahkan reproduksi serta pengujian.</li>
+<li>Invarian menghubungkan kontrak matematika dengan tes program.</li>
+<li>Keluaran kanonis membuat hash artefak bermakna.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Disalin!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Disalin!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../source/units/01-komputasi-bukti.html" class="pagination-link" aria-label="Komputasi, Representasi, dan Bukti">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Komputasi, Representasi, dan Bukti</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../source/units/03-array-vektorisasi.html" class="pagination-link" aria-label="Array, Bentuk, dan Vektorisasi">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Array, Bentuk, dan Vektorisasi</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

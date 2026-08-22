@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "ipykernel_launcher",
+    "-f",
+    "{connection_file}"
+  ],
+  "display_name": "O002 frozen Python 3.13.1",
+  "language": "python",
+  "metadata": {
+    "debugger": true
+  }
+}

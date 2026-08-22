@@ -1,0 +1,341 @@
+---
+title: "Rancangan Eksperimen yang Dapat Diperiksa"
+identifier: o002.u07
+---
+
+::: {#sec-o002-u07}
+:::
+
+## Tujuan belajar {#sec-o002-u07-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- mengubah pertanyaan umum menjadi hipotesis dan ukuran hasil yang dapat
+  diperiksa;
+- membedakan variabel yang diubah, hasil yang diukur, dan kondisi yang
+  dikendalikan;
+- menetapkan kisi parameter, banyak replikasi, dan aturan berhenti sebelum
+  melihat hasil;
+- menjelaskan apa yang dapat dan tidak dapat diulang oleh benih acak semu;
+- memisahkan data pengembangan dari data uji yang ditahan (*holdout*);
+- melaporkan ukuran efek dan hasil negatif tanpa mengubah sasaran sesudahnya;
+  dan
+- membatasi hasil eksperimen agar tidak diperlakukan sebagai bukti umum.
+
+Prasyarat lokal: Unit 1-4, persentase, rata-rata, perbandingan pecahan, dan
+fungsi bertahap sederhana pada tingkat A30. Tidak diperlukan kalkulus atau
+statistika inferensial.
+
+## Pertanyaan dahulu, hasil kemudian {#sec-o002-u07-question}
+
+Eksperimen Unit 7 mempelajari aturan keputusan sederhana. Setiap kasus
+mempunyai skor bulat dari 0 sampai 9. Untuk ambang $k$, program memprediksi
+hasil positif jika
+
+$$
+\text{skor}\ge k.
+$$
+
+Kita memilih satu ambang dari kisi $\{3,4,5,6,7\}$. Pertanyaan yang
+dibekukan sebelum menjalankan eksperimen ialah:
+
+> Apakah ambang yang dipilih pada data pengembangan meningkatkan akurasi pada
+> data *holdout* sedikitnya 0,10 dibandingkan ambang referensi 6?
+
+Angka 0,10 berarti sepuluh poin persentase, bukan “sepuluh persen dari akurasi
+lama”. Hipotesis awal menjawab “ya”. Eksperimen kemudian boleh mendukung atau
+tidak mendukung jawaban itu; hipotesis bukan janji tentang hasil.
+
+Pertanyaan ini menyatakan tiga hal yang sering hilang:
+
+1. aturan pembanding, yaitu ambang 6;
+2. ukuran hasil, yaitu proporsi prediksi benar; dan
+3. batas efek yang dianggap bermakna, yaitu 0,10.
+
+Tanpa ketiganya, mudah memilih cerita setelah melihat angka.
+
+## Variabel, kontrol, dan perancu {#sec-o002-u07-variables}
+
+Dalam eksperimen ini:
+
+| Peran | Isi |
+|---|---|
+| variabel yang diubah | ambang keputusan $k$ |
+| hasil yang diukur | akurasi, yaitu banyak prediksi benar dibagi banyak kasus |
+| kondisi yang dikendalikan | pembangkit kasus, ukuran sampel, replikasi, dan jadwal benih |
+| faktor acak | skor dan hasil buatan pada setiap kasus |
+
+Sebuah **perancu** adalah faktor lain yang berubah bersama variabel utama
+sehingga penyebab perbedaan menjadi kabur. Jika ambang 3 diuji pada kasus yang
+mudah sedangkan ambang 7 diuji pada kasus yang sulit, selisih akurasi dapat
+berasal dari kasus, bukan ambang.
+
+Skrip mencegah perancu itu dengan rancangan berpasangan: dalam satu replikasi,
+semua ambang dinilai pada kasus yang persis sama. Hanya ambangnya yang berubah.
+Rancangan ini tidak menghapus semua kemungkinan kesalahan; aturan pembangkit
+kasus sendiri masih dapat buruk. Namun, ia mengisolasi perbandingan yang sedang
+dilakukan.
+
+## Kisi parameter dan aturan pemilihan {#sec-o002-u07-grid}
+
+Kisi parameter ditentukan sebagai
+
+$$
+K=(3,4,5,6,7).
+$$
+
+Program tidak menambahkan ambang baru setelah melihat hasil. Setiap kandidat
+menyelesaikan 20 replikasi pengembangan, masing-masing berisi 200 kasus. Ambang
+dengan jumlah prediksi benar terbesar dipilih. Jika dua ambang seri, ambang
+yang lebih kecil menang. Aturan seri itu tampak sepele, tetapi tanpa aturan
+tetap dua pelaksana dapat memilih hasil berbeda.
+
+Pencarian kisi hanya membandingkan lima kandidat tersebut. Jika ambang 5
+menang, kesimpulan yang sah adalah “5 terbaik pada kisi dan data pengembangan
+ini menurut ukuran yang ditetapkan”, bukan “5 adalah ambang terbaik yang
+mungkin untuk setiap populasi”.
+
+Kisi yang sangat rapat juga bukan hadiah gratis. Makin banyak pilihan yang
+dicoba pada data sama, makin besar peluang menemukan pilihan yang cocok dengan
+kebetulan khusus data pengembangan. Itulah salah satu alasan memakai
+*holdout*.
+
+## Benih dan nondeterminisme {#sec-o002-u07-randomness}
+
+`random.Random(seed)` menghasilkan urutan acak **semu**. Benih yang sama pada
+lingkungan yang sama menghasilkan urutan yang sama, sehingga kegagalan dapat
+dijalankan ulang. Unit ini memakai benih dasar 1729 untuk pengembangan dan
+271828 untuk *holdout*. Replikasi ke-$i$ memakai `benih_dasar + i`.
+
+Benih tidak mengubah eksperimen menjadi bukti, dan tidak dapat menangkap semua
+nondeterminisme nyata. Contohnya:
+
+- derau sensor fisik;
+- perubahan suhu atau tegangan;
+- urutan proses paralel;
+- paket data yang tiba dari jaringan; dan
+- tindakan manusia selama pengukuran.
+
+Untuk sumber semacam itu, catat waktu, perangkat, kalibrasi, urutan perlakuan,
+lingkungan, dan data mentah sejauh relevan. Replikasi independen tetap
+diperlukan. Menulis angka `seed=42` tidak mengulang sebuah laboratorium.
+
+## Replikasi dan aturan berhenti {#sec-o002-u07-replication}
+
+Satu pengulangan dapat kebetulan menguntungkan satu ambang. Replikasi
+menunjukkan apakah hasil bertahan pada beberapa sampel. Rencana unit menetapkan:
+
+- pengembangan: tepat $20\times200=4.000$ kasus; dan
+- *holdout*: tepat $12\times250=3.000$ kasus.
+
+Kata “tepat” adalah bagian dari metode. Program tidak berhenti ketika hasil
+pertama kali tampak baik. Jika kita terus melihat hasil dan berhenti pada
+replikasi yang menyenangkan, aturan pengumpulan data bergantung pada hasil;
+ringkasan akhir lalu lebih optimistis daripada rencana awal.
+
+Aturan berhenti dapat berupa jumlah kasus tetap, batas waktu tetap, atau
+kriteria lain. Yang penting, aturan itu ditulis sebelum hasil diperiksa dan
+dilaporkan bersama penyimpangan apa pun.
+
+## Pengembangan dan data holdout {#sec-o002-u07-holdout}
+
+Data pengembangan dipakai untuk membandingkan kisi dan memilih ambang. Data
+*holdout* dibangkitkan dengan jadwal benih terpisah, tidak ikut menentukan
+pilihan, dan diperiksa sekali setelah ambang dibekukan.
+
+Analogi sederhananya adalah latihan dan ujian. Jika jawaban ujian dipakai untuk
+mengubah cara menjawab lalu nilai ujian yang sama dilaporkan sebagai penilaian
+akhir, ujian itu telah menjadi latihan. Demikian juga, jika hasil *holdout*
+dilihat berulang kali untuk mengubah kisi, fitur, atau aturan, ia bukan lagi
+penilaian yang tidak tersentuh. Kita memerlukan *holdout* baru atau harus jujur
+menyebut tahap tersebut pengembangan tambahan.
+
+Pemisahan ini tidak membuat hasil berlaku bagi semua dunia nyata. Data
+*holdout* masih berasal dari pembangkit kasus tertentu. Ia hanya mengurangi
+satu jenis penyesuaian berlebihan terhadap data pengembangan.
+
+## Ukuran efek, bukan kesan gambar {#sec-o002-u07-effect}
+
+Pada rekaman acuan, ambang 5 dipilih. Di *holdout*, ambang 5 benar pada 2.355
+dari 3.000 kasus, sedangkan ambang referensi 6 benar pada 2.204 kasus. Ukuran
+efeknya ialah
+
+$$
+\frac{2355}{3000}-\frac{2204}{3000}
+=\frac{151}{3000}
+\approx0{,}0503.
+$$
+
+Jadi peningkatannya sekitar 5,03 poin persentase. Sebuah grafik dengan sumbu
+terpotong dapat membuat selisih itu tampak besar, tetapi ukuran efek numeriknya
+tidak berubah. Karena batas yang ditetapkan adalah 10 poin persentase,
+hipotesis awal **tidak didukung**.
+
+“Tidak didukung” tidak sama dengan “kedua aturan pasti identik”. Hasil
+menunjukkan efek teramati positif tetapi lebih kecil daripada sasaran yang
+dibekukan. Unit ini tidak menghitung interval kepercayaan atau nilai-p; jangan
+menyisipkan makna statistik yang tidak dihitung.
+
+## Hasil negatif tetap merupakan hasil {#sec-o002-u07-negative-results}
+
+Setelah melihat 0,0503, kita tidak boleh menurunkan ambang efek dari 0,10 ke
+0,05 lalu mengaku rencana awal berhasil. Kita juga tidak boleh menghapus
+ambang yang kalah atau hanya menampilkan replikasi yang menguntungkan.
+
+Hasil negatif berguna karena:
+
+- ia membatasi klaim yang masuk akal;
+- ia mencegah orang lain mengulangi jalan buntu tanpa mengetahui hasilnya;
+- ia dapat mengungkap bahwa sasaran praktis terlalu besar; dan
+- ia membantu merancang eksperimen berikutnya tanpa mengubah sejarah
+  eksperimen ini.
+
+Eksperimen baru boleh mempunyai hipotesis baru. Yang tidak jujur adalah
+menulis ulang rencana lama seolah-olah sasaran baru telah ditetapkan sejak
+awal.
+
+## Rekaman kanonis Unit 7 {#sec-o002-u07-artifact}
+
+Jalankan dari akar proyek:
+
+```text
+python source/code/unit07_experiment_design.py --output output/unit07-results.json
+```
+
+JSON menyimpan pertanyaan, hipotesis, kisi, variabel, kontrol, aturan seleksi,
+aturan berhenti, jadwal benih, setiap ringkasan replikasi, hasil pengembangan,
+hasil *holdout*, ukuran efek eksak, hasil negatif, dan batas bukti. Pecahan
+disimpan sebagai pembilang dan penyebut serta desimal empat tempat. Kunci
+diurutkan, inden dan akhir baris ditetapkan, lalu `core_sha256` mengikat rekaman
+sebelum medan hash ditambahkan.
+
+Pada lingkungan Python yang sama, perintah yang sama menghasilkan byte sama.
+Versi Python ikut dicatat karena rincian pembangkit acak semu merupakan bagian
+dari lingkungan yang perlu dibekukan.
+
+## Eksperimen dan bukti {#sec-o002-u07-proof}
+
+Eksperimen ini membuktikan hal yang sangat terbatas tentang eksekusi: untuk
+benih dan kode yang direkam, jumlah keberhasilan dapat dihitung ulang. Ia
+memberi bukti empiris tentang lima ambang pada sampel buatan berhingga.
+
+Ia tidak membuktikan bahwa ambang 5 terbaik:
+
+- di luar kisi 3 sampai 7;
+- untuk setiap urutan data;
+- untuk pembangkit kasus lain; atau
+- untuk fenomena nyata yang tidak dimodelkan oleh generator.
+
+Bukti umum memerlukan klaim matematis yang tepat. Misalnya, jika distribusi
+skor dan peluang hasil didefinisikan secara eksak, seseorang dapat menghitung
+akurasi harapan setiap ambang dengan menjumlahkan peluang pada sepuluh skor.
+Perhitungan itu merupakan argumen tentang model yang didefinisikan, bukan
+jaminan bahwa model mewakili dunia nyata.
+
+## Latihan {#sec-o002-u07-exercises}
+
+### Latihan 1 - variabel dan perancu {#ex-o002-u07-01}
+
+Sebuah eksperimen menguji ambang 4 pada 100 kasus pertama dan ambang 6 pada 100
+kasus berikutnya. Sebutkan variabel utama, hasil yang diukur, dan perancu yang
+mungkin. Berikan satu perbaikan.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Tanyakan apakah kedua ambang menghadapi kasus yang sama sulitnya.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Variabel utamanya adalah ambang, dan hasilnya dapat berupa proporsi prediksi
+benar. Kelompok kasus menjadi perancu karena urutan pertama dan kedua mungkin
+mempunyai tingkat kesulitan berbeda. Perbaikan paling langsung ialah menilai
+kedua ambang pada 200 kasus yang sama. Jika hal itu tidak mungkin, acak urutan
+penugasan dan lakukan replikasi dengan aturan yang dibekukan.
+:::
+
+### Latihan 2 - benih bukan mesin waktu {#ex-o002-u07-02}
+
+Jelaskan mengapa menyimpan benih cukup untuk mengulang simulasi Unit 7 tetapi
+tidak cukup untuk mengulang pengukuran suhu di laboratorium.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Bedakan urutan acak semu dari gangguan fisik dan keadaan alat.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Simulasi menghitung seluruh urutan dari algoritme dan benih, sehingga pasangan
+yang sama dapat membangkitkan kasus yang sama pada lingkungan yang dibekukan.
+Suhu laboratorium dipengaruhi sensor, kalibrasi, waktu, lokasi, dan gangguan
+fisik yang tidak berasal dari `random.Random`. Benih harus dilengkapi data
+mentah, keadaan alat, waktu, prosedur, dan replikasi independen.
+:::
+
+### Latihan 3 - pemilihan dan holdout {#ex-o002-u07-03}
+
+Pada data pengembangan, ambang 4, 5, dan 6 memperoleh 760, 810, dan 790 jawaban
+benar dari 1.000 kasus. Ambang mana dipilih? Mengapa Anda tidak boleh mengganti
+pilihan setelah melihat bahwa ambang 6 sedikit lebih baik pada *holdout*?
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan aturan seleksi pada pengembangan, lalu pertahankan fungsi *holdout*
+sebagai penilaian yang belum disentuh.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Ambang 5 dipilih karena 810 adalah jumlah benar terbesar. Jika pilihan diubah
+menjadi 6 setelah membaca *holdout*, data itu ikut melakukan pemilihan dan
+tidak lagi menjadi penilaian terpisah. Ambang 6 dapat menjadi hipotesis untuk
+eksperimen baru dengan *holdout* baru, tetapi hasil eksperimen lama harus tetap
+dilaporkan menurut rencana semula.
+:::
+
+### Latihan 4 - ukuran efek dan aturan berhenti {#ex-o002-u07-04}
+
+Hitung peningkatan ambang 5 atas ambang 6 dari 2.355 dan 2.204 jawaban benar
+dalam 3.000 kasus. Apakah sasaran 0,10 tercapai? Bolehkah eksperimen berhenti
+lebih awal pada replikasi yang menunjukkan 0,11?
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Kurangi jumlah benar lalu bagi dengan jumlah kasus yang sama.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Peningkatannya $(2355-2204)/3000=151/3000\approx0{,}0503$, yaitu sekitar
+5,03 poin persentase. Sasaran 10 poin tidak tercapai. Eksperimen tidak boleh
+berhenti pada satu replikasi 0,11 karena aturan awal mewajibkan seluruh
+replikasi; berhenti berdasarkan hasil akan mengubah rancangan dan membuat
+ringkasan terlalu menguntungkan.
+:::
+
+### Latihan 5 - hasil negatif dan batas bukti {#ex-o002-u07-05}
+
+Tuliskan kesimpulan jujur untuk eksperimen Unit 7 dan satu klaim yang tidak
+boleh dibuat. Lalu sebutkan apa yang diperlukan untuk membuktikan klaim umum
+tentang ambang terbaik pada model yang didefinisikan.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Pisahkan efek pada *holdout*, sasaran 0,10, dan seluruh ruang kemungkinan.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Kesimpulan jujur: ambang 5 terpilih pada kisi, lalu mengungguli ambang 6 sekitar
+5,03 poin persentase pada *holdout*, tetapi tidak mencapai efek minimum 10 poin
+yang ditetapkan. Klaim terlarang: ambang 5 telah terbukti terbaik untuk semua
+data atau dunia nyata. Untuk klaim umum pada model eksak, tentukan distribusi
+skor dan peluang hasil, hitung akurasi harapan setiap kandidat (atau seluruh
+domain ambang), lalu bandingkan dengan argumen yang mencakup semuanya.
+:::
+
+## Ringkasan {#sec-o002-u07-summary}
+
+- Pertanyaan, hipotesis, pembanding, ukuran hasil, dan efek minimum ditetapkan
+  sebelum melihat hasil.
+- Variabel lain dikendalikan agar perbedaan tidak tercampur dengan kesulitan
+  sampel atau perubahan prosedur.
+- Kisi, aturan seri, replikasi, jadwal benih, dan aturan berhenti merupakan
+  bagian dari rencana.
+- Benih mengulang acak semu, bukan nondeterminisme fisik yang tidak direkam.
+- Data pengembangan memilih parameter; *holdout* menilai pilihan sekali.
+- Ukuran efek numerik lebih penting daripada kesan visual, dan hasil negatif
+  harus tetap dilaporkan.
+- Eksperimen berhingga memberi bukti empiris terbatas; bukti umum memerlukan
+  argumen yang mencakup domain klaim.

@@ -1,0 +1,363 @@
+---
+title: "Data, Konfigurasi, dan Provenans"
+identifier: o002.u09
+---
+
+::: {#sec-o002-u09}
+:::
+
+## Tujuan belajar {#sec-o002-u09-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- membedakan data mentah, data turunan, dan laporan run;
+- menyatakan schema, tipe, makna kolom, dan satuan;
+- memisahkan konfigurasi yang berubah dari kode transformasi;
+- mencatat identitas lingkungan dan batas berkas kunci;
+- memakai jalur relatif yang tidak dapat keluar dari akar proyek;
+- merekam asal-usul serta status hak setiap komponen;
+- mengikat artefak pada ukuran byte dan SHA-256 tanpa melebih-lebihkan fungsi
+  hash;
+- mengecualikan data privat dari artefak publik; dan
+- membedakan pengulangan semantik dari pengulangan byte demi byte.
+
+Prasyarat lokal: Unit 1-4 dan 7-8, tabel, rasio, satuan, berkas teks, dan fungsi
+sederhana. Jalur dasar hanya memakai pustaka standar Python.
+
+## Tiga lapisan data {#sec-o002-u09-data-layers}
+
+**Data mentah** adalah rekaman yang diterima sebelum transformasi analitis
+unit. “Mentah” tidak berarti tanpa sejarah: sensor, formulir, atau proses
+ekspor mungkin sudah mengubahnya. Istilah itu hanya menyatakan titik masuk
+yang dibekukan bagi run ini.
+
+Unit 9 memakai lima rekaman sintetis:
+
+| `sample_id` | `length_cm` | `mass_g` |
+|---|---:|---:|
+| S01 | 10,0 | 20,0 |
+| S02 | 12,0 | 24,6 |
+| S03 | 8,0 | 15,8 |
+| S04 | 14,0 | 28,7 |
+| S05 | 11,0 | 21,8 |
+
+**Data turunan** dihasilkan dengan aturan
+
+$$
+r=\frac{\text{massa dalam gram}}{\text{panjang dalam sentimeter}},
+$$
+
+lalu dibulatkan ke tiga tempat desimal dengan aturan *round half even*.
+Nama kolom turunannya ialah `mass_per_length_g_per_cm`.
+
+**Manifest run** bukan data pengukuran baru. Ia menjawab berkas apa yang
+dipakai, transformasi apa yang dijalankan, konfigurasi dan lingkungan apa yang
+berlaku, serta byte keluaran mana yang dihasilkan.
+
+Jangan menimpa data mentah dengan hasil turunan. Jika sebuah transformasi perlu
+diperbaiki, data mentah yang terikat memungkinkan keluaran dibuat ulang dan
+dibandingkan.
+
+## Schema dan satuan {#sec-o002-u09-schema-units}
+
+Schema adalah kontrak struktur. Schema mentah unit ini menetapkan:
+
+| Medan | Tipe | Satuan | Makna |
+|---|---|---|---|
+| `sample_id` | teks berbentuk `S` + dua digit | tidak ada | pengenal sintetis |
+| `length_cm` | teks desimal positif | cm | panjang |
+| `mass_g` | teks desimal positif | g | massa |
+
+Menyimpan desimal sebagai teks menghindari perubahan awal ke titik-mengambang.
+Kode menolak nilai numerik yang bukan teks, lalu mengubah teks tervalidasi itu
+menjadi `Decimal` ketika menghitung. Pengenal tidak mempunyai satuan; `None`
+lebih jujur daripada satuan kosong yang dapat berarti “lupa diisi”.
+
+Nama `length` tanpa satuan tidak cukup. Nilai 10 dapat berarti 10 mm, 10 cm,
+atau 10 m, dan ketiganya menghasilkan rasio berbeda. Satuan harus mengikuti
+data sampai keluaran; schema turunan menetapkan `g/cm`.
+
+Validasi memeriksa nama medan, bentuk pengenal, keunikan, bilangan berhingga,
+dan kepositifan. Schema yang lulus belum menjamin pengukuran benar, tetapi ia
+mencegah beberapa salah tafsir struktural.
+
+## Konfigurasi terpisah dari kode {#sec-o002-u09-configuration}
+
+Kode transformasi menyatakan **bagaimana** rasio dihitung. Konfigurasi
+menyatakan pilihan run yang sah berubah, misalnya:
+
+```json
+{
+  "derived_path": "data/derived/unit09_mass-per-length.csv",
+  "ratio_decimal_places": 3,
+  "raw_path": "data/raw/unit09_measurements.csv",
+  "rounding": "ROUND_HALF_EVEN",
+  "schema": "o002.unit09.config.v1"
+}
+```
+
+Jika jumlah tempat desimal ditanam di banyak baris kode, perubahan kecil mudah
+menjadi tidak konsisten. Satu konfigurasi tervalidasi membuat pilihan itu dapat
+ditinjau dan diikat dengan hash.
+
+Memisahkan konfigurasi tidak berarti menerima sembarang nilai. Unit ini hanya
+menerima 0 sampai 9 tempat desimal dan satu aturan pembulatan yang telah diuji.
+Konfigurasi adalah masukan yang mempunyai schema, bukan jalan belakang untuk
+menjalankan teks sebagai kode.
+
+## Identitas dan kunci lingkungan {#sec-o002-u09-environment}
+
+Keluaran dapat berubah walaupun data dan kode tampak sama karena versi bahasa,
+pustaka, sistem operasi, atau perangkat keras berbeda. Manifest Unit 9
+mencatat implementasi dan versi Python serta menyatakan bahwa jalur dasar hanya
+memakai pustaka standar.
+
+Karena tidak ada dependensi eksternal, “kunci lingkungan” unit ini kecil:
+identitas Python dan konteks aritmetika `Decimal` diserialisasikan secara
+kanonis lalu diikat dengan SHA-256. Konteks tersebut membekukan presisi 28
+digit, pembulatan *round half even*, batas eksponen, serta perangkap operasi;
+ia tidak mewarisi presisi atau perangkap proses pemanggil.
+Proyek yang memakai NumPy, SymPy, SageMath, atau pustaka lain memerlukan berkas
+kunci yang menyebut versi tepat beserta sumber paket. Daftar nama tanpa versi
+bukan kunci.
+
+Berkas kunci juga tidak membekukan seluruh dunia. Perbedaan sistem operasi,
+lokal, CPU, atau pustaka sistem masih dapat relevan. Catat lapisan yang
+mempengaruhi pertanyaan, dan jangan menyebut lingkungan “identik” hanya karena
+satu nomor versi cocok.
+
+## Jalur relatif yang aman {#sec-o002-u09-paths}
+
+Manifest menyimpan jalur logis seperti
+`data/raw/unit09_measurements.csv`, bukan
+`direktori-profil/Nama/Desktop/data.csv`. Jalur relatif dapat dipindahkan bersama
+proyek dan tidak membocorkan nama akun lokal.
+
+Validator unit menerima jalur POSIX relatif yang kanonis. Ia menolak:
+
+- `/etc/secret` atau `C:/secret`, karena absolut;
+- `../secret` dan `data/../secret`, karena dapat keluar atau menyamarkan
+  tujuan;
+- garis miring terbalik, agar satu bentuk dipakai pada semua sistem; dan
+- bentuk ganda seperti `data//raw/file.csv`.
+
+Setiap peran artefak juga harus mempunyai jalur unik setelah normalisasi Unicode
+dan pelipatan kapitalisasi. Karena itu, `data/raw.csv` dan `DATA/RAW.CSV`
+dianggap bertabrakan agar satu manifest tetap aman pada sistem berkas yang tidak
+membedakan huruf besar dan kecil.
+
+Validasi jalur adalah batas keamanan dan reproduksibilitas. Namun, ia bukan
+izin membaca setiap berkas yang kebetulan berada di dalam proyek. Daftar
+masukan yang diizinkan tetap harus dibatasi oleh rencana run.
+
+## Provenans dan hak per komponen {#sec-o002-u09-rights}
+
+Provenans menjawab “dari mana komponen ini berasal dan apa yang terjadi
+padanya?”. Hak menjawab “atas dasar apa komponen boleh dipakai atau
+didistribusikan?”. Keduanya berkaitan tetapi tidak sama.
+
+Manifest mencatat secara terpisah:
+
+- data mentah sintetis yang ditetapkan di kode;
+- data turunan beserta rumus transformasinya;
+- konfigurasi;
+- identitas lingkungan; dan
+- kode Unit 9, yang menunjuk `LICENSE-CODE.md` dan lisensi MIT.
+
+Data contoh tidak memuat bahan pihak ketiga. Rekaman itu tidak dipakai untuk
+membuat klaim lisensi menyeluruh atas setiap berkas proyek. Jika sebuah gambar
+CC BY-SA, kode MIT, dan data berizin khusus digabungkan, masing-masing tetap
+memerlukan pencipta/sumber, lisensi, perubahan, dan pembatasannya sendiri.
+Provenans tidak boleh dihapus hanya karena hasil turunannya berupa angka.
+
+## SHA-256 dan ukuran byte {#sec-o002-u09-hashes}
+
+Untuk setiap komponen, manifest menyimpan jalur logis, jenis media, peran,
+ukuran byte, dan SHA-256. Jika satu byte berubah, hash hampir pasti berubah.
+Ukuran membantu mendeteksi berkas kosong atau pemotongan yang tidak sengaja
+dan memberi pemeriksaan sederhana sebelum hashing.
+
+Hash menjawab pertanyaan identitas byte. Ia tidak membuktikan bahwa:
+
+- rumus transformasi benar;
+- satuan sesuai;
+- data dikumpulkan secara etis;
+- lisensi yang dicatat sah; atau
+- manifest memuat semua komponen yang semestinya.
+
+Semua pertanyaan itu memerlukan pemeriksaan lain. Hash yang cocok atas berkas
+salah hanya memastikan bahwa dua orang memiliki berkas salah yang sama.
+
+## Privasi dan pengecualian {#sec-o002-u09-privacy}
+
+Reproduksibilitas bukan alasan untuk menerbitkan nama, surel, nomor telepon,
+lokasi rinci, atau teks bebas yang dapat mengidentifikasi seseorang. Dataset
+unit memakai `S01` sampai `S05` sebagai pengenal sintetis dan secara eksplisit
+menolak medan privat.
+
+Pada penelitian nyata, strategi dapat meliputi:
+
+- memisahkan data terbatas dari artefak publik;
+- menerbitkan schema, kode, data sintetis, dan ringkasan aman;
+- mencatat cara peneliti berwenang dapat memohon akses;
+- menghapus medan yang tidak diperlukan sebelum analisis; dan
+- memeriksa apakah gabungan beberapa medan masih dapat mengidentifikasi orang.
+
+Menulis hash data rahasia ke manifest publik juga dapat membocorkan informasi
+dalam keadaan tertentu, khususnya bila ruang kemungkinan kecil. Putuskan apa
+yang boleh dipublikasikan sebelum membuat manifes publik.
+
+## Manifest run yang kanonis {#sec-o002-u09-manifest}
+
+Jalankan dari akar proyek:
+
+```text
+python source/code/unit09_provenance.py --output output/unit09-manifest.json
+```
+
+Skrip tidak mengakses jaringan atau waktu saat ini. Manifest memuat rekaman
+mentah dan turunan, schema, konfigurasi, identitas lingkungan, ikatan artefak,
+rantai input-kode-konfigurasi-output, kebijakan privasi, status hak per
+komponen, dan batas reproduksibilitas. JSON memakai UTF-8, kunci terurut, inden
+tetap, dan satu akhir baris LF. `core_sha256` mengikat isi sebelum medan hash
+tersebut ditambahkan.
+
+CSV mentah dan turunan pada contoh ini adalah artefak logis yang byte
+kanonisnya dibangun di memori lalu diikat di manifest. Dengan demikian,
+perintah hanya menulis JSON yang diminta, tetapi pembaca dapat membangun ulang
+CSV persis dari rekaman dan aturan kolom yang disimpan.
+
+## Semantik dan byte {#sec-o002-u09-reproducibility}
+
+Dua keluaran **reproduktif secara byte** jika setiap byte sama. Keduanya pasti
+mempunyai SHA-256 sama. Syarat ini berguna untuk memeriksa alur kerja deterministik,
+arsip, dan distribusi.
+
+Dua keluaran dapat **reproduktif secara semantik** walaupun byte berbeda.
+Contohnya, JSON berikut menyimpan pemetaan sama:
+
+```text
+{"a":1,"b":2}
+{
+  "b": 2,
+  "a": 1
+}
+```
+
+Spasi dan urutan kunci berbeda, sehingga hash berbeda, tetapi pengurai JSON
+menghasilkan nilai yang sama. Dalam komputasi numerik, dua algoritme juga dapat
+menghasilkan nilai yang setara dalam toleransi dan satuan yang ditetapkan
+tanpa menghasilkan byte identik.
+
+Karena itu, laporan harus menyatakan tingkat yang diminta. Pengulangan
+deterministik Unit 9 menargetkan byte identik pada lingkungan terkunci.
+Validasi ilmiah lebih luas juga harus membandingkan schema, satuan, rumus, dan
+makna hasil.
+
+## Latihan {#sec-o002-u09-exercises}
+
+### Latihan 1 - mentah, turunan, dan garis keturunan {#ex-o002-u09-01}
+
+Jika `mass_g` untuk S03 berubah dari `15.8` menjadi `15.9`, komponen mana yang
+harus berubah hash dan komponen mana yang seharusnya tetap?
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Ikuti rantai data mentah → transformasi → data turunan; kode dan konfigurasi
+tidak diedit.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Hash dan ukuran data mentah mungkin berubah, dan hash data turunan harus
+berubah karena rasio S03 dihitung dari massa baru. `core_sha256` manifest juga
+berubah karena ikatannya berubah. Hash kode, konfigurasi, dan identitas
+lingkungan tetap jika byte ketiganya tidak berubah. Provenans harus mencatat
+bahwa keluaran baru berasal dari revisi data mentah tersebut.
+:::
+
+### Latihan 2 - schema dan satuan {#ex-o002-u09-02}
+
+Sebuah tabel mengganti `length_cm` dengan kolom `length` tanpa memperbarui
+schema. Mengapa nilai `10.0` tidak cukup untuk menghitung rasio yang dapat
+ditafsirkan? Berikan perbaikan.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Angka tidak membawa satuan secara otomatis.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+`10.0` dapat berarti milimeter, sentimeter, meter, atau satuan lain. Rasio dan
+satuannya berubah mengikuti pilihan itu. Perbaiki dengan medan yang tidak
+ambigu seperti `length_cm`, nyatakan `unit: cm` dalam schema, validasi data
+terhadap schema, dan ubah rumus keluaran jika konversi satuan diperlukan.
+:::
+
+### Latihan 3 - konfigurasi dan jalur aman {#ex-o002-u09-03}
+
+Konfigurasi berisi `raw_path: "../../private.csv"` dan jumlah tempat desimal
+ditulis langsung pada tiga fungsi berbeda. Temukan dua masalah dan berikan
+perbaikannya.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Periksa pelintasan direktori dan satu sumber keputusan run.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Jalur `../../private.csv` dapat keluar dari akar proyek dan harus ditolak;
+gunakan jalur relatif kanonis dalam daftar masukan yang diizinkan. Menanam
+jumlah desimal di tiga tempat membuat perubahan mudah tidak seragam. Simpan
+satu nilai `ratio_decimal_places` dalam konfigurasi berversi, validasi
+rentangnya, dan buat semua pemanggilan membaca nilai yang sama.
+:::
+
+### Latihan 4 - hak dan privasi {#ex-o002-u09-04}
+
+Anda menerima tabel pihak ketiga berisi pengukuran, nama, dan surel. Sebutkan
+apa yang harus dipisahkan atau dicatat sebelum membuat artefak publik.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Provenans, izin distribusi, dan kebutuhan analitis adalah tiga pertanyaan
+berbeda.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Catat sumber, pencipta, versi, lisensi atau dasar izin, serta perubahan pada
+komponen tabel. Pisahkan nama dan surel dari data publik kecuali ada dasar,
+kebutuhan, dan persetujuan yang sah; gunakan pengenal aman atau data sintetis
+bila sesuai. Periksa apakah pengukuran gabungan masih dapat mengidentifikasi
+orang. Jangan menganggap lisensi kode proyek otomatis mencakup data pihak
+ketiga.
+:::
+
+### Latihan 5 - semantik, byte, dan hash {#ex-o002-u09-05}
+
+Dua berkas JSON mempunyai urutan kunci dan spasi berbeda, tetapi setelah
+diurai menghasilkan objek yang sama. Apa yang dapat dikatakan tentang
+reproduksibilitas semantik, byte, dan SHA-256 mereka?
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Bandingkan nilai hasil penguraian dengan urutan karakter asli.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Keduanya reproduktif secara semantik untuk pemetaan JSON tersebut karena nilai
+hasil penguraiannya sama. Keduanya tidak reproduktif secara byte karena urutan
+karakternya berbeda, sehingga SHA-256 hampir pasti berbeda. Hash hanya mengikat
+byte masing-masing; untuk menuntut hash sama, keduanya harus diserialisasikan
+dengan aturan kanonis yang sama.
+:::
+
+## Ringkasan {#sec-o002-u09-summary}
+
+- Data mentah, data turunan, dan manifest run mempunyai peran berbeda dan tidak
+  boleh saling menimpa.
+- Schema memuat tipe, makna, dan satuan; validasi struktur bukan bukti mutu
+  pengukuran.
+- Konfigurasi dipisahkan dari kode, tetapi tetap mempunyai schema dan batas.
+- Identitas Python dan dependensi berversi membentuk kunci lingkungan minimum.
+- Jalur relatif kanonis meningkatkan portabilitas dan mencegah pelintasan
+  direktori.
+- Setiap komponen mempertahankan provenans dan status haknya sendiri.
+- Ukuran serta SHA-256 mengikat byte, bukan kebenaran, etika, atau lisensi.
+- Privasi dapat mewajibkan pengecualian data dari artefak publik.
+- Reproduksibilitas semantik tidak selalu memerlukan byte identik; manifest
+  harus menyatakan tingkat yang ditargetkan.

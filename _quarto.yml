@@ -1,0 +1,62 @@
+project:
+  type: book
+  output-dir: output
+  execute-dir: project
+  resources:
+    - LICENSE-TEXT.md
+    - LICENSE-CODE.md
+    - THIRD_PARTY.md
+    - RUNTIME-LICENSES.md
+    - LICENSE-RUNTIME-APACHE-2.0.txt
+    - backend/catalog.json
+    - 00_control/SOURCE_SELECTION.md
+
+book:
+  title: "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi"
+  subtitle: "B80 - Bahasa Indonesia"
+  author: "Kontributor proyek O002"
+  date: "2026-08-21"
+  chapters:
+    - index.qmd
+    - source/units/01-komputasi-bukti.qmd
+    - source/units/02-objek-fungsi.qmd
+    - source/units/03-array-vektorisasi.qmd
+    - source/units/04-visualisasi-integritas.qmd
+    - source/units/05-eksak-simbolik-sage.qmd
+    - source/units/06-titik-mengambang-stabilitas.qmd
+    - source/units/07-rancangan-eksperimen.qmd
+    - source/units/08-pengujian-validasi.qmd
+    - source/units/09-data-konfigurasi-provenans.qmd
+    - source/units/10-otomasi-pipa.qmd
+    - source/units/11-eksperimen-numerik.qmd
+    - source/units/12-proyek-akhir.qmd
+
+lang: id
+jupyter: o002-frozen
+
+execute:
+  enabled: true
+  cache: false
+  freeze: false
+  error: false
+  warning: false
+
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-copy: true
+    code-overflow: wrap
+    html-math-method: mathml
+    css: styles.css
+    embed-resources: false
+  pdf:
+    documentclass: scrreprt
+    toc: true
+    number-sections: true
+    code-overflow: wrap
+    include-in-header:
+      text: |
+        \RedeclareSectionCommand[tocnumwidth=2.8em]{chapter}
+        \RedeclareSectionCommand[tocnumwidth=4.6em]{section}
+        \RedeclareSectionCommand[tocnumwidth=6.0em]{subsection}

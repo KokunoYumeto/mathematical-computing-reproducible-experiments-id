@@ -1,0 +1,22 @@
+{
+  "pdf": {
+    "bytes": 502373,
+    "page_count": 98,
+    "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+    "sha256": "289e744aeef09eb6e546c002e0782a346519a39c5265ae4ef5c9d1e3ce095376"
+  },
+  "render": {
+    "contact_sheets": 7,
+    "dpi": 120,
+    "manifest_path": "00_control/PDF_VISUAL_RENDER_MANIFEST.csv",
+    "manifest_sha256": "9a66e23f5dbdd4d886ed88b4431f5f947023aef4b8ff2aaf289ffdf77b742bd6",
+    "page_images": 98
+  },
+  "review": {
+    "inspected_pages": 98,
+    "method": "All 98 page images reviewed through seven contact sheets; pages 8, 9, 12, 68, and 93-98 inspected individually at full render resolution.",
+    "result": "pass",
+    "reviewer": "Codex"
+  },
+  "schema": "o002.pdf-visual-qa.v1"
+}

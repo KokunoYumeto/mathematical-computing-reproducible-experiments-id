@@ -1,0 +1,536 @@
+{
+  "conclusion": {
+    "effect_size": {
+      "decimal": "0.0503",
+      "denominator": 3000,
+      "fraction": "151/3000",
+      "numerator": 151
+    },
+    "effect_unit": "selisih proporsi; kalikan 100 untuk poin persentase",
+    "hypothesis_supported": false,
+    "minimum_effect_was_not_changed_after_run": true,
+    "reference_accuracy": {
+      "decimal": "0.7347",
+      "denominator": 750,
+      "fraction": "551/750",
+      "numerator": 551
+    },
+    "result_label": "hasil negatif terhadap ambang efek yang ditetapkan",
+    "selected_accuracy": {
+      "decimal": "0.7850",
+      "denominator": 200,
+      "fraction": "157/200",
+      "numerator": 157
+    }
+  },
+  "core_sha256": "6075dde0694c58ca047e9d9c0944db12f0f3b0e5db0952311a2e9bbf8aeb0e57",
+  "development": {
+    "base_seed": 1729,
+    "by_threshold": {
+      "3": {
+        "accuracy": {
+          "decimal": "0.6825",
+          "denominator": 400,
+          "fraction": "273/400",
+          "numerator": 273
+        },
+        "correct": 2730,
+        "total": 4000
+      },
+      "4": {
+        "accuracy": {
+          "decimal": "0.7345",
+          "denominator": 2000,
+          "fraction": "1469/2000",
+          "numerator": 1469
+        },
+        "correct": 2938,
+        "total": 4000
+      },
+      "5": {
+        "accuracy": {
+          "decimal": "0.7973",
+          "denominator": 4000,
+          "fraction": "3189/4000",
+          "numerator": 3189
+        },
+        "correct": 3189,
+        "total": 4000
+      },
+      "6": {
+        "accuracy": {
+          "decimal": "0.7465",
+          "denominator": 2000,
+          "fraction": "1493/2000",
+          "numerator": 1493
+        },
+        "correct": 2986,
+        "total": 4000
+      },
+      "7": {
+        "accuracy": {
+          "decimal": "0.6813",
+          "denominator": 160,
+          "fraction": "109/160",
+          "numerator": 109
+        },
+        "correct": 2725,
+        "total": 4000
+      }
+    },
+    "cases_per_repetition": 200,
+    "paired_cases_across_thresholds": true,
+    "repetitions_completed": 20,
+    "replications": [
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 145,
+          "4": 151,
+          "5": 169,
+          "6": 160,
+          "7": 145
+        },
+        "index": 1,
+        "seed": 1729
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 130,
+          "4": 142,
+          "5": 149,
+          "6": 143,
+          "7": 134
+        },
+        "index": 2,
+        "seed": 1730
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 135,
+          "4": 146,
+          "5": 156,
+          "6": 147,
+          "7": 134
+        },
+        "index": 3,
+        "seed": 1731
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 130,
+          "4": 145,
+          "5": 162,
+          "6": 151,
+          "7": 140
+        },
+        "index": 4,
+        "seed": 1732
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 131,
+          "4": 131,
+          "5": 145,
+          "6": 135,
+          "7": 118
+        },
+        "index": 5,
+        "seed": 1733
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 138,
+          "4": 149,
+          "5": 157,
+          "6": 149,
+          "7": 138
+        },
+        "index": 6,
+        "seed": 1734
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 143,
+          "4": 153,
+          "5": 160,
+          "6": 154,
+          "7": 140
+        },
+        "index": 7,
+        "seed": 1735
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 148,
+          "4": 158,
+          "5": 165,
+          "6": 152,
+          "7": 136
+        },
+        "index": 8,
+        "seed": 1736
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 142,
+          "4": 153,
+          "5": 166,
+          "6": 150,
+          "7": 142
+        },
+        "index": 9,
+        "seed": 1737
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 143,
+          "4": 146,
+          "5": 159,
+          "6": 145,
+          "7": 132
+        },
+        "index": 10,
+        "seed": 1738
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 138,
+          "4": 150,
+          "5": 161,
+          "6": 148,
+          "7": 137
+        },
+        "index": 11,
+        "seed": 1739
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 141,
+          "4": 153,
+          "5": 161,
+          "6": 158,
+          "7": 143
+        },
+        "index": 12,
+        "seed": 1740
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 129,
+          "4": 137,
+          "5": 153,
+          "6": 145,
+          "7": 133
+        },
+        "index": 13,
+        "seed": 1741
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 120,
+          "4": 133,
+          "5": 150,
+          "6": 139,
+          "7": 127
+        },
+        "index": 14,
+        "seed": 1742
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 147,
+          "4": 148,
+          "5": 160,
+          "6": 149,
+          "7": 131
+        },
+        "index": 15,
+        "seed": 1743
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 146,
+          "4": 160,
+          "5": 169,
+          "6": 154,
+          "7": 142
+        },
+        "index": 16,
+        "seed": 1744
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 135,
+          "4": 149,
+          "5": 163,
+          "6": 154,
+          "7": 140
+        },
+        "index": 17,
+        "seed": 1745
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 124,
+          "4": 143,
+          "5": 165,
+          "6": 151,
+          "7": 135
+        },
+        "index": 18,
+        "seed": 1746
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 136,
+          "4": 150,
+          "5": 162,
+          "6": 153,
+          "7": 142
+        },
+        "index": 19,
+        "seed": 1747
+      },
+      {
+        "cases": 200,
+        "correct_by_threshold": {
+          "3": 129,
+          "4": 141,
+          "5": 157,
+          "6": 149,
+          "7": 136
+        },
+        "index": 20,
+        "seed": 1748
+      }
+    ],
+    "seed_schedule": "base_seed + repetition_index",
+    "total_cases": 4000
+  },
+  "holdout": {
+    "base_seed": 271828,
+    "by_threshold": {
+      "5": {
+        "accuracy": {
+          "decimal": "0.7850",
+          "denominator": 200,
+          "fraction": "157/200",
+          "numerator": 157
+        },
+        "correct": 2355,
+        "total": 3000
+      },
+      "6": {
+        "accuracy": {
+          "decimal": "0.7347",
+          "denominator": 750,
+          "fraction": "551/750",
+          "numerator": 551
+        },
+        "correct": 2204,
+        "total": 3000
+      }
+    },
+    "cases_per_repetition": 250,
+    "paired_cases_across_thresholds": true,
+    "repetitions_completed": 12,
+    "replications": [
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 188,
+          "6": 172
+        },
+        "index": 1,
+        "seed": 271828
+      },
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 191,
+          "6": 180
+        },
+        "index": 2,
+        "seed": 271829
+      },
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 197,
+          "6": 183
+        },
+        "index": 3,
+        "seed": 271830
+      },
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 190,
+          "6": 185
+        },
+        "index": 4,
+        "seed": 271831
+      },
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 212,
+          "6": 202
+        },
+        "index": 5,
+        "seed": 271832
+      },
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 200,
+          "6": 193
+        },
+        "index": 6,
+        "seed": 271833
+      },
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 189,
+          "6": 176
+        },
+        "index": 7,
+        "seed": 271834
+      },
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 204,
+          "6": 184
+        },
+        "index": 8,
+        "seed": 271835
+      },
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 200,
+          "6": 182
+        },
+        "index": 9,
+        "seed": 271836
+      },
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 182,
+          "6": 176
+        },
+        "index": 10,
+        "seed": 271837
+      },
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 198,
+          "6": 190
+        },
+        "index": 11,
+        "seed": 271838
+      },
+      {
+        "cases": 250,
+        "correct_by_threshold": {
+          "5": 204,
+          "6": 181
+        },
+        "index": 12,
+        "seed": 271839
+      }
+    ],
+    "seed_schedule": "base_seed + repetition_index",
+    "total_cases": 3000
+  },
+  "hypothesis": {
+    "declared_before_run": true,
+    "direction": "akurasi ambang terpilih lebih tinggi",
+    "minimum_meaningful_effect": {
+      "decimal": "0.1000",
+      "denominator": 10,
+      "fraction": "1/10",
+      "numerator": 1
+    }
+  },
+  "plan": {
+    "development_cases_per_repetition": 200,
+    "development_repetitions": 20,
+    "development_seed": 1729,
+    "holdout_cases_per_repetition": 250,
+    "holdout_policy": "holdout tidak dipakai untuk memilih ambang dan dinilai sekali setelah pilihan dibekukan",
+    "holdout_repetitions": 12,
+    "holdout_seed": 271828,
+    "minimum_meaningful_effect": {
+      "decimal": "0.1000",
+      "denominator": 10,
+      "fraction": "1/10",
+      "numerator": 1
+    },
+    "parameter_grid": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "reference_threshold": 6,
+    "selection_rule": "akurasi pengembangan tertinggi; jika seri pilih ambang terkecil",
+    "stopping_rule": {
+      "development": "tepat 20 replikasi x 200 kasus",
+      "early_stopping_allowed": false,
+      "holdout": "tepat 12 replikasi x 250 kasus"
+    }
+  },
+  "proof_boundary": {
+    "proves_selected_threshold_is_universally_best": false,
+    "reason": "Eksperimen memeriksa kisi, generator, benih, dan sampel berhingga; klaim umum memerlukan argumen lain."
+  },
+  "question": "Apakah ambang yang dipilih pada data pengembangan meningkatkan akurasi holdout sedikitnya 1/10 (sekitar 0,1000) dibanding ambang referensi 6?",
+  "randomness": {
+    "genuine_nondeterminism_note": "Benih tidak dapat mengulang gangguan fisik, penjadwalan sistem, atau sumber nondeterminisme nyata yang tidak direkam.",
+    "kind": "acak semu dengan benih tercatat",
+    "replayable": true
+  },
+  "runtime": {
+    "implementation": "CPython",
+    "python": "3.13.1",
+    "random_generator": "random.Random"
+  },
+  "schema": "o002.unit07.experiment-design.v1",
+  "selected_threshold": 5,
+  "variables": {
+    "controlled": [
+      "aturan pembangkitan kasus",
+      "jumlah kasus per replikasi",
+      "jumlah replikasi",
+      "jadwal benih",
+      "kasus yang sama untuk setiap ambang dalam satu replikasi"
+    ],
+    "dependent": "proporsi prediksi benar",
+    "independent": "ambang keputusan dalam parameter_grid"
+  }
+}

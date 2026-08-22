@@ -1,0 +1,14 @@
+{
+  "expected": {
+    "luahbtex": "1.25.7",
+    "miktex": "26.5",
+    "python": "3.13.1",
+    "quarto": "1.9.37"
+  },
+  "luahbtex": "1.25.7",
+  "matches_expected": true,
+  "miktex": "26.5",
+  "python": "3.13.1",
+  "quarto": "1.9.37",
+  "schema": "o002.toolchain-qa.v1"
+}

@@ -1,0 +1,53 @@
+---
+title: "Pengantar"
+identifier: o002.frontmatter.intro
+---
+
+## Cara menggunakan buku ini {#sec-o002-intro}
+
+Buku ini mempelajari komputasi sebagai bagian dari kegiatan matematika:
+merumuskan pertanyaan, merepresentasikan objek, menjalankan eksperimen,
+memeriksa program, menyimpan bukti kerja, dan menjelaskan apa yang benar-benar
+ditunjukkan oleh hasilnya.
+
+Prasyarat formalnya hanya kompetensi A30: aljabar, fungsi, dan trigonometri
+pada tingkat prakalulus. Python diperkenalkan dari awal. Topik kalkulus,
+aljabar linear, peluang, dan persamaan diferensial akan dipakai setelah pembaca
+mencapai mata kuliah terkait; topik itu tidak diselundupkan sebagai prasyarat
+Unit 1.
+
+Setiap eksperimen dalam buku ini harus dapat dijalankan secara lokal dengan
+perangkat lunak terbuka. Sebuah hasil komputasi belum menjadi bukti hanya
+karena keluar dari komputer. Sebaliknya, komputasi dapat menemukan contoh
+penyangkal, menguji implementasi, menuntun dugaan, dan menghasilkan bukti kerja
+yang dapat diperiksa orang lain.
+
+## Kontrak setiap unit {#sec-o002-unit-contract}
+
+Setiap unit memuat:
+
+1. tujuan belajar dan prasyarat lokal;
+2. teks pembaca dengan identitas stabil;
+3. kode yang dapat dijalankan tanpa layanan berbayar;
+4. pengujian otomatis untuk klaim tentang program;
+5. latihan, petunjuk, jawaban, dan solusi terpilih;
+6. catatan tentang batas antara eksperimen, bukti, dan kesimpulan; serta
+7. rekaman versi, lingkungan, dan hash artefak pada batas produksi.
+
+## Lisensi, atribusi, dan batas sumber {#sec-o002-license}
+
+Kedua belas unit dalam edisi ini ditulis secara mandiri. Patrick Walls,
+*Mathematical Python*; Irving dan rekan-rekan, *Research Software Engineering
+with Python*; serta *Scientific Python Lectures* dipakai untuk membandingkan
+cakupan dan praktik produksi, bukan sebagai sumber prosa, latihan, gambar,
+data, atau kode yang disalin maupun diadaptasi ke edisi ini. Penyebutan mereka
+tidak menyiratkan dukungan atau pengesahan.
+
+Teks asli edisi ini berlisensi **CC BY-SA 4.0**; kode asli berlisensi **MIT**.
+Pemakaian ulang harus mempertahankan atribusi, pemberitahuan lisensi, dan
+catatan perubahan yang diwajibkan. Berkas lengkap tersedia sebagai
+[lisensi teks](LICENSE-TEXT.md), [lisensi kode](LICENSE-CODE.md),
+[batas materi pihak ketiga](THIRD_PARTY.md), dan
+[lisensi runtime web](RUNTIME-LICENSES.md). Materi donor yang mungkin dipakai
+pada revisi mendatang tetap mengikuti lisensi komponennya sendiri dan tidak
+otomatis tercakup oleh lisensi edisi ini.

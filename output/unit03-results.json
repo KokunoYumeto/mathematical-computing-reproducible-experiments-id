@@ -1,0 +1,103 @@
+{
+  "broadcasting": {
+    "offset_shape": [
+      3
+    ],
+    "result": [
+      [
+        11,
+        18,
+        33
+      ],
+      [
+        41,
+        48,
+        63
+      ]
+    ],
+    "result_shape": [
+      2,
+      3
+    ],
+    "table_shape": [
+      2,
+      3
+    ]
+  },
+  "copy_vs_view": {
+    "base": [
+      0,
+      -10,
+      2,
+      3,
+      4,
+      5
+    ],
+    "copy": [
+      1,
+      99,
+      3
+    ],
+    "copy_shares_memory": false,
+    "view": [
+      -10,
+      2,
+      3
+    ],
+    "view_shares_memory": true
+  },
+  "floating_point": {
+    "close_to_0.6": true,
+    "expression": "sum([0.1, 0.2, 0.3])",
+    "is_exactly_0.6": false,
+    "result": "0.6000000000000001"
+  },
+  "payload_sha256": "4ab1787d01459db6ccc925239988b513c6be0a0f305ec90f921845f22d7e81f2",
+  "proof_boundary": {
+    "checked_case": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "proves_for_every_compatible_array": false,
+    "reason": "Pemeriksaan satu array menguji implementasi pada kasus itu; klaim umum memerlukan argumen per komponen.",
+    "vectorized_matches_scalar_reference": true
+  },
+  "runtime": {
+    "numpy": "2.1.3"
+  },
+  "schema": "o002.unit03-results.v1",
+  "vectorization": {
+    "formula": "3*x-2",
+    "input": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "input_dtype": "int64",
+    "input_shape": [
+      4
+    ],
+    "input_unchanged": true,
+    "matches_scalar_reference": true,
+    "result": [
+      1,
+      4,
+      7,
+      10
+    ],
+    "result_shape": [
+      4
+    ],
+    "scalar_reference": [
+      1,
+      4,
+      7,
+      10
+    ],
+    "shape_preserved": true,
+    "sum_invariant": true
+  }
+}

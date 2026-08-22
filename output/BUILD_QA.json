@@ -1,0 +1,373 @@
+{
+  "checks": {
+    "backend_schema_and_references": true,
+    "complete_12_unit_reader": true,
+    "experiment_json": true,
+    "frozen_toolchain_versions": true,
+    "html_ids_unique_per_document": true,
+    "html_lang_id": true,
+    "html_mathml_offline": true,
+    "html_runtime_resources_local": true,
+    "local_profile_paths_absent": true,
+    "pdf_all_pages_visual_pass": true,
+    "reader_license_notice_and_files": true,
+    "reader_provenance_records_packaged": true,
+    "runtime_component_inventory": true,
+    "stable_reader_ids": true,
+    "test_receipt_invocation_exact": true,
+    "unit04_artifact_closure": true,
+    "unit12_package_verification": true
+  },
+  "files": [
+    {
+      "bytes": 6851,
+      "path": "output/00_control/SOURCE_SELECTION.md",
+      "sha256": "273c9548d4e40df3ff0a5869b7f46e0073e3f176a4358f49f70d412b78967950"
+    },
+    {
+      "bytes": 20695,
+      "path": "output/backend/catalog.json",
+      "sha256": "7d8eb9a3f9fc398e5abea77e517046f5feb37eb3e1197048555d3b9646aa21bf"
+    },
+    {
+      "bytes": 30374,
+      "path": "output/index.html",
+      "sha256": "c44e5f71a7066ae780e7f59c95eebc69645dea03051f71280ff546b90d5a58a1"
+    },
+    {
+      "bytes": 502373,
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+      "sha256": "289e744aeef09eb6e546c002e0782a346519a39c5265ae4ef5c9d1e3ce095376"
+    },
+    {
+      "bytes": 1083,
+      "path": "output/LICENSE-CODE.md",
+      "sha256": "7a3860578c00e71c20019ef26ab76e28be25393a194a28f6c0a4edef59074b57"
+    },
+    {
+      "bytes": 10142,
+      "path": "output/LICENSE-RUNTIME-APACHE-2.0.txt",
+      "sha256": "bea1b4266f1499fa4bbb16d6e7577e6b5b53d1ef010835a9d460876022cc8722"
+    },
+    {
+      "bytes": 624,
+      "path": "output/LICENSE-TEXT.md",
+      "sha256": "afa51324d3c7c936969b2721bbe1b7103ab3db62d38069b5742fd35f675d50a0"
+    },
+    {
+      "bytes": 751,
+      "path": "output/PDF_VISUAL_QA.json",
+      "sha256": "a51fb79f7fdd0f5e6a42eee4b70fd72778ddd6fa0259a361ebd2afe31e530bca"
+    },
+    {
+      "bytes": 3425,
+      "path": "output/RUNTIME-LICENSES.md",
+      "sha256": "980c602f8f427ba13547259edcc8d2dccb607be8ce87aa7ceb72fd3f1ef88f30"
+    },
+    {
+      "bytes": 193715,
+      "path": "output/search.json",
+      "sha256": "8461c28814b570fc1ba7ca8044f626689f07b805e7acb74afda586115206355e"
+    },
+    {
+      "bytes": 508361,
+      "path": "output/site_libs/bootstrap/bootstrap-fd460e4b8aec9c2402a9e5dfeb0c5f8c.min.css",
+      "sha256": "e760513c2ef1e44efe8978394d9255ccb962d3198c3766b1a8aed98202987bb0"
+    },
+    {
+      "bytes": 99464,
+      "path": "output/site_libs/bootstrap/bootstrap-icons.css",
+      "sha256": "01253947f506e030589e4f33fc7ec7ccdfb9505e2e596dedf16445f12e243c0a"
+    },
+    {
+      "bytes": 180288,
+      "path": "output/site_libs/bootstrap/bootstrap-icons.woff",
+      "sha256": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15"
+    },
+    {
+      "bytes": 80668,
+      "path": "output/site_libs/bootstrap/bootstrap.min.js",
+      "sha256": "d2ea6c1e0cabca20d18e924b25a1cd0187c38ba7c33f60ab06e1b0402b9bcdb5"
+    },
+    {
+      "bytes": 9160,
+      "path": "output/site_libs/clipboard/clipboard.min.js",
+      "sha256": "e17a1d816e13c0826e0ed7febfabc3277f45571234bde0bf9120829a7169edc9"
+    },
+    {
+      "bytes": 5888,
+      "path": "output/site_libs/quarto-html/anchor.min.js",
+      "sha256": "69098e105d990f834cff1b7886d873444228ff63c590e5ff834d568f1115ed8b"
+    },
+    {
+      "bytes": 20084,
+      "path": "output/site_libs/quarto-html/popper.min.js",
+      "sha256": "4d50586b184724d39ddfe0f6582861664eddd5e806e5a79e0dbaa832361414d0"
+    },
+    {
+      "bytes": 3678,
+      "path": "output/site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css",
+      "sha256": "96d688dbd4c2de66404fd9b0e75d5b62573cbece9ee7011ca24d8bce1bbe044c"
+    },
+    {
+      "bytes": 26830,
+      "path": "output/site_libs/quarto-html/quarto.js",
+      "sha256": "4ecb60f215d96b2af0fe9d985c71e32863b1c993a64725a416ac18b5991c59c6"
+    },
+    {
+      "bytes": 2882,
+      "path": "output/site_libs/quarto-html/tabsets/tabsets.js",
+      "sha256": "a9c226bf70e82eaf5476f619cecfb70b4446b87ce4d1634d6404b0b2ba006d15"
+    },
+    {
+      "bytes": 1409,
+      "path": "output/site_libs/quarto-html/tippy.css",
+      "sha256": "5969f497d9158d7682f8219c6f13fa67269cdf5bf50a3931d95327151dee5678"
+    },
+    {
+      "bytes": 24033,
+      "path": "output/site_libs/quarto-html/tippy.umd.min.js",
+      "sha256": "41181eeec6d7ba64cb9165f0e95563e34e026bde79e7c13aeec83270429b6fae"
+    },
+    {
+      "bytes": 4570,
+      "path": "output/site_libs/quarto-nav/headroom.min.js",
+      "sha256": "5b80cc4165a661a3f2060d6bdb5ccff591f04c4f8e39a06c12d3c2544587cb17"
+    },
+    {
+      "bytes": 9636,
+      "path": "output/site_libs/quarto-nav/quarto-nav.js",
+      "sha256": "a3e9c8c52dd54d783a6d9294357ef104d17d03faf0a404b592216c0d71a9f717"
+    },
+    {
+      "bytes": 96397,
+      "path": "output/site_libs/quarto-search/autocomplete.umd.js",
+      "sha256": "cd9db3b7d812139a4679a2566ea8f01b2a80159490a60b9e9e813e81b5e00a05"
+    },
+    {
+      "bytes": 23539,
+      "path": "output/site_libs/quarto-search/fuse.min.js",
+      "sha256": "c57339c3fa16b1d69d9a6b46749a8139ef8d4fc9bbfe48144ff897aa7d4222ec"
+    },
+    {
+      "bytes": 43121,
+      "path": "output/site_libs/quarto-search/quarto-search.js",
+      "sha256": "1a23221f499b3993dc66ca5c8913e4e6602dfa4652337e9fbf75139ded5ece68"
+    },
+    {
+      "bytes": 55914,
+      "path": "output/source/units/01-komputasi-bukti.html",
+      "sha256": "891f78cbee7d34f57b74da6de69b8c5bccc10f12aeb4fa0d612e54fed179d8f1"
+    },
+    {
+      "bytes": 58762,
+      "path": "output/source/units/02-objek-fungsi.html",
+      "sha256": "69460e63c03ca362cde8022df5df4178d7c51d955cf9ff8354c440e5e19c1bf6"
+    },
+    {
+      "bytes": 67906,
+      "path": "output/source/units/03-array-vektorisasi.html",
+      "sha256": "ceb81e22ec5d7df37f3c7ea5e34c333af7f5c6b39c825ab1d65d85e1ebc99107"
+    },
+    {
+      "bytes": 60127,
+      "path": "output/source/units/04-visualisasi-integritas.html",
+      "sha256": "3c9e0365346b20a146a7f8a7b877cd539fc10e3dea6450ee0dc03f8713adae8b"
+    },
+    {
+      "bytes": 75460,
+      "path": "output/source/units/05-eksak-simbolik-sage.html",
+      "sha256": "a76e30345f6c30e91e34bc5f2a42beee529f4347400b3182d90d2bda8658e572"
+    },
+    {
+      "bytes": 83957,
+      "path": "output/source/units/06-titik-mengambang-stabilitas.html",
+      "sha256": "5f127c55efcab4e60ef7407a41d60c112c3f7d88d9b8ddf38bab216724e9c479"
+    },
+    {
+      "bytes": 59412,
+      "path": "output/source/units/07-rancangan-eksperimen.html",
+      "sha256": "2a52540e98cd68d1b05f8358ddfcace3f433bafbd56e6a368ea6aeb93dd2bde5"
+    },
+    {
+      "bytes": 73840,
+      "path": "output/source/units/08-pengujian-validasi.html",
+      "sha256": "8583189017559b9aded8e289dc437b45a2e2f695e72769150e3fe9e033ec50b7"
+    },
+    {
+      "bytes": 61343,
+      "path": "output/source/units/09-data-konfigurasi-provenans.html",
+      "sha256": "a0dab9d388c6a4118bf7aeb1b8c76e2a17dfde286de3abd863bbd6ed9ae85a6e"
+    },
+    {
+      "bytes": 49452,
+      "path": "output/source/units/10-otomasi-pipa.html",
+      "sha256": "39648c926b04ddd4ff8d8dc3977b52d2e372726294dc04c985490e44561eae2a"
+    },
+    {
+      "bytes": 60904,
+      "path": "output/source/units/11-eksperimen-numerik.html",
+      "sha256": "63b04174fa326f8c1bb38ea9b76bd7f84cd485359f991ac5165324eb324a763e"
+    },
+    {
+      "bytes": 49903,
+      "path": "output/source/units/12-proyek-akhir.html",
+      "sha256": "9fb9d8d51906d59a5f5bc10ae995336f2ce6cf8fa2ec4caa59e9ee3b143b8418"
+    },
+    {
+      "bytes": 96,
+      "path": "output/SOURCE_QA.json",
+      "sha256": "c0cfb5cc97194d9ea9224013f883a8876a3f8301be9d333c058f11f3da84f47b"
+    },
+    {
+      "bytes": 380,
+      "path": "output/styles.css",
+      "sha256": "cadd4dee138cee52d118807db84a1f1c27b71b63a97495a19cc274561095d9a1"
+    },
+    {
+      "bytes": 290,
+      "path": "output/TEST_QA.json",
+      "sha256": "fd99841678c1d6ab13242747ed2cef33e50a7e9e798f000af02ae8b0c93d56f9"
+    },
+    {
+      "bytes": 1598,
+      "path": "output/THIRD_PARTY.md",
+      "sha256": "5fb147c587a21dc7555f0956b456ca4450b85579e87fdf535818878fa83a4fe4"
+    },
+    {
+      "bytes": 271,
+      "path": "output/TOOLCHAIN_QA.json",
+      "sha256": "6e38ac29060b39079c8e80cb0bb75433cb5745ef4c10dff7472b1d09ab4b34e0"
+    },
+    {
+      "bytes": 771,
+      "path": "output/unit01-results.json",
+      "sha256": "343fdc4f3fe8e45807b9f2a8eaedb1e3820749b26fbe78861c6fb183a3580a6d"
+    },
+    {
+      "bytes": 339,
+      "path": "output/unit02-results.json",
+      "sha256": "05d2ad13548932aacb18ba5b52545e431a65a9723e9458d9f51155863c21e18a"
+    },
+    {
+      "bytes": 1635,
+      "path": "output/unit03-results.json",
+      "sha256": "dbc8673b8cdc94fcab512f64c8856168593c84c293ee57cdb2b6d7c86c3b29d4"
+    },
+    {
+      "bytes": 479,
+      "path": "output/unit04/unit04-alt.txt",
+      "sha256": "c68df3a88d557ec461d6b38240f7c177e95b41c7489c67b8b58a92095ec48e52"
+    },
+    {
+      "bytes": 160,
+      "path": "output/unit04/unit04-data.csv",
+      "sha256": "f510ee30b5adc1cf470f75c2552ea8254a4513a107e3506dc4ad8c033c6f03be"
+    },
+    {
+      "bytes": 18742,
+      "path": "output/unit04/unit04-figure.svg",
+      "sha256": "5b7d7be5000706220b3f7ab7ce394018246d8c2b7ed01c630a7672bd24c8c5a0"
+    },
+    {
+      "bytes": 886,
+      "path": "output/unit04/unit04-manifest.json",
+      "sha256": "8d155adf8ad52ec8fb27bdec11f546e7d1e9befd07d17482175bb41dc052f4cb"
+    },
+    {
+      "bytes": 1853,
+      "path": "output/unit05-results.json",
+      "sha256": "28788f790fea38aa307ced8caea48f7eda9c9a0574b6f2071b46494f601da68c"
+    },
+    {
+      "bytes": 3432,
+      "path": "output/unit06-results.json",
+      "sha256": "5c361c992c5fdd03d2704bb0498ffa532b4dbc8112e2edfe90304d6543b0c5f6"
+    },
+    {
+      "bytes": 11641,
+      "path": "output/unit07-results.json",
+      "sha256": "bea53712e4feeea054080c041f603f4095f2ece746e9068b2d7b21f3a5c369ef"
+    },
+    {
+      "bytes": 1895,
+      "path": "output/unit08-results.json",
+      "sha256": "bff1ac901d5e970df75e9963e291afa257d89595b93f1ae48b17006428bacca3"
+    },
+    {
+      "bytes": 7110,
+      "path": "output/unit09-results.json",
+      "sha256": "9ba59ea2333f57a9f19fb9aff0cc00deb2b74972151bc8efbed1de5fd170c54f"
+    },
+    {
+      "bytes": 1261,
+      "path": "output/unit10-results.json",
+      "sha256": "6ddb011417bc5f1a6f9e5b60590822d38b57522be77a921022aca327c6b5c3aa"
+    },
+    {
+      "bytes": 2657,
+      "path": "output/unit11-results.json",
+      "sha256": "598e6cf6bebaa238819ddce7b05a654c3eddccbf76fecbbf43947f291514826a"
+    },
+    {
+      "bytes": 1806,
+      "path": "output/unit12-results.json",
+      "sha256": "9234f0e1def6bc5780f04023b3ab2061708237ad1711045ca27f4fc92eb2dd0d"
+    }
+  ],
+  "pdf_visual_qa": {
+    "pdf": {
+      "bytes": 502373,
+      "page_count": 98,
+      "path": "output/Komputasi-Matematis-dan-Eksperimen-yang-Dapat-Direproduksi.pdf",
+      "sha256": "289e744aeef09eb6e546c002e0782a346519a39c5265ae4ef5c9d1e3ce095376"
+    },
+    "render": {
+      "contact_sheets": 7,
+      "dpi": 120,
+      "manifest_path": "00_control/PDF_VISUAL_RENDER_MANIFEST.csv",
+      "manifest_sha256": "9a66e23f5dbdd4d886ed88b4431f5f947023aef4b8ff2aaf289ffdf77b742bd6",
+      "page_images": 98
+    },
+    "review": {
+      "inspected_pages": 98,
+      "method": "All 98 page images reviewed through seven contact sheets; pages 8, 9, 12, 68, and 93-98 inspected individually at full render resolution.",
+      "result": "pass",
+      "reviewer": "Codex"
+    },
+    "schema": "o002.pdf-visual-qa.v1"
+  },
+  "schema": "o002.build-qa.v1",
+  "source_qa": {
+    "errors": 0,
+    "schema": "o002.source-qa.v1",
+    "successful": true,
+    "unit_triplets": 12
+  },
+  "tests": {
+    "command": "python -B scripts/run_tests.py --receipt tmp/build-receipts/TEST_QA.json",
+    "errors": 0,
+    "expected_failures": 0,
+    "failures": 0,
+    "python": "3.13.1",
+    "schema": "o002.test-qa.v1",
+    "skipped": 0,
+    "successful": true,
+    "tests_run": 115,
+    "unexpected_successes": 0
+  },
+  "toolchain": {
+    "expected": {
+      "luahbtex": "1.25.7",
+      "miktex": "26.5",
+      "python": "3.13.1",
+      "quarto": "1.9.37"
+    },
+    "luahbtex": "1.25.7",
+    "matches_expected": true,
+    "miktex": "26.5",
+    "python": "3.13.1",
+    "quarto": "1.9.37",
+    "schema": "o002.toolchain-qa.v1"
+  }
+}

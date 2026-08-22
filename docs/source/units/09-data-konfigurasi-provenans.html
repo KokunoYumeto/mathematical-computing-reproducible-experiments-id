@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Data, Konfigurasi, dan Provenans – Komputasi Matematis dan Eksperimen yang Dapat Direproduksi</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../source/units/10-otomasi-pipa.html" rel="next">
+<link href="../../source/units/08-pengujian-validasi.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-fd460e4b8aec9c2402a9e5dfeb0c5f8c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Tidak ada hasil",
+    "search-matching-documents-text": "dokumen cocok",
+    "search-copy-link-title": "Salin tautan untuk mencari",
+    "search-hide-matches-text": "Sembunyikan kecocokan lainnya",
+    "search-more-match-text": "kecocokan lainnya di dokumen ini",
+    "search-more-matches-text": "kecocokan lainnya di dokumen ini",
+    "search-clear-button-title": "Hapus",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Batal",
+    "search-submit-button-title": "Kirim",
+    "search-label": "Mencari"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alihkan bilah sisi" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../source/units/09-data-konfigurasi-provenans.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data, Konfigurasi, dan Provenans</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alihkan bilah sisi" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Mencari" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Komputasi Matematis dan Eksperimen yang Dapat Direproduksi</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Mencari"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Pengantar</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/01-komputasi-bukti.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Komputasi, Representasi, dan Bukti</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/02-objek-fungsi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Objek, Nilai, dan Fungsi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/03-array-vektorisasi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Array, Bentuk, dan Vektorisasi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/04-visualisasi-integritas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualisasi dengan Integritas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/05-eksak-simbolik-sage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Komputasi Eksak dan Simbolik</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/06-titik-mengambang-stabilitas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Titik-Mengambang, Galat, dan Stabilitas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/07-rancangan-eksperimen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Rancangan Eksperimen yang Dapat Diperiksa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/08-pengujian-validasi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pengujian dan Validasi Komputasi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/09-data-konfigurasi-provenans.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data, Konfigurasi, dan Provenans</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/10-otomasi-pipa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Otomasi dan Alur Kerja yang Dapat Direproduksi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/11-eksperimen-numerik.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Eksperimen Numerik Berprasyarat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../source/units/12-proyek-akhir.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Proyek Akhir yang Dapat Diperiksa</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Daftar Isi</h2>
+   
+  <ul>
+  <li><a href="#sec-o002-u09-objectives" id="toc-sec-o002-u09-objectives" class="nav-link active" data-scroll-target="#sec-o002-u09-objectives"><span class="header-section-number">10.1</span> Tujuan belajar</a></li>
+  <li><a href="#sec-o002-u09-data-layers" id="toc-sec-o002-u09-data-layers" class="nav-link" data-scroll-target="#sec-o002-u09-data-layers"><span class="header-section-number">10.2</span> Tiga lapisan data</a></li>
+  <li><a href="#sec-o002-u09-schema-units" id="toc-sec-o002-u09-schema-units" class="nav-link" data-scroll-target="#sec-o002-u09-schema-units"><span class="header-section-number">10.3</span> Schema dan satuan</a></li>
+  <li><a href="#sec-o002-u09-configuration" id="toc-sec-o002-u09-configuration" class="nav-link" data-scroll-target="#sec-o002-u09-configuration"><span class="header-section-number">10.4</span> Konfigurasi terpisah dari kode</a></li>
+  <li><a href="#sec-o002-u09-environment" id="toc-sec-o002-u09-environment" class="nav-link" data-scroll-target="#sec-o002-u09-environment"><span class="header-section-number">10.5</span> Identitas dan kunci lingkungan</a></li>
+  <li><a href="#sec-o002-u09-paths" id="toc-sec-o002-u09-paths" class="nav-link" data-scroll-target="#sec-o002-u09-paths"><span class="header-section-number">10.6</span> Jalur relatif yang aman</a></li>
+  <li><a href="#sec-o002-u09-rights" id="toc-sec-o002-u09-rights" class="nav-link" data-scroll-target="#sec-o002-u09-rights"><span class="header-section-number">10.7</span> Provenans dan hak per komponen</a></li>
+  <li><a href="#sec-o002-u09-hashes" id="toc-sec-o002-u09-hashes" class="nav-link" data-scroll-target="#sec-o002-u09-hashes"><span class="header-section-number">10.8</span> SHA-256 dan ukuran byte</a></li>
+  <li><a href="#sec-o002-u09-privacy" id="toc-sec-o002-u09-privacy" class="nav-link" data-scroll-target="#sec-o002-u09-privacy"><span class="header-section-number">10.9</span> Privasi dan pengecualian</a></li>
+  <li><a href="#sec-o002-u09-manifest" id="toc-sec-o002-u09-manifest" class="nav-link" data-scroll-target="#sec-o002-u09-manifest"><span class="header-section-number">10.10</span> Manifest run yang kanonis</a></li>
+  <li><a href="#sec-o002-u09-reproducibility" id="toc-sec-o002-u09-reproducibility" class="nav-link" data-scroll-target="#sec-o002-u09-reproducibility"><span class="header-section-number">10.11</span> Semantik dan byte</a></li>
+  <li><a href="#sec-o002-u09-exercises" id="toc-sec-o002-u09-exercises" class="nav-link" data-scroll-target="#sec-o002-u09-exercises"><span class="header-section-number">10.12</span> Latihan</a>
+  <ul class="collapse">
+  <li><a href="#ex-o002-u09-01" id="toc-ex-o002-u09-01" class="nav-link" data-scroll-target="#ex-o002-u09-01"><span class="header-section-number">10.12.1</span> Latihan 1 - mentah, turunan, dan garis keturunan</a></li>
+  <li><a href="#ex-o002-u09-02" id="toc-ex-o002-u09-02" class="nav-link" data-scroll-target="#ex-o002-u09-02"><span class="header-section-number">10.12.2</span> Latihan 2 - schema dan satuan</a></li>
+  <li><a href="#ex-o002-u09-03" id="toc-ex-o002-u09-03" class="nav-link" data-scroll-target="#ex-o002-u09-03"><span class="header-section-number">10.12.3</span> Latihan 3 - konfigurasi dan jalur aman</a></li>
+  <li><a href="#ex-o002-u09-04" id="toc-ex-o002-u09-04" class="nav-link" data-scroll-target="#ex-o002-u09-04"><span class="header-section-number">10.12.4</span> Latihan 4 - hak dan privasi</a></li>
+  <li><a href="#ex-o002-u09-05" id="toc-ex-o002-u09-05" class="nav-link" data-scroll-target="#ex-o002-u09-05"><span class="header-section-number">10.12.5</span> Latihan 5 - semantik, byte, dan hash</a></li>
+  </ul></li>
+  <li><a href="#sec-o002-u09-summary" id="toc-sec-o002-u09-summary" class="nav-link" data-scroll-target="#sec-o002-u09-summary"><span class="header-section-number">10.13</span> Ringkasan</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data, Konfigurasi, dan Provenans</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="sec-o002-u09">
+
+</div>
+<section id="sec-o002-u09-objectives" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-o002-u09-objectives"><span class="header-section-number">10.1</span> Tujuan belajar</h2>
+<p>Setelah menyelesaikan unit ini, pembaca dapat:</p>
+<ul>
+<li>membedakan data mentah, data turunan, dan laporan run;</li>
+<li>menyatakan schema, tipe, makna kolom, dan satuan;</li>
+<li>memisahkan konfigurasi yang berubah dari kode transformasi;</li>
+<li>mencatat identitas lingkungan dan batas berkas kunci;</li>
+<li>memakai jalur relatif yang tidak dapat keluar dari akar proyek;</li>
+<li>merekam asal-usul serta status hak setiap komponen;</li>
+<li>mengikat artefak pada ukuran byte dan SHA-256 tanpa melebih-lebihkan fungsi hash;</li>
+<li>mengecualikan data privat dari artefak publik; dan</li>
+<li>membedakan pengulangan semantik dari pengulangan byte demi byte.</li>
+</ul>
+<p>Prasyarat lokal: Unit 1-4 dan 7-8, tabel, rasio, satuan, berkas teks, dan fungsi sederhana. Jalur dasar hanya memakai pustaka standar Python.</p>
+</section>
+<section id="sec-o002-u09-data-layers" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-o002-u09-data-layers"><span class="header-section-number">10.2</span> Tiga lapisan data</h2>
+<p><strong>Data mentah</strong> adalah rekaman yang diterima sebelum transformasi analitis unit. “Mentah” tidak berarti tanpa sejarah: sensor, formulir, atau proses ekspor mungkin sudah mengubahnya. Istilah itu hanya menyatakan titik masuk yang dibekukan bagi run ini.</p>
+<p>Unit 9 memakai lima rekaman sintetis:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><code>sample_id</code></th>
+<th style="text-align: right;"><code>length_cm</code></th>
+<th style="text-align: right;"><code>mass_g</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>S01</td>
+<td style="text-align: right;">10,0</td>
+<td style="text-align: right;">20,0</td>
+</tr>
+<tr class="even">
+<td>S02</td>
+<td style="text-align: right;">12,0</td>
+<td style="text-align: right;">24,6</td>
+</tr>
+<tr class="odd">
+<td>S03</td>
+<td style="text-align: right;">8,0</td>
+<td style="text-align: right;">15,8</td>
+</tr>
+<tr class="even">
+<td>S04</td>
+<td style="text-align: right;">14,0</td>
+<td style="text-align: right;">28,7</td>
+</tr>
+<tr class="odd">
+<td>S05</td>
+<td style="text-align: right;">11,0</td>
+<td style="text-align: right;">21,8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Data turunan</strong> dihasilkan dengan aturan</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mfrac><mtext mathvariant="normal">massa dalam gram</mtext><mtext mathvariant="normal">panjang dalam sentimeter</mtext></mfrac><mo>,</mo></mrow><annotation encoding="application/x-tex">
+r=\frac{\text{massa dalam gram}}{\text{panjang dalam sentimeter}},
+</annotation></semantics></math></p>
+<p>lalu dibulatkan ke tiga tempat desimal dengan aturan <em>round half even</em>. Nama kolom turunannya ialah <code>mass_per_length_g_per_cm</code>.</p>
+<p><strong>Manifest run</strong> bukan data pengukuran baru. Ia menjawab berkas apa yang dipakai, transformasi apa yang dijalankan, konfigurasi dan lingkungan apa yang berlaku, serta byte keluaran mana yang dihasilkan.</p>
+<p>Jangan menimpa data mentah dengan hasil turunan. Jika sebuah transformasi perlu diperbaiki, data mentah yang terikat memungkinkan keluaran dibuat ulang dan dibandingkan.</p>
+</section>
+<section id="sec-o002-u09-schema-units" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="sec-o002-u09-schema-units"><span class="header-section-number">10.3</span> Schema dan satuan</h2>
+<p>Schema adalah kontrak struktur. Schema mentah unit ini menetapkan:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Medan</th>
+<th>Tipe</th>
+<th>Satuan</th>
+<th>Makna</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sample_id</code></td>
+<td>teks berbentuk <code>S</code> + dua digit</td>
+<td>tidak ada</td>
+<td>pengenal sintetis</td>
+</tr>
+<tr class="even">
+<td><code>length_cm</code></td>
+<td>teks desimal positif</td>
+<td>cm</td>
+<td>panjang</td>
+</tr>
+<tr class="odd">
+<td><code>mass_g</code></td>
+<td>teks desimal positif</td>
+<td>g</td>
+<td>massa</td>
+</tr>
+</tbody>
+</table>
+<p>Menyimpan desimal sebagai teks menghindari perubahan awal ke titik-mengambang. Kode menolak nilai numerik yang bukan teks, lalu mengubah teks tervalidasi itu menjadi <code>Decimal</code> ketika menghitung. Pengenal tidak mempunyai satuan; <code>None</code> lebih jujur daripada satuan kosong yang dapat berarti “lupa diisi”.</p>
+<p>Nama <code>length</code> tanpa satuan tidak cukup. Nilai 10 dapat berarti 10 mm, 10 cm, atau 10 m, dan ketiganya menghasilkan rasio berbeda. Satuan harus mengikuti data sampai keluaran; schema turunan menetapkan <code>g/cm</code>.</p>
+<p>Validasi memeriksa nama medan, bentuk pengenal, keunikan, bilangan berhingga, dan kepositifan. Schema yang lulus belum menjamin pengukuran benar, tetapi ia mencegah beberapa salah tafsir struktural.</p>
+</section>
+<section id="sec-o002-u09-configuration" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="sec-o002-u09-configuration"><span class="header-section-number">10.4</span> Konfigurasi terpisah dari kode</h2>
+<p>Kode transformasi menyatakan <strong>bagaimana</strong> rasio dihitung. Konfigurasi menyatakan pilihan run yang sah berubah, misalnya:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"derived_path"</span><span class="fu">:</span> <span class="st">"data/derived/unit09_mass-per-length.csv"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"ratio_decimal_places"</span><span class="fu">:</span> <span class="dv">3</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"raw_path"</span><span class="fu">:</span> <span class="st">"data/raw/unit09_measurements.csv"</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"rounding"</span><span class="fu">:</span> <span class="st">"ROUND_HALF_EVEN"</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"schema"</span><span class="fu">:</span> <span class="st">"o002.unit09.config.v1"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Jika jumlah tempat desimal ditanam di banyak baris kode, perubahan kecil mudah menjadi tidak konsisten. Satu konfigurasi tervalidasi membuat pilihan itu dapat ditinjau dan diikat dengan hash.</p>
+<p>Memisahkan konfigurasi tidak berarti menerima sembarang nilai. Unit ini hanya menerima 0 sampai 9 tempat desimal dan satu aturan pembulatan yang telah diuji. Konfigurasi adalah masukan yang mempunyai schema, bukan jalan belakang untuk menjalankan teks sebagai kode.</p>
+</section>
+<section id="sec-o002-u09-environment" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sec-o002-u09-environment"><span class="header-section-number">10.5</span> Identitas dan kunci lingkungan</h2>
+<p>Keluaran dapat berubah walaupun data dan kode tampak sama karena versi bahasa, pustaka, sistem operasi, atau perangkat keras berbeda. Manifest Unit 9 mencatat implementasi dan versi Python serta menyatakan bahwa jalur dasar hanya memakai pustaka standar.</p>
+<p>Karena tidak ada dependensi eksternal, “kunci lingkungan” unit ini kecil: identitas Python dan konteks aritmetika <code>Decimal</code> diserialisasikan secara kanonis lalu diikat dengan SHA-256. Konteks tersebut membekukan presisi 28 digit, pembulatan <em>round half even</em>, batas eksponen, serta perangkap operasi; ia tidak mewarisi presisi atau perangkap proses pemanggil. Proyek yang memakai NumPy, SymPy, SageMath, atau pustaka lain memerlukan berkas kunci yang menyebut versi tepat beserta sumber paket. Daftar nama tanpa versi bukan kunci.</p>
+<p>Berkas kunci juga tidak membekukan seluruh dunia. Perbedaan sistem operasi, lokal, CPU, atau pustaka sistem masih dapat relevan. Catat lapisan yang mempengaruhi pertanyaan, dan jangan menyebut lingkungan “identik” hanya karena satu nomor versi cocok.</p>
+</section>
+<section id="sec-o002-u09-paths" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sec-o002-u09-paths"><span class="header-section-number">10.6</span> Jalur relatif yang aman</h2>
+<p>Manifest menyimpan jalur logis seperti <code>data/raw/unit09_measurements.csv</code>, bukan <code>direktori-profil/Nama/Desktop/data.csv</code>. Jalur relatif dapat dipindahkan bersama proyek dan tidak membocorkan nama akun lokal.</p>
+<p>Validator unit menerima jalur POSIX relatif yang kanonis. Ia menolak:</p>
+<ul>
+<li><code>/etc/secret</code> atau <code>C:/secret</code>, karena absolut;</li>
+<li><code>../secret</code> dan <code>data/../secret</code>, karena dapat keluar atau menyamarkan tujuan;</li>
+<li>garis miring terbalik, agar satu bentuk dipakai pada semua sistem; dan</li>
+<li>bentuk ganda seperti <code>data//raw/file.csv</code>.</li>
+</ul>
+<p>Setiap peran artefak juga harus mempunyai jalur unik setelah normalisasi Unicode dan pelipatan kapitalisasi. Karena itu, <code>data/raw.csv</code> dan <code>DATA/RAW.CSV</code> dianggap bertabrakan agar satu manifest tetap aman pada sistem berkas yang tidak membedakan huruf besar dan kecil.</p>
+<p>Validasi jalur adalah batas keamanan dan reproduksibilitas. Namun, ia bukan izin membaca setiap berkas yang kebetulan berada di dalam proyek. Daftar masukan yang diizinkan tetap harus dibatasi oleh rencana run.</p>
+</section>
+<section id="sec-o002-u09-rights" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="sec-o002-u09-rights"><span class="header-section-number">10.7</span> Provenans dan hak per komponen</h2>
+<p>Provenans menjawab “dari mana komponen ini berasal dan apa yang terjadi padanya?”. Hak menjawab “atas dasar apa komponen boleh dipakai atau didistribusikan?”. Keduanya berkaitan tetapi tidak sama.</p>
+<p>Manifest mencatat secara terpisah:</p>
+<ul>
+<li>data mentah sintetis yang ditetapkan di kode;</li>
+<li>data turunan beserta rumus transformasinya;</li>
+<li>konfigurasi;</li>
+<li>identitas lingkungan; dan</li>
+<li>kode Unit 9, yang menunjuk <code>LICENSE-CODE.md</code> dan lisensi MIT.</li>
+</ul>
+<p>Data contoh tidak memuat bahan pihak ketiga. Rekaman itu tidak dipakai untuk membuat klaim lisensi menyeluruh atas setiap berkas proyek. Jika sebuah gambar CC BY-SA, kode MIT, dan data berizin khusus digabungkan, masing-masing tetap memerlukan pencipta/sumber, lisensi, perubahan, dan pembatasannya sendiri. Provenans tidak boleh dihapus hanya karena hasil turunannya berupa angka.</p>
+</section>
+<section id="sec-o002-u09-hashes" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="sec-o002-u09-hashes"><span class="header-section-number">10.8</span> SHA-256 dan ukuran byte</h2>
+<p>Untuk setiap komponen, manifest menyimpan jalur logis, jenis media, peran, ukuran byte, dan SHA-256. Jika satu byte berubah, hash hampir pasti berubah. Ukuran membantu mendeteksi berkas kosong atau pemotongan yang tidak sengaja dan memberi pemeriksaan sederhana sebelum hashing.</p>
+<p>Hash menjawab pertanyaan identitas byte. Ia tidak membuktikan bahwa:</p>
+<ul>
+<li>rumus transformasi benar;</li>
+<li>satuan sesuai;</li>
+<li>data dikumpulkan secara etis;</li>
+<li>lisensi yang dicatat sah; atau</li>
+<li>manifest memuat semua komponen yang semestinya.</li>
+</ul>
+<p>Semua pertanyaan itu memerlukan pemeriksaan lain. Hash yang cocok atas berkas salah hanya memastikan bahwa dua orang memiliki berkas salah yang sama.</p>
+</section>
+<section id="sec-o002-u09-privacy" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="sec-o002-u09-privacy"><span class="header-section-number">10.9</span> Privasi dan pengecualian</h2>
+<p>Reproduksibilitas bukan alasan untuk menerbitkan nama, surel, nomor telepon, lokasi rinci, atau teks bebas yang dapat mengidentifikasi seseorang. Dataset unit memakai <code>S01</code> sampai <code>S05</code> sebagai pengenal sintetis dan secara eksplisit menolak medan privat.</p>
+<p>Pada penelitian nyata, strategi dapat meliputi:</p>
+<ul>
+<li>memisahkan data terbatas dari artefak publik;</li>
+<li>menerbitkan schema, kode, data sintetis, dan ringkasan aman;</li>
+<li>mencatat cara peneliti berwenang dapat memohon akses;</li>
+<li>menghapus medan yang tidak diperlukan sebelum analisis; dan</li>
+<li>memeriksa apakah gabungan beberapa medan masih dapat mengidentifikasi orang.</li>
+</ul>
+<p>Menulis hash data rahasia ke manifest publik juga dapat membocorkan informasi dalam keadaan tertentu, khususnya bila ruang kemungkinan kecil. Putuskan apa yang boleh dipublikasikan sebelum membuat manifes publik.</p>
+</section>
+<section id="sec-o002-u09-manifest" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="sec-o002-u09-manifest"><span class="header-section-number">10.10</span> Manifest run yang kanonis</h2>
+<p>Jalankan dari akar proyek:</p>
+<pre class="text"><code>python source/code/unit09_provenance.py --output output/unit09-manifest.json</code></pre>
+<p>Skrip tidak mengakses jaringan atau waktu saat ini. Manifest memuat rekaman mentah dan turunan, schema, konfigurasi, identitas lingkungan, ikatan artefak, rantai input-kode-konfigurasi-output, kebijakan privasi, status hak per komponen, dan batas reproduksibilitas. JSON memakai UTF-8, kunci terurut, inden tetap, dan satu akhir baris LF. <code>core_sha256</code> mengikat isi sebelum medan hash tersebut ditambahkan.</p>
+<p>CSV mentah dan turunan pada contoh ini adalah artefak logis yang byte kanonisnya dibangun di memori lalu diikat di manifest. Dengan demikian, perintah hanya menulis JSON yang diminta, tetapi pembaca dapat membangun ulang CSV persis dari rekaman dan aturan kolom yang disimpan.</p>
+</section>
+<section id="sec-o002-u09-reproducibility" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="sec-o002-u09-reproducibility"><span class="header-section-number">10.11</span> Semantik dan byte</h2>
+<p>Dua keluaran <strong>reproduktif secara byte</strong> jika setiap byte sama. Keduanya pasti mempunyai SHA-256 sama. Syarat ini berguna untuk memeriksa alur kerja deterministik, arsip, dan distribusi.</p>
+<p>Dua keluaran dapat <strong>reproduktif secara semantik</strong> walaupun byte berbeda. Contohnya, JSON berikut menyimpan pemetaan sama:</p>
+<pre class="text"><code>{"a":1,"b":2}
+{
+  "b": 2,
+  "a": 1
+}</code></pre>
+<p>Spasi dan urutan kunci berbeda, sehingga hash berbeda, tetapi pengurai JSON menghasilkan nilai yang sama. Dalam komputasi numerik, dua algoritme juga dapat menghasilkan nilai yang setara dalam toleransi dan satuan yang ditetapkan tanpa menghasilkan byte identik.</p>
+<p>Karena itu, laporan harus menyatakan tingkat yang diminta. Pengulangan deterministik Unit 9 menargetkan byte identik pada lingkungan terkunci. Validasi ilmiah lebih luas juga harus membandingkan schema, satuan, rumus, dan makna hasil.</p>
+</section>
+<section id="sec-o002-u09-exercises" class="level2" data-number="10.12">
+<h2 data-number="10.12" class="anchored" data-anchor-id="sec-o002-u09-exercises"><span class="header-section-number">10.12</span> Latihan</h2>
+<section id="ex-o002-u09-01" class="level3" data-number="10.12.1">
+<h3 data-number="10.12.1" class="anchored" data-anchor-id="ex-o002-u09-01"><span class="header-section-number">10.12.1</span> Latihan 1 - mentah, turunan, dan garis keturunan</h3>
+<p>Jika <code>mass_g</code> untuk S03 berubah dari <code>15.8</code> menjadi <code>15.9</code>, komponen mana yang harus berubah hash dan komponen mana yang seharusnya tetap?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ikuti rantai data mentah → transformasi → data turunan; kode dan konfigurasi tidak diedit.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Hash dan ukuran data mentah mungkin berubah, dan hash data turunan harus berubah karena rasio S03 dihitung dari massa baru. <code>core_sha256</code> manifest juga berubah karena ikatannya berubah. Hash kode, konfigurasi, dan identitas lingkungan tetap jika byte ketiganya tidak berubah. Provenans harus mencatat bahwa keluaran baru berasal dari revisi data mentah tersebut.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-u09-02" class="level3" data-number="10.12.2">
+<h3 data-number="10.12.2" class="anchored" data-anchor-id="ex-o002-u09-02"><span class="header-section-number">10.12.2</span> Latihan 2 - schema dan satuan</h3>
+<p>Sebuah tabel mengganti <code>length_cm</code> dengan kolom <code>length</code> tanpa memperbarui schema. Mengapa nilai <code>10.0</code> tidak cukup untuk menghitung rasio yang dapat ditafsirkan? Berikan perbaikan.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Angka tidak membawa satuan secara otomatis.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>10.0</code> dapat berarti milimeter, sentimeter, meter, atau satuan lain. Rasio dan satuannya berubah mengikuti pilihan itu. Perbaiki dengan medan yang tidak ambigu seperti <code>length_cm</code>, nyatakan <code>unit: cm</code> dalam schema, validasi data terhadap schema, dan ubah rumus keluaran jika konversi satuan diperlukan.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-u09-03" class="level3" data-number="10.12.3">
+<h3 data-number="10.12.3" class="anchored" data-anchor-id="ex-o002-u09-03"><span class="header-section-number">10.12.3</span> Latihan 3 - konfigurasi dan jalur aman</h3>
+<p>Konfigurasi berisi <code>raw_path: "../../private.csv"</code> dan jumlah tempat desimal ditulis langsung pada tiga fungsi berbeda. Temukan dua masalah dan berikan perbaikannya.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Periksa pelintasan direktori dan satu sumber keputusan run.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Jalur <code>../../private.csv</code> dapat keluar dari akar proyek dan harus ditolak; gunakan jalur relatif kanonis dalam daftar masukan yang diizinkan. Menanam jumlah desimal di tiga tempat membuat perubahan mudah tidak seragam. Simpan satu nilai <code>ratio_decimal_places</code> dalam konfigurasi berversi, validasi rentangnya, dan buat semua pemanggilan membaca nilai yang sama.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-u09-04" class="level3" data-number="10.12.4">
+<h3 data-number="10.12.4" class="anchored" data-anchor-id="ex-o002-u09-04"><span class="header-section-number">10.12.4</span> Latihan 4 - hak dan privasi</h3>
+<p>Anda menerima tabel pihak ketiga berisi pengukuran, nama, dan surel. Sebutkan apa yang harus dipisahkan atau dicatat sebelum membuat artefak publik.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Provenans, izin distribusi, dan kebutuhan analitis adalah tiga pertanyaan berbeda.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Catat sumber, pencipta, versi, lisensi atau dasar izin, serta perubahan pada komponen tabel. Pisahkan nama dan surel dari data publik kecuali ada dasar, kebutuhan, dan persetujuan yang sah; gunakan pengenal aman atau data sintetis bila sesuai. Periksa apakah pengukuran gabungan masih dapat mengidentifikasi orang. Jangan menganggap lisensi kode proyek otomatis mencakup data pihak ketiga.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ex-o002-u09-05" class="level3" data-number="10.12.5">
+<h3 data-number="10.12.5" class="anchored" data-anchor-id="ex-o002-u09-05"><span class="header-section-number">10.12.5</span> Latihan 5 - semantik, byte, dan hash</h3>
+<p>Dua berkas JSON mempunyai urutan kunci dan spasi berbeda, tetapi setelah diurai menghasilkan objek yang sama. Apa yang dapat dikatakan tentang reproduksibilitas semantik, byte, dan SHA-256 mereka?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Petunjuk">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Catatan</span>Petunjuk
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Bandingkan nilai hasil penguraian dengan urutan karakter asli.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Jawaban dan solusi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jawaban dan solusi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Keduanya reproduktif secara semantik untuk pemetaan JSON tersebut karena nilai hasil penguraiannya sama. Keduanya tidak reproduktif secara byte karena urutan karakternya berbeda, sehingga SHA-256 hampir pasti berbeda. Hash hanya mengikat byte masing-masing; untuk menuntut hash sama, keduanya harus diserialisasikan dengan aturan kanonis yang sama.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-o002-u09-summary" class="level2" data-number="10.13">
+<h2 data-number="10.13" class="anchored" data-anchor-id="sec-o002-u09-summary"><span class="header-section-number">10.13</span> Ringkasan</h2>
+<ul>
+<li>Data mentah, data turunan, dan manifest run mempunyai peran berbeda dan tidak boleh saling menimpa.</li>
+<li>Schema memuat tipe, makna, dan satuan; validasi struktur bukan bukti mutu pengukuran.</li>
+<li>Konfigurasi dipisahkan dari kode, tetapi tetap mempunyai schema dan batas.</li>
+<li>Identitas Python dan dependensi berversi membentuk kunci lingkungan minimum.</li>
+<li>Jalur relatif kanonis meningkatkan portabilitas dan mencegah pelintasan direktori.</li>
+<li>Setiap komponen mempertahankan provenans dan status haknya sendiri.</li>
+<li>Ukuran serta SHA-256 mengikat byte, bukan kebenaran, etika, atau lisensi.</li>
+<li>Privasi dapat mewajibkan pengecualian data dari artefak publik.</li>
+<li>Reproduksibilitas semantik tidak selalu memerlukan byte identik; manifest harus menyatakan tingkat yang ditargetkan.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Disalin!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Disalin!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../source/units/08-pengujian-validasi.html" class="pagination-link" aria-label="Pengujian dan Validasi Komputasi">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pengujian dan Validasi Komputasi</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../source/units/10-otomasi-pipa.html" class="pagination-link" aria-label="Otomasi dan Alur Kerja yang Dapat Direproduksi">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Otomasi dan Alur Kerja yang Dapat Direproduksi</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

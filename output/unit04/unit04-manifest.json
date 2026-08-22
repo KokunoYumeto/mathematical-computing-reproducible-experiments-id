@@ -1,0 +1,25 @@
+{
+  "all_model_values_within_uncertainty": true,
+  "artifacts": {
+    "unit04-alt.txt": "c68df3a88d557ec461d6b38240f7c177e95b41c7489c67b8b58a92095ec48e52",
+    "unit04-data.csv": "f510ee30b5adc1cf470f75c2552ea8254a4513a107e3506dc4ad8c033c6f03be",
+    "unit04-figure.svg": "5b7d7be5000706220b3f7ab7ce394018246d8c2b7ed01c630a7672bd24c8c5a0"
+  },
+  "axis_policy": {
+    "x_starts_at_zero": true,
+    "y_starts_at_zero": true
+  },
+  "claim_limit": "Grafik menunjukkan konsistensi pada tujuh pengamatan; grafik tidak membuktikan model untuk semua waktu.",
+  "encoding": {
+    "measurement": "titik lingkaran",
+    "model": "garis putus-putus",
+    "uncertainty": "batang galat vertikal"
+  },
+  "question": "Apakah data pengukuran konsisten dengan model d = 2t + 1?",
+  "schema": "o002.unit04.visualization.v1",
+  "units": {
+    "distance": "m",
+    "time": "s",
+    "uncertainty": "m"
+  }
+}

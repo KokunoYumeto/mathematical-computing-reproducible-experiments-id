@@ -1,0 +1,304 @@
+---
+title: "Array, Bentuk, dan Vektorisasi"
+identifier: o002.u03
+---
+
+::: {#sec-o002-u03}
+:::
+
+## Tujuan belajar {#sec-o002-u03-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- membuat array NumPy dengan bentuk dan `dtype` yang dinyatakan;
+- membaca hubungan antara indeks, sumbu, dan bentuk array;
+- mengganti perulangan komponen yang sederhana dengan operasi vektorisasi;
+- memakai broadcasting hanya setelah memeriksa kecocokan bentuk;
+- membedakan *view* yang berbagi memori dari salinan yang terpisah;
+- merumuskan invarian bentuk, nilai, dan keadaan masukan; dan
+- membatasi kesimpulan eksperimen agar tidak disalahartikan sebagai bukti umum.
+
+Prasyarat lokal: Unit 1-2, fungsi linear sederhana, daftar dan tuple, serta
+koordinat pada bidang. Unit ini tidak mengandaikan kalkulus atau aljabar
+linear formal.
+
+## Array sebagai data beserta kontraknya {#sec-o002-u03-array-contract}
+
+Array bukan sekadar kumpulan angka. Kontrak minimalnya memuat:
+
+1. **bentuk** (`shape`), yaitu banyaknya posisi pada setiap sumbu;
+2. **jumlah dimensi** (`ndim`);
+3. **jenis representasi** (`dtype`); dan
+4. **makna setiap sumbu**, yang harus kita dokumentasikan sendiri.
+
+```{python}
+#| label: lst-o002-u03-array-contract
+import numpy as np
+
+temperatur = np.array(
+    [[28.0, 29.5, 30.0], [27.5, 29.0, 31.0]],
+    dtype=np.float64,
+)
+(temperatur.shape, temperatur.ndim, temperatur.dtype)
+```
+
+Bentuk `(2, 3)` hanya mengatakan bahwa ada dua baris dan tiga kolom. Bentuk
+itu belum mengatakan apakah baris menyatakan kota, hari, atau pengulangan
+percobaan. Makna tersebut merupakan bagian dari spesifikasi data.
+
+Array satu dimensi dengan bentuk `(3,)` berbeda dari tabel satu baris berbentuk
+`(1, 3)` dan tabel satu kolom berbentuk `(3, 1)`. Ketiganya memuat tiga angka,
+tetapi operasi terhadap sumbunya dapat berbeda.
+
+## `dtype` adalah representasi, bukan himpunan matematika {#sec-o002-u03-dtype}
+
+NumPy menyimpan elemen array biasa dalam satu `dtype`. Pilihan eksplisit
+membuat kontrak lebih mudah diperiksa:
+
+```{python}
+#| label: lst-o002-u03-dtypes
+bilangan_bulat = np.array([1, 2, 3], dtype=np.int64)
+pendekatan = np.array([0.1, 0.2, 0.3], dtype=np.float64)
+(bilangan_bulat.dtype, pendekatan.dtype, pendekatan.sum())
+```
+
+`int64` menyimpan bilangan bulat dalam rentang berhingga. Operasi yang keluar
+dari rentang itu dapat meluap; ia tidak sama dengan himpunan seluruh bilangan
+bulat matematika. `float64` menyimpan pendekatan biner dengan ketelitian
+berhingga; ia tidak sama dengan bilangan real.
+
+NumPy dapat memakai `dtype=object` untuk objek Python seperti bilangan bulat
+tak berbatas praktis atau `Fraction`, tetapi banyak keuntungan komputasi array
+numerik hilang. Jika pertanyaan menuntut aritmetika eksak, pilih alat eksak
+secara sadar (misalnya `Fraction`, SymPy, atau Sage), alih-alih menyebut hasil
+`float64` eksak.
+
+## Vektorisasi dan referensi skalar {#sec-o002-u03-vectorization}
+
+Misalkan setiap data $x_i$ diubah oleh fungsi
+
+$$
+y_i=3x_i-2.
+$$
+
+Perulangan skalar yang jelas dapat menjadi referensi:
+
+```{python}
+#| label: lst-o002-u03-scalar-reference
+x = np.array([1, 2, 3, 4], dtype=np.int64)
+y_referensi = np.array([3 * int(nilai) - 2 for nilai in x])
+y_referensi
+```
+
+NumPy memungkinkan aturan yang sama ditulis untuk seluruh array:
+
+```{python}
+#| label: lst-o002-u03-vectorized
+y = 3 * x - 2
+y
+```
+
+Vektorisasi menyatakan operasi pada array tanpa perulangan Python yang kita
+tulis sendiri. Ia sering lebih ringkas dan dapat lebih cepat, tetapi keringkasan
+bukan bukti kebenaran. Bandingkan hasilnya dengan referensi sederhana dan
+periksa invarian yang berasal dari rumus:
+
+- `y.shape == x.shape`;
+- `x` tidak berubah; dan
+- $\sum_i y_i=3\sum_i x_i-2n$, dengan $n$ banyaknya elemen.
+
+Referensi skalar juga harus diperiksa. Dua implementasi yang menyalin kesalahan
+konseptual sama dapat sepakat dan tetap salah.
+
+## Broadcasting dengan pemeriksaan bentuk {#sec-o002-u03-broadcasting}
+
+Broadcasting memperluas operasi antararray tanpa membuat salinan ubin secara
+manual. Misalkan setiap kolom tabel menerima offset berbeda:
+
+```{python}
+#| label: lst-o002-u03-broadcasting
+tabel = np.array([[10, 20, 30], [40, 50, 60]], dtype=np.int64)
+offset = np.array([1, -2, 3], dtype=np.int64)
+tabel + offset
+```
+
+Bentuk `(2, 3)` dan `(3,)` cocok karena sumbu terakhir sama-sama berukuran
+tiga. Offset diterapkan pada setiap baris. Jangan mengandalkan keberhasilan
+operasi sebagai satu-satunya pemeriksaan: bentuk yang tidak dimaksudkan kadang
+tetap dapat di-*broadcast* dan menghasilkan jawaban yang tampak masuk akal.
+
+Fungsi `add_column_offsets` dalam kode Unit 3 menyatakan kontrak lebih ketat:
+tabel harus dua dimensi, offset harus satu dimensi, dan jumlah offset harus
+sama dengan jumlah kolom.
+
+## Salinan dan *view* {#sec-o002-u03-copy-view}
+
+Irisan array NumPy biasanya merupakan *view*: objek baru yang melihat memori
+array asal. Mengubah *view* dapat mengubah data asal.
+
+```{python}
+#| label: lst-o002-u03-view
+asal = np.arange(6)
+jendela = asal[1:4]
+jendela[0] = -10
+asal
+```
+
+Gunakan `.copy()` bila eksperimen membutuhkan nilai terpisah:
+
+```{python}
+#| label: lst-o002-u03-copy
+asal = np.arange(6)
+terpisah = asal[1:4].copy()
+terpisah[0] = -10
+asal
+```
+
+Pilihan ini harus disengaja. *View* berguna untuk menghindari salinan besar;
+salinan berguna untuk mencegah perubahan tak terduga. `np.shares_memory(a, b)`
+dapat membantu memeriksa hubungan itu pada tes.
+
+## Eksperimen Unit 3 {#sec-o002-u03-experiment}
+
+Jalankan dari akar proyek:
+
+```text
+python source/code/unit03_arrays.py --output output/unit03-results.json
+```
+
+Skrip mencatat versi NumPy, bentuk, `dtype`, hasil vektorisasi, hasil
+broadcasting, jejak *view* dan salinan, batas titik-mengambang, serta batas
+epistemik kesimpulan. JSON ditulis sebagai UTF-8 dengan kunci terurut, inden
+tetap, dan akhir baris LF. Pada lingkungan yang sama, pemanggilan yang sama
+menghasilkan byte yang sama.
+
+## Komputasi dan bukti {#sec-o002-u03-proof-boundary}
+
+Untuk array `[1, 2, 3, 4]`, program memeriksa bahwa operasi vektorisasi sama
+dengan referensi skalar. Hasil itu mendukung klaim terbatas tentang kasus dan
+implementasi yang dijalankan. Ia tidak membuktikan kesamaan bagi setiap array,
+setiap `dtype`, atau setiap ukuran.
+
+Untuk aritmetika tanpa luapan, argumen umum berjalan per komponen. Pada indeks
+$i$, kedua implementasi menghitung ekspresi yang sama, yaitu $3x_i-2$.
+Karena indeks $i$ dipilih sembarang, kesamaan berlaku pada setiap komponen;
+bentuk juga tetap karena tepat satu keluaran dibuat untuk setiap masukan.
+
+Argumen itu harus dibatasi oleh domain representasi. Pada `int64`, luapan dapat
+mengubah hubungan dengan bilangan bulat matematika. Pada `float64`, pembulatan
+dapat membuat dua susunan operasi yang ekuivalen secara aljabar menghasilkan
+bit berbeda. Tes membantu menemukan gejala tersebut; spesifikasi dan argumen
+menentukan apa yang sebenarnya diklaim.
+
+## Latihan {#sec-o002-u03-exercises}
+
+### Latihan 1 - bentuk dan makna sumbu {#ex-o002-u03-01}
+
+Sebuah array menyimpan pengukuran tiga sensor pada empat waktu dan mempunyai
+bentuk `(4, 3)`. Jelaskan arti kedua sumbu. Apa bentuk yang dihasilkan oleh
+`data[2, :]` dan `data[:, 1]`?
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Indeks tunggal menghapus sumbu yang dipilih, sedangkan `:` mempertahankan semua
+posisi pada sumbu itu.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Sumbu 0 menyatakan empat waktu dan sumbu 1 menyatakan tiga sensor. `data[2, :]`
+memilih seluruh sensor pada waktu ketiga sehingga berbentuk `(3,)`.
+`data[:, 1]` memilih sensor kedua pada seluruh waktu sehingga berbentuk `(4,)`.
+Makna ini berasal dari kontrak data, bukan dari bentuk saja.
+:::
+
+### Latihan 2 - vektorisasi dan invarian {#ex-o002-u03-02}
+
+Vektorisasikan perulangan yang menghitung $z_i=5x_i+1$. Sebutkan dua
+invarian yang dapat diuji dan turunkan invarian jumlahnya.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Terapkan operasi langsung pada `x`, lalu jumlahkan persamaan komponen.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Tuliskan `z = 5*x + 1`. Dua invarian yang berguna ialah `z.shape == x.shape`
+dan `x` tidak berubah. Jika ada $n$ elemen, maka
+
+$$
+\sum_i z_i=\sum_i(5x_i+1)=5\sum_i x_i+n.
+$$
+
+Tes dapat membandingkan hasil vektorisasi dengan referensi skalar serta
+memeriksa ketiga sifat tersebut pada kasus yang dipilih.
+:::
+
+### Latihan 3 - kontrak broadcasting {#ex-o002-u03-03}
+
+Tentukan apakah pasangan bentuk berikut cocok untuk penambahan yang dimaksudkan
+sebagai “satu offset per kolom”: `(5, 3)` dengan `(3,)`, `(5, 3)` dengan
+`(5,)`, dan `(5, 3)` dengan `(1, 3)`. Jelaskan setiap jawaban.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Bandingkan dimensi dari kanan. Ukuran harus sama atau salah satunya satu.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+`(5, 3)` dengan `(3,)` cocok dan menerapkan tiga offset pada setiap baris.
+`(5, 3)` dengan `(5,)` tidak cocok karena ukuran terakhir 3 dan 5 berbeda.
+`(5, 3)` dengan `(1, 3)` cocok; sumbu pertama berukuran satu diperluas menjadi
+lima. Meskipun dua pasangan cocok menurut NumPy, kontrak fungsi tetap perlu
+menyatakan bahwa data kedua benar-benar berarti offset kolom.
+:::
+
+### Latihan 4 - melacak *view* {#ex-o002-u03-04}
+
+Untuk kode berikut, tentukan nilai akhir `a`, `b`, dan `c` tanpa menjalankannya.
+
+```python
+a = np.array([0, 1, 2, 3])
+b = a[1:3]
+c = a[1:3].copy()
+b[0] = 8
+c[1] = 9
+```
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+`b` berbagi memori dengan `a`, sedangkan `c` tidak.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Nilai akhirnya adalah `a == [0, 8, 2, 3]`, `b == [8, 2]`, dan
+`c == [1, 9]`. Perubahan melalui `b` mengenai elemen yang sama pada `a`.
+Salinan `c` dibuat sebelum perubahan dan perubahan pada `c` tidak kembali ke
+`a`.
+:::
+
+### Latihan 5 - eksperimen bukan bukti umum {#ex-o002-u03-05}
+
+Anda membangkitkan satu juta array bilangan kecil dan mendapati bahwa
+`3*x-2` selalu sama dengan referensi perulangan. Nyatakan kesimpulan terkuat
+yang sah, lalu berikan kerangka bukti umum dan satu batas representasinya.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Pisahkan cakupan sampel, argumen per komponen, dan perilaku `dtype` berhingga.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Kesimpulan empiris terkuat ialah tidak ditemukan perbedaan pada satu juta kasus
+dan lingkungan yang diuji. Untuk bukti umum pada domain aritmetika yang
+ditetapkan, pilih indeks sembarang $i$: kedua cara menghitung $3x_i-2$,
+sehingga semua komponennya sama dan bentuknya tetap. Batasnya, `int64` dapat
+meluap dan `float64` membulatkan; karena itu hubungan dengan aritmetika bilangan
+bulat atau real harus menyebut rentang dan model representasi.
+:::
+
+## Ringkasan {#sec-o002-u03-summary}
+
+- `shape`, `ndim`, `dtype`, dan makna sumbu bersama-sama membentuk kontrak
+  array.
+- Vektorisasi mengungkap operasi per komponen, tetapi tetap perlu referensi dan
+  invarian.
+- Broadcasting aman secara pedagogis bila bentuk dan maksud sumbunya diperiksa.
+- Irisan biasanya merupakan *view*; `.copy()` memutus hubungan memori.
+- Keluaran kanonis merekam eksperimen yang dapat dibandingkan byte demi byte.
+- Pemeriksaan banyak kasus adalah bukti kerja, bukan pengganti argumen umum;
+  batas `dtype` harus menjadi bagian dari klaim.

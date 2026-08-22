@@ -1,0 +1,76 @@
+{
+  "all_required_checks_passed": true,
+  "core_sha256": "f0532704f7033e1bf644bae51110e427f67e2bab4becc5c5286861b97644d504",
+  "coverage_limit": "Tidak ditemukannya pelanggaran pada domain berhingga bukan bukti bahwa implementasi benar untuk setiap bilangan bulat taknegatif.",
+  "edge_and_domain_checks": {
+    "boolean_n_rejected": true,
+    "n_zero_returns_zero": true,
+    "negative_n_rejected": true,
+    "noninteger_n_rejected": true
+  },
+  "independent_oracle": {
+    "domain_checked": "0 <= n <= 1000",
+    "implementation": "penjumlahan berulang 1+...+n",
+    "mismatches": [],
+    "reference": "rumus pasangan n(n+1)/2"
+  },
+  "metamorphic_properties": {
+    "doubling": {
+      "relation": "T(2n)=2*T(n)+n^2",
+      "violations": []
+    },
+    "increment": {
+      "relation": "T(n+1)-T(n)=n+1",
+      "violations": []
+    }
+  },
+  "parameters": {
+    "finite_property_limit": 1000
+  },
+  "schema": "o002.unit08.validation.v1",
+  "test_layers": {
+    "integration": "laporan menggabungkan oracle, sifat, dan serialisasi",
+    "regression": "kasus n=0 dibekukan untuk mencegah galat batas berulang",
+    "unit": "fungsi tunggal diperiksa pada contoh, batas, dan sifat"
+  },
+  "tolerant_numeric_assertion": {
+    "absolute_tolerance": "1e-12",
+    "estimate": "1.414213562373095",
+    "iterations": 5,
+    "passed": true,
+    "relative_tolerance": "0.0",
+    "squared_residual": "-4.440892098500626e-16"
+  },
+  "unit_examples": [
+    {
+      "actual": 0,
+      "expected": 0,
+      "n": 0,
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "expected": 1,
+      "n": 1,
+      "passed": true
+    },
+    {
+      "actual": 3,
+      "expected": 3,
+      "n": 2,
+      "passed": true
+    },
+    {
+      "actual": 55,
+      "expected": 55,
+      "n": 10,
+      "passed": true
+    },
+    {
+      "actual": 5050,
+      "expected": 5050,
+      "n": 100,
+      "passed": true
+    }
+  ]
+}

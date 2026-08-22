@@ -1,0 +1,224 @@
+{
+  "artifacts": {
+    "code": {
+      "bytes": 16458,
+      "logical_path": "source/code/unit09_provenance.py",
+      "media_type": "text/x-python; charset=utf-8",
+      "provenance": "kode asli proyek O002",
+      "rights": {
+        "license": "MIT",
+        "license_file": "LICENSE-CODE.md",
+        "third_party_material": false
+      },
+      "role": "kode transformasi dan manifest",
+      "sha256": "5b26d8ed8fd42c7d088d45e5c638ba7d8b15270c59a43b3de47038b9bf3b55fa"
+    },
+    "configuration": {
+      "bytes": 213,
+      "logical_path": "config/unit09.json",
+      "media_type": "application/json",
+      "provenance": "DEFAULT_CONFIG atau konfigurasi tervalidasi pemanggil",
+      "rights": {
+        "blanket_claim_applied": false,
+        "component_status": "dibuat khusus untuk Unit 9",
+        "third_party_material": false
+      },
+      "role": "konfigurasi run yang terpisah dari kode",
+      "sha256": "bdb8cb3ab2fb2c4df71c6a1c22e93332805c875d464fe6118c613da87cf6790d"
+    },
+    "derived_data": {
+      "bytes": 85,
+      "logical_path": "data/derived/unit09_mass-per-length.csv",
+      "media_type": "text/csv; charset=utf-8",
+      "provenance": "mass_g dibagi length_cm lalu dibulatkan menurut konfigurasi",
+      "rights": {
+        "blanket_claim_applied": false,
+        "component_status": "dibuat khusus untuk Unit 9",
+        "third_party_material": false
+      },
+      "role": "data turunan",
+      "sha256": "6302c34f7980aabf42a2f9bb1382207b3a5723c02670a691b4b8026d47bbac2f"
+    },
+    "environment_lock": {
+      "bytes": 358,
+      "logical_path": "environment/unit09-python-lock.json",
+      "media_type": "application/json",
+      "provenance": "diturunkan dari runtime Python aktif",
+      "rights": {
+        "blanket_claim_applied": false,
+        "component_status": "fakta lingkungan yang dihasilkan",
+        "third_party_material": false
+      },
+      "role": "identitas lingkungan minimum",
+      "sha256": "782f3907e6e545b0059a0932ec61fe10cfb5e486dd698db6720b2fa5c49961c7"
+    },
+    "raw_data": {
+      "bytes": 96,
+      "logical_path": "data/raw/unit09_measurements.csv",
+      "media_type": "text/csv; charset=utf-8",
+      "provenance": "nilai sumber ditetapkan dalam unit09_provenance.py",
+      "rights": {
+        "blanket_claim_applied": false,
+        "component_status": "dibuat khusus untuk Unit 9",
+        "third_party_material": false
+      },
+      "role": "data mentah sintetis",
+      "sha256": "d95ff18983b68267aa92bf0b55c6b9985faaac992427e25e64dd635db5462b18"
+    }
+  },
+  "configuration": {
+    "derived_path": "data/derived/unit09_mass-per-length.csv",
+    "ratio_decimal_places": 3,
+    "raw_path": "data/raw/unit09_measurements.csv",
+    "rounding": "ROUND_HALF_EVEN",
+    "schema": "o002.unit09.config.v1"
+  },
+  "core_sha256": "1a9297659cd6d81d071d65a5720391382a4d29ccb609bd778c6f1204e5fcb4f8",
+  "datasets": {
+    "derived": {
+      "records": [
+        {
+          "mass_per_length_g_per_cm": "2.000",
+          "sample_id": "S01"
+        },
+        {
+          "mass_per_length_g_per_cm": "2.050",
+          "sample_id": "S02"
+        },
+        {
+          "mass_per_length_g_per_cm": "1.975",
+          "sample_id": "S03"
+        },
+        {
+          "mass_per_length_g_per_cm": "2.050",
+          "sample_id": "S04"
+        },
+        {
+          "mass_per_length_g_per_cm": "1.982",
+          "sample_id": "S05"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "meaning": "pengenal sintetis yang dipertahankan dari data mentah",
+            "name": "sample_id",
+            "source": "raw.sample_id",
+            "type": "string",
+            "unit": null
+          },
+          {
+            "formula": "mass_g / length_cm",
+            "meaning": "massa sampel per satuan panjang sampel",
+            "name": "mass_per_length_g_per_cm",
+            "type": "decimal string",
+            "unit": "g/cm"
+          }
+        ],
+        "schema": "o002.unit09.mass-per-length.v1"
+      }
+    },
+    "raw": {
+      "records": [
+        {
+          "length_cm": "10.0",
+          "mass_g": "20.0",
+          "sample_id": "S01"
+        },
+        {
+          "length_cm": "12.0",
+          "mass_g": "24.6",
+          "sample_id": "S02"
+        },
+        {
+          "length_cm": "8.0",
+          "mass_g": "15.8",
+          "sample_id": "S03"
+        },
+        {
+          "length_cm": "14.0",
+          "mass_g": "28.7",
+          "sample_id": "S04"
+        },
+        {
+          "length_cm": "11.0",
+          "mass_g": "21.8",
+          "sample_id": "S05"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "meaning": "pengenal sintetis, bukan identitas orang",
+            "name": "sample_id",
+            "type": "string",
+            "unit": null
+          },
+          {
+            "meaning": "panjang sampel",
+            "name": "length_cm",
+            "type": "decimal string",
+            "unit": "cm"
+          },
+          {
+            "meaning": "massa sampel",
+            "name": "mass_g",
+            "type": "decimal string",
+            "unit": "g"
+          }
+        ],
+        "schema": "o002.unit09.raw-measurements.v1"
+      }
+    }
+  },
+  "environment_identity": {
+    "decimal_context": {
+      "capitals": 1,
+      "clamp": 0,
+      "emax": 999999,
+      "emin": -999999,
+      "precision": 28,
+      "rounding": "ROUND_HALF_EVEN",
+      "traps": [
+        "DivisionByZero",
+        "InvalidOperation",
+        "Overflow"
+      ]
+    },
+    "external_dependencies": [],
+    "implementation": "CPython",
+    "python": "3.13.1",
+    "stdlib_only": true
+  },
+  "lineage": {
+    "code": "5b26d8ed8fd42c7d088d45e5c638ba7d8b15270c59a43b3de47038b9bf3b55fa",
+    "configuration": "bdb8cb3ab2fb2c4df71c6a1c22e93332805c875d464fe6118c613da87cf6790d",
+    "input": "d95ff18983b68267aa92bf0b55c6b9985faaac992427e25e64dd635db5462b18",
+    "output": "6302c34f7980aabf42a2f9bb1382207b3a5723c02670a691b4b8026d47bbac2f",
+    "transformation": "mass_per_length = mass_g / length_cm"
+  },
+  "privacy": {
+    "contains_personal_data": false,
+    "excluded_fields": [
+      "email",
+      "free_text",
+      "name",
+      "phone",
+      "precise_location"
+    ],
+    "policy": "manifes menolak medan privat; gunakan pengenal sintetis dan jangan memasukkan data sensitif hanya demi reproduksibilitas"
+  },
+  "reproducibility": {
+    "byte_reproducibility": "kode, konfigurasi, data mentah, dan lingkungan terkunci yang sama menghasilkan byte kanonis serta hash yang sama",
+    "deterministic_replay": true,
+    "hash_limit": "SHA-256 mengikat byte dan ukuran; hash tidak membuktikan makna, hak, kebenaran rumus, atau kelengkapan provenans",
+    "semantic_reproducibility": "implementasi atau serialisasi lain dapat menghasilkan nilai dan satuan sama walaupun byte serta SHA-256 berbeda"
+  },
+  "run": {
+    "command": "python source/code/unit09_provenance.py --output output/unit09-manifest.json",
+    "current_time_recorded": false,
+    "network_required": false,
+    "working_directory": "akar proyek"
+  },
+  "schema": "o002.unit09.provenance-manifest.v1"
+}

@@ -1,0 +1,70 @@
+{
+  "artifacts_checked": [
+    {
+      "bytes": 149,
+      "path": "README.md",
+      "sha256": "01797accd5d1e159562b899c6511b5f0e22271f1bcb056c3021226c4c37d8fe2"
+    },
+    {
+      "bytes": 104,
+      "path": "LICENSES/README.md",
+      "sha256": "353007f50957aaf411a048e50d841826e42b0f13969d8d6d52d98c8822a8ed60"
+    },
+    {
+      "bytes": 38,
+      "path": "environment/python.txt",
+      "sha256": "fc01e3cd24ece4194a504abe98dac5fbafb04ed3d16b8846abf86e9d404d84ca"
+    },
+    {
+      "bytes": 284,
+      "path": "source/run.py",
+      "sha256": "99f820dba0a6c54eaa346f14490a93fd6c4389bb3ce159bdb224e4cdebbb69a7"
+    },
+    {
+      "bytes": 333,
+      "path": "tests/test_run.py",
+      "sha256": "a94a1c9a800846fc173e8dffcce9d7a5596d9fac4c8cdabb277854a7efb6780f"
+    },
+    {
+      "bytes": 3,
+      "path": "inputs/value.txt",
+      "sha256": "084c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0"
+    },
+    {
+      "bytes": 3,
+      "path": "outputs/result.txt",
+      "sha256": "084c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0"
+    }
+  ],
+  "claim_evidence_bindings": [
+    {
+      "claim_id": "claim-o002-demo-001",
+      "evidence_path": "outputs/result.txt",
+      "evidence_sha256": "084c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0"
+    }
+  ],
+  "claims_checked": 1,
+  "command": [
+    "python",
+    "source/run.py",
+    "inputs/value.txt",
+    "outputs/result.txt"
+  ],
+  "environment": {
+    "dependencies": [],
+    "runtime": "Python",
+    "runtime_version": "3.13.1"
+  },
+  "inputs_checked": [
+    "inputs/value.txt"
+  ],
+  "manifest_schema": "o002.run-manifest.v1",
+  "outputs_checked": [
+    "outputs/result.txt"
+  ],
+  "parameters": {
+    "operation": "identity-integer"
+  },
+  "schema": "o002.unit12-verification.v1",
+  "verified": true
+}

@@ -1,0 +1,213 @@
+---
+title: "Eksperimen Numerik Berprasyarat"
+identifier: o002.u11
+---
+
+::: {#sec-o002-u11}
+:::
+
+## Tujuan belajar {#sec-o002-u11-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- memilih metode numerik yang sesuai dengan prasyarat matematikanya;
+- mencatat invarian, toleransi, batas iterasi, dan kriteria berhenti;
+- membedakan galat masalah, galat diskretisasi, galat pembulatan, dan galat
+  implementasi;
+- memeriksa hasil melalui substitusi, residual, batas, atau metode pembanding;
+- menjalankan eksperimen konvergensi tanpa mengubahnya menjadi bukti umum; dan
+- menolak penggunaan pustaka yang menyembunyikan asumsi domain.
+
+Unit ini mempunyai jalur lokal. Jalur akar memerlukan A30 dan konsep fungsi
+kontinu. Jalur kuadratur memerlukan B30, jalur sistem linear memerlukan B40,
+dan jalur persamaan diferensial memerlukan B70. Pembaca boleh menunda jalur
+yang prasyaratnya belum dipenuhi.
+
+## Metode datang bersama teorema {#sec-o002-u11-method-theorem}
+
+Perintah perangkat lunak tidak menjamin bahwa masalah memenuhi asumsi metode.
+Metode bagi-dua, misalnya, mempertahankan selang yang kedua ujungnya mempunyai
+tanda berbeda. Jaminan adanya akar di dalam selang memerlukan kekontinuan.
+Program dapat memeriksa tanda ujung; program tidak dapat menyimpulkan
+kekontinuan dari beberapa sampel. Implementasi unit juga menolak titik ujung,
+titik tengah, atau nilai fungsi yang tidak berhingga.
+
+Setiap eksperimen numerik menuliskan:
+
+1. masalah dan domain;
+2. asumsi matematis;
+3. metode dan representasi;
+4. parameter serta kriteria berhenti;
+5. invarian yang diperiksa;
+6. ukuran galat atau residual; dan
+7. batas kesimpulan.
+
+## Jalur A30: bagi-dua {#sec-o002-u11-bisection}
+
+Untuk mencari akar $f(x)=0$, mulai dengan $[a,b]$ sehingga
+$f(a)f(b)<0$. Setiap langkah memilih titik tengah dan mempertahankan separuh
+selang yang masih mempunyai perubahan tanda.
+
+Jika lebar awal $w_0=b-a$, setelah $k$ langkah lebarnya
+$w_k=w_0/2^k$. Hubungan ini memberi batas galat berdasarkan selang, bukan
+hanya berdasarkan nilai kecil $f(x)$.
+
+```{python}
+#| label: lst-o002-u11-bisection
+from source.code.unit11_numerical import bisection
+
+result = bisection(lambda x: x*x - 2.0, 1.0, 2.0, width_tolerance=1e-12)
+(result.midpoint, result.width, result.iterations)
+```
+
+Nilai itu adalah pendekatan. Pernyataan eksak $x=\sqrt{2}$ berasal dari
+definisi akar positif persamaan $x^2=2$, bukan dari digit yang dicetak.
+
+## Jalur B30: kuadratur dan pemurnian {#sec-o002-u11-quadrature}
+
+Aturan trapesium majemuk mengganti kurva pada setiap subselang dengan ruas
+garis. Eksperimen pemurnian memakai $n,2n,4n,\ldots$ subselang dan mencatat
+perubahan hasil. Nilai yang tampak stabil mendukung dugaan konvergensi, tetapi
+tidak menggantikan analisis galat.
+
+Untuk fungsi linear, aturan trapesium eksak dalam aritmetika eksak. Kasus itu
+menjadi pemeriksaan implementasi yang lebih kuat daripada angka referensi
+acak.
+
+## Jalur B40: sistem linear dan residual {#sec-o002-u11-linear}
+
+Jika program mengusulkan $\widehat{x}$ bagi $Ax=b$, hitung residual
+$r=b-A\widehat{x}$. Residual kecil berarti persamaan hampir dipenuhi pada
+skala yang dipakai. Residual kecil belum selalu berarti galat solusi kecil;
+hubungannya dipengaruhi kondisi matriks.
+
+Untuk sistem berukuran dua yang koefisiennya rasional, solusi eksak dengan
+`Fraction` dapat menjadi pembanding independen bagi jalur titik-mengambang.
+
+## Jalur B70: langkah Euler {#sec-o002-u11-euler}
+
+Untuk masalah $y'=g(t,y)$, langkah Euler memakai
+
+$$
+y_{k+1}=y_k+h g(t_k,y_k).
+$$
+
+Mengurangi $h$ dan membandingkan dengan solusi yang diketahui dapat
+mengungkap pola galat pada contoh. Itu menguji implementasi dan perilaku kasus,
+bukan membuktikan orde konvergensi bagi semua fungsi $g$.
+
+## Empat sumber ketidakcocokan {#sec-o002-u11-error-sources}
+
+Ketika hasil tidak cocok dengan harapan, pisahkan:
+
+- **galat masalah:** model atau data tidak menggambarkan pertanyaan;
+- **galat diskretisasi:** metode mengganti masalah kontinu dengan masalah
+  berhingga;
+- **galat pembulatan:** representasi titik-mengambang mengubah operasi; dan
+- **galat implementasi:** kode tidak melaksanakan metode yang dimaksud.
+
+Mengubah toleransi hanya menanggapi sebagian sumber tersebut. Karena itu,
+laporan tidak boleh menyebut satu angka “galat numerik” tanpa definisi.
+
+## Artefak eksperimen {#sec-o002-u11-artifacts}
+
+Jalankan seluruh contoh lokal yang prasyaratnya telah dipenuhi:
+
+```text
+python source/code/unit11_numerical.py --output output/unit11-results.json
+```
+
+Keluaran mencatat selang akhir bagi-dua, tabel pemurnian kuadratur, solusi dan
+residual sistem, serta galat langkah Euler. Identitas fungsi, domain atau data
+awal, toleransi, kisi pemurnian, banyak langkah, dan nilai referensi yang
+dipakai pemeriksaan disimpan bersama hasil.
+
+## Latihan {#sec-o002-u11-exercises}
+
+### Latihan 1 - invarian bagi-dua {#ex-o002-u11-01}
+
+Sebutkan dua invarian yang harus diperiksa pada setiap langkah bagi-dua dan
+jelaskan mengapa nilai tengah saja tidak cukup.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Perhatikan perubahan tanda dan penyusutan selang.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Ujung selang harus tetap mengurung perubahan tanda, dan lebar selang harus
+berkurang setengah pada setiap langkah. Nilai tengah saja tidak membuktikan
+bahwa akar masih terkurung atau bahwa implementasi memilih separuh yang benar.
+:::
+
+### Latihan 2 - batas iterasi {#ex-o002-u11-02}
+
+Berapa langkah minimum yang menjamin lebar selang paling besar $10^{-6}$
+jika lebar awal 1?
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Cari $k$ sehingga $2^{-k}\leq 10^{-6}$.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Karena $2^{19}=524288<10^6$ dan $2^{20}=1048576>10^6$, diperlukan 20
+langkah. Setelah 20 langkah, lebarnya $2^{-20}<10^{-6}$.
+:::
+
+### Latihan 3 - pemeriksaan kuadratur {#ex-o002-u11-03}
+
+Gunakan aturan trapesium untuk $f(x)=3x+2$ pada $[0,4]$ dengan satu
+subselang. Bandingkan dengan integral eksak.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Luas trapesium adalah lebar dikali rata-rata tinggi ujung.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Nilai ujungnya 2 dan 14, sehingga luas trapesium
+$4(2+14)/2=32$. Integral eksak
+$[3x^2/2+2x]_0^4=24+8=32$. Kecocokan eksak ini diharapkan karena grafik
+fungsi linear sendiri merupakan ruas garis.
+:::
+
+### Latihan 4 - residual bukan galat solusi {#ex-o002-u11-04}
+
+Jelaskan mengapa residual kecil tidak otomatis menjamin bahwa solusi hampiran
+dekat dengan solusi eksak.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Pikirkan sistem yang sangat peka terhadap perubahan kecil pada ruas kanan.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Residual mengukur seberapa baik $\widehat{x}$ memenuhi persamaan yang diberikan.
+Pada matriks berkondisi buruk, perubahan kecil pada ruas kanan dapat berkaitan
+dengan perubahan besar pada solusi. Karena itu residual harus dibaca bersama
+skala dan informasi kondisi, bukan sebagai galat solusi langsung.
+:::
+
+### Latihan 5 - eksperimen Euler {#ex-o002-u11-05}
+
+Untuk $y'=y$, $y(0)=1$, bandingkan galat pada $t=1$ untuk $h=1/10$
+dan $h=1/20$. Kesimpulan apa yang boleh dibuat?
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan solusi referensi $e^t$ dan jangan menaikkan dua kasus menjadi teorema.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Langkah Euler memberi $(1+h)^{1/h}$. Untuk $h=0{,}1$ nilainya sekitar
+2,5937; untuk $h=0{,}05$ sekitar 2,6533; sedangkan $e\approx2{,}7183$.
+Galat berkurang pada dua kasus ini. Hasil tersebut mendukung perilaku yang
+diharapkan dan memeriksa implementasi, tetapi dua ukuran langkah tidak
+membuktikan konvergensi atau orde galat secara umum.
+:::
+
+## Ringkasan {#sec-o002-u11-summary}
+
+- Metode numerik datang bersama asumsi dan teorema.
+- Kriteria berhenti harus dinyatakan sebelum hasil dilihat.
+- Residual, batas selang, dan kasus eksak memberi pemeriksaan yang berbeda.
+- Galat masalah, diskretisasi, pembulatan, dan implementasi tidak boleh
+  dicampur.
+- Eksperimen pemurnian memberi bukti kerja; bukti konvergensi memerlukan
+  argumen matematika.

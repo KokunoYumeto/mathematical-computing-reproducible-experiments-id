@@ -1,0 +1,242 @@
+---
+title: "Proyek Akhir yang Dapat Diperiksa"
+identifier: o002.u12
+---
+
+::: {#sec-o002-u12}
+:::
+
+## Tujuan belajar {#sec-o002-u12-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- mengubah pertanyaan matematika menjadi eksperimen dengan batas klaim yang
+  dinyatakan;
+- memisahkan klaim matematika, klaim implementasi, dan pengamatan empiris;
+- menyerahkan sumber, data, lingkungan, perintah, tes, dan artefak yang saling
+  terikat oleh hash;
+- meminta orang lain mereproduksi hasil tanpa petunjuk lisan tambahan;
+- menanggapi tinjauan substantif dengan perubahan atau alasan yang dapat
+  diperiksa; dan
+- menjelaskan bagian proyek yang merupakan bukti dan bagian yang hanya
+  merupakan bukti kerja komputasional.
+
+Prasyarat lokal: seluruh unit inti O002 yang relevan bagi proyek dan seluruh
+prasyarat matematika dari topik yang dipilih. Proyek tidak boleh memakai topik
+matematika lanjut hanya karena pustaka dapat menghitungnya.
+
+## Pertanyaan sebelum perangkat {#sec-o002-u12-question}
+
+Proyek dimulai dari pertanyaan, bukan dari keinginan memakai suatu pustaka.
+Pertanyaan yang baik menentukan objek, domain, besaran yang diamati, dan bentuk
+jawaban yang dianggap bermakna. Contoh:
+
+> Bagaimana galat evaluasi suatu bentuk aljabar berubah ketika masukan mendekati
+> titik pembatalan, dan reformulasi mana yang mempertahankan lebih banyak angka
+> bermakna pada rentang yang ditentukan?
+
+Pertanyaan itu belum menjanjikan teorema universal. Ia memberi wilayah
+eksperimen, perbandingan metode, dan ukuran galat yang dapat diaudit.
+
+## Tiga jenis klaim {#sec-o002-u12-claims}
+
+Setiap kesimpulan proyek diberi jenis berikut.
+
+| Jenis | Contoh | Bukti yang diperlukan |
+|---|---|---|
+| matematika | dua rumus setara pada domain tertentu | argumen simbolik dengan domain dan pengecualian |
+| implementasi | fungsi mengembalikan residu pada batas yang ditetapkan | inspeksi, tes, dan kasus tepi |
+| empiris | metode A lebih akurat pada kisi uji tertentu | data, parameter, lingkungan, ukuran galat, dan analisis |
+
+Kesalahan paling serius ialah menaikkan pengamatan empiris menjadi klaim
+matematika tanpa argumen. Kesalahan lain ialah memberi bukti matematika yang
+benar tetapi tidak memeriksa apakah program benar-benar mengimplementasikannya.
+
+## Paket reproduksi minimum {#sec-o002-u12-package}
+
+Paket proyek minimum mempunyai struktur berikut.
+
+```text
+project/
+  README.md
+  LICENSES/
+  environment/
+  source/
+  tests/
+  inputs/
+  outputs/
+  RUN_MANIFEST.json
+```
+
+`RUN_MANIFEST.json` mencatat versi skema; `command` sebagai larik argumen;
+`environment` dengan runtime, versi runtime, dan dependensi; objek
+`parameters`; daftar `inputs` dan `outputs`; rekaman ukuran dan hash dalam
+`artifacts`; serta larik `claims`. Setiap jalur masukan dan keluaran harus
+menunjuk satu artefak terdaftar. Setiap objek klaim memuat `id`, `kind`,
+`statement`, `evidence`, dan `limitations`, dan nilai `evidence` harus menunjuk
+keluaran terdaftar. Dengan demikian, hash artefak juga mengikat bukti klaim.
+Manifest harus memuat sekurangnya satu artefak, satu keluaran, dan satu klaim,
+dan jalur tidak boleh berulang. Jalur harus berbentuk POSIX kanonis dan relatif
+terhadap akar paket; jalur profil mesin tidak boleh menjadi bagian publik.
+
+Skrip pemeriksa unit ini menerima sebuah manifest dan akar paket:
+
+```text
+python source/code/unit12_capstone.py verify
+```
+
+Perintah ringkas itu memakai tata letak baku di atas: paket `project`, manifest
+`project/RUN_MANIFEST.json`, dan laporan `output/unit12-results.json`. Opsi
+`--root`, `--manifest`, dan `--output` tersedia jika tata letaknya berbeda.
+
+Pemeriksa tidak menentukan apakah argumen matematika benar. Ia memastikan
+bahwa berkas yang disebut ada, ukurannya dan hash-nya cocok, jalurnya tidak
+keluar dari paket, kontrak eksekusi mempunyai bentuk minimum, klaim mempunyai
+medan minimum, dan setiap bukti klaim menunjuk keluaran yang benar-benar telah
+diperiksa. Pemeriksa tidak menjalankan `command`, menilai isi README dan
+lisensi, atau membuktikan bahwa struktur folder minimum sudah memadai; hal-hal
+itu tetap diperiksa melalui reproduksi buta dan rubrik.
+
+## Reproduksi buta terbatas {#sec-o002-u12-blind-replay}
+
+Berikan paket kepada peninjau yang tidak ikut membuatnya. Peninjau mengikuti
+README dan merekam:
+
+1. lingkungan yang benar-benar dipasang;
+2. perintah yang dijalankan;
+3. hash masukan dan keluaran;
+4. tes yang lulus atau gagal;
+5. perbedaan hasil; dan
+6. instruksi yang ambigu atau tidak lengkap.
+
+“Berhasil pada komputer pembuat” bukan standar reproduksi. Sebaliknya,
+perbedaan antarmesin tidak selalu berarti penelitian salah. Perbedaan harus
+ditelusuri ke versi, platform, nondeterminisme, toleransi, atau cacat paket.
+
+## Tinjauan dan revisi {#sec-o002-u12-review}
+
+Tinjauan substantif menantang klaim, metode, domain, tes, visualisasi, atau
+reproduksibilitas. Tanggapan proyek memuat:
+
+- ringkasan masalah yang diajukan;
+- keputusan menerima, menerima sebagian, atau menolak;
+- perubahan byte atau argumen yang dibuat;
+- bukti baru yang ditambahkan; dan
+- keterbatasan yang masih tersisa.
+
+Menolak komentar diperbolehkan, tetapi “hasil komputer saya sama” bukan alasan
+yang cukup ketika komentar menyangkut validitas klaim.
+
+## Rubrik kelulusan {#sec-o002-u12-rubric}
+
+Proyek lulus hanya jika seluruh syarat berikut terpenuhi:
+
+1. pertanyaan dan domain eksplisit;
+2. sumber, data, dan hak komponen jelas;
+3. lingkungan dan perintah dapat dipasang serta dijalankan ulang;
+4. tes mencakup invarian dan kasus tepi yang relevan;
+5. artefak dan manifest saling cocok;
+6. visualisasi mempunyai label, unit, skala, dan uraian;
+7. klaim matematika, implementasi, dan empiris tidak dicampur;
+8. kesimpulan menyatakan keterbatasan;
+9. reproduksi buta terbatas didokumentasikan; dan
+10. satu tanggapan terhadap tinjauan substantif disertakan.
+
+Kegagalan satu syarat tidak selalu membatalkan seluruh penelitian, tetapi
+proyek belum memenuhi standar O002 sampai kekurangan itu diperbaiki atau
+didisposisikan secara terbuka.
+
+## Latihan {#sec-o002-u12-exercises}
+
+### Latihan 1 - klasifikasi klaim {#ex-o002-u12-01}
+
+Klasifikasikan pernyataan berikut: “Pada Python 3.13 di Windows, algoritme A
+memerlukan waktu lebih singkat daripada B untuk semua 100 ukuran yang diuji.”
+Apakah pernyataan tersebut membuktikan A selalu lebih cepat?
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Perhatikan platform, versi, dan himpunan ukuran.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Itu pengamatan empiris yang dibatasi lingkungan dan 100 ukuran uji. Pernyataan
+tersebut tidak membuktikan A selalu lebih cepat pada semua ukuran, data,
+platform, versi, atau implementasi. Kesimpulan harus mempertahankan batas itu.
+:::
+
+### Latihan 2 - manifest yang belum lengkap {#ex-o002-u12-02}
+
+Sebuah manifest mencatat nama skrip dan gambar keluaran, tetapi tidak mencatat
+parameter, versi pustaka, atau hash data. Sebutkan tiga kegagalan reproduksi
+yang dapat timbul.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Tanyakan apakah peninjau mengetahui masukan, lingkungan, dan byte yang sama.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Peninjau dapat memakai parameter berbeda, memperoleh perilaku berbeda karena
+versi pustaka, atau memakai data bernama sama tetapi berisi byte lain. Ketiga
+keadaan dapat menghasilkan gambar berbeda tanpa cara pasti untuk menentukan
+sumber perbedaannya.
+:::
+
+### Latihan 3 - jalur berbahaya {#ex-o002-u12-03}
+
+Mengapa manifest publik tidak boleh menyebut
+`direktori-profil/Nama/Desktop/data.csv`? Berikan bentuk pengganti.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Pertimbangkan privasi dan portabilitas.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Jalur itu membocorkan struktur profil lokal dan tidak ada pada mesin peninjau.
+Simpan data di dalam paket, misalnya `inputs/data.csv`, lalu gunakan jalur
+relatif terhadap akar proyek dan ikat byte-nya dengan ukuran serta SHA-256.
+:::
+
+### Latihan 4 - reproduksi tidak identik {#ex-o002-u12-04}
+
+Dua mesin menghasilkan nilai yang berbeda pada digit terakhir tetapi keduanya
+berada dalam toleransi yang ditetapkan sebelum eksperimen. Apakah reproduksi
+gagal?
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Bedakan reproduksi semantik dari identitas byte.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Belum tentu. Jika kontrak memperbolehkan variasi titik-mengambang dan kedua
+nilai memenuhi toleransi yang dibenarkan, hasil semantik dapat cocok walaupun
+byte numeriknya berbeda. Namun manifest tetap harus merekam platform dan versi,
+dan artefak yang diklaim byte-identik harus diperiksa dengan hash.
+:::
+
+### Latihan 5 - tanggapan tinjauan {#ex-o002-u12-05}
+
+Peninjau menunjukkan bahwa grafik memotong sumbu vertikal sehingga perbedaan
+kecil tampak sangat besar. Tulis tanggapan yang memadai.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Jelaskan keputusan, perubahan, dan dampaknya pada kesimpulan.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Akui bahwa pilihan sumbu dapat melebihkan kesan visual. Tambahkan grafik dengan
+rentang penuh atau penanda pemotongan yang jelas, pertahankan grafik terpotong
+hanya jika membantu membaca variasi lokal, dan nyatakan ukuran efek secara
+numerik. Perbarui kesimpulan jika klaim sebelumnya bergantung pada kesan visual
+yang menyesatkan, lalu rekam hash artefak baru.
+:::
+
+## Ringkasan {#sec-o002-u12-summary}
+
+- Proyek dimulai dari pertanyaan dan domain, bukan perangkat.
+- Klaim matematika, implementasi, dan empiris memerlukan bukti berbeda.
+- Manifest dan hash mengikat artefak, tetapi tidak membuktikan teorema.
+- Reproduksi buta menguji kecukupan paket dan instruksi.
+- Tinjauan substantif harus dijawab dengan perubahan atau alasan yang dapat
+  diperiksa.
+- Kelulusan proyek memerlukan pekerjaan matematis, komputasional, dokumenter,
+  dan sosial yang semuanya dapat ditinjau.

@@ -1,0 +1,16 @@
+surface,o002_original,scientific_python_lectures,rse_python,mathematical_python,disposition
+A30-entry Python,yes,strong,assumed prerequisite,present,current edition original; donors comparison-only
+arrays and vectorization,yes,strong,incidental,strong,current edition original; no donor bytes
+plotting and visualization integrity,yes,plotting strong but integrity partial,incidental,plotting strong,current edition original integrity treatment
+SciPy numerical tools,no,strong,no,strong,not required at launch; transparent local methods in Unit 11
+exact and symbolic computation,yes,SymPy present,no,incidental,current edition original with optional Sage bridge
+SageMath bridge,yes,no,no,no,current edition original and optional
+floating-point model and stability,yes,partial,approximate assertions,partial,current edition original systematic treatment
+experiment design and random control,yes,partial,no,no,current edition original
+testing and validation,yes,runtime tests,strong,no,current edition original mathematical framing
+configuration and environments,yes,partial,strong,no,current edition original run contract
+automation and pipelines,yes,build tooling,strong,no,current edition original mathematical workflow
+provenance and inspectability,yes,partial,strong,no,current edition original canonical artifacts
+evidence versus proof,yes,no,no,no,original
+coherent hints and solutions,yes,distributed,109 solutions,no answer key,60 original stable-ID exercises with hints and full solutions
+later calculus and ODE applications,yes with declared prerequisites,examples outside launch,no,strong,current edition original prerequisite-aware Unit 11

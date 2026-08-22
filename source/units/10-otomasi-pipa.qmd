@@ -1,0 +1,223 @@
+---
+title: "Otomasi dan Alur Kerja yang Dapat Direproduksi"
+identifier: o002.u10
+---
+
+::: {#sec-o002-u10}
+:::
+
+## Tujuan belajar {#sec-o002-u10-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- menggambarkan eksperimen sebagai graf tugas dan dependensi;
+- membedakan sumber, produk antara, dan artefak akhir;
+- membangun ulang hanya ketika masukan, parameter, kode, atau lingkungan yang
+  terikat berubah;
+- mendeteksi dependensi hilang dan siklus sebelum menjalankan tugas;
+- menulis artefak secara atomik agar kegagalan tidak meninggalkan hasil seolah
+  lengkap;
+- menjelaskan mengapa cap waktu saja bukan bukti kesamaan isi; dan
+- mengaudit rekaman alur kerja tanpa menganggap keberhasilan proses sebagai bukti
+  matematika.
+
+Prasyarat lokal: Unit 1-2 dan Unit 8-9. Pembaca harus memahami fungsi, berkas,
+hash, konfigurasi, dan tes sebelum mengotomatisasikannya.
+
+## Dari daftar perintah ke graf {#sec-o002-u10-graph}
+
+Eksperimen kecil sering ditulis sebagai daftar perintah:
+
+```text
+generate-data
+analyze-data
+draw-figure
+write-report
+```
+
+Urutan itu menyembunyikan alasan setiap langkah. Graf dependensi menyatakan
+bahwa analisis memerlukan data, gambar memerlukan analisis, dan laporan
+memerlukan analisis serta gambar. Dengan informasi itu, pengelola alur kerja dapat
+menentukan urutan yang sah dan pekerjaan yang perlu diulang.
+
+Graf harus asiklik. Jika `analysis` memerlukan `report`, sementara `report`
+memerlukan `analysis`, tidak ada tugas pertama yang dapat diselesaikan.
+
+## Sumber dan artefak {#sec-o002-u10-artifact-classes}
+
+- **Sumber** ditulis atau diperoleh dari luar alur kerja: kode, konfigurasi, data
+  mentah, dan lisensi.
+- **Produk antara** dapat dibuat ulang tetapi membantu langkah berikutnya.
+- **Artefak akhir** diserahkan kepada pembaca atau peninjau.
+
+Jangan menjadikan artefak akhir sebagai satu-satunya salinan data sumber. Jika
+produk antara mahal dibuat, ia boleh disimpan dalam tembolok, tetapi hash dan
+aturan pembuatannya tetap harus diketahui.
+
+## Kapan tugas dianggap mutakhir {#sec-o002-u10-freshness}
+
+Cap waktu berguna untuk optimisasi lokal, tetapi dapat berubah ketika berkas
+disalin atau jam mesin tidak cocok. Rekaman yang kuat mengikat:
+
+1. hash byte setiap masukan;
+2. hash atau versi kode tugas;
+3. parameter terkanonisasi;
+4. identitas lingkungan yang relevan; dan
+5. hash setiap keluaran.
+
+Skrip Unit 10 menyimpan preimage fingerprint secara lengkap dan kanonis:
+nama serta SHA-256 setiap masukan, SHA-256 kode tugas, parameter, dan identitas
+runtime yang benar-benar menjalankan contoh. Identitas runtime memuat
+implementasi dan versi Python, tag cache, keluarga sistem operasi, arsitektur
+mesin, dan urutan byte. Ia sengaja tidak memuat nama host atau jalur profil.
+`task_fingerprint` adalah SHA-256 byte JSON kanonis preimage tersebut, sehingga
+hash dapat dihitung ulang langsung dari rekaman.
+
+Jika salah satu masukan berubah, tugas dan seluruh keturunannya menjadi tidak
+mutakhir. Jika semuanya cocok dan keluaran masih mempunyai hash yang dicatat,
+tugas dapat dilewati secara aman. Pemeriksa juga menerima daftar nama keluaran
+yang diwajibkan. Pemetaan keluaran kosong, keluaran wajib yang hilang, atau
+keluaran tambahan yang tidak dideklarasikan dinilai tidak mutakhir. Unit ini
+tidak mempunyai kontrak tugas tanpa keluaran.
+
+## Gagal secara atomik {#sec-o002-u10-atomic}
+
+Menulis langsung ke `results.json` dapat meninggalkan berkas terpotong ketika
+proses berhenti. Pola yang lebih aman ialah:
+
+1. tulis ke berkas sementara baru dalam direktori yang sama;
+2. tutup dan sinkronkan bila ketahanan terhadap crash diperlukan;
+3. verifikasi bentuk dan hash;
+4. ganti nama sementara menjadi nama tujuan secara atomik; dan
+5. jangan menghapus hasil lama sampai pengganti siap.
+
+Nama sementara harus unik dan bukan tautan yang sudah ada. Pembersihan berkas
+sementara adalah penanganan kegagalan lokal, bukan pengganti manifest.
+
+## Target bernama dan pemeriksaan {#sec-o002-u10-targets}
+
+Alur kerja O002 sekurang-kurangnya mempunyai target:
+
+```text
+test     menjalankan tes tanpa membangun pembaca
+results  membuat artefak eksperimen
+html     membangun pembaca web setelah test dan results
+pdf      membangun pembaca cetak setelah test dan results
+qa       memeriksa kedua pembaca serta manifest
+all      menjalankan seluruh batas penerimaan
+```
+
+Target `all` tidak boleh menerbitkan. Penerbitan merupakan transaksi terpisah
+yang hanya memakai artefak yang telah melewati `qa`.
+
+## Contoh alur kerja {#sec-o002-u10-example}
+
+Skrip unit ini memvalidasi graf kecil, menghitung urutan topologis, dan membuat
+rekaman kanonis yang memuat preimage fingerprint, runtime aktual, serta kontrak
+keluaran:
+
+```text
+python source/code/unit10_pipeline.py --output output/unit10-results.json
+```
+
+Contoh tidak menjalankan perintah shell. Ia memodelkan keputusan alur kerja
+sehingga logika urutan, siklus, dan kesegaran dapat diuji tanpa efek eksternal.
+
+## Otomasi tidak memutuskan kebenaran {#sec-o002-u10-proof-boundary}
+
+Alur kerja yang hijau membuktikan bahwa pemeriksaan yang diprogram lulus pada
+lingkungan tersebut. Ia tidak membuktikan bahwa pemeriksaan cukup, model tepat,
+atau teorema benar. Otomasi mengurangi kelalaian berulang; tanggung jawab
+matematis tetap pada perancang dan peninjau.
+
+## Latihan {#sec-o002-u10-exercises}
+
+### Latihan 1 - urutan tugas {#ex-o002-u10-01}
+
+Tugas `data` tidak mempunyai dependensi; `fit` memerlukan `data`; `plot`
+memerlukan `data` dan `fit`; `report` memerlukan `plot`. Berikan satu urutan
+yang sah.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Setiap tugas harus muncul setelah seluruh dependensinya.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Urutan `data, fit, plot, report` sah. `plot` tidak boleh mendahului `fit`, dan
+`report` tidak boleh mendahului `plot`. Jika ada beberapa tugas independen,
+lebih dari satu urutan dapat sama-sama sah.
+:::
+
+### Latihan 2 - siklus {#ex-o002-u10-02}
+
+Jelaskan mengapa dependensi `a -> b`, `b -> c`, dan `c -> a` harus ditolak
+sebelum satu tugas pun dijalankan.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Cari tugas yang seluruh dependensinya sudah selesai.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Tidak ada tugas awal: `a` menunggu `b`, `b` menunggu `c`, dan `c` menunggu
+`a`. Menjalankan sebagian alur kerja sebelum mendeteksi siklus dapat meninggalkan
+artefak yang tampak sah, sehingga validasi graf harus mendahului efek.
+:::
+
+### Latihan 3 - cap waktu {#ex-o002-u10-03}
+
+Sebuah data disalin dengan isi sama tetapi cap waktu baru. Apakah analisis harus
+selalu diulang? Bandingkan kebijakan cap waktu dan hash.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Cap waktu mengukur peristiwa sistem berkas, bukan isi.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Kebijakan cap waktu dapat membangun ulang walaupun isi sama. Kebijakan hash
+dapat melewati analisis jika byte data, kode, parameter, lingkungan, dan
+keluaran yang dicatat semuanya tetap cocok. Pilihan hash lebih mahal dibaca,
+tetapi lebih langsung mengikat isi.
+:::
+
+### Latihan 4 - kegagalan penulisan {#ex-o002-u10-04}
+
+Mengapa menulis keluaran baru langsung di atas artefak lama berbahaya? Susun
+urutan penulisan yang aman.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Pertimbangkan proses yang berhenti setelah setengah byte ditulis.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Kegagalan dapat menghancurkan artefak lama dan meninggalkan keluaran terpotong
+di nama resmi. Tulis ke sementara unik pada direktori sama, tutup dan
+verifikasi, lalu ganti tujuan secara atomik. Jika langkah gagal, artefak lama
+tetap tersedia dan berkas sementara dapat didisposisikan.
+:::
+
+### Latihan 5 - alur kerja hijau {#ex-o002-u10-05}
+
+Semua target alur kerja lulus. Sebutkan dua alasan mengapa kesimpulan matematika
+masih dapat salah.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Tes dapat tidak lengkap dan model dapat tidak sesuai pertanyaan.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Tes mungkin tidak mencakup kasus yang membantah implementasi, dan model atau
+asumsi matematika dapat keliru walaupun kode melaksanakannya dengan tepat.
+Alur kerja hijau menguatkan reproduksibilitas pemeriksaan, bukan kelengkapan logika.
+:::
+
+## Ringkasan {#sec-o002-u10-summary}
+
+- Graf dependensi menjelaskan urutan dan dampak perubahan.
+- Preimage fingerprint yang lengkap membuat hash masukan, kode, parameter, dan
+  runtime dapat dihitung ulang.
+- Hash isi dan kontrak keluaran mengikat kesegaran lebih langsung daripada cap
+  waktu; pemetaan keluaran kosong tidak dianggap mutakhir.
+- Siklus dan dependensi hilang harus ditolak sebelum efek.
+- Penulisan atomik mencegah keluaran setengah jadi memakai nama resmi.
+- Otomasi membuat pemeriksaan konsisten, tetapi tidak menggantikan penilaian
+  matematika.

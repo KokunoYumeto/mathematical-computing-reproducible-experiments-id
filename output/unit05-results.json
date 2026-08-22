@@ -1,0 +1,57 @@
+{
+  "assumptions": {
+    "sqrt_x_squared_for_positive_x": "Symbol('x', positive=True)",
+    "sqrt_x_squared_for_real_x": "Abs(Symbol('x', real=True))"
+  },
+  "core_sha256": "dcc6fba0bc1672f36343f4071ee1418c9f6e45095b71607d5fd1cf728a31f95a",
+  "domain_sensitive_cancellation": {
+    "cancelled": "Add(Symbol('x'), Integer(1))",
+    "excluded_from_original_domain": [
+      "1"
+    ],
+    "original": "Mul(Pow(Add(Symbol('x'), Integer(-1)), Integer(-1)), Add(Pow(Symbol('x'), Integer(2)), Integer(-1)))",
+    "same_function_with_original_domains": false,
+    "same_values_on_common_domain": true
+  },
+  "exact_fraction": {
+    "expression": "1/10 + 2/10",
+    "result": "3/10"
+  },
+  "exact_real_solutions": {
+    "equation": "x**2 = 2",
+    "solutions": [
+      "-sqrt(2)",
+      "sqrt(2)"
+    ],
+    "zero_residuals": [
+      true,
+      true
+    ]
+  },
+  "expression_and_value": {
+    "expression": "Add(Pow(Symbol('x'), Integer(2)), Integer(-1))",
+    "substitution": {
+      "x": "3"
+    },
+    "value": "8"
+  },
+  "factorization": {
+    "expands_back": true,
+    "factored": "Mul(Add(Symbol('x'), Integer(-1)), Add(Symbol('x'), Integer(1)), Add(Pow(Symbol('x'), Integer(2)), Integer(1)))",
+    "polynomial": "Add(Pow(Symbol('x'), Integer(4)), Integer(-1))"
+  },
+  "polynomial_equivalence": {
+    "expanded_difference_is_zero": true,
+    "left": "Pow(Add(Symbol('x'), Integer(1)), Integer(2))",
+    "right": "Add(Pow(Symbol('x'), Integer(2)), Mul(Integer(2), Symbol('x')), Integer(1))",
+    "structurally_equal": false
+  },
+  "runtime": {
+    "sympy": "1.13.3"
+  },
+  "sage_bridge": {
+    "required_for_baseline": false,
+    "source": "from sage.all import PolynomialRing, QQ, SR, solve\nR = PolynomialRing(QQ, 'x')\nx = R.gen()\nprint((x**4 - 1).factor())\ny = SR.var('y')\nprint(solve(y**2 == 2, y))\n"
+  },
+  "schema": "o002.unit05.symbolic.v1"
+}

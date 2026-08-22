@@ -1,0 +1,297 @@
+---
+title: "Visualisasi dengan Integritas"
+identifier: o002.u04
+---
+
+::: {#sec-o002-u04}
+:::
+
+## Tujuan belajar {#sec-o002-u04-objectives}
+
+Setelah menyelesaikan unit ini, pembaca dapat:
+
+- memulai visualisasi dari pertanyaan yang dapat dinyatakan dengan jelas;
+- memetakan variabel ke posisi, tanda, garis, dan interval tanpa menyembunyikan
+  satuan;
+- menjelaskan bagaimana pemotongan sumbu dan rasio aspek mengubah kesan visual;
+- menyajikan ketidakpastian tanpa memberinya makna statistik yang tidak
+  ditetapkan;
+- menyediakan data, gambar, dan deskripsi tekstual yang dapat diperiksa ulang;
+  dan
+- membedakan pola pada gambar dari bukti matematis umum.
+
+Prasyarat lokal: Unit 1, koordinat Kartesius, persamaan garis lurus, rasio, dan
+interval pada tingkat A30. Unit ini tidak memerlukan kalkulus.
+
+## Gambar dimulai dari pertanyaan {#sec-o002-u04-purpose}
+
+Grafik bukan hiasan yang ditambahkan setelah perhitungan selesai. Grafik adalah
+argumen terstruktur tentang data. Sebelum memilih warna atau jenis garis,
+nyatakan pertanyaannya.
+
+Dalam unit ini pertanyaannya adalah:
+
+> Apakah tujuh pengukuran jarak konsisten dengan model
+> $d=2t+1$, jika setiap pengukuran mempunyai ketidakpastian
+> $\pm 0{,}4$ meter?
+
+Data yang digunakan sengaja kecil agar setiap tanda pada grafik dapat
+dicocokkan dengan tabel.
+
+| Waktu $t$ (s) | Jarak terukur $d$ (m) | Ketidakpastian (m) | Nilai model (m) |
+|---:|---:|---:|---:|
+| 0 | 1,0 | 0,4 | 1,0 |
+| 1 | 3,1 | 0,4 | 3,0 |
+| 2 | 4,8 | 0,4 | 5,0 |
+| 3 | 7,2 | 0,4 | 7,0 |
+| 4 | 9,0 | 0,4 | 9,0 |
+| 5 | 10,9 | 0,4 | 11,0 |
+| 6 | 13,1 | 0,4 | 13,0 |
+
+Karena pertanyaannya membandingkan pengukuran dengan model, grafik harus
+menampilkan keduanya. Menampilkan hanya garis model akan menghapus bukti
+pengukuran; menampilkan hanya titik akan menyembunyikan objek pembanding.
+
+## Pengodean: apa berarti apa? {#sec-o002-u04-encoding}
+
+Setiap unsur visual harus mempunyai arti yang dapat dituliskan tanpa melihat
+gambar.
+
+| Unsur visual | Makna |
+|---|---|
+| posisi mendatar | waktu $t$, dalam detik |
+| posisi tegak | jarak $d$, dalam meter |
+| titik lingkaran | nilai pengukuran |
+| batang vertikal | interval pengukuran $d\pm0{,}4$ meter |
+| garis putus-putus | nilai model $d=2t+1$ |
+
+Warna membantu membedakan unsur, tetapi tidak boleh menjadi satu-satunya
+pengodean. Titik berbentuk lingkaran dan garis putus-putus tetap dapat
+dibedakan pada cetakan abu-abu atau oleh pembaca yang tidak membedakan warna
+tertentu.
+
+Pilih pengodean yang sesuai dengan pertanyaan. Posisi pada sumbu berskala
+berguna untuk membandingkan besaran. Diagram lingkaran tidak sesuai di sini:
+jarak pada waktu berbeda bukan bagian-bagian dari satu keseluruhan.
+
+## Sumbu, skala, dan satuan {#sec-o002-u04-axes}
+
+Label `Waktu, t (s)` menyatakan nama variabel, lambang, dan satuan. Label
+`Jarak, d (m)` melakukan hal yang sama. Angka tanpa satuan tidak cukup ketika
+besaran fisis sedang dibandingkan.
+
+Sumbu tegak pada gambar Unit 4 dimulai dari nol. Keputusan ini membuat tinggi
+visual sebanding dengan jarak yang dinyatakan. Memulai dari nol bukan aturan
+mutlak untuk semua grafik garis, tetapi pemotongan harus terlihat jelas dan
+tidak boleh dipakai untuk membesar-besarkan selisih.
+
+Misalkan dua batang menyatakan 98 dan 100. Dengan garis dasar nol, rasio
+tingginya adalah
+
+$$
+\frac{100-0}{98-0}=\frac{100}{98}\approx 1{,}02.
+$$
+
+Jika garis dasar disembunyikan pada 97, rasionya menjadi
+
+$$
+\frac{100-97}{98-97}=3.
+$$
+
+Selisih datanya tetap 2, tetapi batang kedua tampak tiga kali setinggi batang
+pertama. Pemotongan tersebut dapat berguna untuk melihat perubahan kecil,
+namun garis dasar dan nilai sebenarnya harus dinyatakan dengan terang.
+
+## Rasio aspek dan kemiringan {#sec-o002-u04-aspect}
+
+Rasio aspek adalah perbandingan lebar dan tinggi daerah gambar. Grafik yang
+sangat sempit dapat membuat garis yang sama tampak curam; grafik yang sangat
+lebar dapat membuatnya tampak datar. Kemiringan matematis model tetap
+
+$$
+m=\frac{\Delta d}{\Delta t}=2\ \text{m/s},
+$$
+
+apa pun ukuran gambar di layar. Karena itu, baca nilai sumbu dan satuannya,
+bukan sudut piksel semata. Skrip unit menetapkan ukuran gambar dan batas sumbu
+secara eksplisit agar hasil tidak berubah mengikuti ukuran jendela.
+
+## Ketidakpastian bukan dekorasi {#sec-o002-u04-uncertainty}
+
+Pada contoh ini, batang galat berarti interval toleransi pengukuran
+$[d-0{,}4,d+0{,}4]$ meter. Batang itu **bukan** otomatis simpangan baku,
+interval kepercayaan, atau rentang semua nilai yang mungkin. Makna tersebut
+baru sah jika prosedur pengukuran atau model statistik menetapkannya.
+
+Semua nilai model berada di dalam interval pengukuran. Pernyataan yang sah
+adalah “data ini konsisten dengan model pada tujuh waktu yang diperiksa.”
+Pernyataan yang terlalu kuat adalah “data membuktikan bahwa model selalu
+benar.” Model lain juga mungkin cocok dengan tujuh interval yang sama.
+
+Ketika membandingkan dua seri, gunakan definisi ketidakpastian yang sama atau
+jelaskan perbedaannya. Batang dengan makna berbeda tidak boleh dibandingkan
+seolah-olah identik.
+
+## Deskripsi tekstual dan aksesibilitas {#sec-o002-u04-accessibility}
+
+Teks alternatif yang berguna tidak sekadar berkata “grafik garis”. Ia memuat:
+
+1. tujuan grafik;
+2. variabel dan satuannya;
+3. pengodean tanda dan garis;
+4. pola utama serta penyimpangan penting; dan
+5. batas kesimpulan jika gambar mudah disalahartikan.
+
+Skrip Unit 4 menanamkan judul dan deskripsi ke metadata SVG serta menulis
+deskripsi yang sama sebagai `unit04-alt.txt`. Data tetap tersedia sebagai CSV,
+sehingga pembaca tidak dipaksa memperoleh nilai dari posisi visual saja.
+
+Legenda, bentuk, dan jenis garis juga mengulang informasi warna. Pengulangan
+semacam ini bukan pemborosan: ia membuat informasi dapat diakses melalui lebih
+dari satu petunjuk.
+
+## Artefak deterministik {#sec-o002-u04-artifacts}
+
+Jalankan dari akar proyek:
+
+```text
+python source/code/unit04_visualization.py --output-dir output/unit04
+```
+
+Perintah itu menghasilkan empat berkas:
+
+- `unit04-data.csv`: data bertabel dengan satuan pada nama kolom;
+- `unit04-figure.svg`: gambar vektor dengan skala dan metadata tetap;
+- `unit04-alt.txt`: deskripsi visual dalam teks biasa; dan
+- `unit04-manifest.json`: pertanyaan, kebijakan sumbu, makna pengodean, batas
+  klaim, serta SHA-256 ketiga artefak lainnya.
+
+Skrip tidak memakai jaringan, waktu saat ini, atau bilangan acak. Urutan data,
+format angka, jenis huruf, ukuran gambar, garam pengenal SVG, dan metadata
+ditetapkan. Pada lingkungan perangkat lunak yang sama, dua eksekusi harus
+menghasilkan byte yang sama.
+
+Deterministik tidak berarti benar. Kesalahan yang ditulis secara deterministik
+tetap merupakan kesalahan. Hash membantu memastikan bahwa dua orang memeriksa
+byte yang sama; tes dan penalaran memeriksa apakah byte itu mewakili maksud yang
+benar.
+
+## Bukti visual dan bukti matematis {#sec-o002-u04-proof}
+
+Gambar dapat menunjukkan pola, anomali, dan calon contoh penyangkal. Ia sangat
+berguna untuk mengajukan pertanyaan berikutnya. Akan tetapi, tujuh titik tidak
+membuktikan persamaan bagi semua waktu.
+
+Jika gerak **didefinisikan** mempunyai posisi awal 1 meter dan kecepatan tetap
+2 meter per detik, maka persamaan
+
+$$
+d(t)=1+2t
+$$
+
+mengikuti definisi gerak berkecepatan tetap. Itu adalah argumen model. Grafik
+kemudian memeriksa apakah pengukuran terbatas konsisten dengan konsekuensi
+model tersebut.
+
+Sebaliknya, satu pengamatan yang intervalnya tidak memuat nilai model dapat
+menjadi bukti bahwa model, ketidakpastian, data, atau implementasi perlu
+diperiksa. Ia tidak secara otomatis mengatakan bagian mana yang salah.
+
+## Latihan {#sec-o002-u04-exercises}
+
+### Latihan 1 - pertanyaan dan pengodean {#ex-o002-u04-01}
+
+Seorang teman membuat grafik tujuh pengukuran tetapi tidak menampilkan garis
+model. Sebutkan informasi yang hilang dan satu perbaikan yang tidak hanya
+mengandalkan warna.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Kembali ke pertanyaan utama: dua objek apa yang sedang dibandingkan?
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Grafik kehilangan nilai pembanding $d=2t+1$, sehingga pembaca tidak dapat
+menilai konsistensi pengukuran terhadap model secara langsung. Tambahkan garis
+model putus-putus dengan label pada legenda atau label langsung. Jenis garis
+yang berbeda membuatnya tetap dapat dibedakan tanpa bergantung pada warna.
+:::
+
+### Latihan 2 - sumbu terpotong {#ex-o002-u04-02}
+
+Dua nilai adalah 98 dan 100. Hitung rasio tinggi tampaknya untuk garis dasar 0
+dan 97. Jelaskan mengapa judul “nilai kedua tiga kali lebih besar” tidak sah.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Tinggi tampak adalah nilai dikurangi garis dasar; besar data tetap nilai asli.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Dengan garis dasar 0, rasionya $100/98\approx1{,}02$. Dengan garis dasar 97,
+rasio tinggi tampak adalah $(100-97)/(98-97)=3$. Akan tetapi, nilai kedua
+hanya $100/98$ kali nilai pertama, bukan tiga kali. Angka 3 menggambarkan
+geometri gambar yang dipotong, bukan rasio data.
+:::
+
+### Latihan 3 - makna batang galat {#ex-o002-u04-03}
+
+Apakah batang $\pm0{,}4$ meter pada unit ini merupakan interval kepercayaan
+95%? Tuliskan pernyataan yang sah tentang batang tersebut.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gunakan hanya definisi ketidakpastian yang benar-benar diberikan.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Tidak ada dasar untuk menyebutnya interval kepercayaan 95%. Unit hanya
+mendefinisikannya sebagai toleransi pengukuran dari $d-0{,}4$ sampai
+$d+0{,}4$ meter. Pernyataan yang sah: pada ketujuh waktu, nilai model berada
+di dalam interval toleransi yang dinyatakan.
+:::
+
+### Latihan 4 - deskripsi aksesibel {#ex-o002-u04-04}
+
+Tuliskan teks alternatif dua atau tiga kalimat untuk grafik Unit 4. Jangan
+sekadar mengulang judul.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Sebutkan sumbu, pengodean, pola, ketidakpastian, dan batas klaim.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Contoh: “Grafik membandingkan jarak terukur dalam meter terhadap waktu 0--6
+detik dengan model $d=2t+1$. Titik lingkaran dan batang $\pm0{,}4$ meter
+mewakili pengukuran, sedangkan garis putus-putus mewakili model; semua nilai
+model berada di dalam interval pengukuran. Kecocokan tujuh titik mendukung
+konsistensi pada data ini, bukan bukti bahwa model berlaku untuk semua waktu.”
+:::
+
+### Latihan 5 - gambar dan bukti {#ex-o002-u04-05}
+
+Grafik menunjukkan 1.000 titik tepat pada kurva $y=x^2$. Apakah hal itu
+membuktikan bahwa program selalu menghitung kuadrat dengan benar? Berikan satu
+langkah komputasional dan satu langkah matematis yang memperkuat pemeriksaan.
+
+::: {.callout-note collapse="true" title="Petunjuk"}
+Gambar hanya memuat masukan berhingga dan resolusi visual terbatas.
+:::
+
+::: {.callout-tip collapse="true" title="Jawaban dan solusi"}
+Tidak. Seribu titik hanya memeriksa masukan yang dipilih, dan perbedaan kecil
+dapat tersembunyi oleh resolusi gambar. Langkah komputasional: uji nilai batas,
+nilai negatif, dan masukan acak deterministik dengan membandingkan keluaran
+numerik terhadap hasil eksak. Langkah matematis: periksa definisi algoritme dan
+tunjukkan bahwa operasi yang diterapkan pada setiap masukan memang menghasilkan
+$x\cdot x$ pada domain yang dinyatakan.
+:::
+
+## Ringkasan {#sec-o002-u04-summary}
+
+- Visualisasi dimulai dari pertanyaan, bukan pilihan warna.
+- Posisi, tanda, garis, sumbu, skala, dan satuan harus mempunyai arti eksplisit.
+- Sumbu terpotong dan rasio aspek dapat mengubah kesan tanpa mengubah data.
+- Makna ketidakpastian harus dinyatakan; batang galat tidak membawa makna
+  statistik secara otomatis.
+- Data bertabel, teks alternatif, gambar, dan manifes hash membuat artefak dapat
+  diperiksa melalui lebih dari satu jalur.
+- Grafik memberi bukti visual terbatas dan dapat menemukan kejanggalan; bukti
+  umum tetap memerlukan argumen yang mencakup seluruh domain.
