@@ -1,0 +1,179 @@
+{
+  "authoritative_original_url": "https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/",
+  "course_id": "B80",
+  "documents": [
+    {
+      "bytes": 39134,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/index.html",
+      "sha256": "18b7a169ea9cc4c20006ff3606e9fe8724bde19d12ec50fffa119bb24b375fa5"
+    },
+    {
+      "bytes": 60568,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/01-komputasi-bukti.html",
+      "sha256": "5c2ca5e14b086447c80f5c4ae2708c4079d62bedba9aec1619fb99e2b8a3257a"
+    },
+    {
+      "bytes": 63254,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/02-objek-fungsi.html",
+      "sha256": "e84926e87111c4b4cb632105e9c1c9f56fa7faf7ba0796f4b964f8a96c36fed9"
+    },
+    {
+      "bytes": 72398,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/03-array-vektorisasi.html",
+      "sha256": "9f58c636e79dd78349df513defeb48cdd45b13f5b39432351f2dcaa7a30e35df"
+    },
+    {
+      "bytes": 100042,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/04-visualisasi-integritas.html",
+      "sha256": "8055b64d225562dca6a5ac7329b1459a1f828951cc7fb26afd07c78f7ce5c734"
+    },
+    {
+      "bytes": 114901,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/05-eksak-simbolik-sage.html",
+      "sha256": "9a29889eba99e5e7bb1a91c10050103664de57b834f31ed1f0056af572d28aa9"
+    },
+    {
+      "bytes": 114005,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/06-titik-mengambang-stabilitas.html",
+      "sha256": "196f147ccacbd2c29be064daf7d9a08dd3bcf7c6894272ef06a438a2a88f2dca"
+    },
+    {
+      "bytes": 63980,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/07-rancangan-eksperimen.html",
+      "sha256": "1355965ce77471a6ebb2b1bee8eca3b49313866d76b7704907054d0b704619a4"
+    },
+    {
+      "bytes": 78411,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/08-pengujian-validasi.html",
+      "sha256": "966a6bb5315a4a4f86f43ffbb31b950208cdf9500c4ced96b4f654c57d218315"
+    },
+    {
+      "bytes": 65836,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/09-data-konfigurasi-provenans.html",
+      "sha256": "61c10874c679f63f25528adb56856526bfd143a5b19e64c2d070c51c4dddb98d"
+    },
+    {
+      "bytes": 53944,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/10-otomasi-pipa.html",
+      "sha256": "b8c16b6eb27acf3e28fb689d4508f66200dbbcd0779074d768212af80d76b4c3"
+    },
+    {
+      "bytes": 88415,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/11-eksperimen-numerik.html",
+      "sha256": "a130e076fdf2f7592e19da4693bbbbc98bc709a0b718c1db672325bf5aab9d95"
+    },
+    {
+      "bytes": 54395,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/12-proyek-akhir.html",
+      "sha256": "263c5e8114b700e0d62017d73e754674adf1f6e8ab4111ab07a04a422b3cc044"
+    },
+    {
+      "bytes": 94504,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/p01-menjalankan-eksperimen-python.html",
+      "sha256": "d65caea736038d6e21c8806df05ebd20c774c8649f26c2ab53b6ec5334bb24a6"
+    },
+    {
+      "bytes": 124769,
+      "link_counts": {
+        "en": 1,
+        "id": 1,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "docs/source/units/p02-kontrol-koleksi-fungsi-modul-berkas.html",
+      "sha256": "ddb0f00f30aaec6789313fe2e9cf6fbb9d6c4b4e7364c1c3b529cd34dacf4a66"
+    }
+  ],
+  "en_course_url": "https://kokunoyumeto.github.io/program-matematika-indonesia/en/#course-B80",
+  "html_documents": 15,
+  "id_course_url": "https://kokunoyumeto.github.io/program-matematika-indonesia/id/#course-B80",
+  "published_root": [
+    "docs"
+  ],
+  "repository": "mathematical-computing-reproducible-experiments-id",
+  "status": "pass"
+}
