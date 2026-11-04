@@ -23,9 +23,8 @@ karena keluar dari komputer. Sebaliknya, komputasi dapat menemukan contoh
 penyangkal, menguji implementasi, menuntun dugaan, dan menghasilkan bukti kerja
 yang dapat diperiksa orang lain.
 
-Edisi ini adalah versi `2026.08.22.1`, dengan DOI
-<https://doi.org/10.5281/zenodo.22053905>. Rilis 12-unit `2026.08.22` tetap
-tersedia sebagai [versi historis](https://doi.org/10.5281/zenodo.22052053) dan
+Edisi ini adalah versi `2026.08.22.1`. Rilis 12-unit `2026.08.22` tetap
+tersedia sebagai [versi historis](https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22) dan
 tidak ditimpa oleh perluasan ini.
 
 ## Penyiapan lokal {#sec-o002-setup}

@@ -1,58 +1,54 @@
 # Komputasi Matematis dan Eksperimen yang Dapat Direproduksi
 
-Edisi Bahasa Indonesia (`id-ID`) untuk peran kurikulum B80 / proyek O002.
-Versi `2026.08.22.1` memuat arsitektur 14-unit yang dipilih: dua primer wajib
-diikuti dua belas unit utama, dengan runtime lokal Python, SciPy, dan SageMath.
-Rilis 12-unit `v2026.08.22` tetap lengkap dan tidak berubah sebagai edisi
-mandiri historis.
-Buku ini merupakan karya independen dan tidak menyiratkan dukungan dari penulis
-atau lembaga yang dibahas sebagai sumber perbandingan.
+Buku ajar Bahasa Indonesia yang memperkenalkan pemrograman dan eksperimen komputasional dalam matematika setelah
+prakalkulus: dua primer wajib dan dua belas unit utama, 75 latihan dengan petunjuk, jawaban, dan solusi lengkap, serta
+lab Python, SciPy, dan SageMath yang berjalan secara lokal, sebagai pembaca HTML, PDF, dan EPUB. Buku ini tidak
+mengandaikan kalkulus, aljabar linear, atau persamaan diferensial.
 
-Produksi, penerjemahan, dan QA berbantuan model menggunakan **OpenAI Codex gpt-5.6-sol, Ultra**,
-atas arahan pengguna. Identifikasi ini tidak menggantikan atribusi penulis,
-sumber, pemegang hak, atau kontributor manusia yang tercatat.
+[Baca daring](https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/) ·
+[PDF](https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/download/v2026.08.22.1/00-b80-id.pdf) · [EPUB](https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/download/v2026.08.22.1/03-b80-id.epub)
 
-- Pembaca HTML: <https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/>
-- PDF dan paket preservasi versi 2026.08.22.1: <https://doi.org/10.5281/zenodo.22053905>
-- Cermin pembaca dan sumber ringkas di Figshare: <https://doi.org/10.6084/m9.figshare.33314796.v2>
-- Rilis historis 12-unit: <https://doi.org/10.5281/zenodo.22052053>
-- Repositori sumber: <https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id>
+## Cara pembuatan
 
-Ini adalah buku ajar baru yang memperkenalkan pemrograman dan eksperimen
-komputasional setelah kompetensi prasyarat A30 (prakalulus). Buku ini tidak
-menganggap pembaca telah menyelesaikan kalkulus, aljabar linear, atau persamaan
-diferensial.
+Buku ini ditulis oleh AI: OpenAI Codex gpt-5.6-sol, Ultra, sebagai karya baru untuk kursus B80
+[Program Matematika Indonesia](https://kokunoyumeto.github.io/program-matematika-indonesia/id/#course-B80). Build lokal
+memverifikasi lingkungan Python dan SageMath yang dikunci, menjalankan pemeriksaan sumber, seluruh tes, ke-14 permukaan
+eksperimen, build HTML/PDF/EPUB, pemeriksaan pembaca, dan manifes SHA-256. Untuk edisi 14-unit, 177 tes dan 7/7 uji
+Sage lulus, PDF diperiksa halaman demi halaman, dan dua build bersih menghasilkan manifes yang identik byte demi byte
+([status](00_control/CURRENT_STATE.md)). Edisi format PDF, LaTeX, dan EPUB tanggal 3 Oktober 2026 dibuat oleh OpenAI
+Codex GPT-6 Astra (Ultra) dari teks yang sama; EPUBCheck 5.4.0 tidak menemukan kesalahan atau peringatan, dan
+eksperimen Python/Sage tidak dijalankan ulang untuk edisi itu.
 
-Sumber hidup memuat dua primer wajib dan dua belas unit utama yang membentuk
-satu alur dari pemrograman pertama, representasi, dan bukti sampai proyek akhir
-yang dapat diperiksa. Enam puluh latihan lama tetap utuh; primer dan lab
-penguasaan menambah lima belas latihan sehingga batas baru memuat 75 latihan.
-Semua latihan mempunyai petunjuk, jawaban, dan solusi lengkap; lima belas
-latihan penguasaan baru juga mempunyai pemeriksaan yang dapat dieksekusi.
-Status penerimaan pembaca ditentukan oleh `00_control/CURRENT_STATE.md`.
+## Status
 
-Sumber pembaca berada di `source/`, pengujian di `tests/`, catatan kendali di
-`00_control/`, rekaman backend stabil di `backend/`, dan pembaca terbangun di
-`output/`. Situs GitHub Pages diterbitkan dari pohon rilis yang telah
-diverifikasi, bukan dari salinan sumber yang dibaca sebagai sumber daya Quarto.
-Pilihan istilah utama dicatat dalam [glosarium id-ID](GLOSSARY_ID_ID.md),
-beserta [QA terminologi berbasis sumber TeX Indonesia](00_control/TERMINOLOGY_QA_ID_ARXIV.md).
+Edisi lengkap 14-unit, versi 2026.08.22.1. Rilis 12-unit `v2026.08.22` tetap tersedia sebagai edisi historis yang
+tidak berubah. Masih mungkin ada kesalahan.
 
-Teks asli proyek dilisensikan dengan CC BY-SA 4.0. Kode asli proyek
-dilisensikan dengan MIT. Sumber rujukan/donor mempertahankan lisensi masing-
-masing dan tidak otomatis menjadi bagian dari buku ini. Tidak ada byte donor
-yang diadaptasi ke dalam sumber hidup 14-unit maupun rilis historis 12-unit.
+## Isi
 
-Ikuti [panduan penyiapan lokal](index.qmd#sec-o002-setup) sebelum menjalankan
-eksperimen. Build lokal yang dibekukan memakai Quarto, Python, Jupyter, dan
-LuaLaTeX:
+- [Rilis v2026.08.22.1](https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22.1): edisi format (PDF 135 halaman, LaTeX kumulatif, sumber dan skrip reproduksi, EPUB) dan
+  berkas rilis pertama (PDF 159 halaman, EPUB, sumber Quarto dan backend yang dapat disunting, paket luring);
+  [rilis 12-unit v2026.08.22](https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id/releases/tag/v2026.08.22).
+- `source/`: sumber pembaca (Quarto); `tests/`: pengujian; `backend/`: rekaman stabil; `output/` dan `docs/`: pembaca
+  terbangun (situs Pages diterbitkan dari pohon rilis yang telah diverifikasi); `00_control/`: catatan kendali.
+- Istilah utama: [glosarium id-ID](GLOSSARY_ID_ID.md) dan
+  [pemeriksaan terminologi terhadap sumber TeX berbahasa Indonesia](00_control/TERMINOLOGY_QA_ID_ARXIV.md).
+
+Ikuti [panduan penyiapan lokal](index.qmd#sec-o002-setup) sebelum menjalankan eksperimen. Build lokal memakai Quarto,
+Python, Jupyter, dan LuaLaTeX:
 
 ```text
 powershell -ExecutionPolicy Bypass -File scripts/build.ps1 -Mode Candidate
 ```
 
-Perintah tersebut memverifikasi lock Python dan SageMath, menjalankan QA sumber,
-seluruh tes, 14 permukaan eksperimen, build HTML/PDF/EPUB, QA pembaca, dan
-manifest SHA-256. Batas rilis historis 2026.08.22 lulus 115/115 pengujian dan
-dua build bersih menghasilkan manifest keluaran 60 berkas yang identik byte
-demi byte; angka itu tidak dipakai sebagai bukti untuk batas 14-unit yang baru.
+## Sumber dan atribusi
+
+- Karya independen; sumber rujukan dan pembanding tercantum di [THIRD_PARTY.md](THIRD_PARTY.md). Tidak ada teks, kode,
+  atau data dari sumber itu yang diadaptasi ke dalam buku, dan buku ini tidak menyiratkan dukungan dari penulis atau
+  lembaga yang dirujuk.
+- Komponen runtime pembaca mempertahankan lisensinya sendiri ([RUNTIME-LICENSES.md](RUNTIME-LICENSES.md)).
+
+## Lisensi
+
+Teks tersedia menurut CC BY-SA 4.0 ([LICENSE-TEXT.md](LICENSE-TEXT.md)); kode asli menurut MIT
+([LICENSE-CODE.md](LICENSE-CODE.md)).

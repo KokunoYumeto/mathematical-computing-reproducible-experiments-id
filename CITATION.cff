@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "Jika Anda menggunakan edisi ini, sitasilah buku dan DOI berikut."
+message: "Jika Anda menggunakan edisi ini, sitasilah buku ini dengan metadata berikut."
 title: "Komputasi Matematis dan Eksperimen yang Dapat Direproduksi — Bahasa Indonesia"
 type: book
 authors:
@@ -7,6 +7,5 @@ authors:
 version: "2026.08.22.1"
 date-released: 2026-08-22
 license: CC-BY-SA-4.0
-doi: 10.5281/zenodo.22053905
 repository-code: "https://github.com/KokunoYumeto/mathematical-computing-reproducible-experiments-id"
 url: "https://kokunoyumeto.github.io/mathematical-computing-reproducible-experiments-id/"
